@@ -124,8 +124,8 @@ def interp_qaoa(p_max, point, op, backend, optimizer, x, max_coeff, offset):
         optimal_point = qaoa_result['optimal_point']
         optimizer_evals = qaoa_result['optimizer_evals']
         estate = qaoa_result['eigenstate']
-        print("Optimizer_evals: {}".format(optimizer_evals))
-        print("Optimal_point: {} \nOptimal_value: {:0.4f}".format(optimal_point, optimal_value))
+        # print("Optimizer_evals: {}".format(optimizer_evals))
+        # print("Optimal_point: {} \nOptimal_value: {:0.4f}".format(optimal_point, optimal_value))
         prob_x = estate[x] if x in estate else 0
         print("Prob of state {}: {:0.2%}\n".format(x, prob_x))
         prob_s.append(prob_x)
