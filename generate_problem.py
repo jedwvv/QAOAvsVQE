@@ -1,7 +1,6 @@
 import numpy as np 
 import osmnx as ox
 import argparse
-import json
 import pickle as pkl
 import multiprocessing as mp
 import matplotlib.pyplot as plt

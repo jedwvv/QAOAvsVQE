@@ -17,7 +17,6 @@ def main(raw_args=None):
     qubo, max_coeff = convert_qubo(qubo, linear, quadratic, penalty_multiplier = penalty_multiplier)
     op, offset = qubo.to_ising()
     op *= (1/max_coeff)
-    offset /= max_coeff
     return qubo, max_coeff, op, offset, linear, quadratic, results
 
 def parse(raw_args):
