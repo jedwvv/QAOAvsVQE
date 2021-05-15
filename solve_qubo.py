@@ -126,8 +126,9 @@ def interp_qaoa(p_max, point, op, backend, optimizer, x, max_coeff, offset):
         estate = qaoa_result['eigenstate']
         print("Optimizer_evals: {}".format(optimizer_evals))
         print("Optimal_point: {} \nOptimal_value: {:0.4f}".format(optimal_point, optimal_value))
-        print("Prob of state {}: {:0.2%}\n".format(x, estate[x]))
-        prob_s.append(estate[x])
+        prob_x = estate[x] if x in estate else 0
+        print("Prob of state {}: {:0.2%}\n".format(x, prob_x))
+        prob_s.append(prob_x)
     return qaoa_result, prob_s
 
 def solve_classically(qubo):
