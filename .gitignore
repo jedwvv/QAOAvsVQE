@@ -1,2 +1,3 @@
 *.txt
 !change.txt
+*.pyc
