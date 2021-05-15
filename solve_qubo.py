@@ -23,6 +23,9 @@ def main(raw_args = None):
     G = import_map('unimelb_graph.pkl')
     avg_avg_prob_success = []
     for qubo_no in range(args["no_samples"]):
+        output_txt = open('{}cars{}routes_{}_output.txt'.format(args["no_cars"], args["no_routes"], args["optimizer"]), 'w')
+        print("__"*50, "\nQUBO NO: {}\n".format(qubo_no), "__"*50, file = output_txt)
+        output_txt.close()
         while True: #Generate valid QUBO
             try:
                 #Generate a QUBO
@@ -65,7 +68,7 @@ def main(raw_args = None):
         optimizers = {"ADAM":ADAM(), "CG":CG(), "COBYLA":COBYLA(), "L_BFGS_B":L_BFGS_B(), "NELDER_MEAD":NELDER_MEAD(), "NFT":NFT(), "POWELL":POWELL(), "SLSQP":SLSQP(), "SPSA":SPSA(), "TNC":TNC()}
         optimizer = optimizers[args["optimizer"]]
         output_txt = open('{}cars{}routes_{}_output.txt'.format(args["no_cars"], args["no_routes"], args["optimizer"]), 'a')
-        print("__"*50, "\n", optimizer.__class__.__name__, "\n", "__"*50, file = output_txt)
+        print("__"*50, "\n"+optimizer.__class__.__name__+"\n", "__"*50, file = output_txt)
         output_txt.close()
 
         #Solve with interp QAOA up to args["p_max"] number of layers, restarting after p_max is reached.
