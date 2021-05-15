@@ -82,7 +82,7 @@ def main(raw_args = None):
     if args["visual"]:
         visualise_solution(G, routes)
 
-    return avg_avg_prob_success, optimizer.__class__.__name__, args["no_restarts"], args["no_samples"], p_max
+    return avg_avg_prob_success, args
 
 def parse(raw_args):
     """Parse inputs for no_cars (number of cars),
@@ -176,7 +176,7 @@ def interp_point(optimal_point):
 
     return point
 
-def get_cost(qubo, no_qubits):
+def get_costs(qubo, no_qubits):
     # values = ['{}'.format()]
     cpus = mp.cpu_count()
     pool = mp.Pool(cpus)
@@ -227,14 +227,19 @@ def visualise_solution(G, routes):
 
 if __name__ == "__main__":
     start = time()
-    avg_avg_prob_success, optimizer_name, no_restarts, no_samples, p_max = main()
+    avg_avg_prob_success, args = main()
     finish = time()
 
     #Save results
-    with open('{}.txt'.format(optimizer_name), 'w') as f:
+    optimizer_name = args["optimizer"]
+    no_cars = args["no_cars"]
+    no_routes = args["no_routes"]
+    no_restarts = args["no_restarts"]
+    no_samples = args["no_samples"]
+    p_max = args["p_max"]
+    with open('{}cars{}routes_{}.txt'.format(no_cars, no_routes, optimizer_name), 'w') as f:
         print("No_restarts: " + str(no_restarts) + "\nNo_samples: " + str(no_samples) + "\nMax number of layers: " + str(p_max), file = f)
-
-    with open('{}.csv'.format(optimizer_name), 'w') as f:
+    with open('{}cars{}routes_{}.csv'.format(no_cars, no_routes, optimizer_name), 'w') as f:
         np.savetxt(f, avg_avg_prob_success, delimiter=',')
 
     print("Time Taken: {}s".format(finish-start))
