@@ -120,8 +120,8 @@ def interp_qaoa(p_max, point, op, backend, optimizer, x, max_coeff, offset):
         print("p: {}".format(p))
         point = interp_point(optimal_point) if p != 1 else point
         qaoa_result = solve_qubo_qaoa(op, p, point, backend, optimizer)
+        optimal_point = qaoa_result['optimal_point']
         # optimal_value = qaoa_result['optimal_value']*max_coeff + offset
-        # optimal_point = qaoa_result['optimal_point']
         # optimizer_evals = qaoa_result['optimizer_evals']
         estate = qaoa_result['eigenstate']
         # print("Optimizer_evals: {}".format(optimizer_evals))
