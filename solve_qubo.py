@@ -141,9 +141,11 @@ def interp_qaoa(p_max, point, op, backend, optimizer, x, max_coeff, offset, outp
         point = interp_point(optimal_point) if p != 1 else point
         qaoa_result = solve_qubo_qaoa(op, p, point, backend, optimizer)
         optimal_point = qaoa_result['optimal_point']
+        optimizer_evals = qaoa_result['optimizer_evals']
         estate = qaoa_result['eigenstate']
         prob_x = estate[x] if x in estate else 0
-        print("Prob of state {}: {:0.2%}\n".format(x, prob_x), file = output_file)
+        print("Prob of state {}: {:0.2%}".format(x, prob_x), file = output_file)
+        print("Optimizer Evals: {}".format(optimizer_evals), file = output_file)
         prob_s.append(prob_x)
     return qaoa_result, prob_s
 
