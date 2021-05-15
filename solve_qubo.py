@@ -17,7 +17,9 @@ import argparse
 import os
 
 def main(raw_args = None):
+    start = time()
     args = parse(raw_args)
+    output_txt = open('{}cars{}routes_{}_output.txt'.format(args["no_cars"], args["no_routes"], args["optimizer"]), 'w')
     G = import_map('unimelb_graph.pkl')
     avg_avg_prob_success = []
     for qubo_no in range(args["no_samples"]):
@@ -30,13 +32,15 @@ def main(raw_args = None):
                 del(linear, quadratic)
                 
                 #Classically solve generated QUBO
-                classical_result = solve_classically(qubo)
-                
+                output_txt = open('{}cars{}routes_{}_output.txt'.format(args["no_cars"], args["no_routes"], args["optimizer"]), 'a')
+                classical_result = solve_classically(qubo, output_txt)
+                output_txt.close()
                 #Check solution
                 variables_dict = classical_result.variables_dict
-                routes = filter_solutions(results, variables_dict, args["no_cars"])
-                check_solutions(routes)
-
+                output_txt = open('{}cars{}routes_{}_output.txt'.format(args["no_cars"], args["no_routes"], args["optimizer"]), 'a')
+                routes = filter_solutions(results, variables_dict, args["no_cars"], output_txt)
+                check_solutions(routes, output_txt)
+                output_txt.close()
                 #If valid solution, save the solution.
                 x = classical_result.x
                 x = arr_to_str(x)
@@ -45,18 +49,24 @@ def main(raw_args = None):
 
             except TypeError:
                 #QUBO has invalid solution, start again with increased penalty.
-                print("Starting with new qubo")
+                output_txt = open('{}cars{}routes_{}_output.txt'.format(args["no_cars"], args["no_routes"], args["optimizer"]), 'a')
+                print("Starting with new qubo", file = output_txt)
+                output_txt.close()
                 args["penalty_multiplier"] += 0.05
 
         #Solve QAOA from QUBO with valid solution
-        print("Solving with QAOA...")
+        output_txt = open('{}cars{}routes_{}_output.txt'.format(args["no_cars"], args["no_routes"], args["optimizer"]), 'a')
+        print("Solving with QAOA...", file = output_txt)
+        output_txt.close()
         no_shots = 10000
         backend = Aer.get_backend('qasm_simulator', shots = no_shots)
         
         #Optimizers available from QISKIT - as chosen from parsed argument.
         optimizers = {"ADAM":ADAM(), "CG":CG(), "COBYLA":COBYLA(), "L_BFGS_B":L_BFGS_B(), "NELDER_MEAD":NELDER_MEAD(), "NFT":NFT(), "POWELL":POWELL(), "SLSQP":SLSQP(), "SPSA":SPSA(), "TNC":TNC()}
         optimizer = optimizers[args["optimizer"]]
-        print("__"*50, "\n", optimizer.__class__.__name__, "\n", "__"*50)
+        output_txt = open('{}cars{}routes_{}_output.txt'.format(args["no_cars"], args["no_routes"], args["optimizer"]), 'a')
+        print("__"*50, "\n", optimizer.__class__.__name__, "\n", "__"*50, file = output_txt)
+        output_txt.close()
 
         #Solve with interp QAOA up to args["p_max"] number of layers, restarting after p_max is reached.
         p_max = args["p_max"]
@@ -65,22 +75,32 @@ def main(raw_args = None):
         avg_optimal_values = []
         for i in range(no_restarts):
             point = points[i]
-            qaoa_result, optimal_values = interp_qaoa(p_max, point, op, backend, optimizer, x, max_coeff, offset)
+            output_txt = open('{}cars{}routes_{}_output.txt'.format(args["no_cars"], args["no_routes"], args["optimizer"]), 'a')
+            qaoa_result, optimal_values = interp_qaoa(p_max, point, op, backend, optimizer, x, max_coeff, offset, output_txt)
+            output_txt.close()
             del(qaoa_result)
             avg_optimal_values.append(optimal_values)
         avg_prob_success = np.array(avg_optimal_values)
         avg_prob_success = avg_prob_success.mean(axis = 0)
-        print("Average over {} restarts for probability of success per layer of QUBO number {}: {}".format(no_restarts, qubo_no, avg_prob_success))
+        output_txt = open('{}cars{}routes_{}_output.txt'.format(args["no_cars"], args["no_routes"], args["optimizer"]), 'a')
+        print("Average over {} restarts for probability of success per layer of QUBO number {}: {}".format(no_restarts, qubo_no, avg_prob_success), file = output_txt)
+        output_txt.close()
         avg_avg_prob_success.append(avg_prob_success)
         #Now start again with new QUBO of same number of qubits
         
     avg_avg_prob_success = np.array(avg_avg_prob_success)
     avg_avg_prob_success = avg_avg_prob_success.mean(axis = 0)
-    print("Average over {} QUBOs for probability of success per layer: {}".format(args["no_samples"], avg_avg_prob_success))
+    output_txt = open('{}cars{}routes_{}_output.txt'.format(args["no_cars"], args["no_routes"], args["optimizer"]), 'a')
+    print("Average over {} QUBOs for probability of success per layer: {}".format(args["no_samples"], avg_avg_prob_success), file=output_txt)
+    output_txt.close()
 
     #Visualise solution
     if args["visual"]:
         visualise_solution(G, routes)
+    finish = time()
+    output_txt = open('{}cars{}routes_{}_output.txt'.format(args["no_cars"], args["no_routes"], args["optimizer"]), 'a')
+    print("Time Taken: {}s".format(finish-start), file = output_txt)
+    output_txt.close()
 
     return avg_avg_prob_success, args
 
@@ -114,28 +134,24 @@ def arr_to_str(x):
     string = ''.join(str(int(x_i)) for x_i in x)
     return string
 
-def interp_qaoa(p_max, point, op, backend, optimizer, x, max_coeff, offset):
+def interp_qaoa(p_max, point, op, backend, optimizer, x, max_coeff, offset, output_file):
     prob_s = []
     for p in range(1, p_max+1):
-        print("p: {}".format(p))
+        print("p: {}".format(p), file = output_file)
         point = interp_point(optimal_point) if p != 1 else point
         qaoa_result = solve_qubo_qaoa(op, p, point, backend, optimizer)
         optimal_point = qaoa_result['optimal_point']
-        # optimal_value = qaoa_result['optimal_value']*max_coeff + offset
-        # optimizer_evals = qaoa_result['optimizer_evals']
         estate = qaoa_result['eigenstate']
-        # print("Optimizer_evals: {}".format(optimizer_evals))
-        # print("Optimal_point: {} \nOptimal_value: {:0.4f}".format(optimal_point, optimal_value))
         prob_x = estate[x] if x in estate else 0
-        print("Prob of state {}: {:0.2%}\n".format(x, prob_x))
+        print("Prob of state {}: {:0.2%}\n".format(x, prob_x), file = output_file)
         prob_s.append(prob_x)
     return qaoa_result, prob_s
 
-def solve_classically(qubo):
+def solve_classically(qubo, output_txt):
     exact_mes = NumPyMinimumEigensolver()
     exact = MinimumEigenOptimizer(exact_mes)
     exact_result = exact.solve(qubo)
-    print(exact_result)
+    print(exact_result, file = output_txt)
     return exact_result
 
 def solve_qubo_qaoa(operator, p, point, backend, optimizer):
@@ -149,8 +165,8 @@ def solve_qubo_qaoa(operator, p, point, backend, optimizer):
                     })
     return qaoa_result
 
-def print_return_string(string):
-    print(string)
+def print_return_string(string, output_file):
+    print(string, file = output_file)
     return string
 
 def interp_point(optimal_point):
@@ -189,14 +205,14 @@ def get_costs(qubo, no_qubits):
     sort_values = sorted(values, key=lambda x: x[1])
     return sort_values
 
-def check_solutions(routes):
+def check_solutions(routes, output_file):
     try:
         len(routes)
-        print("This is a valid solution")
+        print("This is a valid solution", file = output_file)
     except TypeError:
-        raise TypeError("This is not a valid solution")
+        raise TypeError("This is not a valid solution", file = output_file)
 
-def filter_solutions(results, qaoa_dict, no_cars):
+def filter_solutions(results, qaoa_dict, no_cars, output_txt):
     routes = []
     variables = []
     for var_route, var_value in zip( results.items(), qaoa_dict.items() ):
@@ -204,13 +220,13 @@ def filter_solutions(results, qaoa_dict, no_cars):
             routes.append(var_route[1])
             variables.append(var_route[0])
         elif var_route[0] != var_value[0]:
-            print("Error, function returned non-matching variables")
+            print("Error, function returned non-matching variables", file = output_txt)
             return None
         elif var_route[0] in variables:
-            print("Error: Solution found two routes for one car")
+            print("Error: Solution found two routes for one car", file = output_txt)
             return None
     if len(variables) != no_cars:
-        print("Error: At least one car did not have a valid route")
+        print("Error: At least one car did not have a valid route", file = output_txt)
         return None
     return routes
 
@@ -226,9 +242,7 @@ def visualise_solution(G, routes):
     return fig, ax
 
 if __name__ == "__main__":
-    start = time()
     avg_avg_prob_success, args = main()
-    finish = time()
 
     #Save results
     optimizer_name = args["optimizer"]
@@ -242,4 +256,4 @@ if __name__ == "__main__":
     with open('{}cars{}routes_{}.csv'.format(no_cars, no_routes, optimizer_name), 'w') as f:
         np.savetxt(f, avg_avg_prob_success, delimiter=',')
 
-    print("Time Taken: {}s".format(finish-start))
+    
