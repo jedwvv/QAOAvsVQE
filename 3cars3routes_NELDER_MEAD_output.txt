@@ -9,3 +9,93 @@ Solving with QAOA...
 ____________________________________________________________________________________________________ 
 NELDER_MEAD
  ____________________________________________________________________________________________________
+p: 1
+Prob of state 100010001: 3.12%
+Optimizer Evals: 78
+p: 2
+Prob of state 100010001: 6.99%
+Optimizer Evals: 174
+p: 3
+Prob of state 100010001: 5.41%
+Optimizer Evals: 497
+p: 4
+Prob of state 100010001: 0.00%
+Optimizer Evals: 611
+p: 5
+Prob of state 100010001: 5.41%
+Optimizer Evals: 1000
+p: 6
+Prob of state 100010001: 5.41%
+Optimizer Evals: 1000
+p: 7
+Prob of state 100010001: 6.99%
+Optimizer Evals: 1000
+p: 8
+Prob of state 100010001: 0.00%
+Optimizer Evals: 1000
+p: 9
+Prob of state 100010001: 4.42%
+Optimizer Evals: 1001
+p: 10
+Prob of state 100010001: 5.41%
+Optimizer Evals: 1001
+p: 1
+Prob of state 100010001: 0.00%
+Optimizer Evals: 45
+p: 2
+Prob of state 100010001: 4.42%
+Optimizer Evals: 211
+p: 3
+Prob of state 100010001: 3.12%
+Optimizer Evals: 621
+p: 4
+Prob of state 100010001: 5.41%
+Optimizer Evals: 1000
+p: 5
+Prob of state 100010001: 6.99%
+Optimizer Evals: 942
+p: 6
+Prob of state 100010001: 5.41%
+Optimizer Evals: 1000
+p: 7
+Prob of state 100010001: 10.36%
+Optimizer Evals: 1001
+p: 8
+Prob of state 100010001: 8.27%
+Optimizer Evals: 1001
+p: 9
+Prob of state 100010001: 3.12%
+Optimizer Evals: 1001
+p: 10
+Prob of state 100010001: 0.00%
+Optimizer Evals: 1000
+p: 1
+Prob of state 100010001: 3.12%
+Optimizer Evals: 70
+p: 2
+Prob of state 100010001: 5.41%
+Optimizer Evals: 215
+p: 3
+Prob of state 100010001: 3.12%
+Optimizer Evals: 365
+p: 4
+Prob of state 100010001: 0.00%
+Optimizer Evals: 536
+p: 5
+Prob of state 100010001: 3.12%
+Optimizer Evals: 1001
+p: 6
+Prob of state 100010001: 6.25%
+Optimizer Evals: 1000
+p: 7
+Prob of state 100010001: 3.12%
+Optimizer Evals: 1000
+p: 8
+Prob of state 100010001: 3.12%
+Optimizer Evals: 1000
+p: 9
+Prob of state 100010001: 3.12%
+Optimizer Evals: 1000
+p: 10
+Prob of state 100010001: 5.41%
+Optimizer Evals: 1000
