@@ -219,3 +219,98 @@ Optimizer Evals: 1007
 p: 10
 Prob of state 010100001: 14.32%
 Optimizer Evals: 1008
+p: 1
+Prob of state 010100001: 3.12%
+Optimizer Evals: 75
+p: 2
+Prob of state 010100001: 0.00%
+Optimizer Evals: 75
+p: 3
+Prob of state 010100001: 3.12%
+Optimizer Evals: 189
+p: 4
+Prob of state 010100001: 0.00%
+Optimizer Evals: 405
+p: 5
+Prob of state 010100001: 6.99%
+Optimizer Evals: 473
+p: 6
+Prob of state 010100001: 6.25%
+Optimizer Evals: 624
+p: 7
+Prob of state 010100001: 4.42%
+Optimizer Evals: 1005
+p: 8
+Prob of state 010100001: 5.41%
+Optimizer Evals: 1003
+p: 9
+Prob of state 010100001: 18.75%
+Optimizer Evals: 1007
+p: 10
+Prob of state 010100001: 15.62%
+Optimizer Evals: 1008
+p: 1
+Prob of state 010100001: 11.69%
+Optimizer Evals: 27
+p: 2
+Prob of state 010100001: 13.26%
+Optimizer Evals: 95
+p: 3
+Prob of state 010100001: 11.27%
+Optimizer Evals: 224
+p: 4
+Prob of state 010100001: 17.95%
+Optimizer Evals: 441
+p: 5
+Prob of state 010100001: 20.01%
+Optimizer Evals: 550
+p: 6
+Prob of state 010100001: 20.96%
+Optimizer Evals: 1001
+p: 7
+Prob of state 010100001: 19.01%
+Optimizer Evals: 1005
+p: 8
+Prob of state 010100001: 17.95%
+Optimizer Evals: 1003
+p: 9
+Prob of state 010100001: 13.62%
+Optimizer Evals: 1007
+p: 10
+Prob of state 010100001: 13.62%
+Optimizer Evals: 1008
+p: 1
+Prob of state 010100001: 3.12%
+Optimizer Evals: 36
+p: 2
+Prob of state 010100001: 6.25%
+Optimizer Evals: 120
+p: 3
+Prob of state 010100001: 6.99%
+Optimizer Evals: 210
+p: 4
+Prob of state 010100001: 12.88%
+Optimizer Evals: 288
+p: 5
+Prob of state 010100001: 15.93%
+Optimizer Evals: 495
+p: 6
+Prob of state 010100001: 3.12%
+Optimizer Evals: 689
+p: 7
+Prob of state 010100001: 18.49%
+Optimizer Evals: 1005
+p: 8
+Prob of state 010100001: 4.42%
+Optimizer Evals: 1003
+p: 9
+Prob of state 010100001: 11.27%
+Optimizer Evals: 1007
+p: 10
+Prob of state 010100001: 13.98%
+Optimizer Evals: 1008
+Average over 10 restarts for probability of success per layer of QUBO number 49: [0.04939423 0.04516688 0.0808434  0.07878395 0.11229416 0.10922189
+ 0.11397309 0.09088854 0.1265946  0.14525639]
+Average over 50 QUBOs for probability of success per layer: [0.05609056 0.06846085 0.0856042  0.09655266 0.09917859 0.10231538
+ 0.10428773 0.0979353  0.10102715 0.09496015]
+Time Taken: 113903.11382675171s
