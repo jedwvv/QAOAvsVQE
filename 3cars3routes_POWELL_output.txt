@@ -9,3 +9,63 @@ Solving with QAOA...
 ____________________________________________________________________________________________________ 
 POWELL
  ____________________________________________________________________________________________________
+p: 1
+Prob of state 010100100: 4.42%
+Optimizer Evals: 53
+p: 2
+Prob of state 010100100: 9.88%
+Optimizer Evals: 197
+p: 3
+Prob of state 010100100: 4.42%
+Optimizer Evals: 464
+p: 4
+Prob of state 010100100: 4.42%
+Optimizer Evals: 622
+p: 5
+Prob of state 010100100: 6.99%
+Optimizer Evals: 869
+p: 6
+Prob of state 010100100: 0.00%
+Optimizer Evals: 1099
+p: 7
+Prob of state 010100100: 0.00%
+Optimizer Evals: 1072
+p: 8
+Prob of state 010100100: 5.41%
+Optimizer Evals: 1049
+p: 9
+Prob of state 010100100: 9.38%
+Optimizer Evals: 1130
+p: 10
+Prob of state 010100100: 4.42%
+Optimizer Evals: 1003
+p: 1
+Prob of state 010100100: 6.25%
+Optimizer Evals: 65
+p: 2
+Prob of state 010100100: 4.42%
+Optimizer Evals: 286
+p: 3
+Prob of state 010100100: 4.42%
+Optimizer Evals: 550
+p: 4
+Prob of state 010100100: 8.84%
+Optimizer Evals: 1008
+p: 5
+Prob of state 010100100: 8.27%
+Optimizer Evals: 1060
+p: 6
+Prob of state 010100100: 0.00%
+Optimizer Evals: 1094
+p: 7
+Prob of state 010100100: 4.42%
+Optimizer Evals: 1084
+p: 8
+Prob of state 010100100: 6.99%
+Optimizer Evals: 1015
+p: 9
+Prob of state 010100100: 4.42%
+Optimizer Evals: 1137
+p: 10
+Prob of state 010100100: 3.12%
+Optimizer Evals: 1034
