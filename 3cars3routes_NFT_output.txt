@@ -1,8 +1,8 @@
 ____________________________________________________________________________________________________ 
-QUBO NO: 46
+QUBO NO: 47
  ____________________________________________________________________________________________________
-optimal function value: 4721.667000000001
-optimal value: [1. 0. 0. 1. 0. 0. 0. 1. 0.]
+optimal function value: 1167.5220000000008
+optimal value: [1. 0. 0. 1. 0. 0. 1. 0. 0.]
 status: SUCCESS
 This is a valid solution
 Solving with QAOA...
@@ -10,272 +10,62 @@ ________________________________________________________________________________
 NFT
  ____________________________________________________________________________________________________
 p: 1
-Prob of state 010001001: 4.42%
+Prob of state 001001001: 8.27%
 Optimizer Evals: 1024
 p: 2
-Prob of state 010001001: 4.42%
+Prob of state 001001001: 0.00%
 Optimizer Evals: 1024
 p: 3
-Prob of state 010001001: 4.42%
+Prob of state 001001001: 4.42%
 Optimizer Evals: 1024
 p: 4
-Prob of state 010001001: 3.12%
+Prob of state 001001001: 6.99%
 Optimizer Evals: 1024
 p: 5
-Prob of state 010001001: 0.00%
+Prob of state 001001001: 3.12%
 Optimizer Evals: 1024
 p: 6
-Prob of state 010001001: 5.41%
+Prob of state 001001001: 0.00%
 Optimizer Evals: 1024
 p: 7
-Prob of state 010001001: 4.42%
+Prob of state 001001001: 0.00%
 Optimizer Evals: 1024
 p: 8
-Prob of state 010001001: 0.00%
+Prob of state 001001001: 8.84%
 Optimizer Evals: 1024
 p: 9
-Prob of state 010001001: 5.41%
+Prob of state 001001001: 3.12%
 Optimizer Evals: 1024
 p: 10
-Prob of state 010001001: 4.42%
+Prob of state 001001001: 9.88%
 Optimizer Evals: 1024
 p: 1
-Prob of state 010001001: 3.12%
+Prob of state 001001001: 3.12%
 Optimizer Evals: 1024
 p: 2
-Prob of state 010001001: 3.12%
+Prob of state 001001001: 3.12%
 Optimizer Evals: 1024
 p: 3
-Prob of state 010001001: 0.00%
+Prob of state 001001001: 5.41%
 Optimizer Evals: 1024
 p: 4
-Prob of state 010001001: 10.36%
+Prob of state 001001001: 0.00%
 Optimizer Evals: 1024
 p: 5
-Prob of state 010001001: 4.42%
+Prob of state 001001001: 0.00%
 Optimizer Evals: 1024
 p: 6
-Prob of state 010001001: 3.12%
+Prob of state 001001001: 0.00%
 Optimizer Evals: 1024
 p: 7
-Prob of state 010001001: 0.00%
+Prob of state 001001001: 7.65%
 Optimizer Evals: 1024
 p: 8
-Prob of state 010001001: 0.00%
+Prob of state 001001001: 0.00%
 Optimizer Evals: 1024
 p: 9
-Prob of state 010001001: 0.00%
+Prob of state 001001001: 0.00%
 Optimizer Evals: 1024
 p: 10
-Prob of state 010001001: 3.12%
-Optimizer Evals: 1024
-p: 1
-Prob of state 010001001: 3.12%
-Optimizer Evals: 1024
-p: 2
-Prob of state 010001001: 5.41%
-Optimizer Evals: 1024
-p: 3
-Prob of state 010001001: 3.12%
-Optimizer Evals: 1024
-p: 4
-Prob of state 010001001: 4.42%
-Optimizer Evals: 1024
-p: 5
-Prob of state 010001001: 7.65%
-Optimizer Evals: 1024
-p: 6
-Prob of state 010001001: 4.42%
-Optimizer Evals: 1024
-p: 7
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 8
-Prob of state 010001001: 5.41%
-Optimizer Evals: 1024
-p: 9
-Prob of state 010001001: 3.12%
-Optimizer Evals: 1024
-p: 10
-Prob of state 010001001: 4.42%
-Optimizer Evals: 1024
-p: 1
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 2
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 3
-Prob of state 010001001: 5.41%
-Optimizer Evals: 1024
-p: 4
-Prob of state 010001001: 3.12%
-Optimizer Evals: 1024
-p: 5
-Prob of state 010001001: 4.42%
-Optimizer Evals: 1024
-p: 6
-Prob of state 010001001: 6.99%
-Optimizer Evals: 1024
-p: 7
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 8
-Prob of state 010001001: 6.25%
-Optimizer Evals: 1024
-p: 9
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 10
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 1
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 2
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 3
-Prob of state 010001001: 4.42%
-Optimizer Evals: 1024
-p: 4
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 5
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 6
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 7
-Prob of state 010001001: 6.25%
-Optimizer Evals: 1024
-p: 8
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 9
-Prob of state 010001001: 3.12%
-Optimizer Evals: 1024
-p: 10
-Prob of state 010001001: 4.42%
-Optimizer Evals: 1024
-p: 1
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 2
-Prob of state 010001001: 6.25%
-Optimizer Evals: 1024
-p: 3
-Prob of state 010001001: 4.42%
-Optimizer Evals: 1024
-p: 4
-Prob of state 010001001: 4.42%
-Optimizer Evals: 1024
-p: 5
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 6
-Prob of state 010001001: 4.42%
-Optimizer Evals: 1024
-p: 7
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 8
-Prob of state 010001001: 6.99%
-Optimizer Evals: 1024
-p: 9
-Prob of state 010001001: 3.12%
-Optimizer Evals: 1024
-p: 10
-Prob of state 010001001: 4.42%
-Optimizer Evals: 1024
-p: 1
-Prob of state 010001001: 4.42%
-Optimizer Evals: 1024
-p: 2
-Prob of state 010001001: 6.99%
-Optimizer Evals: 1024
-p: 3
-Prob of state 010001001: 3.12%
-Optimizer Evals: 1024
-p: 4
-Prob of state 010001001: 6.25%
-Optimizer Evals: 1024
-p: 5
-Prob of state 010001001: 5.41%
-Optimizer Evals: 1024
-p: 6
-Prob of state 010001001: 3.12%
-Optimizer Evals: 1024
-p: 7
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 8
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 9
-Prob of state 010001001: 3.12%
-Optimizer Evals: 1024
-p: 10
-Prob of state 010001001: 6.25%
-Optimizer Evals: 1024
-p: 1
-Prob of state 010001001: 4.42%
-Optimizer Evals: 1024
-p: 2
-Prob of state 010001001: 5.41%
-Optimizer Evals: 1024
-p: 3
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 4
-Prob of state 010001001: 3.12%
-Optimizer Evals: 1024
-p: 5
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 6
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 7
-Prob of state 010001001: 11.27%
-Optimizer Evals: 1024
-p: 8
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 9
-Prob of state 010001001: 3.12%
-Optimizer Evals: 1024
-p: 10
-Prob of state 010001001: 3.12%
-Optimizer Evals: 1024
-p: 1
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 2
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 3
-Prob of state 010001001: 3.12%
-Optimizer Evals: 1024
-p: 4
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 5
-Prob of state 010001001: 4.42%
-Optimizer Evals: 1024
-p: 6
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 7
-Prob of state 010001001: 5.41%
-Optimizer Evals: 1024
-p: 8
-Prob of state 010001001: 0.00%
-Optimizer Evals: 1024
-p: 9
-Prob of state 010001001: 6.25%
-Optimizer Evals: 1024
-p: 10
-Prob of state 010001001: 3.12%
+Prob of state 001001001: 0.00%
 Optimizer Evals: 1024
