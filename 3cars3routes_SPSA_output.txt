@@ -1,0 +1,316 @@
+____________________________________________________________________________________________________ 
+QUBO NO: 49
+ ____________________________________________________________________________________________________
+optimal function value: 3602.763000000001
+optimal value: [1. 0. 0. 0. 1. 0. 0. 0. 1.]
+status: SUCCESS
+This is a valid solution
+Solving with QAOA...
+____________________________________________________________________________________________________ 
+SPSA
+ ____________________________________________________________________________________________________
+p: 1
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 2
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 3
+Prob of state 100010001: 5.41%
+Optimizer Evals: 200
+p: 4
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 5
+Prob of state 100010001: 4.42%
+Optimizer Evals: 200
+p: 6
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 7
+Prob of state 100010001: 5.41%
+Optimizer Evals: 200
+p: 8
+Prob of state 100010001: 8.84%
+Optimizer Evals: 200
+p: 9
+Prob of state 100010001: 5.41%
+Optimizer Evals: 200
+p: 10
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 1
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 2
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 3
+Prob of state 100010001: 6.25%
+Optimizer Evals: 200
+p: 4
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 5
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 6
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 7
+Prob of state 100010001: 6.25%
+Optimizer Evals: 200
+p: 8
+Prob of state 100010001: 6.25%
+Optimizer Evals: 200
+p: 9
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 10
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 1
+Prob of state 100010001: 6.25%
+Optimizer Evals: 200
+p: 2
+Prob of state 100010001: 4.42%
+Optimizer Evals: 200
+p: 3
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 4
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 5
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 6
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 7
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 8
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 9
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 10
+Prob of state 100010001: 6.99%
+Optimizer Evals: 200
+p: 1
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 2
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 3
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 4
+Prob of state 100010001: 4.42%
+Optimizer Evals: 200
+p: 5
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 6
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 7
+Prob of state 100010001: 4.42%
+Optimizer Evals: 200
+p: 8
+Prob of state 100010001: 9.38%
+Optimizer Evals: 200
+p: 9
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 10
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 1
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 2
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 3
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 4
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 5
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 6
+Prob of state 100010001: 7.65%
+Optimizer Evals: 200
+p: 7
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 8
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 9
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 10
+Prob of state 100010001: 5.41%
+Optimizer Evals: 200
+p: 1
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 2
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 3
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 4
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 5
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 6
+Prob of state 100010001: 5.41%
+Optimizer Evals: 200
+p: 7
+Prob of state 100010001: 5.41%
+Optimizer Evals: 200
+p: 8
+Prob of state 100010001: 4.42%
+Optimizer Evals: 200
+p: 9
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 10
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 1
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 2
+Prob of state 100010001: 4.42%
+Optimizer Evals: 200
+p: 3
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 4
+Prob of state 100010001: 9.38%
+Optimizer Evals: 200
+p: 5
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 6
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 7
+Prob of state 100010001: 6.25%
+Optimizer Evals: 200
+p: 8
+Prob of state 100010001: 5.41%
+Optimizer Evals: 200
+p: 9
+Prob of state 100010001: 5.41%
+Optimizer Evals: 200
+p: 10
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 1
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 2
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 3
+Prob of state 100010001: 4.42%
+Optimizer Evals: 200
+p: 4
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 5
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 6
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 7
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 8
+Prob of state 100010001: 7.65%
+Optimizer Evals: 200
+p: 9
+Prob of state 100010001: 4.42%
+Optimizer Evals: 200
+p: 10
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 1
+Prob of state 100010001: 6.25%
+Optimizer Evals: 200
+p: 2
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 3
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 4
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 5
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 6
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 7
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 8
+Prob of state 100010001: 3.12%
+Optimizer Evals: 200
+p: 9
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 10
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 1
+Prob of state 100010001: 5.41%
+Optimizer Evals: 200
+p: 2
+Prob of state 100010001: 5.41%
+Optimizer Evals: 200
+p: 3
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 4
+Prob of state 100010001: 4.42%
+Optimizer Evals: 200
+p: 5
+Prob of state 100010001: 4.42%
+Optimizer Evals: 200
+p: 6
+Prob of state 100010001: 6.99%
+Optimizer Evals: 200
+p: 7
+Prob of state 100010001: 0.00%
+Optimizer Evals: 200
+p: 8
+Prob of state 100010001: 6.99%
+Optimizer Evals: 200
+p: 9
+Prob of state 100010001: 4.42%
+Optimizer Evals: 200
+p: 10
+Prob of state 100010001: 5.41%
+Optimizer Evals: 200
+Average over 10 restarts for probability of success per layer of QUBO number 49: [0.02728766 0.02362649 0.01920708 0.02133883 0.02133883 0.02943003
+ 0.04024473 0.05206328 0.01966415 0.02406303]
+Average over 50 QUBOs for probability of success per layer: [0.04878572 0.04848839 0.04717691 0.04039573 0.0357311  0.03355623
+ 0.03409502 0.03164108 0.03334176 0.03087834]
+Time Taken: 58554.89197278023s

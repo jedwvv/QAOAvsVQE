@@ -1,3 +1,1 @@
-*.txt
-!change.txt
 __pycache__/
