@@ -9,3 +9,63 @@ Solving with QAOA...
 ____________________________________________________________________________________________________ 
 SLSQP
  ____________________________________________________________________________________________________
+p: 1
+Prob of state 001100001: 6.25%
+Optimizer Evals: 41
+p: 2
+Prob of state 001100001: 3.12%
+Optimizer Evals: 134
+p: 3
+Prob of state 001100001: 8.27%
+Optimizer Evals: 175
+p: 4
+Prob of state 001100001: 6.99%
+Optimizer Evals: 216
+p: 5
+Prob of state 001100001: 0.00%
+Optimizer Evals: 331
+p: 6
+Prob of state 001100001: 6.25%
+Optimizer Evals: 652
+p: 7
+Prob of state 001100001: 6.99%
+Optimizer Evals: 874
+p: 8
+Prob of state 001100001: 0.00%
+Optimizer Evals: 707
+p: 9
+Prob of state 001100001: 10.36%
+Optimizer Evals: 1654
+p: 10
+Prob of state 001100001: 6.25%
+Optimizer Evals: 1089
+p: 1
+Prob of state 001100001: 4.42%
+Optimizer Evals: 28
+p: 2
+Prob of state 001100001: 3.12%
+Optimizer Evals: 96
+p: 3
+Prob of state 001100001: 8.27%
+Optimizer Evals: 148
+p: 4
+Prob of state 001100001: 4.42%
+Optimizer Evals: 196
+p: 5
+Prob of state 001100001: 5.41%
+Optimizer Evals: 254
+p: 6
+Prob of state 001100001: 9.88%
+Optimizer Evals: 386
+p: 7
+Prob of state 001100001: 12.10%
+Optimizer Evals: 536
+p: 8
+Prob of state 001100001: 6.25%
+Optimizer Evals: 936
+p: 9
+Prob of state 001100001: 4.42%
+Optimizer Evals: 1216
+p: 10
+Prob of state 001100001: 16.83%
+Optimizer Evals: 1569
