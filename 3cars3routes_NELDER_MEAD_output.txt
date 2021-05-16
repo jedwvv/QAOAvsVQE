@@ -9,3 +9,33 @@ Solving with QAOA...
 ____________________________________________________________________________________________________ 
 NELDER_MEAD
  ____________________________________________________________________________________________________
+p: 1
+Prob of state 010010100: 0.00%
+Optimizer Evals: 73
+p: 2
+Prob of state 010010100: 3.12%
+Optimizer Evals: 293
+p: 3
+Prob of state 010010100: 4.42%
+Optimizer Evals: 923
+p: 4
+Prob of state 010010100: 3.12%
+Optimizer Evals: 1000
+p: 5
+Prob of state 010010100: 11.27%
+Optimizer Evals: 1000
+p: 6
+Prob of state 010010100: 9.38%
+Optimizer Evals: 1000
+p: 7
+Prob of state 010010100: 8.84%
+Optimizer Evals: 1001
+p: 8
+Prob of state 010010100: 4.42%
+Optimizer Evals: 1000
+p: 9
+Prob of state 010010100: 3.12%
+Optimizer Evals: 1000
+p: 10
+Prob of state 010010100: 3.12%
+Optimizer Evals: 1001
