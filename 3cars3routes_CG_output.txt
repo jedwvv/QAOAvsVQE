@@ -279,3 +279,38 @@ Optimizer Evals: 627
 p: 10
 Prob of state 100010100: 3.12%
 Optimizer Evals: 840
+p: 1
+Prob of state 100010100: 4.42%
+Optimizer Evals: 39
+p: 2
+Prob of state 100010100: 10.83%
+Optimizer Evals: 175
+p: 3
+Prob of state 100010100: 8.84%
+Optimizer Evals: 266
+p: 4
+Prob of state 100010100: 0.00%
+Optimizer Evals: 324
+p: 5
+Prob of state 100010100: 4.42%
+Optimizer Evals: 407
+p: 6
+Prob of state 100010100: 6.25%
+Optimizer Evals: 455
+p: 7
+Prob of state 100010100: 0.00%
+Optimizer Evals: 600
+p: 8
+Prob of state 100010100: 3.12%
+Optimizer Evals: 629
+p: 9
+Prob of state 100010100: 5.41%
+Optimizer Evals: 703
+p: 10
+Prob of state 100010100: 10.83%
+Optimizer Evals: 756
+Average over 10 restarts for probability of success per layer of QUBO number 49: [0.05875154 0.06304071 0.09202301 0.10238893 0.08228198 0.05982423
+ 0.04102809 0.03785366 0.05924632 0.0539294 ]
+Average over 50 QUBOs for probability of success per layer: [0.05361432 0.0602122  0.07037113 0.08110475 0.08714811 0.08047594
+ 0.080649   0.08302475 0.08227046 0.08378535]
+Time Taken: 81327.15300130844s

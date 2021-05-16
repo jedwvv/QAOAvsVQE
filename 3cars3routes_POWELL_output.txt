@@ -99,3 +99,63 @@ Optimizer Evals: 1145
 p: 10
 Prob of state 001100010: 7.65%
 Optimizer Evals: 1011
+p: 1
+Prob of state 001100010: 6.25%
+Optimizer Evals: 134
+p: 2
+Prob of state 001100010: 6.25%
+Optimizer Evals: 353
+p: 3
+Prob of state 001100010: 6.25%
+Optimizer Evals: 454
+p: 4
+Prob of state 001100010: 10.83%
+Optimizer Evals: 692
+p: 5
+Prob of state 001100010: 6.25%
+Optimizer Evals: 1002
+p: 6
+Prob of state 001100010: 0.00%
+Optimizer Evals: 1077
+p: 7
+Prob of state 001100010: 3.12%
+Optimizer Evals: 1077
+p: 8
+Prob of state 001100010: 0.00%
+Optimizer Evals: 1016
+p: 9
+Prob of state 001100010: 0.00%
+Optimizer Evals: 1162
+p: 10
+Prob of state 001100010: 6.25%
+Optimizer Evals: 1019
+p: 1
+Prob of state 001100010: 0.00%
+Optimizer Evals: 72
+p: 2
+Prob of state 001100010: 3.12%
+Optimizer Evals: 352
+p: 3
+Prob of state 001100010: 8.27%
+Optimizer Evals: 661
+p: 4
+Prob of state 001100010: 12.10%
+Optimizer Evals: 1073
+p: 5
+Prob of state 001100010: 4.42%
+Optimizer Evals: 748
+p: 6
+Prob of state 001100010: 0.00%
+Optimizer Evals: 1075
+p: 7
+Prob of state 001100010: 3.12%
+Optimizer Evals: 1109
+p: 8
+Prob of state 001100010: 3.12%
+Optimizer Evals: 1009
+p: 9
+Prob of state 001100010: 6.99%
+Optimizer Evals: 1133
+p: 10
+Prob of state 001100010: 3.12%
+Optimizer Evals: 1006
