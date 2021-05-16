@@ -14,3 +14,63 @@ Solving with QAOA...
 ____________________________________________________________________________________________________ 
 NFT
  ____________________________________________________________________________________________________
+p: 1
+Prob of state 100010100: 11.27%
+Optimizer Evals: 1024
+p: 2
+Prob of state 100010100: 5.41%
+Optimizer Evals: 1024
+p: 3
+Prob of state 100010100: 6.25%
+Optimizer Evals: 1024
+p: 4
+Prob of state 100010100: 0.00%
+Optimizer Evals: 1024
+p: 5
+Prob of state 100010100: 3.12%
+Optimizer Evals: 1024
+p: 6
+Prob of state 100010100: 0.00%
+Optimizer Evals: 1024
+p: 7
+Prob of state 100010100: 0.00%
+Optimizer Evals: 1024
+p: 8
+Prob of state 100010100: 0.00%
+Optimizer Evals: 1024
+p: 9
+Prob of state 100010100: 4.42%
+Optimizer Evals: 1024
+p: 10
+Prob of state 100010100: 6.99%
+Optimizer Evals: 1024
+p: 1
+Prob of state 100010100: 5.41%
+Optimizer Evals: 1024
+p: 2
+Prob of state 100010100: 4.42%
+Optimizer Evals: 1024
+p: 3
+Prob of state 100010100: 6.25%
+Optimizer Evals: 1024
+p: 4
+Prob of state 100010100: 6.25%
+Optimizer Evals: 1024
+p: 5
+Prob of state 100010100: 5.41%
+Optimizer Evals: 1024
+p: 6
+Prob of state 100010100: 4.42%
+Optimizer Evals: 1024
+p: 7
+Prob of state 100010100: 0.00%
+Optimizer Evals: 1024
+p: 8
+Prob of state 100010100: 4.42%
+Optimizer Evals: 1024
+p: 9
+Prob of state 100010100: 4.42%
+Optimizer Evals: 1024
+p: 10
+Prob of state 100010100: 0.00%
+Optimizer Evals: 1024
