@@ -2285,3 +2285,179 @@ QUBO NO: 13
 optimal function value: 0.7631083535149998
 optimal value: [1. 0. 0. 0. 0. 1. 0. 1. 0.]
 status: SUCCESS
+__________________________________________________
+10 lowest states:
+('001100010', 0.7631083535149998)
+('010100001', 0.7631083535149998)
+('010100100', 0.7637743507789998)
+('100100010', 0.7637743507789998)
+('010001010', 0.785918971004)
+('010010010', 0.786584968268)
+('000001010', 0.8194493667789997)
+('010001000', 0.8194493667789997)
+('000010010', 0.8205192690849998)
+('010010000', 0.8205192690849998)
+__________________________________________________
+Other ground state(s) found: '010100001'
+Number of couplings: 36
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 3.6885843378030465
+Prob_s: 0.1341640786499874 
+
+Restart No: 1
+Exp_val: 4.688278054669397
+Prob_s: 0.14560219778561037 
+
+Restart No: 2
+Exp_val: 3.7543799350200873
+Prob_s: 0.12649110640673517 
+
+Restart No: 3
+Exp_val: 4.087156580021918
+Prob_s: 0.07483314773547883 
+
+Restart No: 4
+Exp_val: 4.896809869614355
+Prob_s: 0.08944271909999159 
+
+Restart No: 5
+Exp_val: 1.9078641205973552
+Prob_s: 0.05291502622129181 
+
+Restart No: 6
+Exp_val: 3.701446435520164
+Prob_s: 0.07483314773547883 
+
+Restart No: 7
+Exp_val: 3.8736996170304656
+Prob_s: 0.034641016151377546 
+
+Restart No: 8
+Exp_val: 3.977306555219944
+Prob_s: 0.066332495807108 
+
+Restart No: 9
+Exp_val: 6.824762958190767
+Prob_s: 0.0282842712474619 
+
+Minimum Exp Val:  1.9078641205973552
+Prob_s for this:  0.05291502622129181
+p=2
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 200, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 1.9236332656530482, prob_s_L: 0.066332495807108
+Time for intialising with 10 perturbed values: 34.996540784835815
+Minim_exp_val_B: 1.9092021114495916, prob_s_B: 0.0565685424949238
+p=3
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 300, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 1.8765641531847452, prob_s_L: 0.08
+Time for intialising with 10 perturbed values: 26.33388924598694
+Minim_exp_val_B: 1.8746467731136596, prob_s_B: 0.07211102550927978
+p=4
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 400, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 1.8968082015148182, prob_s_L: 0.07745966692414834
+Time for intialising with 10 perturbed values: 53.23631405830383
+Minim_exp_val_B: 1.4282649893678108, prob_s_B: 0.17204650534085253
+p=5
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 500, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 1.9095289854579585, prob_s_L: 0.066332495807108
+Time for intialising with 10 perturbed values: 45.37813997268677
+Minim_exp_val_B: 1.3632026367872099, prob_s_B: 0.18
+p=6
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 600, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 3.737053085598086, prob_s_L: 0.09797958971132711
+Time for intialising with 10 perturbed values: 272.65394949913025
+Minim_exp_val_B: 3.467433333556667, prob_s_B: 0.10392304845413264
+p=7
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 700, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 3.6792589668754037, prob_s_L: 0.07483314773547883
+Time for intialising with 10 perturbed values: 243.58441400527954
+Minim_exp_val_B: 3.4663759588338734, prob_s_B: 0.10954451150103323
+p=8
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 800, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 3.7348238259550204, prob_s_L: 0.08944271909999159
+Time for intialising with 10 perturbed values: 325.3568308353424
+Minim_exp_val_B: 3.4128375082555866, prob_s_B: 0.10392304845413264
+p=9
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 900, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 3.6927814106808685, prob_s_L: 0.0916515138991168
+Time for intialising with 10 perturbed values: 231.25741291046143
+Minim_exp_val_B: 3.1188909257056574, prob_s_B: 0.1131370849898476
+p=10
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 1000, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 1.9639108312062652, prob_s_L: 0.07745966692414834
+Time for intialising with 10 perturbed values: 248.26475954055786
+Minim_exp_val_B: 1.6010298919956205, prob_s_B: 0.198997487421324
+____________________________________________________________________________________________________ 
+QUBO NO: 14
+ ____________________________________________________________________________________________________
+optimal function value: 0.274146907923
+optimal value: [1. 0. 0. 0. 0. 1. 1. 0. 0.]
+status: SUCCESS
