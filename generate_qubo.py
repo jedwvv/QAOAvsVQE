@@ -17,6 +17,9 @@ def main(raw_args=None):
     qubo, max_coeff = convert_qubo(qubo, linear, quadratic, penalty_multiplier = penalty_multiplier)
     op, offset = qubo.to_ising()
     op *= (1/max_coeff)
+    # print(op)
+    # print(max_coeff)
+    # print(offset)
     return qubo, max_coeff, op, offset, linear, quadratic, results
 
 def parse(raw_args):
@@ -70,16 +73,16 @@ def get_linear_quadratic_coeffs(G, all_edges_dict):
         #Linear terms
         for var in all_edges_dict[edge]:
             if var in linear:
-                linear[var] += G[edge[0]][edge[1]][0]['length']
+                linear[var] += (G[edge[0]][edge[1]][0]['length']/1000)**2
             else:
-                linear[var] = G[edge[0]][edge[1]][0]['length']
+                linear[var] = (G[edge[0]][edge[1]][0]['length']/1000)**2
 
         #Quadratic terms
         for vars_couple in combinations(all_edges_dict[edge],2):
             if vars_couple in quadratic:
-                quadratic[vars_couple] += 2*G[edge[0]][edge[1]][0]['length']
+                quadratic[vars_couple] += 2*((G[edge[0]][edge[1]][0]['length']/1000)**2)
             else:
-                quadratic[vars_couple] = 2*G[edge[0]][edge[1]][0]['length']
+                quadratic[vars_couple] = 2*((G[edge[0]][edge[1]][0]['length']/1000)**2)
     return linear, quadratic
 
 def get_edges_dict(routes_dict):

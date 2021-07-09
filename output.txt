@@ -1,0 +1,5242 @@
+____________________________________________________________________________________________________ 
+QUBO NO: 0
+ ____________________________________________________________________________________________________
+optimal function value: 0.46385135385200016
+optimal value: [0. 0. 1. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001100', 0.46385135385200016)
+('001100100', 0.4645173511160001)
+('010001100', 0.46451735111600034)
+('010100100', 0.4689387731600001)
+('100001100', 0.4775897305890002)
+('100100100', 0.47825572785299997)
+('001010100', 0.4863148734520002)
+('010010100', 0.48698087071599994)
+('001001010', 0.4946457804490003)
+('001100010', 0.49531177771299983)
+__________________________________________________
+Number of couplings: 36
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 6.642926862231332
+Prob_s: 0.022360679774997897 
+
+Restart No: 1
+Exp_val: 2.4699080199010783
+Prob_s: 0.04898979485566356 
+
+Restart No: 2
+Exp_val: 2.9965876315972433
+Prob_s: 0.066332495807108 
+
+Restart No: 3
+Exp_val: 3.4700775573759914
+Prob_s: 0.033166247903554 
+
+Restart No: 4
+Exp_val: 3.7094581374149143
+Prob_s: 0.017320508075688773 
+
+Restart No: 5
+Exp_val: 3.3622180606802647
+Prob_s: 0.03605551275463989 
+
+Restart No: 6
+Exp_val: 4.026336791589053
+Prob_s: 0.01 
+
+Restart No: 7
+Exp_val: 5.298528994225362
+Prob_s: 0.01 
+
+Restart No: 8
+Exp_val: 3.3761001449538974
+Prob_s: 0.026457513110645904 
+
+Restart No: 9
+Exp_val: 3.936624166306345
+Prob_s: 0.022360679774997897 
+
+Minimum Exp Val:  2.4699080199010783
+Prob_s for this:  0.04898979485566356
+p=2
+Minim_exp_val_L: 2.4744802716904974, prob_s_L: 0.042426406871192854
+Time for intialising with 10 perturbed values: 34.76346516609192
+Minim_exp_val_B: 2.46785871883494, prob_s_B: 0.053851648071345036
+p=3
+Minim_exp_val_L: 2.4809781474743304, prob_s_L: 0.06244997998398398
+Time for intialising with 10 perturbed values: 52.6406135559082
+Minim_exp_val_B: 2.4598023125144897, prob_s_B: 0.05099019513592785
+p=4
+Minim_exp_val_L: 2.5015517258046684, prob_s_L: 0.05477225575051661
+Time for intialising with 10 perturbed values: 55.70333170890808
+Minim_exp_val_B: 2.5015517258046684, prob_s_B: 0.05477225575051661
+p=5
+Minim_exp_val_L: 2.4672776729542645, prob_s_L: 0.05099019513592785
+Time for intialising with 10 perturbed values: 111.142094373703
+Minim_exp_val_B: 2.2072196405334843, prob_s_B: 0.08660254037844387
+p=6
+Minim_exp_val_L: 2.7541351331388793, prob_s_L: 0.0469041575982343
+Time for intialising with 10 perturbed values: 99.91746950149536
+Minim_exp_val_B: 2.53409713965271, prob_s_B: 0.05477225575051661
+p=7
+Minim_exp_val_L: 2.761155826813561, prob_s_L: 0.034641016151377546
+Time for intialising with 10 perturbed values: 85.42948746681213
+Minim_exp_val_B: 2.2297660160977406, prob_s_B: 0.07810249675906655
+p=8
+Minim_exp_val_L: 2.755865814907596, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 129.04125905036926
+Minim_exp_val_B: 2.1229054502114435, prob_s_B: 0.06244997998398398
+p=9
+Minim_exp_val_L: 2.8036236452022183, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 159.01216554641724
+Minim_exp_val_B: 1.9796644860072274, prob_s_B: 0.07141428428542851
+p=10
+Minim_exp_val_L: 2.5718415506105963, prob_s_L: 0.04898979485566356
+Time for intialising with 10 perturbed values: 138.31926155090332
+Minim_exp_val_B: 1.3510587456034087, prob_s_B: 0.11489125293076058
+____________________________________________________________________________________________________ 
+QUBO NO: 1
+ ____________________________________________________________________________________________________
+optimal function value: 0.22264709500399998
+optimal value: [0. 0. 1. 1. 0. 0. 0. 0. 0.]
+status: SUCCESS
+Error: At least one car did not have a valid route
+Starting with new qubo
+optimal function value: 0.33422234294100006
+optimal value: [1. 0. 0. 0. 1. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001010001', 0.33422234294100006)
+('010001001', 0.33422234294100006)
+('100001001', 0.33964998091199994)
+('001100001', 0.33964998091200016)
+('001001010', 0.33996621369500013)
+('001010100', 0.3949942718080002)
+('010001100', 0.3949942718080002)
+('100001100', 0.40049235822899987)
+('001100100', 0.4004923582290001)
+('001001100', 0.40436523386400003)
+__________________________________________________
+Other ground state(s) found: '010001001'
+Number of couplings: 36
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 2.121649460084919
+Prob_s: 0.11223534805903114 
+
+Restart No: 1
+Exp_val: 2.1705931408270094
+Prob_s: 0.16412574942949282 
+
+Restart No: 2
+Exp_val: 2.3006407310111823
+Prob_s: 0.09486247283136148 
+
+Restart No: 3
+Exp_val: 2.155860769243756
+Prob_s: 0.08582575694955841 
+
+Restart No: 4
+Exp_val: 5.1718354817285865
+Prob_s: 0 
+
+Restart No: 5
+Exp_val: 2.1542032695659517
+Prob_s: 0.10276107583640265 
+
+Restart No: 6
+Exp_val: 2.315069206223919
+Prob_s: 0.10960245526281695 
+
+Restart No: 7
+Exp_val: 1.9835186097361952
+Prob_s: 0.03863703305156273 
+
+Restart No: 8
+Exp_val: 2.280310523871127
+Prob_s: 0.06741657386773942 
+
+Restart No: 9
+Exp_val: 2.166706091773538
+Prob_s: 0.01414213562373095 
+
+Minimum Exp Val:  1.9835186097361952
+Prob_s for this:  0.03863703305156273
+p=2
+Minim_exp_val_L: 1.9542937495701647, prob_s_L: 0.05095241053847768
+Time for intialising with 10 perturbed values: 37.697835206985474
+Minim_exp_val_B: 1.9542937495701647, prob_s_B: 0.05095241053847768
+p=3
+Minim_exp_val_L: 1.9798119442554873, prob_s_L: 0.0564575131106459
+Time for intialising with 10 perturbed values: 48.518935441970825
+Minim_exp_val_B: 1.9640147465947155, prob_s_B: 0.04685557720282968
+p=4
+Minim_exp_val_L: 1.9754197487640577, prob_s_L: 0.0506449510224598
+Time for intialising with 10 perturbed values: 79.4196228981018
+Minim_exp_val_B: 1.853929628038355, prob_s_B: 0.10540394169850748
+p=5
+Minim_exp_val_L: 1.9870081370265678, prob_s_L: 0.06626379275306134
+Time for intialising with 10 perturbed values: 127.10045504570007
+Minim_exp_val_B: 1.7602446621952748, prob_s_B: 0.10763916785536654
+p=6
+Minim_exp_val_L: 2.016418600568118, prob_s_L: 0.09358898943540674
+Time for intialising with 10 perturbed values: 84.53221678733826
+Minim_exp_val_B: 1.8866569700178246, prob_s_B: 0.09589395245389785
+p=7
+Minim_exp_val_L: 2.018597199637967, prob_s_L: 0.0770674230225704
+Time for intialising with 10 perturbed values: 246.69538569450378
+Minim_exp_val_B: 1.8919716779908944, prob_s_B: 0.10755873763085165
+p=8
+Minim_exp_val_L: 2.029855137843222, prob_s_L: 0.0853748891008666
+Time for intialising with 10 perturbed values: 180.1164357662201
+Minim_exp_val_B: 1.9063157108165236, prob_s_B: 0.10099019513592786
+p=9
+Minim_exp_val_L: 2.0309104034812426, prob_s_L: 0.1
+Time for intialising with 10 perturbed values: 145.34747219085693
+Minim_exp_val_B: 1.9244233796324175, prob_s_B: 0.09997998999159141
+p=10
+Minim_exp_val_L: 1.973910128222285, prob_s_L: 0.0582842712474619
+Time for intialising with 10 perturbed values: 199.3686192035675
+Minim_exp_val_B: 1.8656863916329196, prob_s_B: 0.08825216382075125
+____________________________________________________________________________________________________ 
+QUBO NO: 2
+ ____________________________________________________________________________________________________
+optimal function value: 0.35290829289399994
+optimal value: [0. 0. 1. 0. 0. 1. 0. 1. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('010100100', 0.35290829289399994)
+('001100100', 0.35295626331399976)
+('100100100', 0.35366620092699996)
+('010010100', 0.37275297746500025)
+('001010100', 0.37280094788500007)
+('100010100', 0.37351088549800027)
+('010100010', 0.38164478531400015)
+('001100010', 0.38169275573399997)
+('100100010', 0.38240269334700017)
+('010001100', 0.38585348822800025)
+__________________________________________________
+Number of couplings: 9
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 2.9853916294809624
+Prob_s: 0 
+
+Restart No: 1
+Exp_val: 3.97039655619011
+Prob_s: 0.02 
+
+Restart No: 2
+Exp_val: 3.8250595890686463
+Prob_s: 0 
+
+Restart No: 3
+Exp_val: 2.726927728370316
+Prob_s: 0.03872983346207417 
+
+Restart No: 4
+Exp_val: 2.175539948483101
+Prob_s: 0.02449489742783178 
+
+Restart No: 5
+Exp_val: 2.326478324353884
+Prob_s: 0.0412310562561766 
+
+Restart No: 6
+Exp_val: 2.05278060479323
+Prob_s: 0.04795831523312719 
+
+Restart No: 7
+Exp_val: 3.086851487244135
+Prob_s: 0 
+
+Restart No: 8
+Exp_val: 2.4643728827724707
+Prob_s: 0.08717797887081347 
+
+Restart No: 9
+Exp_val: 2.30996915175761
+Prob_s: 0 
+
+Minimum Exp Val:  2.05278060479323
+Prob_s for this:  0.04795831523312719
+p=2
+Minim_exp_val_L: 2.0467084669849562, prob_s_L: 0.05099019513592785
+Time for intialising with 10 perturbed values: 15.376790761947632
+Minim_exp_val_B: 1.7646255706562326, prob_s_B: 0.055677643628300216
+p=3
+Minim_exp_val_L: 2.0616363827330386, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 35.408050298690796
+Minim_exp_val_B: 1.7135056508568076, prob_s_B: 0.07483314773547883
+p=4
+Minim_exp_val_L: 2.0672579856101985, prob_s_L: 0.0469041575982343
+Time for intialising with 10 perturbed values: 55.80709385871887
+Minim_exp_val_B: 1.70103424679939, prob_s_B: 0.06557438524302
+p=5
+Minim_exp_val_L: 2.041513898443009, prob_s_L: 0.04358898943540673
+Time for intialising with 10 perturbed values: 27.802324295043945
+Minim_exp_val_B: 1.6405389182096402, prob_s_B: 0.06855654600401044
+p=6
+Minim_exp_val_L: 2.210032188173111, prob_s_L: 0.04358898943540673
+Time for intialising with 10 perturbed values: 38.68683743476868
+Minim_exp_val_B: 1.9665126536113955, prob_s_B: 0.0608276253029822
+p=7
+Minim_exp_val_L: 2.1891639016044127, prob_s_L: 0.0458257569495584
+Time for intialising with 10 perturbed values: 87.81860780715942
+Minim_exp_val_B: 1.7860781109609194, prob_s_B: 0.05196152422706632
+p=8
+Minim_exp_val_L: 2.2183500519062567, prob_s_L: 0.042426406871192854
+Time for intialising with 10 perturbed values: 67.56454586982727
+Minim_exp_val_B: 1.8923117128054947, prob_s_B: 0.05196152422706632
+p=9
+Minim_exp_val_L: 2.3143109116696214, prob_s_L: 0.03605551275463989
+Time for intialising with 10 perturbed values: 94.03048968315125
+Minim_exp_val_B: 1.8187080896486698, prob_s_B: 0.058309518948453
+p=10
+Minim_exp_val_L: 2.0942423439940034, prob_s_L: 0.04898979485566356
+Time for intialising with 10 perturbed values: 142.735595703125
+Minim_exp_val_B: 1.2006136312171074, prob_s_B: 0.1004987562112089
+____________________________________________________________________________________________________ 
+QUBO NO: 3
+ ____________________________________________________________________________________________________
+optimal function value: 0.3439292747470002
+optimal value: [0. 1. 0. 1. 0. 0. 0. 0. 1.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('100001010', 0.3439292747470002)
+('100010010', 0.3441505025709999)
+('100001001', 0.3454458754269998)
+('100010001', 0.3456671032509999)
+('100001100', 0.35192174481799987)
+('100010100', 0.352142972642)
+('100100010', 0.35545386147900015)
+('100100001', 0.3566982710469999)
+('100100100', 0.363174140438)
+('010001001', 0.37418236784699976)
+__________________________________________________
+Number of couplings: 25
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 2.0552918793650483
+Prob_s: 0.0412310562561766 
+
+Restart No: 1
+Exp_val: 2.3669266602569783
+Prob_s: 0.0282842712474619 
+
+Restart No: 2
+Exp_val: 4.480155501273215
+Prob_s: 0 
+
+Restart No: 3
+Exp_val: 2.477093177217656
+Prob_s: 0.01414213562373095 
+
+Restart No: 4
+Exp_val: 2.395688430407097
+Prob_s: 0 
+
+Restart No: 5
+Exp_val: 2.4105963467372593
+Prob_s: 0.03872983346207417 
+
+Restart No: 6
+Exp_val: 1.9484823486662677
+Prob_s: 0.05477225575051661 
+
+Restart No: 7
+Exp_val: 2.073083212453921
+Prob_s: 0.034641016151377546 
+
+Restart No: 8
+Exp_val: 2.098497966059181
+Prob_s: 0.0282842712474619 
+
+Restart No: 9
+Exp_val: 2.559936639079129
+Prob_s: 0.02449489742783178 
+
+Minimum Exp Val:  1.9484823486662677
+Prob_s for this:  0.05477225575051661
+p=2
+Minim_exp_val_L: 1.9644724470270496, prob_s_L: 0.06855654600401044
+Time for intialising with 10 perturbed values: 40.420127630233765
+Minim_exp_val_B: 1.494489347305846, prob_s_B: 0.06557438524302
+p=3
+Minim_exp_val_L: 1.982204440079686, prob_s_L: 0.0670820393249937
+Time for intialising with 10 perturbed values: 36.93768119812012
+Minim_exp_val_B: 1.4179670268766877, prob_s_B: 0.07071067811865475
+p=4
+Minim_exp_val_L: 2.0186612370488186, prob_s_L: 0.07681145747868608
+Time for intialising with 10 perturbed values: 42.26179003715515
+Minim_exp_val_B: 1.3643089744876042, prob_s_B: 0.07874007874011811
+p=5
+Minim_exp_val_L: 2.026786400022018, prob_s_L: 0.07141428428542851
+Time for intialising with 10 perturbed values: 91.56573557853699
+Minim_exp_val_B: 1.3069900552693805, prob_s_B: 0.05744562646538029
+p=6
+Minim_exp_val_L: 1.982862646964478, prob_s_L: 0.04898979485566356
+Time for intialising with 10 perturbed values: 68.09731864929199
+Minim_exp_val_B: 1.8343159172085288, prob_s_B: 0.0412310562561766
+p=7
+Minim_exp_val_L: 2.002537481353125, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 107.29263472557068
+Minim_exp_val_B: 1.787148515885172, prob_s_B: 0.05196152422706632
+p=8
+Minim_exp_val_L: 1.9917903443516125, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 141.99712538719177
+Minim_exp_val_B: 1.8582284049579398, prob_s_B: 0.042426406871192854
+p=9
+Minim_exp_val_L: 1.9781499213276383, prob_s_L: 0.03605551275463989
+Time for intialising with 10 perturbed values: 118.46183443069458
+Minim_exp_val_B: 1.7971672879061238, prob_s_B: 0.04795831523312719
+p=10
+Minim_exp_val_L: 1.9448885251229449, prob_s_L: 0.0565685424949238
+Time for intialising with 10 perturbed values: 241.367116689682
+Minim_exp_val_B: 1.1476678975200194, prob_s_B: 0.08602325267042626
+____________________________________________________________________________________________________ 
+QUBO NO: 4
+ ____________________________________________________________________________________________________
+optimal function value: 0.402912924672
+optimal value: [0. 0. 1. 0. 0. 1. 0. 1. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('010100100', 0.402912924672)
+('001100100', 0.40296089509199984)
+('100100100', 0.40367083270500004)
+('010100010', 0.4088566694560001)
+('001100010', 0.4089046398759999)
+('100100010', 0.4096145774890001)
+('010010100', 0.429304979771)
+('001010100', 0.4293529501910003)
+('100010100', 0.43006288780400004)
+('010010010', 0.4352487245550001)
+__________________________________________________
+Number of couplings: 12
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 2.9038129646124027
+Prob_s: 0.03162277660168379 
+
+Restart No: 1
+Exp_val: 2.6729433186233456
+Prob_s: 0.017320508075688773 
+
+Restart No: 2
+Exp_val: 4.157871413584264
+Prob_s: 0 
+
+Restart No: 3
+Exp_val: 1.8282919867431846
+Prob_s: 0.06557438524302 
+
+Restart No: 4
+Exp_val: 4.532334361137142
+Prob_s: 0.01 
+
+Restart No: 5
+Exp_val: 2.2350602687369228
+Prob_s: 0.04898979485566356 
+
+Restart No: 6
+Exp_val: 3.077495319814801
+Prob_s: 0.03605551275463989 
+
+Restart No: 7
+Exp_val: 2.2214185999502942
+Prob_s: 0.04 
+
+Restart No: 8
+Exp_val: 2.655937787096488
+Prob_s: 0 
+
+Restart No: 9
+Exp_val: 2.9382179598613978
+Prob_s: 0 
+
+Minimum Exp Val:  1.8282919867431846
+Prob_s for this:  0.06557438524302
+p=2
+Minim_exp_val_L: 1.8473578275129123, prob_s_L: 0.05
+Time for intialising with 10 perturbed values: 9.541579723358154
+Minim_exp_val_B: 1.847159386523926, prob_s_B: 0.06
+p=3
+Minim_exp_val_L: 1.9078356498293594, prob_s_L: 0.058309518948453
+Time for intialising with 10 perturbed values: 42.252360582351685
+Minim_exp_val_B: 1.8544357761604706, prob_s_B: 0.055677643628300216
+p=4
+Minim_exp_val_L: 1.8802661177624644, prob_s_L: 0.05477225575051661
+Time for intialising with 10 perturbed values: 36.16724109649658
+Minim_exp_val_B: 1.8034627026944758, prob_s_B: 0.05916079783099616
+p=5
+Minim_exp_val_L: 1.8712611479041885, prob_s_L: 0.05916079783099616
+Time for intialising with 10 perturbed values: 50.61491298675537
+Minim_exp_val_B: 1.7797364174498083, prob_s_B: 0.0565685424949238
+p=6
+Minim_exp_val_L: 2.367130730160997, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 68.9131965637207
+Minim_exp_val_B: 2.325270587809171, prob_s_B: 0.0412310562561766
+p=7
+Minim_exp_val_L: 2.402761757880824, prob_s_L: 0.03605551275463989
+Time for intialising with 10 perturbed values: 58.49105262756348
+Minim_exp_val_B: 2.1815320505264695, prob_s_B: 0.05196152422706632
+p=8
+Minim_exp_val_L: 2.4044834025141335, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 47.706865310668945
+Minim_exp_val_B: 2.043979186127408, prob_s_B: 0.05744562646538029
+p=9
+Minim_exp_val_L: 2.3931294800187155, prob_s_L: 0.0458257569495584
+Time for intialising with 10 perturbed values: 81.947922706604
+Minim_exp_val_B: 2.0538520527411426, prob_s_B: 0.0670820393249937
+p=10
+Minim_exp_val_L: 1.7428211985737483, prob_s_L: 0.0648074069840786
+Time for intialising with 10 perturbed values: 130.24174785614014
+Minim_exp_val_B: 1.462189989097792, prob_s_B: 0.06928203230275509
+____________________________________________________________________________________________________ 
+QUBO NO: 5
+ ____________________________________________________________________________________________________
+optimal function value: 0.23958017532499998
+optimal value: [1. 0. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001001', 0.23958017532499998)
+('010001001', 0.2397937653319997)
+('100001001', 0.24330602126799983)
+('001100001', 0.2557888954609999)
+('010100001', 0.2560024854680001)
+('100100001', 0.2742843898539997)
+('001010001', 0.29008553037499984)
+('010010001', 0.290299120382)
+('100010001', 0.29418664672600014)
+('001001010', 0.32679728974800004)
+__________________________________________________
+Number of couplings: 19
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 2.2120788634766932
+Prob_s: 0.04358898943540673 
+
+Restart No: 1
+Exp_val: 2.8335939391438436
+Prob_s: 0.01 
+
+Restart No: 2
+Exp_val: 1.9082070641895719
+Prob_s: 0.033166247903554 
+
+Restart No: 3
+Exp_val: 1.623260808241986
+Prob_s: 0.05744562646538029 
+
+Restart No: 4
+Exp_val: 2.7131934744927717
+Prob_s: 0 
+
+Restart No: 5
+Exp_val: 2.4175547591946787
+Prob_s: 0.02 
+
+Restart No: 6
+Exp_val: 1.886317860054493
+Prob_s: 0.0469041575982343 
+
+Restart No: 7
+Exp_val: 2.31585128902604
+Prob_s: 0.04898979485566356 
+
+Restart No: 8
+Exp_val: 2.830316042060196
+Prob_s: 0 
+
+Restart No: 9
+Exp_val: 2.245451077794202
+Prob_s: 0.04 
+
+Minimum Exp Val:  1.623260808241986
+Prob_s for this:  0.05744562646538029
+p=2
+Minim_exp_val_L: 1.6117761475771695, prob_s_L: 0.066332495807108
+Time for intialising with 10 perturbed values: 22.19775152206421
+Minim_exp_val_B: 1.6117761475771695, prob_s_B: 0.066332495807108
+p=3
+Minim_exp_val_L: 1.6341919237769194, prob_s_L: 0.06782329983125268
+Time for intialising with 10 perturbed values: 30.72940158843994
+Minim_exp_val_B: 1.5298566465141628, prob_s_B: 0.0754983443527075
+p=4
+Minim_exp_val_L: 1.6943330726468147, prob_s_L: 0.06403124237432849
+Time for intialising with 10 perturbed values: 35.56757044792175
+Minim_exp_val_B: 1.5571481730445609, prob_s_B: 0.08
+p=5
+Minim_exp_val_L: 1.7001430308754846, prob_s_L: 0.066332495807108
+Time for intialising with 10 perturbed values: 73.35991406440735
+Minim_exp_val_B: 1.5358222366247225, prob_s_B: 0.07416198487095663
+p=6
+Minim_exp_val_L: 2.242607855500958, prob_s_L: 0.04
+Time for intialising with 10 perturbed values: 132.4042251110077
+Minim_exp_val_B: 2.052710384409803, prob_s_B: 0.03741657386773942
+p=7
+Minim_exp_val_L: 2.2759743152899277, prob_s_L: 0.03605551275463989
+Time for intialising with 10 perturbed values: 104.92680025100708
+Minim_exp_val_B: 2.0806743675373074, prob_s_B: 0.0412310562561766
+p=8
+Minim_exp_val_L: 2.2174863187177434, prob_s_L: 0.03741657386773942
+Time for intialising with 10 perturbed values: 90.52956867218018
+Minim_exp_val_B: 2.0619345789515613, prob_s_B: 0.05099019513592785
+p=9
+Minim_exp_val_L: 2.2011429079917573, prob_s_L: 0.04
+Time for intialising with 10 perturbed values: 101.47730159759521
+Minim_exp_val_B: 2.1015653891697137, prob_s_B: 0.0565685424949238
+p=10
+Minim_exp_val_L: 1.6617923951661764, prob_s_L: 0.0648074069840786
+Time for intialising with 10 perturbed values: 159.85206651687622
+Minim_exp_val_B: 1.6617923951661764, prob_s_B: 0.0648074069840786
+____________________________________________________________________________________________________ 
+QUBO NO: 6
+ ____________________________________________________________________________________________________
+optimal function value: 0.28044093567100004
+optimal value: [0. 1. 0. 0. 0. 1. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001010100', 0.28044093567100004)
+('001100010', 0.28044093567100004)
+('010010100', 0.28151083797700016)
+('010100010', 0.28151083797700016)
+('100010100', 0.28290913037800025)
+('100100010', 0.28290913037800025)
+('001100100', 0.2954282569640001)
+('010100100', 0.2964981592700002)
+('100100100', 0.2978964516710001)
+('001001100', 0.384893687347)
+__________________________________________________
+Other ground state(s) found: '001100010'
+Number of couplings: 26
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 1.5717674197368496
+Prob_s: 0.09797958971132711 
+
+Restart No: 1
+Exp_val: 1.9836870769632937
+Prob_s: 0.02 
+
+Restart No: 2
+Exp_val: 1.9073370605399087
+Prob_s: 0.02 
+
+Restart No: 3
+Exp_val: 2.140963648802265
+Prob_s: 0 
+
+Restart No: 4
+Exp_val: 1.6703651348060704
+Prob_s: 0.18439088914585774 
+
+Restart No: 5
+Exp_val: 1.6508998291780828
+Prob_s: 0.08 
+
+Restart No: 6
+Exp_val: 1.6263364368755344
+Prob_s: 0.12 
+
+Restart No: 7
+Exp_val: 2.0028781252682384
+Prob_s: 0.034641016151377546 
+
+Restart No: 8
+Exp_val: 2.1663944381520777
+Prob_s: 0 
+
+Restart No: 9
+Exp_val: 1.640766071401206
+Prob_s: 0.13114877048604 
+
+Minimum Exp Val:  1.5717674197368496
+Prob_s for this:  0.09797958971132711
+p=2
+Minim_exp_val_L: 1.6847403035128439, prob_s_L: 0.0916515138991168
+Time for intialising with 10 perturbed values: 26.30679702758789
+Minim_exp_val_B: 1.5856056801827696, prob_s_B: 0.0916515138991168
+p=3
+Minim_exp_val_L: 1.683008044889477, prob_s_L: 0.08485281374238571
+Time for intialising with 10 perturbed values: 71.74487209320068
+Minim_exp_val_B: 1.5654528752314831, prob_s_B: 0.09797958971132711
+p=4
+Minim_exp_val_L: 1.6429411008519914, prob_s_L: 0.08717797887081347
+Time for intialising with 10 perturbed values: 66.17943692207336
+Minim_exp_val_B: 1.6012642961847028, prob_s_B: 0.1019803902718557
+p=5
+Minim_exp_val_L: 1.5467659536791663, prob_s_L: 0.1019803902718557
+Time for intialising with 10 perturbed values: 90.56736040115356
+Minim_exp_val_B: 1.5467659536791663, prob_s_B: 0.1019803902718557
+p=6
+Minim_exp_val_L: 1.6476021366360338, prob_s_L: 0.08485281374238571
+Time for intialising with 10 perturbed values: 61.384302854537964
+Minim_exp_val_B: 1.6476021366360338, prob_s_B: 0.08485281374238571
+p=7
+Minim_exp_val_L: 1.6637197798844365, prob_s_L: 0.07483314773547883
+Time for intialising with 10 perturbed values: 65.89345026016235
+Minim_exp_val_B: 1.6137551239019106, prob_s_B: 0.1019803902718557
+p=8
+Minim_exp_val_L: 1.6745052467619597, prob_s_L: 0.08485281374238571
+Time for intialising with 10 perturbed values: 122.49769401550293
+Minim_exp_val_B: 1.5158975984737024, prob_s_B: 0.10392304845413264
+p=9
+Minim_exp_val_L: 1.6718894327513971, prob_s_L: 0.0565685424949238
+Time for intialising with 10 perturbed values: 154.45741176605225
+Minim_exp_val_B: 1.370039481883694, prob_s_B: 0.11489125293076058
+p=10
+Minim_exp_val_L: 1.2944066222370665, prob_s_L: 0.12649110640673517
+Time for intialising with 10 perturbed values: 139.11282420158386
+Minim_exp_val_B: 1.2944066222370665, prob_s_B: 0.12649110640673517
+____________________________________________________________________________________________________ 
+QUBO NO: 7
+ ____________________________________________________________________________________________________
+optimal function value: 0.18171509863700008
+optimal value: [1. 0. 0. 1. 0. 0. 0. 1. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('010001001', 0.18171509863700008)
+('100001001', 0.18174537001500013)
+('001010001', 0.187655912672)
+('001100001', 0.19566449149199994)
+('010010001', 0.20344632345299996)
+('100010001', 0.203476594831)
+('001001001', 0.20837360897400015)
+('010100001', 0.2114549022729999)
+('100100001', 0.21148517365099995)
+('010001010', 0.22153838502800005)
+__________________________________________________
+Other ground state(s) found: '100001001'
+Number of couplings: 29
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 1.4224976319399858
+Prob_s: 0.0565685424949238 
+
+Restart No: 1
+Exp_val: 1.3014110931908174
+Prob_s: 0.07337084961345172 
+
+Restart No: 2
+Exp_val: 1.5135952889714654
+Prob_s: 0.01 
+
+Restart No: 3
+Exp_val: 2.279183205738023
+Prob_s: 0 
+
+Restart No: 4
+Exp_val: 1.0492115996096927
+Prob_s: 0.08563399106030847 
+
+Restart No: 5
+Exp_val: 1.0487549545173305
+Prob_s: 0.07187326068286863 
+
+Restart No: 6
+Exp_val: 0.9641973508351556
+Prob_s: 0.12125202887132022 
+
+Restart No: 7
+Exp_val: 1.8628081951124995
+Prob_s: 0.08944271909999159 
+
+Restart No: 8
+Exp_val: 1.1502049157510164
+Prob_s: 0.09 
+
+Restart No: 9
+Exp_val: 0.8435259927234828
+Prob_s: 0.05 
+
+Minimum Exp Val:  0.8435259927234828
+Prob_s for this:  0.05
+p=2
+Minim_exp_val_L: 0.8515988185281649, prob_s_L: 0.04898979485566356
+Time for intialising with 10 perturbed values: 57.555357933044434
+Minim_exp_val_B: 0.6453124276282813, prob_s_B: 0.12721852527270977
+p=3
+Minim_exp_val_L: 0.8429888025681483, prob_s_L: 0.05990704784914569
+Time for intialising with 10 perturbed values: 32.35664367675781
+Minim_exp_val_B: 0.4463033607545923, prob_s_B: 0.23916375287812985
+p=4
+Minim_exp_val_L: 0.8523417676582005, prob_s_L: 0.05474178435810781
+Time for intialising with 10 perturbed values: 65.03687071800232
+Minim_exp_val_B: 0.44364713086414664, prob_s_B: 0.23316077434701946
+p=5
+Minim_exp_val_L: 0.8521136452263355, prob_s_L: 0.0582842712474619
+Time for intialising with 10 perturbed values: 56.14877223968506
+Minim_exp_val_B: 0.44707663240197404, prob_s_B: 0.2622076938187742
+p=6
+Minim_exp_val_L: 1.1696607926321123, prob_s_L: 0.0836308110070411
+Time for intialising with 10 perturbed values: 51.28237843513489
+Minim_exp_val_B: 1.1341204985872986, prob_s_B: 0.08259933138450473
+p=7
+Minim_exp_val_L: 1.178982902396089, prob_s_L: 0.07872983346207417
+Time for intialising with 10 perturbed values: 74.38974666595459
+Minim_exp_val_B: 1.1279789820185986, prob_s_B: 0.09486247283136148
+p=8
+Minim_exp_val_L: 1.180039153144438, prob_s_L: 0.0824621125123532
+Time for intialising with 10 perturbed values: 170.90384984016418
+Minim_exp_val_B: 1.0908983594621458, prob_s_B: 0.09886568182530062
+p=9
+Minim_exp_val_L: 1.2264019291605537, prob_s_L: 0.07614640732981359
+Time for intialising with 10 perturbed values: 295.16424584388733
+Minim_exp_val_B: 1.0361133529942992, prob_s_B: 0.10665338225254059
+p=10
+Minim_exp_val_L: 0.913232835562469, prob_s_L: 0.05449489742783178
+Time for intialising with 10 perturbed values: 190.70479273796082
+Minim_exp_val_B: 0.44113469114482506, prob_s_B: 0.226246540187361
+____________________________________________________________________________________________________ 
+QUBO NO: 8
+ ____________________________________________________________________________________________________
+optimal function value: 0.34116849393399984
+optimal value: [0. 1. 0. 1. 0. 0. 0. 1. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('010001010', 0.34116849393399984)
+('010100010', 0.34396217073899993)
+('010010010', 0.34464489852799995)
+('010001001', 0.3503197119329997)
+('010100001', 0.3531133887379998)
+('010010001', 0.3537961165269998)
+('100001010', 0.35737721407)
+('100100010', 0.3601708908750001)
+('100010010', 0.3608536186640001)
+('100001001', 0.3665284320689999)
+__________________________________________________
+Number of couplings: 18
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 4.1701354064253175
+Prob_s: 0.0282842712474619 
+
+Restart No: 1
+Exp_val: 1.568052397558581
+Prob_s: 0.099498743710662 
+
+Restart No: 2
+Exp_val: 2.677170579444743
+Prob_s: 0 
+
+Restart No: 3
+Exp_val: 1.835246731274342
+Prob_s: 0.10392304845413264 
+
+Restart No: 4
+Exp_val: 3.3976881340908234
+Prob_s: 0.04 
+
+Restart No: 5
+Exp_val: 1.0860468548781776
+Prob_s: 0.01 
+
+Restart No: 6
+Exp_val: 2.300691682236419
+Prob_s: 0 
+
+Restart No: 7
+Exp_val: 2.127280340243117
+Prob_s: 0.022360679774997897 
+
+Restart No: 8
+Exp_val: 2.4338726796881223
+Prob_s: 0 
+
+Restart No: 9
+Exp_val: 1.9861594559337084
+Prob_s: 0.03741657386773942 
+
+Minimum Exp Val:  1.0860468548781776
+Prob_s for this:  0.01
+p=2
+Minim_exp_val_L: 1.0804308626403518, prob_s_L: 0.01
+Time for intialising with 10 perturbed values: 18.973496198654175
+Minim_exp_val_B: 1.0760985387081883, prob_s_B: 0.01
+p=3
+Minim_exp_val_L: 1.0908478063307245, prob_s_L: 0.01
+Time for intialising with 10 perturbed values: 21.961110830307007
+Minim_exp_val_B: 1.0846058866084651, prob_s_B: 0.017320508075688773
+p=4
+Minim_exp_val_L: 1.078604386751789, prob_s_L: 0
+Time for intialising with 10 perturbed values: 59.49350380897522
+Minim_exp_val_B: 1.0755909993481025, prob_s_B: 0
+p=5
+Minim_exp_val_L: 1.0776611808885748, prob_s_L: 0.01414213562373095
+Time for intialising with 10 perturbed values: 44.022520303726196
+Minim_exp_val_B: 1.0776611808885748, prob_s_B: 0.01414213562373095
+p=6
+Minim_exp_val_L: 1.8773343539079752, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 67.59883904457092
+Minim_exp_val_B: 1.7789429393642253, prob_s_B: 0.05291502622129181
+p=7
+Minim_exp_val_L: 1.8726533602781983, prob_s_L: 0.04
+Time for intialising with 10 perturbed values: 65.32324886322021
+Minim_exp_val_B: 1.7769590380566433, prob_s_B: 0.04795831523312719
+p=8
+Minim_exp_val_L: 1.8747003879938169, prob_s_L: 0.03741657386773942
+Time for intialising with 10 perturbed values: 95.50477194786072
+Minim_exp_val_B: 1.7727413877177585, prob_s_B: 0.053851648071345036
+p=9
+Minim_exp_val_L: 1.8370238097898017, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 110.98632168769836
+Minim_exp_val_B: 1.7528217240585855, prob_s_B: 0.04358898943540673
+p=10
+Minim_exp_val_L: 1.1436428109125298, prob_s_L: 0.01
+Time for intialising with 10 perturbed values: 137.0379023551941
+Minim_exp_val_B: 1.1436428109125298, prob_s_B: 0.01
+____________________________________________________________________________________________________ 
+QUBO NO: 9
+ ____________________________________________________________________________________________________
+optimal function value: 0.3851902540300003
+optimal value: [1. 0. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001001', 0.3851902540300003)
+('001001100', 0.38602037786800025)
+('001010100', 0.38622513874700015)
+('100001001', 0.386236262952)
+('100001100', 0.38706638678999994)
+('100010100', 0.38727114766899984)
+('001100100', 0.3874503745670004)
+('100100100', 0.3884963834890005)
+('010001001', 0.388662666069)
+('010001100', 0.389492789907)
+__________________________________________________
+Number of couplings: 16
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 2.983565006466525
+Prob_s: 0.042426406871192854 
+
+Restart No: 1
+Exp_val: 4.009485777281386
+Prob_s: 0.04 
+
+Restart No: 2
+Exp_val: 7.258621209430561
+Prob_s: 0 
+
+Restart No: 3
+Exp_val: 2.0150088937047466
+Prob_s: 0.0608276253029822 
+
+Restart No: 4
+Exp_val: 3.960651893089693
+Prob_s: 0 
+
+Restart No: 5
+Exp_val: 3.7316589103091142
+Prob_s: 0 
+
+Restart No: 6
+Exp_val: 3.2137069129594447
+Prob_s: 0 
+
+Restart No: 7
+Exp_val: 3.768341053011698
+Prob_s: 0.02 
+
+Restart No: 8
+Exp_val: 3.462302762255699
+Prob_s: 0.01 
+
+Restart No: 9
+Exp_val: 3.3868088785709474
+Prob_s: 0.03605551275463989 
+
+Minimum Exp Val:  2.0150088937047466
+Prob_s for this:  0.0608276253029822
+p=2
+Minim_exp_val_L: 1.9900071540787518, prob_s_L: 0.07280109889280519
+Time for intialising with 10 perturbed values: 28.48930859565735
+Minim_exp_val_B: 1.9378785547535782, prob_s_B: 0.07483314773547883
+p=3
+Minim_exp_val_L: 2.0148306840283063, prob_s_L: 0.06324555320336758
+Time for intialising with 10 perturbed values: 26.426573038101196
+Minim_exp_val_B: 1.8992488220323451, prob_s_B: 0.07615773105863909
+p=4
+Minim_exp_val_L: 2.011070190102201, prob_s_L: 0.0648074069840786
+Time for intialising with 10 perturbed values: 43.706421852111816
+Minim_exp_val_B: 1.9099851703104822, prob_s_B: 0.07348469228349534
+p=5
+Minim_exp_val_L: 2.015468455963791, prob_s_L: 0.0670820393249937
+Time for intialising with 10 perturbed values: 32.1490695476532
+Minim_exp_val_B: 1.903004990992988, prob_s_B: 0.07211102550927978
+p=6
+Minim_exp_val_L: 2.8729738981955486, prob_s_L: 0.05099019513592785
+Time for intialising with 10 perturbed values: 50.57282996177673
+Minim_exp_val_B: 2.8729738981955486, prob_s_B: 0.05099019513592785
+p=7
+Minim_exp_val_L: 2.658061981835257, prob_s_L: 0.04898979485566356
+Time for intialising with 10 perturbed values: 81.05155301094055
+Minim_exp_val_B: 2.658061981835257, prob_s_B: 0.04898979485566356
+p=8
+Minim_exp_val_L: 2.824812120313826, prob_s_L: 0.04
+Time for intialising with 10 perturbed values: 66.3473117351532
+Minim_exp_val_B: 2.824812120313826, prob_s_B: 0.04
+p=9
+Minim_exp_val_L: 2.825537979977359, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 87.82461547851562
+Minim_exp_val_B: 2.825537979977359, prob_s_B: 0.0412310562561766
+p=10
+Minim_exp_val_L: 1.874799950124873, prob_s_L: 0.0670820393249937
+Time for intialising with 10 perturbed values: 136.40354204177856
+Minim_exp_val_B: 1.6276464843999296, prob_s_B: 0.07416198487095663
+____________________________________________________________________________________________________ 
+QUBO NO: 10
+ ____________________________________________________________________________________________________
+optimal function value: 0.7259795902289998
+optimal value: [0. 0. 1. 0. 1. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('100001010', 0.7259795902289994)
+('100010001', 0.7259795902289994)
+('001010100', 0.7259795902289998)
+('001100010', 0.7259795902289998)
+('010001100', 0.7259795902289998)
+('010100001', 0.7259795902289998)
+('100010010', 0.7496221012409996)
+('010010100', 0.749622101241)
+('010100010', 0.749622101241)
+('100010100', 0.7518958253399997)
+__________________________________________________
+Other ground state(s) found: '100010001'
+Other ground state(s) found: '001010100'
+Other ground state(s) found: '001100010'
+Other ground state(s) found: '010001100'
+Other ground state(s) found: '010100001'
+Number of couplings: 34
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 5.002130607485919
+Prob_s: 0.08796545909814858 
+
+Restart No: 1
+Exp_val: 5.120900070218238
+Prob_s: 0.23791530665217814 
+
+Restart No: 2
+Exp_val: 3.5120290752449606
+Prob_s: 0.2674746049716247 
+
+Restart No: 3
+Exp_val: 5.246455172218509
+Prob_s: 0.0906449510224598 
+
+Restart No: 4
+Exp_val: 7.499536433122449
+Prob_s: 0.15560623297836548 
+
+Restart No: 5
+Exp_val: 4.829827431446012
+Prob_s: 0.02 
+
+Restart No: 6
+Exp_val: 4.504571103736143
+Prob_s: 0.11968118785068668 
+
+Restart No: 7
+Exp_val: 5.1251127561139596
+Prob_s: 0.10705716184502276 
+
+Restart No: 8
+Exp_val: 5.576335873173406
+Prob_s: 0.04 
+
+Restart No: 9
+Exp_val: 3.1725094803179403
+Prob_s: 0.3807273164429645 
+
+Minimum Exp Val:  3.1725094803179403
+Prob_s for this:  0.3807273164429645
+p=2
+Minim_exp_val_L: 3.171795227275733, prob_s_L: 0.36244431361516316
+Time for intialising with 10 perturbed values: 47.93728017807007
+Minim_exp_val_B: 3.171795227275733, prob_s_B: 0.36244431361516316
+p=3
+Minim_exp_val_L: 3.146294994884897, prob_s_L: 0.3562043653431778
+Time for intialising with 10 perturbed values: 38.949824810028076
+Minim_exp_val_B: 3.146294994884897, prob_s_B: 0.3562043653431778
+p=4
+Minim_exp_val_L: 3.1702418301752235, prob_s_L: 0.3912144208000216
+Time for intialising with 10 perturbed values: 46.62225580215454
+Minim_exp_val_B: 2.5886833217987952, prob_s_B: 0.42081830845742707
+p=5
+Minim_exp_val_L: 3.15823842325999, prob_s_L: 0.3579783216985952
+Time for intialising with 10 perturbed values: 126.61886167526245
+Minim_exp_val_B: 1.551029969773414, prob_s_B: 0.6536114499453539
+p=6
+Minim_exp_val_L: 3.519721731978892, prob_s_L: 0.23856773214167892
+Time for intialising with 10 perturbed values: 182.9710192680359
+Minim_exp_val_B: 3.2463652945136285, prob_s_B: 0.32089927618892233
+p=7
+Minim_exp_val_L: 3.5396235902484277, prob_s_L: 0.228499382154069
+Time for intialising with 10 perturbed values: 140.38737511634827
+Minim_exp_val_B: 3.2407775276900916, prob_s_B: 0.29176663042959583
+p=8
+Minim_exp_val_L: 3.5532863426268135, prob_s_L: 0.2690865329371408
+Time for intialising with 10 perturbed values: 188.9481499195099
+Minim_exp_val_B: 3.3761682700666666, prob_s_B: 0.29438572393993473
+p=9
+Minim_exp_val_L: 3.5578855956033517, prob_s_L: 0.2814008619482603
+Time for intialising with 10 perturbed values: 222.83163046836853
+Minim_exp_val_B: 2.904940625628427, prob_s_B: 0.3398390129567333
+p=10
+Minim_exp_val_L: 3.2276140138835725, prob_s_L: 0.36507321699868633
+Time for intialising with 10 perturbed values: 125.4353232383728
+Minim_exp_val_B: 1.3773723151438375, prob_s_B: 0.6611528867241592
+____________________________________________________________________________________________________ 
+QUBO NO: 11
+ ____________________________________________________________________________________________________
+optimal function value: 0.8372517865949995
+optimal value: [1. 0. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001001', 0.8372517865949995)
+('010001001', 0.8403227040559997)
+('001001010', 0.8403728206839998)
+('001010001', 0.8403728206839998)
+('010001010', 0.8434437381449995)
+('010010001', 0.8434437381449995)
+('100001001', 0.8453444145320002)
+('100001010', 0.8484654486209995)
+('100010001', 0.8484654486209995)
+('001010010', 0.8508368538390005)
+__________________________________________________
+Number of couplings: 24
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 4.206000950319852
+Prob_s: 0.042426406871192854 
+
+Restart No: 1
+Exp_val: 5.965300193553935
+Prob_s: 0.03162277660168379 
+
+Restart No: 2
+Exp_val: 5.201085261282492
+Prob_s: 0.026457513110645904 
+
+Restart No: 3
+Exp_val: 3.7863210175744193
+Prob_s: 0.04358898943540673 
+
+Restart No: 4
+Exp_val: 5.232019001023204
+Prob_s: 0.02 
+
+Restart No: 5
+Exp_val: 3.0947104770554548
+Prob_s: 0.044721359549995794 
+
+Restart No: 6
+Exp_val: 6.015491401282045
+Prob_s: 0.01 
+
+Restart No: 7
+Exp_val: 4.118630806773849
+Prob_s: 0.04358898943540673 
+
+Restart No: 8
+Exp_val: 4.9862431309533575
+Prob_s: 0.05 
+
+Restart No: 9
+Exp_val: 4.7547685819930745
+Prob_s: 0.022360679774997897 
+
+Minimum Exp Val:  3.0947104770554548
+Prob_s for this:  0.044721359549995794
+p=2
+Minim_exp_val_L: 3.0994701686120365, prob_s_L: 0.0469041575982343
+Time for intialising with 10 perturbed values: 37.499194383621216
+Minim_exp_val_B: 2.515052279161429, prob_s_B: 0.07681145747868608
+p=3
+Minim_exp_val_L: 3.1182393072170083, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 24.896140575408936
+Minim_exp_val_B: 1.773194788674361, prob_s_B: 0.0888819441731559
+p=4
+Minim_exp_val_L: 3.1009708666061657, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 59.408223152160645
+Minim_exp_val_B: 1.4721317202992403, prob_s_B: 0.10099504938362078
+p=5
+Minim_exp_val_L: 3.097065383269074, prob_s_L: 0.053851648071345036
+Time for intialising with 10 perturbed values: 43.19701910018921
+Minim_exp_val_B: 1.4660325811155923, prob_s_B: 0.09899494936611665
+p=6
+Minim_exp_val_L: 4.062786413288419, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 104.96958231925964
+Minim_exp_val_B: 3.8830866939420834, prob_s_B: 0.05
+p=7
+Minim_exp_val_L: 4.029407533483838, prob_s_L: 0.0458257569495584
+Time for intialising with 10 perturbed values: 224.346604347229
+Minim_exp_val_B: 3.8511249157762335, prob_s_B: 0.05099019513592785
+p=8
+Minim_exp_val_L: 4.11098714029597, prob_s_L: 0.053851648071345036
+Time for intialising with 10 perturbed values: 131.01408648490906
+Minim_exp_val_B: 3.588969159834451, prob_s_B: 0.053851648071345036
+p=9
+Minim_exp_val_L: 4.091115554883562, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 107.4507851600647
+Minim_exp_val_B: 3.3959402167826136, prob_s_B: 0.0565685424949238
+p=10
+Minim_exp_val_L: 3.121835993993229, prob_s_L: 0.05
+Time for intialising with 10 perturbed values: 103.0011420249939
+Minim_exp_val_B: 1.5001647682963317, prob_s_B: 0.09848857801796104
+____________________________________________________________________________________________________ 
+QUBO NO: 12
+ ____________________________________________________________________________________________________
+optimal function value: 0.7411456689400002
+optimal value: [1. 0. 0. 0. 0. 1. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('100001001', 0.7411456689399998)
+('001100001', 0.7411456689400002)
+('001010001', 0.764610416559)
+('010001001', 0.764610416559)
+('001100010', 0.7735636575210005)
+('100001010', 0.7735636575210005)
+('001100100', 0.7751979714450004)
+('100001100', 0.7751979714450004)
+('001010010', 0.7970284051400003)
+('010001010', 0.7970284051400003)
+__________________________________________________
+Other ground state(s) found: '001100001'
+Number of couplings: 18
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 5.31699146689571
+Prob_s: 0.07483314773547883 
+
+Restart No: 1
+Exp_val: 4.5920335054440455
+Prob_s: 0.07211102550927978 
+
+Restart No: 2
+Exp_val: 4.559152795348243
+Prob_s: 0.10392304845413264 
+
+Restart No: 3
+Exp_val: 3.8178729984746775
+Prob_s: 0.07483314773547883 
+
+Restart No: 4
+Exp_val: 5.505274787226063
+Prob_s: 0 
+
+Restart No: 5
+Exp_val: 5.874070399954448
+Prob_s: 0.0282842712474619 
+
+Restart No: 6
+Exp_val: 4.913614214999676
+Prob_s: 0.06324555320336758 
+
+Restart No: 7
+Exp_val: 5.968158932675481
+Prob_s: 0.02 
+
+Restart No: 8
+Exp_val: 4.36677300548691
+Prob_s: 0.07483314773547883 
+
+Restart No: 9
+Exp_val: 5.819447077259321
+Prob_s: 0.04 
+
+Minimum Exp Val:  3.8178729984746775
+Prob_s for this:  0.07483314773547883
+p=2
+Minim_exp_val_L: 3.8010141058130196, prob_s_L: 0.06928203230275509
+Time for intialising with 10 perturbed values: 30.062090158462524
+Minim_exp_val_B: 2.8700876880060417, prob_s_B: 0.0282842712474619
+p=3
+Minim_exp_val_L: 3.8014057350953347, prob_s_L: 0.066332495807108
+Time for intialising with 10 perturbed values: 17.937952280044556
+Minim_exp_val_B: 2.174506593745126, prob_s_B: 0.10583005244258362
+p=4
+Minim_exp_val_L: 3.8428723112567322, prob_s_L: 0.05291502622129181
+Time for intialising with 10 perturbed values: 39.977476835250854
+Minim_exp_val_B: 2.168913529128378, prob_s_B: 0.10392304845413264
+p=5
+Minim_exp_val_L: 3.850264243413602, prob_s_L: 0.066332495807108
+Time for intialising with 10 perturbed values: 52.25709939002991
+Minim_exp_val_B: 2.18205139821516, prob_s_B: 0.10770329614269007
+p=6
+Minim_exp_val_L: 4.153488053208204, prob_s_L: 0.0938083151964686
+Time for intialising with 10 perturbed values: 143.6908097267151
+Minim_exp_val_B: 3.8245714968063456, prob_s_B: 0.09797958971132711
+p=7
+Minim_exp_val_L: 4.1193863138236955, prob_s_L: 0.10392304845413264
+Time for intialising with 10 perturbed values: 101.35203886032104
+Minim_exp_val_B: 3.7617206150612117, prob_s_B: 0.10583005244258362
+p=8
+Minim_exp_val_L: 4.15870775322132, prob_s_L: 0.09591663046625439
+Time for intialising with 10 perturbed values: 131.3435091972351
+Minim_exp_val_B: 3.846791626511684, prob_s_B: 0.10583005244258362
+p=9
+Minim_exp_val_L: 4.124224468123676, prob_s_L: 0.08944271909999159
+Time for intialising with 10 perturbed values: 141.27146792411804
+Minim_exp_val_B: 3.6073849382063985, prob_s_B: 0.13564659966250536
+p=10
+Minim_exp_val_L: 3.8098805325077896, prob_s_L: 0.06324555320336758
+Time for intialising with 10 perturbed values: 98.383793592453
+Minim_exp_val_B: 3.8098805325077896, prob_s_B: 0.06324555320336758
+____________________________________________________________________________________________________ 
+QUBO NO: 13
+ ____________________________________________________________________________________________________
+optimal function value: 0.7544516669739996
+optimal value: [0. 0. 1. 1. 0. 0. 0. 1. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('010001100', 0.7544516669739996)
+('010010001', 0.7544516669739996)
+('001100001', 0.754451666974)
+('010100001', 0.7627640891520002)
+('010001001', 0.781431701477)
+('010100100', 0.8196048919110002)
+('001001001', 0.8670262848150001)
+('001100100', 0.9055443567929999)
+('010010100', 0.9055443567929999)
+('100100100', 0.9198309360300003)
+__________________________________________________
+Other ground state(s) found: '010010001'
+Other ground state(s) found: '001100001'
+Number of couplings: 36
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 4.058497368625082
+Prob_s: 0.12817255256206575 
+
+Restart No: 1
+Exp_val: 4.985711394601434
+Prob_s: 0.11807223446092155 
+
+Restart No: 2
+Exp_val: 4.208033189588537
+Prob_s: 0.11971480752017097 
+
+Restart No: 3
+Exp_val: 4.296011240264531
+Prob_s: 0.16198039027185568 
+
+Restart No: 4
+Exp_val: 4.11942164912698
+Prob_s: 0.24606261493616083 
+
+Restart No: 5
+Exp_val: 3.068690177281746
+Prob_s: 0.10510514323456191 
+
+Restart No: 6
+Exp_val: 4.850583888802019
+Prob_s: 0.02 
+
+Restart No: 7
+Exp_val: 4.041114044764099
+Prob_s: 0.01 
+
+Restart No: 8
+Exp_val: 3.815058741597062
+Prob_s: 0.09377692973058688 
+
+Restart No: 9
+Exp_val: 4.709846617111281
+Prob_s: 0 
+
+Minimum Exp Val:  3.068690177281746
+Prob_s for this:  0.10510514323456191
+p=2
+Minim_exp_val_L: 3.03861781009442, prob_s_L: 0.08767311813944673
+Time for intialising with 10 perturbed values: 42.410022020339966
+Minim_exp_val_B: 3.03861781009442, prob_s_B: 0.08767311813944673
+p=3
+Minim_exp_val_L: 3.0483110801965605, prob_s_L: 0.08790332984698218
+Time for intialising with 10 perturbed values: 70.55074548721313
+Minim_exp_val_B: 3.0483110801965605, prob_s_B: 0.08790332984698218
+p=4
+Minim_exp_val_L: 3.0461917955608575, prob_s_L: 0.10056283889298659
+Time for intialising with 10 perturbed values: 43.21353721618652
+Minim_exp_val_B: 3.037691572798019, prob_s_B: 0.11260500271343561
+p=5
+Minim_exp_val_L: 3.0637611708672927, prob_s_L: 0.12508270432752164
+Time for intialising with 10 perturbed values: 122.29531621932983
+Minim_exp_val_B: 2.9786975250996415, prob_s_B: 0.11044731323400417
+p=6
+Minim_exp_val_L: 3.9543432875287166, prob_s_L: 0.12086776687980938
+Time for intialising with 10 perturbed values: 122.1578016281128
+Minim_exp_val_B: 3.8628624672068805, prob_s_B: 0.16875941832726982
+p=7
+Minim_exp_val_L: 4.137417932571535, prob_s_L: 0.11189608136562817
+Time for intialising with 10 perturbed values: 133.5519630908966
+Minim_exp_val_B: 3.8568119612138743, prob_s_B: 0.13154730466853393
+p=8
+Minim_exp_val_L: 4.063614253287635, prob_s_L: 0.10984298073893227
+Time for intialising with 10 perturbed values: 137.88060402870178
+Minim_exp_val_B: 3.9338881018437117, prob_s_B: 0.13910929064825495
+p=9
+Minim_exp_val_L: 4.02692951681505, prob_s_L: 0.14166946963878654
+Time for intialising with 10 perturbed values: 147.09688997268677
+Minim_exp_val_B: 3.9601655118746124, prob_s_B: 0.12976666716029922
+p=10
+Minim_exp_val_L: 3.026404414992977, prob_s_L: 0.1264375031022373
+Time for intialising with 10 perturbed values: 200.22880220413208
+Minim_exp_val_B: 3.026404414992977, prob_s_B: 0.1264375031022373
+____________________________________________________________________________________________________ 
+QUBO NO: 14
+ ____________________________________________________________________________________________________
+optimal function value: 0.3600071054949998
+optimal value: [1. 0. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001001', 0.3600071054949998)
+('001001010', 0.3660023206949998)
+('001010001', 0.36717031856999993)
+('010001001', 0.36717031856999993)
+('100001001', 0.36799923053299977)
+('001100001', 0.367999230533)
+('001001100', 0.3699898276729998)
+('001010010', 0.37316553376999995)
+('010001010', 0.37316553376999995)
+('100001010', 0.3739944457329998)
+__________________________________________________
+Number of couplings: 36
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 1.7326696301741331
+Prob_s: 0.04358898943540673 
+
+Restart No: 1
+Exp_val: 1.7425247768819974
+Prob_s: 0.0412310562561766 
+
+Restart No: 2
+Exp_val: 2.4911133902145166
+Prob_s: 0.022360679774997897 
+
+Restart No: 3
+Exp_val: 1.7895328916318431
+Prob_s: 0.042426406871192854 
+
+Restart No: 4
+Exp_val: 2.1370698652433147
+Prob_s: 0.022360679774997897 
+
+Restart No: 5
+Exp_val: 2.9416558696163424
+Prob_s: 0.01414213562373095 
+
+Restart No: 6
+Exp_val: 1.268593043200791
+Prob_s: 0.03741657386773942 
+
+Restart No: 7
+Exp_val: 1.8093504632298374
+Prob_s: 0.04898979485566356 
+
+Restart No: 8
+Exp_val: 1.7547789920751224
+Prob_s: 0.05196152422706632 
+
+Restart No: 9
+Exp_val: 1.0094059959667006
+Prob_s: 0.022360679774997897 
+
+Minimum Exp Val:  1.0094059959667006
+Prob_s for this:  0.022360679774997897
+p=2
+Minim_exp_val_L: 1.0354613764342953, prob_s_L: 0.01
+Time for intialising with 10 perturbed values: 47.24216055870056
+Minim_exp_val_B: 0.6540765517203473, prob_s_B: 0.10148891565092219
+p=3
+Minim_exp_val_L: 1.015860521181016, prob_s_L: 0.022360679774997897
+Time for intialising with 10 perturbed values: 27.013375759124756
+Minim_exp_val_B: 0.6492631979731627, prob_s_B: 0.09899494936611665
+p=4
+Minim_exp_val_L: 1.0161702428537334, prob_s_L: 0.01
+Time for intialising with 10 perturbed values: 63.499879598617554
+Minim_exp_val_B: 0.645501814099372, prob_s_B: 0.0938083151964686
+p=5
+Minim_exp_val_L: 1.0315803703072441, prob_s_L: 0.022360679774997897
+Time for intialising with 10 perturbed values: 80.27040553092957
+Minim_exp_val_B: 0.6232698195005475, prob_s_B: 0.11269427669584645
+p=6
+Minim_exp_val_L: 1.7269144403455248, prob_s_L: 0.05
+Time for intialising with 10 perturbed values: 144.38502550125122
+Minim_exp_val_B: 1.6672107572645534, prob_s_B: 0.04795831523312719
+p=7
+Minim_exp_val_L: 1.7209644036897391, prob_s_L: 0.05
+Time for intialising with 10 perturbed values: 124.94191217422485
+Minim_exp_val_B: 1.5601623178194886, prob_s_B: 0.05196152422706632
+p=8
+Minim_exp_val_L: 1.7840438862223256, prob_s_L: 0.05099019513592785
+Time for intialising with 10 perturbed values: 134.840913772583
+Minim_exp_val_B: 1.4074471199184357, prob_s_B: 0.06244997998398398
+p=9
+Minim_exp_val_L: 1.761660377241484, prob_s_L: 0.04795831523312719
+Time for intialising with 10 perturbed values: 255.0534257888794
+Minim_exp_val_B: 1.3140968518940515, prob_s_B: 0.07874007874011811
+p=10
+Minim_exp_val_L: 1.0551585269447965, prob_s_L: 0.02
+Time for intialising with 10 perturbed values: 185.56063556671143
+Minim_exp_val_B: 0.8917456905743355, prob_s_B: 0.066332495807108
+____________________________________________________________________________________________________ 
+QUBO NO: 15
+ ____________________________________________________________________________________________________
+optimal function value: 0.370692152395
+optimal value: [1. 0. 0. 0. 0. 1. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001100001', 0.370692152395)
+('100001001', 0.370692152395)
+('001100010', 0.37216595974300004)
+('100001010', 0.37216595974300004)
+('001100100', 0.37761477626499995)
+('100001100', 0.37761477626499995)
+('100000001', 0.3855481295688001)
+('000100001', 0.38573423373279997)
+('001001001', 0.3863634038750001)
+('001000001', 0.3868774754088)
+__________________________________________________
+Other ground state(s) found: '100001001'
+Number of couplings: 36
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 2.2533921637725856
+Prob_s: 0.04685557720282968 
+
+Restart No: 1
+Exp_val: 2.2218630274993143
+Prob_s: 0.10815059268665972 
+
+Restart No: 2
+Exp_val: 1.088426702726817
+Prob_s: 0.027320508075688775 
+
+Restart No: 3
+Exp_val: 2.0466543624266658
+Prob_s: 0.03650281539872885 
+
+Restart No: 4
+Exp_val: 3.517318442356256
+Prob_s: 0.05095241053847768 
+
+Restart No: 5
+Exp_val: 1.8099928451494307
+Prob_s: 0.07587207240755414 
+
+Restart No: 6
+Exp_val: 1.5439746523238225
+Prob_s: 0.08801703698170621 
+
+Restart No: 7
+Exp_val: 1.9284270474618515
+Prob_s: 0.07058282177129341 
+
+Restart No: 8
+Exp_val: 1.0793060500391176
+Prob_s: 0.0614505191510159 
+
+Restart No: 9
+Exp_val: 2.504457549879275
+Prob_s: 0.03650281539872885 
+
+Minimum Exp Val:  1.0793060500391176
+Prob_s for this:  0.0614505191510159
+p=2
+Minim_exp_val_L: 1.0840023145042754, prob_s_L: 0.04732050807568877
+Time for intialising with 10 perturbed values: 43.32946515083313
+Minim_exp_val_B: 1.0840023145042754, prob_s_B: 0.04732050807568877
+p=3
+Minim_exp_val_L: 1.0833522951430323, prob_s_L: 0.05277916867529368
+Time for intialising with 10 perturbed values: 39.46368908882141
+Minim_exp_val_B: 0.6013460684301071, prob_s_B: 0.20179304513845692
+p=4
+Minim_exp_val_L: 1.0896019310093448, prob_s_L: 0.04685557720282968
+Time for intialising with 10 perturbed values: 53.77355217933655
+Minim_exp_val_B: 0.555799087515298, prob_s_B: 0.18643650760992952
+p=5
+Minim_exp_val_L: 1.0893754715995474, prob_s_L: 0.0423606797749979
+Time for intialising with 10 perturbed values: 87.4150698184967
+Minim_exp_val_B: 0.5516958567983377, prob_s_B: 0.17544003745317532
+p=6
+Minim_exp_val_L: 1.6289265490809062, prob_s_L: 0.08455559041163258
+Time for intialising with 10 perturbed values: 114.34959363937378
+Minim_exp_val_B: 1.5418446248416906, prob_s_B: 0.09099019513592785
+p=7
+Minim_exp_val_L: 1.6227917220874597, prob_s_L: 0.11112232205806248
+Time for intialising with 10 perturbed values: 107.92379570007324
+Minim_exp_val_B: 1.448806724162325, prob_s_B: 0.09267967478312299
+p=8
+Minim_exp_val_L: 1.6131432318321492, prob_s_L: 0.07069652890601744
+Time for intialising with 10 perturbed values: 217.14224934577942
+Minim_exp_val_B: 1.51079586700591, prob_s_B: 0.11995365897814277
+p=9
+Minim_exp_val_L: 1.628105910733909, prob_s_L: 0.08601539630659959
+Time for intialising with 10 perturbed values: 234.86099815368652
+Minim_exp_val_B: 1.2167592627247243, prob_s_B: 0.15033149208818633
+p=10
+Minim_exp_val_L: 0.9894566021072541, prob_s_L: 0.0423606797749979
+Time for intialising with 10 perturbed values: 236.72845458984375
+Minim_exp_val_B: 0.9894566021072541, prob_s_B: 0.0423606797749979
+____________________________________________________________________________________________________ 
+QUBO NO: 16
+ ____________________________________________________________________________________________________
+optimal function value: 0.501449685092
+optimal value: [1. 0. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001001', 0.501449685092)
+('010001001', 0.5041330697529998)
+('001010001', 0.5041330697530002)
+('100001001', 0.5092629827809998)
+('001100001', 0.5092629827810002)
+('010100001', 0.511946367442)
+('100010001', 0.5119463674420004)
+('010010001', 0.5137333549360001)
+('001001010', 0.521689899983)
+('001001100', 0.5217666652340003)
+__________________________________________________
+Number of couplings: 36
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 2.687223905696139
+Prob_s: 0.055677643628300216 
+
+Restart No: 1
+Exp_val: 2.4248777641540036
+Prob_s: 0.03162277660168379 
+
+Restart No: 2
+Exp_val: 2.4772129744660907
+Prob_s: 0.07615773105863909 
+
+Restart No: 3
+Exp_val: 1.6138911460138485
+Prob_s: 0.042426406871192854 
+
+Restart No: 4
+Exp_val: 3.3953273524686436
+Prob_s: 0.02 
+
+Restart No: 5
+Exp_val: 2.7379103291391553
+Prob_s: 0.0412310562561766 
+
+Restart No: 6
+Exp_val: 4.0982999047092905
+Prob_s: 0 
+
+Restart No: 7
+Exp_val: 4.143018763089449
+Prob_s: 0.022360679774997897 
+
+Restart No: 8
+Exp_val: 2.8019407591296726
+Prob_s: 0.017320508075688773 
+
+Restart No: 9
+Exp_val: 3.551267636618633
+Prob_s: 0.03872983346207417 
+
+Minimum Exp Val:  1.6138911460138485
+Prob_s for this:  0.042426406871192854
+p=2
+Minim_exp_val_L: 1.6200610452122894, prob_s_L: 0.03162277660168379
+Time for intialising with 10 perturbed values: 39.143399715423584
+Minim_exp_val_B: 1.1680495705646237, prob_s_B: 0.08
+p=3
+Minim_exp_val_L: 1.6424531958905975, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 67.16838955879211
+Minim_exp_val_B: 1.137989900246987, prob_s_B: 0.09433981132056604
+p=4
+Minim_exp_val_L: 1.6481066840523673, prob_s_L: 0.04
+Time for intialising with 10 perturbed values: 49.498279094696045
+Minim_exp_val_B: 1.1115372469549674, prob_s_B: 0.08
+p=5
+Minim_exp_val_L: 1.5323165408007209, prob_s_L: 0.04358898943540673
+Time for intialising with 10 perturbed values: 127.7041609287262
+Minim_exp_val_B: 1.0614968792602875, prob_s_B: 0.09539392014169457
+p=6
+Minim_exp_val_L: 3.003447716179606, prob_s_L: 0.0282842712474619
+Time for intialising with 10 perturbed values: 137.5201449394226
+Minim_exp_val_B: 2.463533497585835, prob_s_B: 0.053851648071345036
+p=7
+Minim_exp_val_L: 2.7818194733266495, prob_s_L: 0.0282842712474619
+Time for intialising with 10 perturbed values: 79.32572722434998
+Minim_exp_val_B: 2.591539058211306, prob_s_B: 0.034641016151377546
+p=8
+Minim_exp_val_L: 2.7600524112894878, prob_s_L: 0.02
+Time for intialising with 10 perturbed values: 127.97339057922363
+Minim_exp_val_B: 2.3571706133504273, prob_s_B: 0.0469041575982343
+p=9
+Minim_exp_val_L: 2.6638707291334884, prob_s_L: 0.022360679774997897
+Time for intialising with 10 perturbed values: 95.43182516098022
+Minim_exp_val_B: 2.2916007528603144, prob_s_B: 0.06
+p=10
+Minim_exp_val_L: 1.7614372321978955, prob_s_L: 0.01414213562373095
+Time for intialising with 10 perturbed values: 127.47348833084106
+Minim_exp_val_B: 1.0498771261799171, prob_s_B: 0.10954451150103323
+____________________________________________________________________________________________________ 
+QUBO NO: 17
+ ____________________________________________________________________________________________________
+optimal function value: 0.15627812096900007
+optimal value: [0. 1. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001010', 0.15627812096900007)
+('001100010', 0.15775192831700013)
+('100001010', 0.16570460601899994)
+('001010010', 0.16590066890600008)
+('100100010', 0.167178413367)
+('010001010', 0.172486841105)
+('010100010', 0.17396064845300008)
+('100010010', 0.17532715395599996)
+('010010010', 0.18210938904200002)
+('001001100', 0.1954307148790001)
+__________________________________________________
+Number of couplings: 16
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 1.0644154784789899
+Prob_s: 0.08944271909999159 
+
+Restart No: 1
+Exp_val: 2.636720611300661
+Prob_s: 0 
+
+Restart No: 2
+Exp_val: 0.914205424842679
+Prob_s: 0.02449489742783178 
+
+Restart No: 3
+Exp_val: 0.9384231037644013
+Prob_s: 0.02 
+
+Restart No: 4
+Exp_val: 2.081967030247336
+Prob_s: 0 
+
+Restart No: 5
+Exp_val: 0.9242002413408209
+Prob_s: 0.026457513110645904 
+
+Restart No: 6
+Exp_val: 1.0062479034097889
+Prob_s: 0.04 
+
+Restart No: 7
+Exp_val: 2.3158559418527265
+Prob_s: 0.017320508075688773 
+
+Restart No: 8
+Exp_val: 1.0166253994181202
+Prob_s: 0.04358898943540673 
+
+Restart No: 9
+Exp_val: 1.3577178529569554
+Prob_s: 0 
+
+Minimum Exp Val:  0.914205424842679
+Prob_s for this:  0.02449489742783178
+p=2
+Minim_exp_val_L: 0.91236755256042, prob_s_L: 0.01
+Time for intialising with 10 perturbed values: 20.35088586807251
+Minim_exp_val_B: 0.5603288055541208, prob_s_B: 0.08485281374238571
+p=3
+Minim_exp_val_L: 0.9055210745057299, prob_s_L: 0.02
+Time for intialising with 10 perturbed values: 23.842655658721924
+Minim_exp_val_B: 0.5248171758608466, prob_s_B: 0.09746794344808964
+p=4
+Minim_exp_val_L: 0.9153884117557648, prob_s_L: 0.01414213562373095
+Time for intialising with 10 perturbed values: 67.58203482627869
+Minim_exp_val_B: 0.4734473578685353, prob_s_B: 0.11489125293076058
+p=5
+Minim_exp_val_L: 0.9080908597566401, prob_s_L: 0.01
+Time for intialising with 10 perturbed values: 46.59106993675232
+Minim_exp_val_B: 0.44022060456207135, prob_s_B: 0.10488088481701516
+p=6
+Minim_exp_val_L: 1.009514515066193, prob_s_L: 0.03741657386773942
+Time for intialising with 10 perturbed values: 84.31355261802673
+Minim_exp_val_B: 0.9255048467059142, prob_s_B: 0.05
+p=7
+Minim_exp_val_L: 1.0198665534367322, prob_s_L: 0.04795831523312719
+Time for intialising with 10 perturbed values: 58.36253023147583
+Minim_exp_val_B: 0.9297928052497304, prob_s_B: 0.0458257569495584
+p=8
+Minim_exp_val_L: 1.009184792594561, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 70.20077705383301
+Minim_exp_val_B: 0.9294970313254028, prob_s_B: 0.04795831523312719
+p=9
+Minim_exp_val_L: 1.0173076641360854, prob_s_L: 0.0469041575982343
+Time for intialising with 10 perturbed values: 97.22219252586365
+Minim_exp_val_B: 0.9525407291699473, prob_s_B: 0.042426406871192854
+p=10
+Minim_exp_val_L: 0.9203269759817606, prob_s_L: 0
+Time for intialising with 10 perturbed values: 104.74275946617126
+Minim_exp_val_B: 0.4392746486283181, prob_s_B: 0.09848857801796104
+____________________________________________________________________________________________________ 
+QUBO NO: 18
+ ____________________________________________________________________________________________________
+optimal function value: 0.803500550096
+optimal value: [0. 1. 0. 1. 0. 0. 0. 0. 1.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('100001010', 0.803500550096)
+('100010010', 0.8048207941909999)
+('100100010', 0.8069729621349997)
+('100001001', 0.8374763254629998)
+('100010001', 0.8387965695579997)
+('100100001', 0.8409487375019995)
+('001001010', 0.9287085652629998)
+('001001001', 0.9292800171260005)
+('001010010', 0.9300288093579998)
+('001010001', 0.9306002612210005)
+__________________________________________________
+Number of couplings: 21
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 2.9328181678953635
+Prob_s: 0.0608276253029822 
+
+Restart No: 1
+Exp_val: 3.7165573234791642
+Prob_s: 0.026457513110645904 
+
+Restart No: 2
+Exp_val: 5.700377625132738
+Prob_s: 0.02449489742783178 
+
+Restart No: 3
+Exp_val: 7.247686095984209
+Prob_s: 0.026457513110645904 
+
+Restart No: 4
+Exp_val: 11.174597197526298
+Prob_s: 0.02 
+
+Restart No: 5
+Exp_val: 5.410863836586442
+Prob_s: 0.06324555320336758 
+
+Restart No: 6
+Exp_val: 9.29979969929549
+Prob_s: 0 
+
+Restart No: 7
+Exp_val: 4.922369529956877
+Prob_s: 0.03741657386773942 
+
+Restart No: 8
+Exp_val: 8.165614151147853
+Prob_s: 0 
+
+Restart No: 9
+Exp_val: 9.018921398562274
+Prob_s: 0.01414213562373095 
+
+Minimum Exp Val:  2.9328181678953635
+Prob_s for this:  0.0608276253029822
+p=2
+Minim_exp_val_L: 2.974913574852251, prob_s_L: 0.06403124237432849
+Time for intialising with 10 perturbed values: 20.908562183380127
+Minim_exp_val_B: 2.3810406050136725, prob_s_B: 0.0806225774829855
+p=3
+Minim_exp_val_L: 2.995606200562468, prob_s_L: 0.05916079783099616
+Time for intialising with 10 perturbed values: 39.06748938560486
+Minim_exp_val_B: 2.246405848980504, prob_s_B: 0.0938083151964686
+p=4
+Minim_exp_val_L: 3.0241048918248024, prob_s_L: 0.05477225575051661
+Time for intialising with 10 perturbed values: 95.07834529876709
+Minim_exp_val_B: 2.0195052678999033, prob_s_B: 0.10583005244258362
+p=5
+Minim_exp_val_L: 3.003448747072108, prob_s_L: 0.0648074069840786
+Time for intialising with 10 perturbed values: 56.29591178894043
+Minim_exp_val_B: 2.0024248596388334, prob_s_B: 0.10862780491200216
+p=6
+Minim_exp_val_L: 5.015611794902902, prob_s_L: 0.034641016151377546
+Time for intialising with 10 perturbed values: 81.2658519744873
+Minim_exp_val_B: 5.015611794902902, prob_s_B: 0.034641016151377546
+p=7
+Minim_exp_val_L: 5.092207253463904, prob_s_L: 0.0458257569495584
+Time for intialising with 10 perturbed values: 88.43545508384705
+Minim_exp_val_B: 4.860553723578312, prob_s_B: 0.034641016151377546
+p=8
+Minim_exp_val_L: 5.045824230054226, prob_s_L: 0.05099019513592785
+Time for intialising with 10 perturbed values: 99.85500931739807
+Minim_exp_val_B: 4.903419979683194, prob_s_B: 0.026457513110645904
+p=9
+Minim_exp_val_L: 4.995525950976477, prob_s_L: 0.0469041575982343
+Time for intialising with 10 perturbed values: 90.8061990737915
+Minim_exp_val_B: 4.810099878059575, prob_s_B: 0.0412310562561766
+p=10
+Minim_exp_val_L: 2.787083645048126, prob_s_L: 0.061644140029689765
+Time for intialising with 10 perturbed values: 100.62956237792969
+Minim_exp_val_B: 2.787083645048126, prob_s_B: 0.061644140029689765
+____________________________________________________________________________________________________ 
+QUBO NO: 19
+ ____________________________________________________________________________________________________
+optimal function value: 0.38632030216900004
+optimal value: [1. 0. 0. 0. 0. 1. 0. 0. 1.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('100100001', 0.38632030216900004)
+('100001001', 0.3867864354980002)
+('100010001', 0.3867977884520002)
+('100100010', 0.3997757178539998)
+('100001010', 0.40024185118299993)
+('100010010', 0.40025320413699994)
+('001100001', 0.4455820159399999)
+('001001001', 0.44604814926900005)
+('001010001', 0.44605950222300006)
+('001100010', 0.4590374316249999)
+__________________________________________________
+Number of couplings: 20
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 3.575766412189329
+Prob_s: 0.02449489742783178 
+
+Restart No: 1
+Exp_val: 2.7028599869569634
+Prob_s: 0.099498743710662 
+
+Restart No: 2
+Exp_val: 4.907864125128601
+Prob_s: 0.01414213562373095 
+
+Restart No: 3
+Exp_val: 3.1178461896239535
+Prob_s: 0.01 
+
+Restart No: 4
+Exp_val: 4.388154064100867
+Prob_s: 0.01 
+
+Restart No: 5
+Exp_val: 4.915351106456146
+Prob_s: 0 
+
+Restart No: 6
+Exp_val: 2.83485334051251
+Prob_s: 0.05916079783099616 
+
+Restart No: 7
+Exp_val: 5.024513099703723
+Prob_s: 0.01 
+
+Restart No: 8
+Exp_val: 3.059799885742079
+Prob_s: 0.05291502622129181 
+
+Restart No: 9
+Exp_val: 6.688854278159951
+Prob_s: 0 
+
+Minimum Exp Val:  2.7028599869569634
+Prob_s for this:  0.099498743710662
+p=2
+Minim_exp_val_L: 2.735646307395303, prob_s_L: 0.09797958971132711
+Time for intialising with 10 perturbed values: 22.987038135528564
+Minim_exp_val_B: 2.735646307395303, prob_s_B: 0.09797958971132711
+p=3
+Minim_exp_val_L: 2.752396801586744, prob_s_L: 0.0888819441731559
+Time for intialising with 10 perturbed values: 26.004838943481445
+Minim_exp_val_B: 2.215698846077322, prob_s_B: 0.0565685424949238
+p=4
+Minim_exp_val_L: 2.757433588814788, prob_s_L: 0.10099504938362078
+Time for intialising with 10 perturbed values: 35.51416087150574
+Minim_exp_val_B: 1.6331214272206471, prob_s_B: 0.09273618495495704
+p=5
+Minim_exp_val_L: 2.764104532594428, prob_s_L: 0.09899494936611665
+Time for intialising with 10 perturbed values: 85.48262023925781
+Minim_exp_val_B: 1.2074065222670738, prob_s_B: 0.1216552506059644
+p=6
+Minim_exp_val_L: 2.981121056477938, prob_s_L: 0.05744562646538029
+Time for intialising with 10 perturbed values: 128.93492531776428
+Minim_exp_val_B: 2.6483900669942213, prob_s_B: 0.05291502622129181
+p=7
+Minim_exp_val_L: 3.011266074809723, prob_s_L: 0.0469041575982343
+Time for intialising with 10 perturbed values: 86.55743622779846
+Minim_exp_val_B: 2.887885484972963, prob_s_B: 0.04358898943540673
+p=8
+Minim_exp_val_L: 3.0226008959928654, prob_s_L: 0.04358898943540673
+Time for intialising with 10 perturbed values: 73.79461908340454
+Minim_exp_val_B: 2.928566753177302, prob_s_B: 0.042426406871192854
+p=9
+Minim_exp_val_L: 3.002223179099106, prob_s_L: 0.03605551275463989
+Time for intialising with 10 perturbed values: 88.18984818458557
+Minim_exp_val_B: 2.958891587557682, prob_s_B: 0.0469041575982343
+p=10
+Minim_exp_val_L: 2.747845429195009, prob_s_L: 0.08544003745317531
+Time for intialising with 10 perturbed values: 152.9438042640686
+Minim_exp_val_B: 1.8204874798732873, prob_s_B: 0.06928203230275509
+____________________________________________________________________________________________________ 
+QUBO NO: 20
+ ____________________________________________________________________________________________________
+optimal function value: 0.8009969913469999
+optimal value: [0. 0. 1. 0. 0. 1. 0. 1. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('010100100', 0.8009969913469999)
+('100010100', 0.8009969913469999)
+('001010100', 0.8675930961269998)
+('010001100', 0.8675930961269998)
+('010010100', 0.922035090331)
+('001100100', 0.9333069237870004)
+('100001100', 0.9333069237870004)
+('001001100', 0.9999030285670003)
+('010000100', 1.003999553739)
+('000010100', 1.0070562471189997)
+__________________________________________________
+Other ground state(s) found: '100010100'
+Number of couplings: 36
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 5.268302031742198
+Prob_s: 0.027320508075688775 
+
+Restart No: 1
+Exp_val: 4.252738106369452
+Prob_s: 0.07614640732981359 
+
+Restart No: 2
+Exp_val: 4.175122239401805
+Prob_s: 0.19009928515755964 
+
+Restart No: 3
+Exp_val: 4.196127180374386
+Prob_s: 0.1 
+
+Restart No: 4
+Exp_val: 3.871044044124875
+Prob_s: 0.11164414002968977 
+
+Restart No: 5
+Exp_val: 6.256329238642894
+Prob_s: 0.0555269276785519 
+
+Restart No: 6
+Exp_val: 4.322353671085858
+Prob_s: 0.09589395245389785 
+
+Restart No: 7
+Exp_val: 5.231197365685969
+Prob_s: 0.0596237610141999 
+
+Restart No: 8
+Exp_val: 5.647362490649624
+Prob_s: 0.08972002859800202 
+
+Restart No: 9
+Exp_val: 4.778136814415172
+Prob_s: 0.14628579117630053 
+
+Minimum Exp Val:  3.871044044124875
+Prob_s for this:  0.11164414002968977
+p=2
+Minim_exp_val_L: 3.8911644879135716, prob_s_L: 0.10376205060618017
+Time for intialising with 10 perturbed values: 34.16708183288574
+Minim_exp_val_B: 3.833911089661404, prob_s_B: 0.1189231968316678
+p=3
+Minim_exp_val_L: 3.8693307855039194, prob_s_L: 0.09886568182530062
+Time for intialising with 10 perturbed values: 40.749478578567505
+Minim_exp_val_B: 3.7778070163033255, prob_s_B: 0.1118033988749895
+p=4
+Minim_exp_val_L: 3.8974769318204476, prob_s_L: 0.09627805494253788
+Time for intialising with 10 perturbed values: 87.55743026733398
+Minim_exp_val_B: 2.6043146292826806, prob_s_B: 0.1906840225908899
+p=5
+Minim_exp_val_L: 3.8830249549977207, prob_s_L: 0.10295171936299416
+Time for intialising with 10 perturbed values: 79.29838466644287
+Minim_exp_val_B: 2.2821106046579125, prob_s_B: 0.18220536528049097
+p=6
+Minim_exp_val_L: 4.262477388646927, prob_s_L: 0.09926663306370695
+Time for intialising with 10 perturbed values: 94.70226907730103
+Minim_exp_val_B: 4.24533880527783, prob_s_B: 0.09038472210432005
+p=7
+Minim_exp_val_L: 4.258765432007891, prob_s_L: 0.07964450219004662
+Time for intialising with 10 perturbed values: 86.80706334114075
+Minim_exp_val_B: 4.245283377883296, prob_s_B: 0.09681595208548624
+p=8
+Minim_exp_val_L: 4.295376877417846, prob_s_L: 0.09627805494253788
+Time for intialising with 10 perturbed values: 119.01736521720886
+Minim_exp_val_B: 4.101516699286617, prob_s_B: 0.09358898943540674
+p=9
+Minim_exp_val_L: 4.296335030887606, prob_s_L: 0.0998191838195261
+Time for intialising with 10 perturbed values: 235.5344433784485
+Minim_exp_val_B: 4.109325821033226, prob_s_B: 0.09099019513592785
+p=10
+Minim_exp_val_L: 3.7760855558611954, prob_s_L: 0.1129150262212918
+Time for intialising with 10 perturbed values: 164.16382479667664
+Minim_exp_val_B: 2.5962863462776093, prob_s_B: 0.15416198487095661
+____________________________________________________________________________________________________ 
+QUBO NO: 21
+ ____________________________________________________________________________________________________
+optimal function value: 0.2876919001510001
+optimal value: [1. 0. 0. 0. 1. 0. 0. 0. 1.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('010100001', 0.2876919001510001)
+('100010001', 0.2876919001510001)
+('001100001', 0.28782846719700017)
+('100001001', 0.28782846719700017)
+('100100001', 0.2897562190359999)
+('001010001', 0.29148418530600007)
+('010001001', 0.29148418530600007)
+('001001001', 0.291620752352)
+('010010001', 0.29166616416800006)
+('010100010', 0.31755445516900016)
+__________________________________________________
+Other ground state(s) found: '100010001'
+Number of couplings: 18
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 3.659051129569515
+Prob_s: 0.02 
+
+Restart No: 1
+Exp_val: 3.0021437577010763
+Prob_s: 0.02 
+
+Restart No: 2
+Exp_val: 2.4829692099844953
+Prob_s: 0.08717797887081347 
+
+Restart No: 3
+Exp_val: 2.506112455295881
+Prob_s: 0.06324555320336758 
+
+Restart No: 4
+Exp_val: 4.014257852531734
+Prob_s: 0.04898979485566356 
+
+Restart No: 5
+Exp_val: 2.242591328252629
+Prob_s: 0.044721359549995794 
+
+Restart No: 6
+Exp_val: 1.1376682106361584
+Prob_s: 0.0916515138991168 
+
+Restart No: 7
+Exp_val: 1.5874008312064067
+Prob_s: 0.08944271909999159 
+
+Restart No: 8
+Exp_val: 1.5116392221592947
+Prob_s: 0.0824621125123532 
+
+Restart No: 9
+Exp_val: 2.3520704103578556
+Prob_s: 0.04898979485566356 
+
+Minimum Exp Val:  1.1376682106361584
+Prob_s for this:  0.0916515138991168
+p=2
+Minim_exp_val_L: 1.1605871514737722, prob_s_L: 0.07211102550927978
+Time for intialising with 10 perturbed values: 17.555566549301147
+Minim_exp_val_B: 1.1485777187133237, prob_s_B: 0.07745966692414834
+p=3
+Minim_exp_val_L: 1.1422863738967912, prob_s_L: 0.09591663046625439
+Time for intialising with 10 perturbed values: 46.49978184700012
+Minim_exp_val_B: 1.1422863738967912, prob_s_B: 0.09591663046625439
+p=4
+Minim_exp_val_L: 1.1551252720457414, prob_s_L: 0.07483314773547883
+Time for intialising with 10 perturbed values: 50.49331879615784
+Minim_exp_val_B: 1.1371448425255428, prob_s_B: 0.07483314773547883
+p=5
+Minim_exp_val_L: 1.1553764202536567, prob_s_L: 0.08717797887081347
+Time for intialising with 10 perturbed values: 47.464685916900635
+Minim_exp_val_B: 0.9018397905357447, prob_s_B: 0.20591260281974
+p=6
+Minim_exp_val_L: 1.63702956938861, prob_s_L: 0.08944271909999159
+Time for intialising with 10 perturbed values: 71.49591207504272
+Minim_exp_val_B: 1.5515386092244126, prob_s_B: 0.10392304845413264
+p=7
+Minim_exp_val_L: 1.6194186529074044, prob_s_L: 0.08944271909999159
+Time for intialising with 10 perturbed values: 98.12096118927002
+Minim_exp_val_B: 1.5578148414806214, prob_s_B: 0.08485281374238571
+p=8
+Minim_exp_val_L: 1.6155303155332885, prob_s_L: 0.0824621125123532
+Time for intialising with 10 perturbed values: 78.7999165058136
+Minim_exp_val_B: 1.4926174631811744, prob_s_B: 0.10770329614269007
+p=9
+Minim_exp_val_L: 1.624046085667361, prob_s_L: 0.06928203230275509
+Time for intialising with 10 perturbed values: 122.34141874313354
+Minim_exp_val_B: 1.3156816351191598, prob_s_B: 0.12328828005937953
+p=10
+Minim_exp_val_L: 1.1513814686769783, prob_s_L: 0.0938083151964686
+Time for intialising with 10 perturbed values: 78.07964944839478
+Minim_exp_val_B: 0.7057187685946619, prob_s_B: 0.19183326093250877
+____________________________________________________________________________________________________ 
+QUBO NO: 22
+ ____________________________________________________________________________________________________
+optimal function value: 0.5421171912720002
+optimal value: [1. 0. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001001', 0.5421171912720002)
+('001010001', 0.5481748948859999)
+('001001010', 0.5537080847820004)
+('001010010', 0.5597657883960001)
+('100001001', 0.5707287970959998)
+('100010001', 0.5767865007099995)
+('100001010', 0.582319690606)
+('001001100', 0.5842053916719996)
+('001100001', 0.5859795658379992)
+('100010010', 0.5883773942199997)
+__________________________________________________
+Number of couplings: 36
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 3.2942108128670617
+Prob_s: 0.0670820393249937 
+
+Restart No: 1
+Exp_val: 5.04321298182293
+Prob_s: 0.0469041575982343 
+
+Restart No: 2
+Exp_val: 6.214408934475319
+Prob_s: 0 
+
+Restart No: 3
+Exp_val: 6.311578226634738
+Prob_s: 0 
+
+Restart No: 4
+Exp_val: 4.590748650227326
+Prob_s: 0.01414213562373095 
+
+Restart No: 5
+Exp_val: 3.3024037274018463
+Prob_s: 0.03872983346207417 
+
+Restart No: 6
+Exp_val: 3.7807770994038417
+Prob_s: 0.042426406871192854 
+
+Restart No: 7
+Exp_val: 3.7848068211211223
+Prob_s: 0.033166247903554 
+
+Restart No: 8
+Exp_val: 5.245984682623212
+Prob_s: 0.0565685424949238 
+
+Restart No: 9
+Exp_val: 2.0079289950609427
+Prob_s: 0.08426149773176358 
+
+Minimum Exp Val:  2.0079289950609427
+Prob_s for this:  0.08426149773176358
+p=2
+Minim_exp_val_L: 2.000304072422119, prob_s_L: 0.0938083151964686
+Time for intialising with 10 perturbed values: 21.606691598892212
+Minim_exp_val_B: 2.000304072422119, prob_s_B: 0.0938083151964686
+p=3
+Minim_exp_val_L: 2.0095039655789173, prob_s_L: 0.09273618495495704
+Time for intialising with 10 perturbed values: 62.19135308265686
+Minim_exp_val_B: 2.005143676270496, prob_s_B: 0.0888819441731559
+p=4
+Minim_exp_val_L: 2.023389102427936, prob_s_L: 0.09219544457292887
+Time for intialising with 10 perturbed values: 63.15808963775635
+Minim_exp_val_B: 1.9784143138303065, prob_s_B: 0.08
+p=5
+Minim_exp_val_L: 1.9657940914477414, prob_s_L: 0.08774964387392122
+Time for intialising with 10 perturbed values: 103.0702736377716
+Minim_exp_val_B: 1.9657940914477414, prob_s_B: 0.08774964387392122
+p=6
+Minim_exp_val_L: 3.6876487667441227, prob_s_L: 0.04898979485566356
+Time for intialising with 10 perturbed values: 184.78132009506226
+Minim_exp_val_B: 3.6077741672043864, prob_s_B: 0.0458257569495584
+p=7
+Minim_exp_val_L: 3.3550243371157857, prob_s_L: 0.04795831523312719
+Time for intialising with 10 perturbed values: 112.78537964820862
+Minim_exp_val_B: 3.3550243371157857, prob_s_B: 0.04795831523312719
+p=8
+Minim_exp_val_L: 3.3892883104026614, prob_s_L: 0.05291502622129181
+Time for intialising with 10 perturbed values: 159.01069378852844
+Minim_exp_val_B: 3.167296791302071, prob_s_B: 0.053851648071345036
+p=9
+Minim_exp_val_L: 3.303650949666135, prob_s_L: 0.06244997998398398
+Time for intialising with 10 perturbed values: 177.9904203414917
+Minim_exp_val_B: 3.163351539775677, prob_s_B: 0.05
+p=10
+Minim_exp_val_L: 1.9322055920463075, prob_s_L: 0.11045361017187261
+Time for intialising with 10 perturbed values: 169.0203194618225
+Minim_exp_val_B: 1.9322055920463075, prob_s_B: 0.11045361017187261
+____________________________________________________________________________________________________ 
+QUBO NO: 23
+ ____________________________________________________________________________________________________
+optimal function value: 0.6111500681269995
+optimal value: [1. 0. 0. 0. 0. 1. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001100', 0.6111500681269995)
+('001100001', 0.6111500681269995)
+('100001100', 0.6147071191719995)
+('100100001', 0.6147071191719995)
+('010001100', 0.6216617867469996)
+('010100001', 0.6216617867469996)
+('001100010', 0.6348732545889995)
+('100100010', 0.6384303056339999)
+('010100010', 0.6453849732089996)
+('001010100', 0.6580970331560003)
+__________________________________________________
+Other ground state(s) found: '001100001'
+Number of couplings: 27
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 4.245388625896267
+Prob_s: 0.08944271909999159 
+
+Restart No: 1
+Exp_val: 5.980169098427211
+Prob_s: 0.0938083151964686 
+
+Restart No: 2
+Exp_val: 4.806863733589014
+Prob_s: 0.0565685424949238 
+
+Restart No: 3
+Exp_val: 6.168087763220283
+Prob_s: 0 
+
+Restart No: 4
+Exp_val: 3.912784307780269
+Prob_s: 0.08717797887081347 
+
+Restart No: 5
+Exp_val: 3.9797011781352896
+Prob_s: 0.0824621125123532 
+
+Restart No: 6
+Exp_val: 5.445375577193707
+Prob_s: 0.044721359549995794 
+
+Restart No: 7
+Exp_val: 4.250194622591188
+Prob_s: 0.04 
+
+Restart No: 8
+Exp_val: 3.944532306172972
+Prob_s: 0.1 
+
+Restart No: 9
+Exp_val: 4.603446019472922
+Prob_s: 0.08485281374238571 
+
+Minimum Exp Val:  3.912784307780269
+Prob_s for this:  0.08717797887081347
+p=2
+Minim_exp_val_L: 3.9239252473452306, prob_s_L: 0.066332495807108
+Time for intialising with 10 perturbed values: 25.331236600875854
+Minim_exp_val_B: 1.5977356723135085, prob_s_B: 0.22803508501982758
+p=3
+Minim_exp_val_L: 3.94241119021336, prob_s_L: 0.07745966692414834
+Time for intialising with 10 perturbed values: 31.588841199874878
+Minim_exp_val_B: 1.5736346040629807, prob_s_B: 0.20591260281974
+p=4
+Minim_exp_val_L: 3.907420648920502, prob_s_L: 0.08
+Time for intialising with 10 perturbed values: 75.82800197601318
+Minim_exp_val_B: 1.527960481046407, prob_s_B: 0.22715633383201095
+p=5
+Minim_exp_val_L: 3.9222814282768286, prob_s_L: 0.08
+Time for intialising with 10 perturbed values: 65.96379399299622
+Minim_exp_val_B: 1.5050314510848337, prob_s_B: 0.21071307505705478
+p=6
+Minim_exp_val_L: 3.9364857720090143, prob_s_L: 0.08944271909999159
+Time for intialising with 10 perturbed values: 110.87970519065857
+Minim_exp_val_B: 3.6517413606472866, prob_s_B: 0.10770329614269007
+p=7
+Minim_exp_val_L: 4.065755246446538, prob_s_L: 0.0916515138991168
+Time for intialising with 10 perturbed values: 101.55697846412659
+Minim_exp_val_B: 3.181803549859235, prob_s_B: 0.12328828005937953
+p=8
+Minim_exp_val_L: 3.949933295535747, prob_s_L: 0.09591663046625439
+Time for intialising with 10 perturbed values: 179.81180620193481
+Minim_exp_val_B: 3.5816568467857546, prob_s_B: 0.10770329614269007
+p=9
+Minim_exp_val_L: 3.993206410495215, prob_s_L: 0.0824621125123532
+Time for intialising with 10 perturbed values: 122.26380729675293
+Minim_exp_val_B: 3.447773744332983, prob_s_B: 0.10392304845413264
+p=10
+Minim_exp_val_L: 3.9652411028692476, prob_s_L: 0.0565685424949238
+Time for intialising with 10 perturbed values: 174.6103515625
+Minim_exp_val_B: 1.5227830123284551, prob_s_B: 0.21908902300206645
+____________________________________________________________________________________________________ 
+QUBO NO: 24
+ ____________________________________________________________________________________________________
+optimal function value: 0.2653444550020001
+optimal value: [1. 0. 0. 0. 0. 1. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001100001', 0.2653444550020001)
+('010100001', 0.26841537246300007)
+('001100010', 0.272226829886)
+('001100100', 0.2722670788720001)
+('010100010', 0.27529774734699997)
+('010100100', 0.27533799633300005)
+('100100001', 0.2824542322160002)
+('100100010', 0.2893366071000001)
+('100100100', 0.28937685608600017)
+('001001001', 0.29008090013800003)
+__________________________________________________
+Number of couplings: 15
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 2.5375202508994077
+Prob_s: 0.034641016151377546 
+
+Restart No: 1
+Exp_val: 1.428264080586052
+Prob_s: 0.026457513110645904 
+
+Restart No: 2
+Exp_val: 1.6806042636474923
+Prob_s: 0.04795831523312719 
+
+Restart No: 3
+Exp_val: 1.6848525250210957
+Prob_s: 0.042426406871192854 
+
+Restart No: 4
+Exp_val: 1.5902439091417035
+Prob_s: 0.0469041575982343 
+
+Restart No: 5
+Exp_val: 1.703304169041473
+Prob_s: 0.06928203230275509 
+
+Restart No: 6
+Exp_val: 2.778427089972471
+Prob_s: 0 
+
+Restart No: 7
+Exp_val: 2.613705904826952
+Prob_s: 0.026457513110645904 
+
+Restart No: 8
+Exp_val: 3.6287740964565556
+Prob_s: 0.01 
+
+Restart No: 9
+Exp_val: 2.4419355253484256
+Prob_s: 0.017320508075688773 
+
+Minimum Exp Val:  1.428264080586052
+Prob_s for this:  0.026457513110645904
+p=2
+Minim_exp_val_L: 1.426610023345216, prob_s_L: 0.0282842712474619
+Time for intialising with 10 perturbed values: 11.491585493087769
+Minim_exp_val_B: 1.4240922232189113, prob_s_B: 0.026457513110645904
+p=3
+Minim_exp_val_L: 1.4235566219051758, prob_s_L: 0.02449489742783178
+Time for intialising with 10 perturbed values: 36.857850074768066
+Minim_exp_val_B: 0.8841527138385071, prob_s_B: 0.10908712114635714
+p=4
+Minim_exp_val_L: 1.4351829826471953, prob_s_L: 0.0282842712474619
+Time for intialising with 10 perturbed values: 85.38854813575745
+Minim_exp_val_B: 0.7396365746138744, prob_s_B: 0.1268857754044952
+p=5
+Minim_exp_val_L: 1.4391471401448273, prob_s_L: 0.033166247903554
+Time for intialising with 10 perturbed values: 36.46896958351135
+Minim_exp_val_B: 0.7260414379415361, prob_s_B: 0.11874342087037917
+p=6
+Minim_exp_val_L: 1.7792789702764193, prob_s_L: 0.05
+Time for intialising with 10 perturbed values: 55.941832065582275
+Minim_exp_val_B: 1.6552806784298097, prob_s_B: 0.05
+p=7
+Minim_exp_val_L: 1.765405255414003, prob_s_L: 0.0458257569495584
+Time for intialising with 10 perturbed values: 93.5414879322052
+Minim_exp_val_B: 1.6338112216825071, prob_s_B: 0.05099019513592785
+p=8
+Minim_exp_val_L: 1.7719147923006702, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 56.4794499874115
+Minim_exp_val_B: 1.5300378190857635, prob_s_B: 0.06
+p=9
+Minim_exp_val_L: 1.774131917917851, prob_s_L: 0.042426406871192854
+Time for intialising with 10 perturbed values: 76.71894001960754
+Minim_exp_val_B: 1.5085769151147668, prob_s_B: 0.06403124237432849
+p=10
+Minim_exp_val_L: 1.49636217948837, prob_s_L: 0.033166247903554
+Time for intialising with 10 perturbed values: 146.1076476573944
+Minim_exp_val_B: 0.9107951468266551, prob_s_B: 0.0824621125123532
+____________________________________________________________________________________________________ 
+QUBO NO: 25
+ ____________________________________________________________________________________________________
+optimal function value: 0.23896846480299994
+optimal value: [0. 1. 0. 0. 0. 1. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001100010', 0.23896846480299994)
+('001001010', 0.23943459813200008)
+('001010010', 0.2394459510860001)
+('001100100', 0.2470610927400001)
+('001001100', 0.2475272260689998)
+('001010100', 0.2475385790229998)
+('010100010', 0.24888887461999998)
+('010001010', 0.24935500794900012)
+('010010010', 0.24936636090300013)
+('100100010', 0.252423880488)
+__________________________________________________
+Number of couplings: 18
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 1.6963804634928492
+Prob_s: 0.04358898943540673 
+
+Restart No: 1
+Exp_val: 1.5253949452218933
+Prob_s: 0.10954451150103323 
+
+Restart No: 2
+Exp_val: 1.835554230319128
+Prob_s: 0.042426406871192854 
+
+Restart No: 3
+Exp_val: 1.6191393265784513
+Prob_s: 0.034641016151377546 
+
+Restart No: 4
+Exp_val: 2.1794289815924364
+Prob_s: 0.0754983443527075 
+
+Restart No: 5
+Exp_val: 2.1327128428004696
+Prob_s: 0.02 
+
+Restart No: 6
+Exp_val: 2.6069861710814846
+Prob_s: 0 
+
+Restart No: 7
+Exp_val: 2.0540553426626826
+Prob_s: 0.022360679774997897 
+
+Restart No: 8
+Exp_val: 2.8473815538503495
+Prob_s: 0.01 
+
+Restart No: 9
+Exp_val: 4.086772571704278
+Prob_s: 0 
+
+Minimum Exp Val:  1.5253949452218933
+Prob_s for this:  0.10954451150103323
+p=2
+Minim_exp_val_L: 1.5374620395157585, prob_s_L: 0.10816653826391968
+Time for intialising with 10 perturbed values: 19.667625665664673
+Minim_exp_val_B: 0.7495311531352405, prob_s_B: 0.09643650760992954
+p=3
+Minim_exp_val_L: 1.5451731592238418, prob_s_L: 0.1044030650891055
+Time for intialising with 10 perturbed values: 39.708984375
+Minim_exp_val_B: 0.7004123414035407, prob_s_B: 0.09695359714832658
+p=4
+Minim_exp_val_L: 1.5632654639679369, prob_s_L: 0.11832159566199232
+Time for intialising with 10 perturbed values: 49.90272831916809
+Minim_exp_val_B: 0.6591329728315986, prob_s_B: 0.1004987562112089
+p=5
+Minim_exp_val_L: 1.5341993145339081, prob_s_L: 0.10862780491200216
+Time for intialising with 10 perturbed values: 71.09623551368713
+Minim_exp_val_B: 0.6546929404865003, prob_s_B: 0.10488088481701516
+p=6
+Minim_exp_val_L: 1.6283834006300366, prob_s_L: 0.05
+Time for intialising with 10 perturbed values: 46.150914669036865
+Minim_exp_val_B: 1.6283834006300366, prob_s_B: 0.05
+p=7
+Minim_exp_val_L: 1.6614078959938863, prob_s_L: 0.04795831523312719
+Time for intialising with 10 perturbed values: 108.86995148658752
+Minim_exp_val_B: 1.5791974161133169, prob_s_B: 0.05099019513592785
+p=8
+Minim_exp_val_L: 1.6552258264568633, prob_s_L: 0.04795831523312719
+Time for intialising with 10 perturbed values: 79.13970637321472
+Minim_exp_val_B: 1.3423007614024753, prob_s_B: 0.058309518948453
+p=9
+Minim_exp_val_L: 1.6570882773778968, prob_s_L: 0.033166247903554
+Time for intialising with 10 perturbed values: 108.05738925933838
+Minim_exp_val_B: 1.1941525130370099, prob_s_B: 0.08
+p=10
+Minim_exp_val_L: 1.5399589014865374, prob_s_L: 0.09219544457292887
+Time for intialising with 10 perturbed values: 87.94110584259033
+Minim_exp_val_B: 1.2704847463659443, prob_s_B: 0.07071067811865475
+____________________________________________________________________________________________________ 
+QUBO NO: 26
+ ____________________________________________________________________________________________________
+optimal function value: 0.6285753298539998
+optimal value: [0. 0. 1. 0. 0. 1. 0. 0. 1.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('100100100', 0.6285753298539998)
+('001100100', 0.6308222505169994)
+('010100100', 0.6325504581589998)
+('100010001', 0.6394705719989995)
+('100100010', 0.6398033916279999)
+('100001010', 0.6401899096679995)
+('001010001', 0.641717492662)
+('001100010', 0.6420503122909995)
+('001001010', 0.642436830331)
+('010010001', 0.6434457003040004)
+__________________________________________________
+Number of couplings: 17
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 5.6125908855002375
+Prob_s: 0.017320508075688773 
+
+Restart No: 1
+Exp_val: 4.666365943294632
+Prob_s: 0.01 
+
+Restart No: 2
+Exp_val: 7.335829967042745
+Prob_s: 0 
+
+Restart No: 3
+Exp_val: 4.590406495391086
+Prob_s: 0 
+
+Restart No: 4
+Exp_val: 3.779782835553909
+Prob_s: 0.07141428428542851 
+
+Restart No: 5
+Exp_val: 2.903259600523869
+Prob_s: 0.04 
+
+Restart No: 6
+Exp_val: 4.601483267132227
+Prob_s: 0 
+
+Restart No: 7
+Exp_val: 3.553411001319505
+Prob_s: 0.11180339887498948 
+
+Restart No: 8
+Exp_val: 3.66664534401825
+Prob_s: 0.06403124237432849 
+
+Restart No: 9
+Exp_val: 2.069185103245606
+Prob_s: 0.0458257569495584 
+
+Minimum Exp Val:  2.069185103245606
+Prob_s for this:  0.0458257569495584
+p=2
+Minim_exp_val_L: 2.0795655397436574, prob_s_L: 0.04795831523312719
+Time for intialising with 10 perturbed values: 22.99051022529602
+Minim_exp_val_B: 2.0677929605172842, prob_s_B: 0.08124038404635961
+p=3
+Minim_exp_val_L: 2.0834816118599724, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 27.17532253265381
+Minim_exp_val_B: 1.6558000562480917, prob_s_B: 0.11401754250991379
+p=4
+Minim_exp_val_L: 2.071323302769758, prob_s_L: 0.05196152422706632
+Time for intialising with 10 perturbed values: 46.690627336502075
+Minim_exp_val_B: 1.6690334353216985, prob_s_B: 0.10246950765959599
+p=5
+Minim_exp_val_L: 2.067260766056238, prob_s_L: 0.04
+Time for intialising with 10 perturbed values: 65.08588886260986
+Minim_exp_val_B: 1.6034278122669523, prob_s_B: 0.11789826122551596
+p=6
+Minim_exp_val_L: 4.032396466218149, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 67.7379367351532
+Minim_exp_val_B: 4.032396466218149, prob_s_B: 0.0412310562561766
+p=7
+Minim_exp_val_L: 4.047105512589794, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 100.46849846839905
+Minim_exp_val_B: 4.006965386365196, prob_s_B: 0.03162277660168379
+p=8
+Minim_exp_val_L: 4.0641968874441154, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 86.82578730583191
+Minim_exp_val_B: 3.913597508067046, prob_s_B: 0.044721359549995794
+p=9
+Minim_exp_val_L: 4.042057300731662, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 121.16120457649231
+Minim_exp_val_B: 3.870403092102931, prob_s_B: 0.05744562646538029
+p=10
+Minim_exp_val_L: 2.0510578287076537, prob_s_L: 0.04358898943540673
+Time for intialising with 10 perturbed values: 108.15331387519836
+Minim_exp_val_B: 2.0510578287076537, prob_s_B: 0.04358898943540673
+____________________________________________________________________________________________________ 
+QUBO NO: 27
+ ____________________________________________________________________________________________________
+optimal function value: 0.2793432302590002
+optimal value: [0. 1. 0. 1. 0. 0. 0. 0. 1.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('100001010', 0.2793432302590002)
+('100001001', 0.27939120067900003)
+('100001100', 0.28010113829200023)
+('100010010', 0.2923129962979998)
+('100010001', 0.2923609667179996)
+('100010100', 0.2930709043309998)
+('001001010', 0.2962730824780002)
+('001001001', 0.29632105289800004)
+('001001100', 0.29703099051100024)
+('001010010', 0.3027489518689994)
+__________________________________________________
+Number of couplings: 27
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 1.96608814577817
+Prob_s: 0.0469041575982343 
+
+Restart No: 1
+Exp_val: 4.328278559461552
+Prob_s: 0.017320508075688773 
+
+Restart No: 2
+Exp_val: 3.163764881423342
+Prob_s: 0.03741657386773942 
+
+Restart No: 3
+Exp_val: 2.395570977008734
+Prob_s: 0.06855654600401044 
+
+Restart No: 4
+Exp_val: 4.686966911898638
+Prob_s: 0 
+
+Restart No: 5
+Exp_val: 3.396572935350407
+Prob_s: 0.034641016151377546 
+
+Restart No: 6
+Exp_val: 2.498645832559485
+Prob_s: 0.0412310562561766 
+
+Restart No: 7
+Exp_val: 2.9259029785483026
+Prob_s: 0.0282842712474619 
+
+Restart No: 8
+Exp_val: 3.006231200738797
+Prob_s: 0.04358898943540673 
+
+Restart No: 9
+Exp_val: 2.9161658333553326
+Prob_s: 0.0282842712474619 
+
+Minimum Exp Val:  1.96608814577817
+Prob_s for this:  0.0469041575982343
+p=2
+Minim_exp_val_L: 1.9688121327552355, prob_s_L: 0.05
+Time for intialising with 10 perturbed values: 27.31595230102539
+Minim_exp_val_B: 1.8657512883852698, prob_s_B: 0.07874007874011811
+p=3
+Minim_exp_val_L: 1.9611491501318514, prob_s_L: 0.0469041575982343
+Time for intialising with 10 perturbed values: 43.87354493141174
+Minim_exp_val_B: 1.7778092856489374, prob_s_B: 0.08426149773176358
+p=4
+Minim_exp_val_L: 1.9497797980553249, prob_s_L: 0.0458257569495584
+Time for intialising with 10 perturbed values: 48.66397666931152
+Minim_exp_val_B: 1.2679947311356599, prob_s_B: 0.09055385138137417
+p=5
+Minim_exp_val_L: 1.9519859753288216, prob_s_L: 0.0469041575982343
+Time for intialising with 10 perturbed values: 98.28659510612488
+Minim_exp_val_B: 1.1050306293890222, prob_s_B: 0.09327379053088815
+p=6
+Minim_exp_val_L: 2.4708923801932015, prob_s_L: 0.0458257569495584
+Time for intialising with 10 perturbed values: 118.26591181755066
+Minim_exp_val_B: 2.4372424080712083, prob_s_B: 0.03872983346207417
+p=7
+Minim_exp_val_L: 2.468155546599708, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 105.02098417282104
+Minim_exp_val_B: 2.468155546599708, prob_s_B: 0.044721359549995794
+p=8
+Minim_exp_val_L: 2.465880742735268, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 143.78958225250244
+Minim_exp_val_B: 2.42810875242067, prob_s_B: 0.03872983346207417
+p=9
+Minim_exp_val_L: 2.4630417426884423, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 96.90969705581665
+Minim_exp_val_B: 2.395377864957038, prob_s_B: 0.034641016151377546
+p=10
+Minim_exp_val_L: 1.9304517285691192, prob_s_L: 0.04795831523312719
+Time for intialising with 10 perturbed values: 114.91923356056213
+Minim_exp_val_B: 1.6921881043758042, prob_s_B: 0.07681145747868608
+____________________________________________________________________________________________________ 
+QUBO NO: 28
+ ____________________________________________________________________________________________________
+optimal function value: 1.0209279806790001
+optimal value: [0. 1. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001010', 1.0209279806790001)
+('001100100', 1.0215348071439996)
+('001001001', 1.0254257472789998)
+('001010100', 1.0260325737439997)
+('100001010', 1.0270618342120001)
+('100100100', 1.0276686606769996)
+('100001001', 1.0315596008119998)
+('100010100', 1.0321664272769997)
+('010001010', 1.0331652432320002)
+('010100100', 1.0337720696969996)
+__________________________________________________
+Number of couplings: 33
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 6.137113763430097
+Prob_s: 0.07211102550927978 
+
+Restart No: 1
+Exp_val: 5.252557677555166
+Prob_s: 0.06403124237432849 
+
+Restart No: 2
+Exp_val: 3.134966580926914
+Prob_s: 0.10723805294763608 
+
+Restart No: 3
+Exp_val: 6.204718559131862
+Prob_s: 0.02 
+
+Restart No: 4
+Exp_val: 4.254727079417505
+Prob_s: 0.0282842712474619 
+
+Restart No: 5
+Exp_val: 4.959035490307318
+Prob_s: 0.05744562646538029 
+
+Restart No: 6
+Exp_val: 4.864707316274473
+Prob_s: 0.05099019513592785 
+
+Restart No: 7
+Exp_val: 5.1530461992461145
+Prob_s: 0.03605551275463989 
+
+Restart No: 8
+Exp_val: 2.9200329131928067
+Prob_s: 0 
+
+Restart No: 9
+Exp_val: 5.477161499158179
+Prob_s: 0.0670820393249937 
+
+Minimum Exp Val:  2.9200329131928067
+Prob_s for this:  0
+p=2
+Minim_exp_val_L: 2.905286785553899, prob_s_L: 0.01
+Time for intialising with 10 perturbed values: 22.05463933944702
+Minim_exp_val_B: 2.4773482032256577, prob_s_B: 0.01
+p=3
+Minim_exp_val_L: 2.931325200027137, prob_s_L: 0
+Time for intialising with 10 perturbed values: 66.3600242137909
+Minim_exp_val_B: 2.466039341885571, prob_s_B: 0.02449489742783178
+p=4
+Minim_exp_val_L: 2.963228098443837, prob_s_L: 0
+Time for intialising with 10 perturbed values: 103.82952308654785
+Minim_exp_val_B: 1.9576876909835281, prob_s_B: 0.0458257569495584
+p=5
+Minim_exp_val_L: 2.939477335685551, prob_s_L: 0
+Time for intialising with 10 perturbed values: 66.15123462677002
+Minim_exp_val_B: 1.6811666649714319, prob_s_B: 0.09273618495495704
+p=6
+Minim_exp_val_L: 4.670189348896403, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 85.28575825691223
+Minim_exp_val_B: 4.670189348896403, prob_s_B: 0.03872983346207417
+p=7
+Minim_exp_val_L: 4.832424388436473, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 125.98339438438416
+Minim_exp_val_B: 4.571493914946396, prob_s_B: 0.0412310562561766
+p=8
+Minim_exp_val_L: 4.5816576678851355, prob_s_L: 0.05099019513592785
+Time for intialising with 10 perturbed values: 118.25639057159424
+Minim_exp_val_B: 4.5816576678851355, prob_s_B: 0.05099019513592785
+p=9
+Minim_exp_val_L: 4.845637825980054, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 92.18036985397339
+Minim_exp_val_B: 4.731036550356507, prob_s_B: 0.05291502622129181
+p=10
+Minim_exp_val_L: 3.023949711685172, prob_s_L: 0
+Time for intialising with 10 perturbed values: 203.9712688922882
+Minim_exp_val_B: 3.023949711685172, prob_s_B: 0
+____________________________________________________________________________________________________ 
+QUBO NO: 29
+ ____________________________________________________________________________________________________
+optimal function value: 0.6890337276139997
+optimal value: [0. 0. 1. 0. 1. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001010100', 0.6890337276139997)
+('100010001', 0.6890337276139997)
+('001001100', 0.7225865710239996)
+('100001001', 0.7225865710239996)
+('010010100', 0.7801493699179998)
+('100010010', 0.7801493699179998)
+('010001100', 0.8137022133279996)
+('100001010', 0.8137022133279996)
+('001010010', 0.8523649776630002)
+('010010001', 0.8523649776630002)
+__________________________________________________
+Other ground state(s) found: '100010001'
+Number of couplings: 26
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 3.9820519970579307
+Prob_s: 0.09789435273416214 
+
+Restart No: 1
+Exp_val: 4.4262479053669335
+Prob_s: 0.0582842712474619 
+
+Restart No: 2
+Exp_val: 4.177372010023108
+Prob_s: 0.08324233081729782 
+
+Restart No: 3
+Exp_val: 5.03710684742188
+Prob_s: 0.03968118785068667 
+
+Restart No: 4
+Exp_val: 6.668144778170779
+Prob_s: 0 
+
+Restart No: 5
+Exp_val: 3.3757356089618358
+Prob_s: 0.09486247283136148 
+
+Restart No: 6
+Exp_val: 4.757537976725868
+Prob_s: 0.04377802118633468 
+
+Restart No: 7
+Exp_val: 4.576519035468346
+Prob_s: 0.034641016151377546 
+
+Restart No: 8
+Exp_val: 5.168634639760603
+Prob_s: 0.044494897427831775 
+
+Restart No: 9
+Exp_val: 3.598124027952488
+Prob_s: 0.07872983346207417 
+
+Minimum Exp Val:  3.3757356089618358
+Prob_s for this:  0.09486247283136148
+p=2
+Minim_exp_val_L: 3.3731379983434593, prob_s_L: 0.1027305709836438
+Time for intialising with 10 perturbed values: 13.484049558639526
+Minim_exp_val_B: 3.3731379983434593, prob_s_B: 0.1027305709836438
+p=3
+Minim_exp_val_L: 3.3448358067450075, prob_s_L: 0.09926663306370695
+Time for intialising with 10 perturbed values: 43.465932846069336
+Minim_exp_val_B: 1.9438470516443265, prob_s_B: 0.2329280973110315
+p=4
+Minim_exp_val_L: 3.399309594204166, prob_s_L: 0.09378407218268558
+Time for intialising with 10 perturbed values: 40.90341567993164
+Minim_exp_val_B: 1.5090421783027081, prob_s_B: 0.23236465417546787
+p=5
+Minim_exp_val_L: 3.2668945091015353, prob_s_L: 0.10180996330447223
+Time for intialising with 10 perturbed values: 40.19608950614929
+Minim_exp_val_B: 1.4928422851710055, prob_s_B: 0.2379042030930063
+p=6
+Minim_exp_val_L: 3.9720148187614694, prob_s_L: 0.09164485968336597
+Time for intialising with 10 perturbed values: 106.43604588508606
+Minim_exp_val_B: 3.959863775156947, prob_s_B: 0.07964450219004662
+p=7
+Minim_exp_val_L: 3.976588774431955, prob_s_L: 0.08717797887081347
+Time for intialising with 10 perturbed values: 60.94439244270325
+Minim_exp_val_B: 3.8741196011193555, prob_s_B: 0.09681595208548624
+p=8
+Minim_exp_val_L: 3.9922046755523577, prob_s_L: 0.0966828837770621
+Time for intialising with 10 perturbed values: 122.20682263374329
+Minim_exp_val_B: 3.4646718546051156, prob_s_B: 0.10854829762792406
+p=9
+Minim_exp_val_L: 3.990098167551905, prob_s_L: 0.08365746312736946
+Time for intialising with 10 perturbed values: 119.35409259796143
+Minim_exp_val_B: 3.3788874146599523, prob_s_B: 0.10755873763085165
+p=10
+Minim_exp_val_L: 3.5060295765587326, prob_s_L: 0.11455916625098157
+Time for intialising with 10 perturbed values: 169.5757451057434
+Minim_exp_val_B: 1.9105331166493622, prob_s_B: 0.17715639175981804
+____________________________________________________________________________________________________ 
+QUBO NO: 30
+ ____________________________________________________________________________________________________
+optimal function value: 0.5618507791460003
+optimal value: [0. 0. 1. 1. 0. 0. 0. 1. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('010001100', 0.5618507791460003)
+('010100001', 0.5618507791460003)
+('100001001', 0.5618507791460003)
+('010100010', 0.5855739656080003)
+('100001010', 0.5855739656080003)
+('001001001', 0.5904689665510001)
+('100010010', 0.5954037780570001)
+('001001010', 0.6141921530130001)
+('001010010', 0.6240219654619998)
+('001001100', 0.6243534776890001)
+__________________________________________________
+Other ground state(s) found: '010100001'
+Other ground state(s) found: '100001001'
+Number of couplings: 31
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 3.5027724535492863
+Prob_s: 0.07656854249492381 
+
+Restart No: 1
+Exp_val: 5.07711640368362
+Prob_s: 0.07527570599628972 
+
+Restart No: 2
+Exp_val: 2.877978032666214
+Prob_s: 0.08869317558210589 
+
+Restart No: 3
+Exp_val: 2.9301976599058213
+Prob_s: 0.0523606797749979 
+
+Restart No: 4
+Exp_val: 2.7260125089695015
+Prob_s: 0.11866848449225154 
+
+Restart No: 5
+Exp_val: 2.6592539472276506
+Prob_s: 0.14232977260625695 
+
+Restart No: 6
+Exp_val: 2.385295918559525
+Prob_s: 0.1823528380363208 
+
+Restart No: 7
+Exp_val: 2.5198234806666093
+Prob_s: 0.15826826280973397 
+
+Restart No: 8
+Exp_val: 2.7953373235525127
+Prob_s: 0.08913591357920933 
+
+Restart No: 9
+Exp_val: 2.76500172787263
+Prob_s: 0.13634687669822587 
+
+Minimum Exp Val:  2.385295918559525
+Prob_s for this:  0.1823528380363208
+p=2
+Minim_exp_val_L: 2.4314938407993227, prob_s_L: 0.1705274011643499
+Time for intialising with 10 perturbed values: 39.61793756484985
+Minim_exp_val_B: 2.3287056983375964, prob_s_B: 0.19102060175358168
+p=3
+Minim_exp_val_L: 2.4259609959177, prob_s_L: 0.1693576920249723
+Time for intialising with 10 perturbed values: 56.54502749443054
+Minim_exp_val_B: 2.0694428749768736, prob_s_B: 0.17737348035560974
+p=4
+Minim_exp_val_L: 2.4033338695325197, prob_s_L: 0.1771130170732981
+Time for intialising with 10 perturbed values: 78.4339189529419
+Minim_exp_val_B: 2.011448442555046, prob_s_B: 0.16189136881463997
+p=5
+Minim_exp_val_L: 2.4436435702006705, prob_s_L: 0.16703293088490065
+Time for intialising with 10 perturbed values: 89.86978030204773
+Minim_exp_val_B: 1.1858756270628514, prob_s_B: 0.33916375287812983
+p=6
+Minim_exp_val_L: 2.7832238380657017, prob_s_L: 0.12295136513678007
+Time for intialising with 10 perturbed values: 73.55706858634949
+Minim_exp_val_B: 2.703715297791416, prob_s_B: 0.1283521705570369
+p=7
+Minim_exp_val_L: 2.753153496599558, prob_s_L: 0.13631890398319943
+Time for intialising with 10 perturbed values: 74.18822765350342
+Minim_exp_val_B: 2.7092727368053726, prob_s_B: 0.15127627140721517
+p=8
+Minim_exp_val_L: 2.7793559985788403, prob_s_L: 0.1383203593250907
+Time for intialising with 10 perturbed values: 179.23625254631042
+Minim_exp_val_B: 2.7793559985788403, prob_s_B: 0.1383203593250907
+p=9
+Minim_exp_val_L: 2.787568695302568, prob_s_L: 0.11300922864248628
+Time for intialising with 10 perturbed values: 107.34584093093872
+Minim_exp_val_B: 2.749947163756699, prob_s_B: 0.12724645256277617
+p=10
+Minim_exp_val_L: 2.604027818024133, prob_s_L: 0.12168950381494836
+Time for intialising with 10 perturbed values: 132.49102139472961
+Minim_exp_val_B: 2.1726224231652114, prob_s_B: 0.177154512468009
+____________________________________________________________________________________________________ 
+QUBO NO: 31
+ ____________________________________________________________________________________________________
+optimal function value: 0.5315728711250001
+optimal value: [0. 1. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001010', 0.5315728711250001)
+('010001010', 0.5550185067159998)
+('001001001', 0.5651257145349999)
+('001100001', 0.5689294534399998)
+('001010100', 0.5750439543279999)
+('001100010', 0.5750439543279999)
+('010001001', 0.5885713501259997)
+('010100001', 0.5923750890309996)
+('100001010', 0.5945267600680002)
+('001010001', 0.5983647342980001)
+__________________________________________________
+Number of couplings: 36
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 4.205258349531881
+Prob_s: 0 
+
+Restart No: 1
+Exp_val: 3.350601789427369
+Prob_s: 0.01 
+
+Restart No: 2
+Exp_val: 4.351350386630421
+Prob_s: 0.022360679774997897 
+
+Restart No: 3
+Exp_val: 2.814286404848167
+Prob_s: 0.04795831523312719 
+
+Restart No: 4
+Exp_val: 6.586748148083419
+Prob_s: 0.01 
+
+Restart No: 5
+Exp_val: 2.761032587609021
+Prob_s: 0.03741657386773942 
+
+Restart No: 6
+Exp_val: 4.1388066870035285
+Prob_s: 0 
+
+Restart No: 7
+Exp_val: 2.688519982448164
+Prob_s: 0.033166247903554 
+
+Restart No: 8
+Exp_val: 5.447705818223984
+Prob_s: 0.01 
+
+Restart No: 9
+Exp_val: 2.83785338616187
+Prob_s: 0.0565685424949238 
+
+Minimum Exp Val:  2.688519982448164
+Prob_s for this:  0.033166247903554
+p=2
+Minim_exp_val_L: 2.7151874365641895, prob_s_L: 0.034641016151377546
+Time for intialising with 10 perturbed values: 41.19025635719299
+Minim_exp_val_B: 2.702846326691903, prob_s_B: 0.03
+p=3
+Minim_exp_val_L: 2.729339338707778, prob_s_L: 0.03162277660168379
+Time for intialising with 10 perturbed values: 30.162097930908203
+Minim_exp_val_B: 1.639757261964757, prob_s_B: 0.11180339887498948
+p=4
+Minim_exp_val_L: 2.7122445918762454, prob_s_L: 0.03
+Time for intialising with 10 perturbed values: 31.971124410629272
+Minim_exp_val_B: 1.2401902981666555, prob_s_B: 0.132664991614216
+p=5
+Minim_exp_val_L: 2.7242452738218326, prob_s_L: 0.026457513110645904
+Time for intialising with 10 perturbed values: 46.39442992210388
+Minim_exp_val_B: 1.1099967968562818, prob_s_B: 0.11874342087037917
+p=6
+Minim_exp_val_L: 2.77332581019597, prob_s_L: 0.034641016151377546
+Time for intialising with 10 perturbed values: 145.59119653701782
+Minim_exp_val_B: 2.537662059603469, prob_s_B: 0.05099019513592785
+p=7
+Minim_exp_val_L: 2.762088485729595, prob_s_L: 0.04
+Time for intialising with 10 perturbed values: 96.77847695350647
+Minim_exp_val_B: 2.6585281050135223, prob_s_B: 0.0412310562561766
+p=8
+Minim_exp_val_L: 2.781322482675938, prob_s_L: 0.04795831523312719
+Time for intialising with 10 perturbed values: 135.3226819038391
+Minim_exp_val_B: 2.6981406049568117, prob_s_B: 0.044721359549995794
+p=9
+Minim_exp_val_L: 2.7926834003583934, prob_s_L: 0.04795831523312719
+Time for intialising with 10 perturbed values: 159.69238138198853
+Minim_exp_val_B: 2.5238007954145307, prob_s_B: 0.04898979485566356
+p=10
+Minim_exp_val_L: 2.7325781214337184, prob_s_L: 0.034641016151377546
+Time for intialising with 10 perturbed values: 109.09194159507751
+Minim_exp_val_B: 1.0844294036824254, prob_s_B: 0.11224972160321824
+____________________________________________________________________________________________________ 
+QUBO NO: 32
+ ____________________________________________________________________________________________________
+optimal function value: 0.4357249689809999
+optimal value: [0. 1. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001010', 0.4357249689809999)
+('001001001', 0.4371605130230001)
+('001001100', 0.44057061096600014)
+('010001010', 0.46271569604100016)
+('010001001', 0.4641512400829999)
+('001100010', 0.4643365748049999)
+('001100001', 0.4657721188470001)
+('010001100', 0.467561338026)
+('001100100', 0.46918221679000016)
+('001010010', 0.475414434977)
+__________________________________________________
+Number of couplings: 16
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 4.154276098478148
+Prob_s: 0.02449489742783178 
+
+Restart No: 1
+Exp_val: 2.977715096248654
+Prob_s: 0.034641016151377546 
+
+Restart No: 2
+Exp_val: 1.2930452764878817
+Prob_s: 0.033166247903554 
+
+Restart No: 3
+Exp_val: 2.4280513535562727
+Prob_s: 0.055677643628300216 
+
+Restart No: 4
+Exp_val: 2.4525471712886895
+Prob_s: 0 
+
+Restart No: 5
+Exp_val: 3.0943261183098425
+Prob_s: 0.06999999999999999 
+
+Restart No: 6
+Exp_val: 3.3884073971156377
+Prob_s: 0.022360679774997897 
+
+Restart No: 7
+Exp_val: 3.6174696872323855
+Prob_s: 0.03 
+
+Restart No: 8
+Exp_val: 3.1669029979366057
+Prob_s: 0 
+
+Restart No: 9
+Exp_val: 3.2483447629228825
+Prob_s: 0.01 
+
+Minimum Exp Val:  1.2930452764878817
+Prob_s for this:  0.033166247903554
+p=2
+Minim_exp_val_L: 1.287468470745135, prob_s_L: 0.0282842712474619
+Time for intialising with 10 perturbed values: 18.835256099700928
+Minim_exp_val_B: 1.081613707231099, prob_s_B: 0.09591663046625439
+p=3
+Minim_exp_val_L: 1.290993050168874, prob_s_L: 0.03
+Time for intialising with 10 perturbed values: 45.43319082260132
+Minim_exp_val_B: 1.0863258067691717, prob_s_B: 0.1
+p=4
+Minim_exp_val_L: 1.297000978137241, prob_s_L: 0.026457513110645904
+Time for intialising with 10 perturbed values: 73.83833932876587
+Minim_exp_val_B: 1.0918897864515134, prob_s_B: 0.09055385138137417
+p=5
+Minim_exp_val_L: 1.252727490096148, prob_s_L: 0.03162277660168379
+Time for intialising with 10 perturbed values: 73.39493370056152
+Minim_exp_val_B: 1.081800059646616, prob_s_B: 0.09110433579144299
+p=6
+Minim_exp_val_L: 2.465305542954688, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 34.09355592727661
+Minim_exp_val_B: 2.4084280965673903, prob_s_B: 0.03605551275463989
+p=7
+Minim_exp_val_L: 2.433113419990679, prob_s_L: 0.05099019513592785
+Time for intialising with 10 perturbed values: 73.1314013004303
+Minim_exp_val_B: 2.386112575252864, prob_s_B: 0.0412310562561766
+p=8
+Minim_exp_val_L: 2.461049766493257, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 103.96094274520874
+Minim_exp_val_B: 2.3893189407571533, prob_s_B: 0.042426406871192854
+p=9
+Minim_exp_val_L: 2.438554606738952, prob_s_L: 0.04898979485566356
+Time for intialising with 10 perturbed values: 146.30388283729553
+Minim_exp_val_B: 2.1871108446572034, prob_s_B: 0.07141428428542851
+p=10
+Minim_exp_val_L: 1.2733040295292963, prob_s_L: 0.01
+Time for intialising with 10 perturbed values: 114.57993817329407
+Minim_exp_val_B: 1.2733040295292963, prob_s_B: 0.01
+____________________________________________________________________________________________________ 
+QUBO NO: 33
+ ____________________________________________________________________________________________________
+optimal function value: 0.695370196918
+optimal value: [0. 0. 1. 1. 0. 0. 0. 0. 1.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('100001100', 0.695370196918)
+('100001001', 0.7103400048340001)
+('100001010', 0.712543826931)
+('100100100', 0.7135581162760001)
+('001010100', 0.7142311450710002)
+('010001100', 0.7142311450710002)
+('100010100', 0.724855821334)
+('001010001', 0.7292009529870003)
+('010001001', 0.7292009529870003)
+('001010010', 0.7314047750840003)
+__________________________________________________
+Number of couplings: 29
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 3.8898597742241163
+Prob_s: 0.044721359549995794 
+
+Restart No: 1
+Exp_val: 3.7305901668902126
+Prob_s: 0.03162277660168379 
+
+Restart No: 2
+Exp_val: 4.385781338025801
+Prob_s: 0 
+
+Restart No: 3
+Exp_val: 1.8772733872489706
+Prob_s: 0.0565685424949238 
+
+Restart No: 4
+Exp_val: 3.277729968104066
+Prob_s: 0.042426406871192854 
+
+Restart No: 5
+Exp_val: 5.66019003498282
+Prob_s: 0.02449489742783178 
+
+Restart No: 6
+Exp_val: 3.683806494183028
+Prob_s: 0.042426406871192854 
+
+Restart No: 7
+Exp_val: 3.536863993095773
+Prob_s: 0.05196152422706632 
+
+Restart No: 8
+Exp_val: 3.543212927942003
+Prob_s: 0.04795831523312719 
+
+Restart No: 9
+Exp_val: 3.507367922934913
+Prob_s: 0.03872983346207417 
+
+Minimum Exp Val:  1.8772733872489706
+Prob_s for this:  0.0565685424949238
+p=2
+Minim_exp_val_L: 1.862926541292997, prob_s_L: 0.0670820393249937
+Time for intialising with 10 perturbed values: 23.860227584838867
+Minim_exp_val_B: 1.4880740580020033, prob_s_B: 0.07937253933193772
+p=3
+Minim_exp_val_L: 1.84848954437328, prob_s_L: 0.058309518948453
+Time for intialising with 10 perturbed values: 54.22496438026428
+Minim_exp_val_B: 1.3534403133333677, prob_s_B: 0.09746794344808964
+p=4
+Minim_exp_val_L: 1.8936261824519582, prob_s_L: 0.0565685424949238
+Time for intialising with 10 perturbed values: 46.93563652038574
+Minim_exp_val_B: 1.3425849381211088, prob_s_B: 0.09591663046625439
+p=5
+Minim_exp_val_L: 1.8746756365783337, prob_s_L: 0.05196152422706632
+Time for intialising with 10 perturbed values: 98.22150015830994
+Minim_exp_val_B: 1.3265129382844139, prob_s_B: 0.10723805294763608
+p=6
+Minim_exp_val_L: 3.558859208046411, prob_s_L: 0.03605551275463989
+Time for intialising with 10 perturbed values: 84.61326360702515
+Minim_exp_val_B: 3.558859208046411, prob_s_B: 0.03605551275463989
+p=7
+Minim_exp_val_L: 3.5546334786230274, prob_s_L: 0.03
+Time for intialising with 10 perturbed values: 119.70200085639954
+Minim_exp_val_B: 3.311482383551799, prob_s_B: 0.05
+p=8
+Minim_exp_val_L: 3.545575667995352, prob_s_L: 0.04358898943540673
+Time for intialising with 10 perturbed values: 137.7497923374176
+Minim_exp_val_B: 3.4143676386253254, prob_s_B: 0.04795831523312719
+p=9
+Minim_exp_val_L: 3.582695139550335, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 140.3529758453369
+Minim_exp_val_B: 3.0890961650675197, prob_s_B: 0.0412310562561766
+p=10
+Minim_exp_val_L: 1.8697304798539822, prob_s_L: 0.061644140029689765
+Time for intialising with 10 perturbed values: 233.56062388420105
+Minim_exp_val_B: 1.5599019289345486, prob_s_B: 0.08717797887081347
+____________________________________________________________________________________________________ 
+QUBO NO: 34
+ ____________________________________________________________________________________________________
+optimal function value: 0.3492142772929996
+optimal value: [1. 0. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001001', 0.3492142772929996)
+('010001001', 0.35686321972299995)
+('100001001', 0.35688089945199986)
+('001001100', 0.37782588311700005)
+('001100001', 0.3791639901780004)
+('001010001', 0.3817515066970001)
+('010001100', 0.38547482554699997)
+('100001100', 0.3854925052759999)
+('100100001', 0.38628973628700014)
+('010100001', 0.38632533861600016)
+__________________________________________________
+Number of couplings: 24
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 2.6893017695779022
+Prob_s: 0.05477225575051661 
+
+Restart No: 1
+Exp_val: 3.8298377181341725
+Prob_s: 0.01 
+
+Restart No: 2
+Exp_val: 2.567087109772482
+Prob_s: 0.033166247903554 
+
+Restart No: 3
+Exp_val: 2.782189551699546
+Prob_s: 0.03605551275463989 
+
+Restart No: 4
+Exp_val: 3.881960343945465
+Prob_s: 0.01414213562373095 
+
+Restart No: 5
+Exp_val: 3.440922554424164
+Prob_s: 0 
+
+Restart No: 6
+Exp_val: 3.860322861902131
+Prob_s: 0 
+
+Restart No: 7
+Exp_val: 2.4842083187223025
+Prob_s: 0.03741657386773942 
+
+Restart No: 8
+Exp_val: 1.7834810115912232
+Prob_s: 0.03162277660168379 
+
+Restart No: 9
+Exp_val: 2.842321270947187
+Prob_s: 0.09273618495495704 
+
+Minimum Exp Val:  1.7834810115912232
+Prob_s for this:  0.03162277660168379
+p=2
+Minim_exp_val_L: 1.8049333776485756, prob_s_L: 0.03605551275463989
+Time for intialising with 10 perturbed values: 16.9418625831604
+Minim_exp_val_B: 1.7943110782371812, prob_s_B: 0.033166247903554
+p=3
+Minim_exp_val_L: 1.7832579811638563, prob_s_L: 0.03162277660168379
+Time for intialising with 10 perturbed values: 39.831772565841675
+Minim_exp_val_B: 1.7832579811638563, prob_s_B: 0.03162277660168379
+p=4
+Minim_exp_val_L: 1.7936894282230342, prob_s_L: 0.034641016151377546
+Time for intialising with 10 perturbed values: 51.89870595932007
+Minim_exp_val_B: 1.392453956496674, prob_s_B: 0.05916079783099616
+p=5
+Minim_exp_val_L: 1.7901495424853033, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 76.36793828010559
+Minim_exp_val_B: 1.39436593444126, prob_s_B: 0.06855654600401044
+p=6
+Minim_exp_val_L: 2.3268203775730423, prob_s_L: 0.04
+Time for intialising with 10 perturbed values: 126.65286874771118
+Minim_exp_val_B: 2.269222081463009, prob_s_B: 0.03605551275463989
+p=7
+Minim_exp_val_L: 2.330060490639829, prob_s_L: 0.05
+Time for intialising with 10 perturbed values: 116.29187345504761
+Minim_exp_val_B: 2.220309061480876, prob_s_B: 0.044721359549995794
+p=8
+Minim_exp_val_L: 2.291758128247232, prob_s_L: 0.04358898943540673
+Time for intialising with 10 perturbed values: 96.3779149055481
+Minim_exp_val_B: 2.154890863282558, prob_s_B: 0.05099019513592785
+p=9
+Minim_exp_val_L: 2.377352126259492, prob_s_L: 0.034641016151377546
+Time for intialising with 10 perturbed values: 118.4472382068634
+Minim_exp_val_B: 1.9602940291379565, prob_s_B: 0.058309518948453
+p=10
+Minim_exp_val_L: 1.7673518842736367, prob_s_L: 0.03741657386773942
+Time for intialising with 10 perturbed values: 125.61391568183899
+Minim_exp_val_B: 1.7673518842736367, prob_s_B: 0.03741657386773942
+____________________________________________________________________________________________________ 
+QUBO NO: 35
+ ____________________________________________________________________________________________________
+optimal function value: 0.207099208664
+optimal value: [1. 0. 0. 0. 1. 0. 0. 0. 1.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('100010001', 0.207099208664)
+('100010100', 0.20820566715900002)
+('001001001', 0.21684935723999987)
+('001001100', 0.2179558157349999)
+('010010001', 0.2283595630030001)
+('010010100', 0.2294660214980001)
+('100010010', 0.23178190863800008)
+('001100001', 0.2321536091080001)
+('001100100', 0.2332600676030001)
+('001001010', 0.24153205721400006)
+__________________________________________________
+Number of couplings: 21
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 1.5635294082431361
+Prob_s: 0 
+
+Restart No: 1
+Exp_val: 1.325886459861957
+Prob_s: 0.01 
+
+Restart No: 2
+Exp_val: 1.1298819503301172
+Prob_s: 0.07211102550927978 
+
+Restart No: 3
+Exp_val: 1.0543109919122011
+Prob_s: 0.022360679774997897 
+
+Restart No: 4
+Exp_val: 1.0141562722528537
+Prob_s: 0.03 
+
+Restart No: 5
+Exp_val: 0.5799067686347881
+Prob_s: 0.05291502622129181 
+
+Restart No: 6
+Exp_val: 0.9883906880818415
+Prob_s: 0.0458257569495584 
+
+Restart No: 7
+Exp_val: 1.5038576056872102
+Prob_s: 0.03 
+
+Restart No: 8
+Exp_val: 0.6936308885514093
+Prob_s: 0.05196152422706632 
+
+Restart No: 9
+Exp_val: 1.0216143574596646
+Prob_s: 0.03872983346207417 
+
+Minimum Exp Val:  0.5799067686347881
+Prob_s for this:  0.05291502622129181
+p=2
+Minim_exp_val_L: 0.5778439254422332, prob_s_L: 0.05291502622129181
+Time for intialising with 10 perturbed values: 13.83380651473999
+Minim_exp_val_B: 0.5509102811574056, prob_s_B: 0.05196152422706632
+p=3
+Minim_exp_val_L: 0.5842107922505295, prob_s_L: 0.034641016151377546
+Time for intialising with 10 perturbed values: 38.09559869766235
+Minim_exp_val_B: 0.5485835647719011, prob_s_B: 0.03741657386773942
+p=4
+Minim_exp_val_L: 0.5789726194106586, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 21.859910011291504
+Minim_exp_val_B: 0.536095841659692, prob_s_B: 0.03605551275463989
+p=5
+Minim_exp_val_L: 0.5775310316066569, prob_s_L: 0.0458257569495584
+Time for intialising with 10 perturbed values: 83.12507581710815
+Minim_exp_val_B: 0.5473082530041193, prob_s_B: 0.03741657386773942
+p=6
+Minim_exp_val_L: 1.0111665422250924, prob_s_L: 0.053851648071345036
+Time for intialising with 10 perturbed values: 69.07079362869263
+Minim_exp_val_B: 0.981138224445776, prob_s_B: 0.04795831523312719
+p=7
+Minim_exp_val_L: 0.9865485006667889, prob_s_L: 0.05099019513592785
+Time for intialising with 10 perturbed values: 97.27533555030823
+Minim_exp_val_B: 0.9865485006667889, prob_s_B: 0.05099019513592785
+p=8
+Minim_exp_val_L: 0.9997400586599393, prob_s_L: 0.04795831523312719
+Time for intialising with 10 perturbed values: 176.51074481010437
+Minim_exp_val_B: 0.9471570968234307, prob_s_B: 0.03741657386773942
+p=9
+Minim_exp_val_L: 0.9893423412751909, prob_s_L: 0.06244997998398398
+Time for intialising with 10 perturbed values: 133.33337879180908
+Minim_exp_val_B: 0.9819597439494366, prob_s_B: 0.05744562646538029
+p=10
+Minim_exp_val_L: 0.5718648482894138, prob_s_L: 0.04795831523312719
+Time for intialising with 10 perturbed values: 136.6052622795105
+Minim_exp_val_B: 0.4467650480948533, prob_s_B: 0.09848857801796104
+____________________________________________________________________________________________________ 
+QUBO NO: 36
+ ____________________________________________________________________________________________________
+optimal function value: 0.23197101271600007
+optimal value: [1. 0. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001001', 0.23197101271600007)
+('001100001', 0.23435268825099997)
+('100001001', 0.23476468952099994)
+('010001001', 0.23544741730999996)
+('100100001', 0.23714636505600006)
+('010100001', 0.2378290928450001)
+('001010001', 0.26299917654500005)
+('100010001', 0.26579285335000014)
+('010010001', 0.26647558113900016)
+('001001010', 0.28107195653999983)
+__________________________________________________
+Number of couplings: 18
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 1.7437787571100438
+Prob_s: 0.02 
+
+Restart No: 1
+Exp_val: 3.273308177701408
+Prob_s: 0 
+
+Restart No: 2
+Exp_val: 2.0619915577924095
+Prob_s: 0.03162277660168379 
+
+Restart No: 3
+Exp_val: 1.4687454830568076
+Prob_s: 0.03162277660168379 
+
+Restart No: 4
+Exp_val: 2.9114702944061044
+Prob_s: 0.017320508075688773 
+
+Restart No: 5
+Exp_val: 2.4159146081583556
+Prob_s: 0.022360679774997897 
+
+Restart No: 6
+Exp_val: 2.01862278956796
+Prob_s: 0.01414213562373095 
+
+Restart No: 7
+Exp_val: 3.2374902804860017
+Prob_s: 0.0282842712474619 
+
+Restart No: 8
+Exp_val: 2.5185823682603887
+Prob_s: 0 
+
+Restart No: 9
+Exp_val: 1.085749286660765
+Prob_s: 0.04795831523312719 
+
+Minimum Exp Val:  1.085749286660765
+Prob_s for this:  0.04795831523312719
+p=2
+Minim_exp_val_L: 1.0892898975328382, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 21.315038919448853
+Minim_exp_val_B: 1.074050749704108, prob_s_B: 0.05291502622129181
+p=3
+Minim_exp_val_L: 1.0898734679406428, prob_s_L: 0.04898979485566356
+Time for intialising with 10 perturbed values: 23.16627025604248
+Minim_exp_val_B: 1.0722435357459372, prob_s_B: 0.0458257569495584
+p=4
+Minim_exp_val_L: 1.086812840948855, prob_s_L: 0.042426406871192854
+Time for intialising with 10 perturbed values: 57.727235317230225
+Minim_exp_val_B: 0.6841277219626992, prob_s_B: 0.1004987562112089
+p=5
+Minim_exp_val_L: 1.0555428182074802, prob_s_L: 0.04358898943540673
+Time for intialising with 10 perturbed values: 54.69612908363342
+Minim_exp_val_B: 0.6659416292796182, prob_s_B: 0.10488088481701516
+p=6
+Minim_exp_val_L: 1.6282193746569937, prob_s_L: 0.0458257569495584
+Time for intialising with 10 perturbed values: 122.24311804771423
+Minim_exp_val_B: 1.5557626388518664, prob_s_B: 0.05
+p=7
+Minim_exp_val_L: 1.7066063676903407, prob_s_L: 0.034641016151377546
+Time for intialising with 10 perturbed values: 81.31120800971985
+Minim_exp_val_B: 1.5733178189500205, prob_s_B: 0.044721359549995794
+p=8
+Minim_exp_val_L: 1.5222575709873372, prob_s_L: 0.053851648071345036
+Time for intialising with 10 perturbed values: 78.53388786315918
+Minim_exp_val_B: 1.5222575709873372, prob_s_B: 0.053851648071345036
+p=9
+Minim_exp_val_L: 1.592554137984841, prob_s_L: 0.04795831523312719
+Time for intialising with 10 perturbed values: 73.5851366519928
+Minim_exp_val_B: 1.592554137984841, prob_s_B: 0.04795831523312719
+p=10
+Minim_exp_val_L: 1.1138668091966628, prob_s_L: 0.0458257569495584
+Time for intialising with 10 perturbed values: 74.08517789840698
+Minim_exp_val_B: 1.1138501783375796, prob_s_B: 0.0458257569495584
+____________________________________________________________________________________________________ 
+QUBO NO: 37
+ ____________________________________________________________________________________________________
+optimal function value: 0.39408791699300005
+optimal value: [0. 0. 1. 1. 0. 0. 0. 1. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('010001100', 0.39408791699300005)
+('010001001', 0.39703120129199987)
+('010000001', 0.40397949870810007)
+('010001010', 0.41705099237300003)
+('010010001', 0.41705099237300003)
+('010001000', 0.41816549973309997)
+('010000010', 0.4242685954211)
+('010000100', 0.42611474679310013)
+('010010000', 0.4384545964461)
+('010010100', 0.4405208669480001)
+__________________________________________________
+Number of couplings: 36
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 1.5660453172993718
+Prob_s: 0.053851648071345036 
+
+Restart No: 1
+Exp_val: 2.4469738077972107
+Prob_s: 0.05 
+
+Restart No: 2
+Exp_val: 1.9195961300983895
+Prob_s: 0.06403124237432849 
+
+Restart No: 3
+Exp_val: 1.9609955828375916
+Prob_s: 0.034641016151377546 
+
+Restart No: 4
+Exp_val: 2.294940330051322
+Prob_s: 0.01 
+
+Restart No: 5
+Exp_val: 1.8148003570228362
+Prob_s: 0.04358898943540673 
+
+Restart No: 6
+Exp_val: 1.8215575400462594
+Prob_s: 0.03872983346207417 
+
+Restart No: 7
+Exp_val: 1.8112655693859452
+Prob_s: 0.06557438524302 
+
+Restart No: 8
+Exp_val: 1.8183160396006497
+Prob_s: 0.0458257569495584 
+
+Restart No: 9
+Exp_val: 0.9736965885794041
+Prob_s: 0.01414213562373095 
+
+Minimum Exp Val:  0.9736965885794041
+Prob_s for this:  0.01414213562373095
+p=2
+Minim_exp_val_L: 0.9779172487069032, prob_s_L: 0.01414213562373095
+Time for intialising with 10 perturbed values: 45.27148127555847
+Minim_exp_val_B: 0.8468304651082839, prob_s_B: 0.03162277660168379
+p=3
+Minim_exp_val_L: 0.9841978296694207, prob_s_L: 0
+Time for intialising with 10 perturbed values: 24.37733030319214
+Minim_exp_val_B: 0.6462074731064948, prob_s_B: 0.09591663046625439
+p=4
+Minim_exp_val_L: 0.9761476707547759, prob_s_L: 0.01
+Time for intialising with 10 perturbed values: 48.04915452003479
+Minim_exp_val_B: 0.6256894800245711, prob_s_B: 0.09797958971132711
+p=5
+Minim_exp_val_L: 0.9894479979832764, prob_s_L: 0
+Time for intialising with 10 perturbed values: 74.96781706809998
+Minim_exp_val_B: 0.6254599617839205, prob_s_B: 0.07810249675906655
+p=6
+Minim_exp_val_L: 1.7876411926474605, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 79.38488626480103
+Minim_exp_val_B: 1.6924278525161918, prob_s_B: 0.055677643628300216
+p=7
+Minim_exp_val_L: 1.7502525151579464, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 121.7086079120636
+Minim_exp_val_B: 1.6953810034135206, prob_s_B: 0.05
+p=8
+Minim_exp_val_L: 1.8446564638856349, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 170.81140851974487
+Minim_exp_val_B: 1.7282330344789498, prob_s_B: 0.053851648071345036
+p=9
+Minim_exp_val_L: 1.826193840155101, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 197.42906522750854
+Minim_exp_val_B: 1.5614984715114053, prob_s_B: 0.05916079783099616
+p=10
+Minim_exp_val_L: 0.9319188135684898, prob_s_L: 0.01414213562373095
+Time for intialising with 10 perturbed values: 247.39292550086975
+Minim_exp_val_B: 0.9319188135684898, prob_s_B: 0.01414213562373095
+____________________________________________________________________________________________________ 
+QUBO NO: 38
+ ____________________________________________________________________________________________________
+optimal function value: 1.3322417942809999
+optimal value: [1. 0. 0. 0. 0. 1. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001100001', 1.3322417942809999)
+('001010001', 1.3330148629999998)
+('010100100', 1.3621043492990004)
+('010010100', 1.3628774180180003)
+('001001001', 1.3722396476940006)
+('001010010', 1.3778897077539995)
+('001001010', 1.3779376781740003)
+('010001100', 1.4021022027119994)
+('001100010', 1.4024292398369997)
+('100010100', 1.4077522627720005)
+__________________________________________________
+Number of couplings: 33
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 4.203545176678333
+Prob_s: 0.01 
+
+Restart No: 1
+Exp_val: 6.498177636729118
+Prob_s: 0.01 
+
+Restart No: 2
+Exp_val: 6.792638573519013
+Prob_s: 0.03741657386773942 
+
+Restart No: 3
+Exp_val: 7.255077708116585
+Prob_s: 0.01 
+
+Restart No: 4
+Exp_val: 8.28846603806706
+Prob_s: 0 
+
+Restart No: 5
+Exp_val: 7.5476439340495745
+Prob_s: 0.05099019513592785 
+
+Restart No: 6
+Exp_val: 6.538745861061918
+Prob_s: 0.044721359549995794 
+
+Restart No: 7
+Exp_val: 6.983327051374614
+Prob_s: 0 
+
+Restart No: 8
+Exp_val: 6.425426243610763
+Prob_s: 0.03162277660168379 
+
+Restart No: 9
+Exp_val: 8.074078192568926
+Prob_s: 0 
+
+Minimum Exp Val:  4.203545176678333
+Prob_s for this:  0.01
+p=2
+Minim_exp_val_L: 4.1484449059931965, prob_s_L: 0
+Time for intialising with 10 perturbed values: 36.02812886238098
+Minim_exp_val_B: 2.332679340148574, prob_s_B: 0.09746794344808964
+p=3
+Minim_exp_val_L: 4.247174462550018, prob_s_L: 0
+Time for intialising with 10 perturbed values: 54.852128982543945
+Minim_exp_val_B: 2.3340808708372087, prob_s_B: 0.09
+p=4
+Minim_exp_val_L: 4.165385509054613, prob_s_L: 0.01
+Time for intialising with 10 perturbed values: 33.63066053390503
+Minim_exp_val_B: 2.3347156861004095, prob_s_B: 0.08831760866327847
+p=5
+Minim_exp_val_L: 4.197813775817701, prob_s_L: 0
+Time for intialising with 10 perturbed values: 78.72951316833496
+Minim_exp_val_B: 2.3165481538026222, prob_s_B: 0.09486832980505137
+p=6
+Minim_exp_val_L: 6.390437710715584, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 125.49235892295837
+Minim_exp_val_B: 6.350958333751552, prob_s_B: 0.05196152422706632
+p=7
+Minim_exp_val_L: 6.54762698422406, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 99.77499651908875
+Minim_exp_val_B: 5.880215732572068, prob_s_B: 0.0469041575982343
+p=8
+Minim_exp_val_L: 6.603742973446908, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 132.1022617816925
+Minim_exp_val_B: 6.270919937677406, prob_s_B: 0.044721359549995794
+p=9
+Minim_exp_val_L: 6.44910659236387, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 127.12314915657043
+Minim_exp_val_B: 6.305848556892684, prob_s_B: 0.0282842712474619
+p=10
+Minim_exp_val_L: 4.284032908268699, prob_s_L: 0.01414213562373095
+Time for intialising with 10 perturbed values: 144.86093592643738
+Minim_exp_val_B: 3.1319461096416545, prob_s_B: 0.0670820393249937
+____________________________________________________________________________________________________ 
+QUBO NO: 39
+ ____________________________________________________________________________________________________
+optimal function value: 0.52458010886
+optimal value: [1. 0. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001001', 0.52458010886)
+('001100001', 0.5251154355850001)
+('001010001', 0.5308338712020002)
+('001001010', 0.5323934065490001)
+('010001001', 0.5323934065490001)
+('001001100', 0.5326294933990001)
+('100001001', 0.5326294933990001)
+('010100001', 0.532928733274)
+('001100010', 0.5329287332740003)
+('100100001', 0.533164820124)
+__________________________________________________
+Number of couplings: 18
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 2.495538693650857
+Prob_s: 0.03872983346207417 
+
+Restart No: 1
+Exp_val: 4.129118737894438
+Prob_s: 0.02 
+
+Restart No: 2
+Exp_val: 2.6160060301154693
+Prob_s: 0.0565685424949238 
+
+Restart No: 3
+Exp_val: 3.287937641749463
+Prob_s: 0.03741657386773942 
+
+Restart No: 4
+Exp_val: 2.9214820657772096
+Prob_s: 0.017320508075688773 
+
+Restart No: 5
+Exp_val: 2.4165447357474834
+Prob_s: 0.0412310562561766 
+
+Restart No: 6
+Exp_val: 2.6539398981809517
+Prob_s: 0.04 
+
+Restart No: 7
+Exp_val: 2.647552949380446
+Prob_s: 0.0670820393249937 
+
+Restart No: 8
+Exp_val: 2.518639787744477
+Prob_s: 0.04 
+
+Restart No: 9
+Exp_val: 3.9072593965031306
+Prob_s: 0 
+
+Minimum Exp Val:  2.4165447357474834
+Prob_s for this:  0.0412310562561766
+p=2
+Minim_exp_val_L: 2.4255728794109994, prob_s_L: 0.042426406871192854
+Time for intialising with 10 perturbed values: 20.510027408599854
+Minim_exp_val_B: 1.9202672966473564, prob_s_B: 0
+p=3
+Minim_exp_val_L: 2.4689678862838855, prob_s_L: 0.04
+Time for intialising with 10 perturbed values: 34.699732542037964
+Minim_exp_val_B: 1.8107860689074589, prob_s_B: 0.05099019513592785
+p=4
+Minim_exp_val_L: 2.453311984179098, prob_s_L: 0.03741657386773942
+Time for intialising with 10 perturbed values: 64.2425491809845
+Minim_exp_val_B: 1.1297134331122045, prob_s_B: 0.09746794344808964
+p=5
+Minim_exp_val_L: 2.483199362636521, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 48.78114295005798
+Minim_exp_val_B: 0.9916018789415411, prob_s_B: 0.10344080432788601
+p=6
+Minim_exp_val_L: 2.4432835181634998, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 91.20032954216003
+Minim_exp_val_B: 2.414021469690455, prob_s_B: 0.055677643628300216
+p=7
+Minim_exp_val_L: 2.4144839030099905, prob_s_L: 0.0458257569495584
+Time for intialising with 10 perturbed values: 45.862070083618164
+Minim_exp_val_B: 2.4144839030099905, prob_s_B: 0.0458257569495584
+p=8
+Minim_exp_val_L: 2.444770961468693, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 135.55375480651855
+Minim_exp_val_B: 2.375427576550396, prob_s_B: 0.058309518948453
+p=9
+Minim_exp_val_L: 2.4471241477221053, prob_s_L: 0.05099019513592785
+Time for intialising with 10 perturbed values: 169.86481142044067
+Minim_exp_val_B: 2.2971695909679126, prob_s_B: 0.06403124237432849
+p=10
+Minim_exp_val_L: 2.5237641515166476, prob_s_L: 0.04795831523312719
+Time for intialising with 10 perturbed values: 142.41014647483826
+Minim_exp_val_B: 1.9567582328709596, prob_s_B: 0.05477225575051661
+____________________________________________________________________________________________________ 
+QUBO NO: 40
+ ____________________________________________________________________________________________________
+optimal function value: 0.4423073176079999
+optimal value: [1. 0. 0. 0. 0. 1. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001100', 0.4423073176079999)
+('001100001', 0.4423073176079999)
+('100001100', 0.44257331982400006)
+('100100001', 0.44257331982400006)
+('001010100', 0.4498412850490001)
+('001100010', 0.4498412850490001)
+('100010100', 0.45010728726500027)
+('100100010', 0.45010728726500027)
+('001001001', 0.45981142698300026)
+('100001001', 0.4600774291990004)
+__________________________________________________
+Other ground state(s) found: '001100001'
+Number of couplings: 36
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 3.317280738598979
+Prob_s: 0.0282842712474619 
+
+Restart No: 1
+Exp_val: 2.0757196352758855
+Prob_s: 0.11832159566199232 
+
+Restart No: 2
+Exp_val: 4.202945277174411
+Prob_s: 0.034641016151377546 
+
+Restart No: 3
+Exp_val: 2.1335736064905797
+Prob_s: 0.12806248474865697 
+
+Restart No: 4
+Exp_val: 2.255549570044482
+Prob_s: 0.10392304845413264 
+
+Restart No: 5
+Exp_val: 1.1495574406727267
+Prob_s: 0.116619037896906 
+
+Restart No: 6
+Exp_val: 3.301036934831605
+Prob_s: 0 
+
+Restart No: 7
+Exp_val: 0.9818529313684827
+Prob_s: 0.22891046284519195 
+
+Restart No: 8
+Exp_val: 2.4344312481478343
+Prob_s: 0.02 
+
+Restart No: 9
+Exp_val: 2.4096046659249146
+Prob_s: 0.1019803902718557 
+
+Minimum Exp Val:  0.9818529313684827
+Prob_s for this:  0.22891046284519195
+p=2
+Minim_exp_val_L: 0.9874646526739055, prob_s_L: 0.2253885533916929
+Time for intialising with 10 perturbed values: 58.054935693740845
+Minim_exp_val_B: 0.8320277012561925, prob_s_B: 0.232379000772445
+p=3
+Minim_exp_val_L: 0.9916361687023281, prob_s_L: 0.23664319132398465
+Time for intialising with 10 perturbed values: 41.57260990142822
+Minim_exp_val_B: 0.8310450903508988, prob_s_B: 0.21354156504062624
+p=4
+Minim_exp_val_L: 1.0045949252100486, prob_s_L: 0.22891046284519195
+Time for intialising with 10 perturbed values: 62.45119333267212
+Minim_exp_val_B: 0.8385767331405605, prob_s_B: 0.22803508501982758
+p=5
+Minim_exp_val_L: 1.007317942710881, prob_s_L: 0.2262741699796952
+Time for intialising with 10 perturbed values: 105.38510990142822
+Minim_exp_val_B: 0.8339460636916574, prob_s_B: 0.20784609690826528
+p=6
+Minim_exp_val_L: 2.3776129921187854, prob_s_L: 0.07483314773547883
+Time for intialising with 10 perturbed values: 124.4457037448883
+Minim_exp_val_B: 2.115096128707613, prob_s_B: 0.10583005244258362
+p=7
+Minim_exp_val_L: 2.3088415008765937, prob_s_L: 0.08717797887081347
+Time for intialising with 10 perturbed values: 194.8065505027771
+Minim_exp_val_B: 2.1754696154654285, prob_s_B: 0.10392304845413264
+p=8
+Minim_exp_val_L: 2.2580163777433406, prob_s_L: 0.0938083151964686
+Time for intialising with 10 perturbed values: 131.23393511772156
+Minim_exp_val_B: 2.248946683459067, prob_s_B: 0.08
+p=9
+Minim_exp_val_L: 2.298836582541966, prob_s_L: 0.08944271909999159
+Time for intialising with 10 perturbed values: 180.50531578063965
+Minim_exp_val_B: 2.1537441053235433, prob_s_B: 0.09797958971132711
+p=10
+Minim_exp_val_L: 1.0527277954438896, prob_s_L: 0.22449944320643647
+Time for intialising with 10 perturbed values: 206.41036915779114
+Minim_exp_val_B: 1.0527277954438896, prob_s_B: 0.22449944320643647
+____________________________________________________________________________________________________ 
+QUBO NO: 41
+ ____________________________________________________________________________________________________
+optimal function value: 0.12773608607700004
+optimal value: [1. 0. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001001', 0.12773608607700004)
+('010001001', 0.12856499803999988)
+('001001010', 0.13582871401399976)
+('001001100', 0.1360211326659997)
+('010001010', 0.13665762597699982)
+('010001100', 0.13685004462899975)
+('100001001', 0.18231878931300005)
+('001010001', 0.18287556776299985)
+('010010001', 0.18416407028799986)
+('001100001', 0.18936159205699998)
+__________________________________________________
+Number of couplings: 28
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 1.514537349049313
+Prob_s: 0.01414213562373095 
+
+Restart No: 1
+Exp_val: 0.7923288799357873
+Prob_s: 0.09219544457292887 
+
+Restart No: 2
+Exp_val: 0.9959513191587567
+Prob_s: 0.0282842712474619 
+
+Restart No: 3
+Exp_val: 1.6320458096038788
+Prob_s: 0.02449489742783178 
+
+Restart No: 4
+Exp_val: 1.456904471380758
+Prob_s: 0.10908712114635714 
+
+Restart No: 5
+Exp_val: 1.2249935516676118
+Prob_s: 0 
+
+Restart No: 6
+Exp_val: 1.211623728242187
+Prob_s: 0.017320508075688773 
+
+Restart No: 7
+Exp_val: 1.3331476752304918
+Prob_s: 0.03741657386773942 
+
+Restart No: 8
+Exp_val: 1.6879951407373368
+Prob_s: 0.03741657386773942 
+
+Restart No: 9
+Exp_val: 1.853378622645305
+Prob_s: 0.05 
+
+Minimum Exp Val:  0.7923288799357873
+Prob_s for this:  0.09219544457292887
+p=2
+Minim_exp_val_L: 0.7897097641410552, prob_s_L: 0.0916515138991168
+Time for intialising with 10 perturbed values: 21.282950401306152
+Minim_exp_val_B: 0.786858553339903, prob_s_B: 0.09695359714832658
+p=3
+Minim_exp_val_L: 0.784397845943475, prob_s_L: 0.1004987562112089
+Time for intialising with 10 perturbed values: 50.81345748901367
+Minim_exp_val_B: 0.784397845943475, prob_s_B: 0.1004987562112089
+p=4
+Minim_exp_val_L: 0.7862150155307829, prob_s_L: 0.09591663046625439
+Time for intialising with 10 perturbed values: 61.932430267333984
+Minim_exp_val_B: 0.7862150155307829, prob_s_B: 0.09591663046625439
+p=5
+Minim_exp_val_L: 0.7997665986235307, prob_s_L: 0.09110433579144299
+Time for intialising with 10 perturbed values: 49.31866908073425
+Minim_exp_val_B: 0.7997665986235307, prob_s_B: 0.09110433579144299
+p=6
+Minim_exp_val_L: 1.4239638371791157, prob_s_L: 0.04358898943540673
+Time for intialising with 10 perturbed values: 157.9260277748108
+Minim_exp_val_B: 1.3476690707866068, prob_s_B: 0.042426406871192854
+p=7
+Minim_exp_val_L: 1.3799097826253208, prob_s_L: 0.05291502622129181
+Time for intialising with 10 perturbed values: 157.6889431476593
+Minim_exp_val_B: 1.1794033127640018, prob_s_B: 0.058309518948453
+p=8
+Minim_exp_val_L: 1.3672846375955454, prob_s_L: 0.04358898943540673
+Time for intialising with 10 perturbed values: 131.74041271209717
+Minim_exp_val_B: 1.2930447025273886, prob_s_B: 0.058309518948453
+p=9
+Minim_exp_val_L: 1.4005274702760664, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 124.08253288269043
+Minim_exp_val_B: 1.309267389137531, prob_s_B: 0.044721359549995794
+p=10
+Minim_exp_val_L: 0.8288014761041149, prob_s_L: 0.07745966692414834
+Time for intialising with 10 perturbed values: 192.55352687835693
+Minim_exp_val_B: 0.5681496378431217, prob_s_B: 0.10677078252031312
+____________________________________________________________________________________________________ 
+QUBO NO: 42
+ ____________________________________________________________________________________________________
+optimal function value: 0.3087058128439999
+optimal value: [1. 0. 0. 0. 1. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001010001', 0.3087058128439999)
+('010010001', 0.31017962019199974)
+('001010010', 0.3108640393419999)
+('010010010', 0.3123378466900002)
+('001100001', 0.31512469428599976)
+('010100001', 0.31659850163400005)
+('001100010', 0.3172829207839998)
+('010100010', 0.3187567281319996)
+('001010100', 0.3195037650989998)
+('010010100', 0.3209775724470001)
+__________________________________________________
+Number of couplings: 21
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 5.276954789165488
+Prob_s: 0 
+
+Restart No: 1
+Exp_val: 2.0404453796006656
+Prob_s: 0.11874342087037917 
+
+Restart No: 2
+Exp_val: 3.6689536327135777
+Prob_s: 0.02 
+
+Restart No: 3
+Exp_val: 2.1561623493621425
+Prob_s: 0.04358898943540673 
+
+Restart No: 4
+Exp_val: 1.5922682564976984
+Prob_s: 0.03 
+
+Restart No: 5
+Exp_val: 2.5096038797118676
+Prob_s: 0.022360679774997897 
+
+Restart No: 6
+Exp_val: 1.9956211656517229
+Prob_s: 0.01 
+
+Restart No: 7
+Exp_val: 3.2496389655647597
+Prob_s: 0.01 
+
+Restart No: 8
+Exp_val: 2.2160355667444294
+Prob_s: 0.0282842712474619 
+
+Restart No: 9
+Exp_val: 2.6768014581609796
+Prob_s: 0.0458257569495584 
+
+Minimum Exp Val:  1.5922682564976984
+Prob_s for this:  0.03
+p=2
+Minim_exp_val_L: 1.5841096527701164, prob_s_L: 0.03605551275463989
+Time for intialising with 10 perturbed values: 18.393518209457397
+Minim_exp_val_B: 1.5841096527701164, prob_s_B: 0.03605551275463989
+p=3
+Minim_exp_val_L: 1.5941040613842383, prob_s_L: 0.04
+Time for intialising with 10 perturbed values: 36.374170780181885
+Minim_exp_val_B: 1.1678407899879426, prob_s_B: 0.08717797887081347
+p=4
+Minim_exp_val_L: 1.5734030570355686, prob_s_L: 0.04
+Time for intialising with 10 perturbed values: 61.388593673706055
+Minim_exp_val_B: 0.962093214147028, prob_s_B: 0.12529964086141668
+p=5
+Minim_exp_val_L: 1.5810140675529945, prob_s_L: 0.04358898943540673
+Time for intialising with 10 perturbed values: 82.6423270702362
+Minim_exp_val_B: 0.982126781091927, prob_s_B: 0.12569805089976535
+p=6
+Minim_exp_val_L: 2.1273435909408622, prob_s_L: 0.04358898943540673
+Time for intialising with 10 perturbed values: 49.68759512901306
+Minim_exp_val_B: 2.1273435909408622, prob_s_B: 0.04358898943540673
+p=7
+Minim_exp_val_L: 2.1522917502271888, prob_s_L: 0.03741657386773942
+Time for intialising with 10 perturbed values: 97.95170760154724
+Minim_exp_val_B: 2.0684947851643383, prob_s_B: 0.05291502622129181
+p=8
+Minim_exp_val_L: 2.20570493509753, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 89.55196857452393
+Minim_exp_val_B: 2.0191348842579435, prob_s_B: 0.05291502622129181
+p=9
+Minim_exp_val_L: 2.1201200796975797, prob_s_L: 0.033166247903554
+Time for intialising with 10 perturbed values: 115.30272722244263
+Minim_exp_val_B: 2.0179853693450034, prob_s_B: 0.0648074069840786
+p=10
+Minim_exp_val_L: 1.502602393944676, prob_s_L: 0.03872983346207417
+Time for intialising with 10 perturbed values: 132.61263298988342
+Minim_exp_val_B: 0.942706063118991, prob_s_B: 0.12884098726725127
+____________________________________________________________________________________________________ 
+QUBO NO: 43
+ ____________________________________________________________________________________________________
+optimal function value: 0.7385307113386999
+optimal value: [1. 0. 0. 0. 0. 0. 1. 0. 0.]
+status: SUCCESS
+Error: At least one car did not have a valid route
+Starting with new qubo
+optimal function value: 0.9120432464349997
+optimal value: [0. 1. 0. 1. 0. 0. 0. 0. 1.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('100001010', 0.9120432464349997)
+('010001100', 0.9120432464350001)
+('010010100', 0.9151141638959999)
+('100010010', 0.9151141638959999)
+('010100100', 0.9176045472149994)
+('100100010', 0.9176045472149994)
+('001001100', 0.9666584231310003)
+('100001001', 0.9666584231310003)
+('001010100', 0.969729340592)
+('100010001', 0.969729340592)
+__________________________________________________
+Other ground state(s) found: '010001100'
+Number of couplings: 30
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 8.097967712192537
+Prob_s: 0 
+
+Restart No: 1
+Exp_val: 6.796830329521969
+Prob_s: 0.01 
+
+Restart No: 2
+Exp_val: 7.17278229097505
+Prob_s: 0.01 
+
+Restart No: 3
+Exp_val: 5.100969999905199
+Prob_s: 0.09591663046625439 
+
+Restart No: 4
+Exp_val: 6.682416603475668
+Prob_s: 0.07189608136562817 
+
+Restart No: 5
+Exp_val: 4.897328637080438
+Prob_s: 0.12073832605254449 
+
+Restart No: 6
+Exp_val: 5.5244006893913795
+Prob_s: 0.05019764837837084 
+
+Restart No: 7
+Exp_val: 9.126411664920049
+Prob_s: 0.02414213562373095 
+
+Restart No: 8
+Exp_val: 5.607218720689503
+Prob_s: 0.0635917360311745 
+
+Restart No: 9
+Exp_val: 4.700290447700389
+Prob_s: 0.0969041575982343 
+
+Minimum Exp Val:  4.700290447700389
+Prob_s for this:  0.0969041575982343
+p=2
+Minim_exp_val_L: 4.782479078171326, prob_s_L: 0.09218882961825603
+Time for intialising with 10 perturbed values: 37.75065851211548
+Minim_exp_val_B: 4.572678178254331, prob_s_B: 0.1906840225908899
+p=3
+Minim_exp_val_L: 4.755796717614089, prob_s_L: 0.10676667429263684
+Time for intialising with 10 perturbed values: 59.03830361366272
+Minim_exp_val_B: 4.022067298698543, prob_s_B: 0.08100556330314615
+p=4
+Minim_exp_val_L: 4.6788712887649, prob_s_L: 0.10284144292700859
+Time for intialising with 10 perturbed values: 60.54133987426758
+Minim_exp_val_B: 3.213121251099429, prob_s_B: 0.1129150262212918
+p=5
+Minim_exp_val_L: 4.768763164099771, prob_s_L: 0.10862390382186166
+Time for intialising with 10 perturbed values: 79.81038975715637
+Minim_exp_val_B: 2.9447692906796292, prob_s_B: 0.13488904181111844
+p=6
+Minim_exp_val_L: 4.817037252350773, prob_s_L: 0.0847213595499958
+Time for intialising with 10 perturbed values: 75.14012837409973
+Minim_exp_val_B: 4.579044797014137, prob_s_B: 0.09371115440565936
+p=7
+Minim_exp_val_L: 4.755772763601071, prob_s_L: 0.08933056446942715
+Time for intialising with 10 perturbed values: 106.45933842658997
+Minim_exp_val_B: 4.301488711492459, prob_s_B: 0.11129727453672533
+p=8
+Minim_exp_val_L: 4.809704250335861, prob_s_L: 0.08582575694955841
+Time for intialising with 10 perturbed values: 142.6271698474884
+Minim_exp_val_B: 4.19277653481165, prob_s_B: 0.0999198394601935
+p=9
+Minim_exp_val_L: 4.744294276994039, prob_s_L: 0.09141620172685641
+Time for intialising with 10 perturbed values: 202.96926832199097
+Minim_exp_val_B: 3.9988256244602907, prob_s_B: 0.11224618612322401
+p=10
+Minim_exp_val_L: 4.778908492944965, prob_s_L: 0.11244997998398398
+Time for intialising with 10 perturbed values: 262.45101165771484
+Minim_exp_val_B: 2.5224164762839467, prob_s_B: 0.1694427190999916
+____________________________________________________________________________________________________ 
+QUBO NO: 44
+ ____________________________________________________________________________________________________
+optimal function value: 0.33487791188000027
+optimal value: [1. 0. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001001001', 0.33487791188000027)
+('001001100', 0.3402450601939999)
+('100001001', 0.34024506019400036)
+('001010001', 0.34578954721300015)
+('001100001', 0.3482183929209999)
+('001010100', 0.3515048060249999)
+('100010001', 0.35150480602500034)
+('100100001', 0.35276865303500005)
+('001100100', 0.35276865303500027)
+('001010010', 0.3606429661220001)
+__________________________________________________
+Number of couplings: 30
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 1.2506286536554567
+Prob_s: 0.0818535277187245 
+
+Restart No: 1
+Exp_val: 3.945492605818175
+Prob_s: 0 
+
+Restart No: 2
+Exp_val: 3.795931738690822
+Prob_s: 0.022360679774997897 
+
+Restart No: 3
+Exp_val: 1.1804327706571311
+Prob_s: 0.04 
+
+Restart No: 4
+Exp_val: 2.799376993508372
+Prob_s: 0.01414213562373095 
+
+Restart No: 5
+Exp_val: 2.264268082339965
+Prob_s: 0.01 
+
+Restart No: 6
+Exp_val: 2.232092896308513
+Prob_s: 0.034641016151377546 
+
+Restart No: 7
+Exp_val: 3.1227816208673063
+Prob_s: 0 
+
+Restart No: 8
+Exp_val: 3.9083165806722526
+Prob_s: 0.01414213562373095 
+
+Restart No: 9
+Exp_val: 2.0846738205266235
+Prob_s: 0.01414213562373095 
+
+Minimum Exp Val:  1.1804327706571311
+Prob_s for this:  0.04
+p=2
+Minim_exp_val_L: 1.174788401939296, prob_s_L: 0.05
+Time for intialising with 10 perturbed values: 25.073935747146606
+Minim_exp_val_B: 1.174788401939296, prob_s_B: 0.05
+p=3
+Minim_exp_val_L: 1.1797817856468915, prob_s_L: 0.0282842712474619
+Time for intialising with 10 perturbed values: 55.731653690338135
+Minim_exp_val_B: 1.1797817856468915, prob_s_B: 0.0282842712474619
+p=4
+Minim_exp_val_L: 1.1688095829650467, prob_s_L: 0.042426406871192854
+Time for intialising with 10 perturbed values: 54.8318305015564
+Minim_exp_val_B: 0.9615332999284969, prob_s_B: 0.09219544457292887
+p=5
+Minim_exp_val_L: 1.1722750133565685, prob_s_L: 0.042426406871192854
+Time for intialising with 10 perturbed values: 48.517802476882935
+Minim_exp_val_B: 0.9543267233855921, prob_s_B: 0.0916515138991168
+p=6
+Minim_exp_val_L: 2.122648349975384, prob_s_L: 0.0469041575982343
+Time for intialising with 10 perturbed values: 112.01577305793762
+Minim_exp_val_B: 2.122648349975384, prob_s_B: 0.0469041575982343
+p=7
+Minim_exp_val_L: 2.144962919557826, prob_s_L: 0.04795831523312719
+Time for intialising with 10 perturbed values: 86.43705368041992
+Minim_exp_val_B: 2.102643540797642, prob_s_B: 0.0469041575982343
+p=8
+Minim_exp_val_L: 2.146171763894747, prob_s_L: 0.05291502622129181
+Time for intialising with 10 perturbed values: 81.54980897903442
+Minim_exp_val_B: 2.0660941624585565, prob_s_B: 0.04358898943540673
+p=9
+Minim_exp_val_L: 2.1826279059224185, prob_s_L: 0.05291502622129181
+Time for intialising with 10 perturbed values: 159.34789752960205
+Minim_exp_val_B: 2.027585183381781, prob_s_B: 0.0565685424949238
+p=10
+Minim_exp_val_L: 1.2970107799255683, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 162.87853026390076
+Minim_exp_val_B: 1.2970107799255683, prob_s_B: 0.0412310562561766
+____________________________________________________________________________________________________ 
+QUBO NO: 45
+ ____________________________________________________________________________________________________
+optimal function value: 0.7950127552050006
+optimal value: [1. 0. 0. 0. 1. 0. 0. 1. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('010001010', 0.7950127552050006)
+('010010001', 0.7950127552050006)
+('100001010', 0.8712181979290001)
+('100010001', 0.8712181979290001)
+('010010100', 0.8712181979290006)
+('010100010', 0.8712181979290006)
+('100001001', 1.0002296259390002)
+('010001100', 1.0002296259390007)
+('010100001', 1.0002296259390007)
+('001001001', 1.0357097156600004)
+__________________________________________________
+Other ground state(s) found: '010010001'
+Number of couplings: 36
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 4.601442277971245
+Prob_s: 0.1673320053068151 
+
+Restart No: 1
+Exp_val: 6.4298088677873695
+Prob_s: 0.0282842712474619 
+
+Restart No: 2
+Exp_val: 5.884896267389784
+Prob_s: 0 
+
+Restart No: 3
+Exp_val: 5.546239821804776
+Prob_s: 0.066332495807108 
+
+Restart No: 4
+Exp_val: 4.442387927223859
+Prob_s: 0 
+
+Restart No: 5
+Exp_val: 4.296290288255633
+Prob_s: 0.066332495807108 
+
+Restart No: 6
+Exp_val: 3.830388953013135
+Prob_s: 0.22181073012818833 
+
+Restart No: 7
+Exp_val: 3.2183509097224854
+Prob_s: 0.06324555320336758 
+
+Restart No: 8
+Exp_val: 4.65718567305076
+Prob_s: 0.15362291495737215 
+
+Restart No: 9
+Exp_val: 2.8149750247140215
+Prob_s: 0.0282842712474619 
+
+Minimum Exp Val:  2.8149750247140215
+Prob_s for this:  0.0282842712474619
+p=2
+Minim_exp_val_L: 2.8018227096551773, prob_s_L: 0.04
+Time for intialising with 10 perturbed values: 39.03479862213135
+Minim_exp_val_B: 2.8018227096551773, prob_s_B: 0.04
+p=3
+Minim_exp_val_L: 2.826741799016995, prob_s_L: 0
+Time for intialising with 10 perturbed values: 53.04550886154175
+Minim_exp_val_B: 2.3089571735731282, prob_s_B: 0.1777638883463118
+p=4
+Minim_exp_val_L: 2.784129137448784, prob_s_L: 0.044721359549995794
+Time for intialising with 10 perturbed values: 92.175288438797
+Minim_exp_val_B: 1.9573042540916847, prob_s_B: 0.1649242250247064
+p=5
+Minim_exp_val_L: 2.8889047810596056, prob_s_L: 0.0282842712474619
+Time for intialising with 10 perturbed values: 66.60715389251709
+Minim_exp_val_B: 1.7539115552759705, prob_s_B: 0.19493588689617927
+p=6
+Minim_exp_val_L: 4.4289737790755845, prob_s_L: 0.1131370849898476
+Time for intialising with 10 perturbed values: 98.8727035522461
+Minim_exp_val_B: 4.4289737790755845, prob_s_B: 0.1131370849898476
+p=7
+Minim_exp_val_L: 4.505298781606446, prob_s_L: 0.11135528725660043
+Time for intialising with 10 perturbed values: 109.05910563468933
+Minim_exp_val_B: 4.400282000059094, prob_s_B: 0.09797958971132711
+p=8
+Minim_exp_val_L: 4.627760184409031, prob_s_L: 0.08944271909999159
+Time for intialising with 10 perturbed values: 110.61513543128967
+Minim_exp_val_B: 4.502763645691186, prob_s_B: 0.08717797887081347
+p=9
+Minim_exp_val_L: 4.66029368426782, prob_s_L: 0.10954451150103323
+Time for intialising with 10 perturbed values: 194.51858758926392
+Minim_exp_val_B: 4.35457078974097, prob_s_B: 0.10583005244258362
+p=10
+Minim_exp_val_L: 2.9252720615421755, prob_s_L: 0.0282842712474619
+Time for intialising with 10 perturbed values: 202.2091212272644
+Minim_exp_val_B: 2.058404167866651, prob_s_B: 0.18220867158288598
+____________________________________________________________________________________________________ 
+QUBO NO: 46
+ ____________________________________________________________________________________________________
+optimal function value: 0.6056137364320002
+optimal value: [1. 0. 0. 0. 1. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('010001001', 0.6056137364319998)
+('001010001', 0.6056137364320002)
+('010001010', 0.6057857403669997)
+('001010010', 0.6057857403670002)
+('100001001', 0.615162527032)
+('100001010', 0.615334530967)
+('001010100', 0.6316798756059998)
+('010001100', 0.6316798756059998)
+('100001100', 0.6412286662059998)
+('010100100', 0.6495192281150002)
+__________________________________________________
+Other ground state(s) found: '001010001'
+Number of couplings: 22
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 3.2032783518317425
+Prob_s: 0.10583005244258362 
+
+Restart No: 1
+Exp_val: 3.361520781342562
+Prob_s: 0.08944271909999159 
+
+Restart No: 2
+Exp_val: 3.518380208717266
+Prob_s: 0.12806248474865697 
+
+Restart No: 3
+Exp_val: 4.2100657105636845
+Prob_s: 0.05291502622129181 
+
+Restart No: 4
+Exp_val: 2.9684431584732835
+Prob_s: 0.17320508075688773 
+
+Restart No: 5
+Exp_val: 2.5865046457684007
+Prob_s: 0.13564659966250536 
+
+Restart No: 6
+Exp_val: 3.1862271896646703
+Prob_s: 0.0824621125123532 
+
+Restart No: 7
+Exp_val: 3.361554376090226
+Prob_s: 0.07745966692414834 
+
+Restart No: 8
+Exp_val: 4.085647999449172
+Prob_s: 0.06 
+
+Restart No: 9
+Exp_val: 3.228093074877721
+Prob_s: 0.0824621125123532 
+
+Minimum Exp Val:  2.5865046457684007
+Prob_s for this:  0.13564659966250536
+p=2
+Minim_exp_val_L: 2.5619370367280796, prob_s_L: 0.1341640786499874
+Time for intialising with 10 perturbed values: 17.261133909225464
+Minim_exp_val_B: 2.429450098885232, prob_s_B: 0.10583005244258362
+p=3
+Minim_exp_val_L: 2.455683424774117, prob_s_L: 0.13564659966250536
+Time for intialising with 10 perturbed values: 42.56689190864563
+Minim_exp_val_B: 2.351304019612934, prob_s_B: 0.12489995996796796
+p=4
+Minim_exp_val_L: 2.5243327898790087, prob_s_L: 0.1
+Time for intialising with 10 perturbed values: 45.99506330490112
+Minim_exp_val_B: 2.235926194572783, prob_s_B: 0.13999999999999999
+p=5
+Minim_exp_val_L: 2.5876356393238464, prob_s_L: 0.1216552506059644
+Time for intialising with 10 perturbed values: 79.53031992912292
+Minim_exp_val_B: 2.1512874960831505, prob_s_B: 0.13114877048604
+p=6
+Minim_exp_val_L: 3.1355305706504217, prob_s_L: 0.08944271909999159
+Time for intialising with 10 perturbed values: 88.42123484611511
+Minim_exp_val_B: 2.918506017236624, prob_s_B: 0.10770329614269007
+p=7
+Minim_exp_val_L: 3.156942250125469, prob_s_L: 0.08717797887081347
+Time for intialising with 10 perturbed values: 42.76240158081055
+Minim_exp_val_B: 2.9768010305422554, prob_s_B: 0.09797958971132711
+p=8
+Minim_exp_val_L: 3.1614067874879863, prob_s_L: 0.09591663046625439
+Time for intialising with 10 perturbed values: 93.16235280036926
+Minim_exp_val_B: 2.9169692593304144, prob_s_B: 0.10583005244258362
+p=9
+Minim_exp_val_L: 3.150561506726774, prob_s_L: 0.066332495807108
+Time for intialising with 10 perturbed values: 136.65144610404968
+Minim_exp_val_B: 2.989267107568196, prob_s_B: 0.08717797887081347
+p=10
+Minim_exp_val_L: 2.4480758540269894, prob_s_L: 0.15874507866387544
+Time for intialising with 10 perturbed values: 249.58268570899963
+Minim_exp_val_B: 2.200251906410169, prob_s_B: 0.13564659966250536
+____________________________________________________________________________________________________ 
+QUBO NO: 47
+ ____________________________________________________________________________________________________
+optimal function value: 0.6228586009389998
+optimal value: [1. 0. 0. 0. 1. 0. 1. 0. 0.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('001010001', 0.6228586009389998)
+('010001001', 0.6305327646729999)
+('001010010', 0.634449494449)
+('010001010', 0.6421236581829997)
+('001010100', 0.6649468013389996)
+('010001100', 0.6726209650729997)
+('010100001', 0.6729395987739997)
+('100010001', 0.6729395987739997)
+('010100010', 0.6845304922839999)
+('100010010', 0.6845304922839999)
+__________________________________________________
+Number of couplings: 24
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 3.4544532402475236
+Prob_s: 0.026457513110645904 
+
+Restart No: 1
+Exp_val: 5.382286519257066
+Prob_s: 0 
+
+Restart No: 2
+Exp_val: 4.007737479390431
+Prob_s: 0.01414213562373095 
+
+Restart No: 3
+Exp_val: 2.215798100403192
+Prob_s: 0.08124038404635961 
+
+Restart No: 4
+Exp_val: 4.582068779022545
+Prob_s: 0 
+
+Restart No: 5
+Exp_val: 3.0057364195315475
+Prob_s: 0.0938083151964686 
+
+Restart No: 6
+Exp_val: 3.8146377956090065
+Prob_s: 0.022360679774997897 
+
+Restart No: 7
+Exp_val: 7.295494529500759
+Prob_s: 0.01 
+
+Restart No: 8
+Exp_val: 4.436734854109686
+Prob_s: 0.026457513110645904 
+
+Restart No: 9
+Exp_val: 5.226325611271118
+Prob_s: 0.03162277660168379 
+
+Minimum Exp Val:  2.215798100403192
+Prob_s for this:  0.08124038404635961
+p=2
+Minim_exp_val_L: 2.201601717998655, prob_s_L: 0.0754983443527075
+Time for intialising with 10 perturbed values: 29.86504626274109
+Minim_exp_val_B: 2.201601717998655, prob_s_B: 0.0754983443527075
+p=3
+Minim_exp_val_L: 2.218359116001623, prob_s_L: 0.07416198487095663
+Time for intialising with 10 perturbed values: 60.15050172805786
+Minim_exp_val_B: 2.218359116001623, prob_s_B: 0.07416198487095663
+p=4
+Minim_exp_val_L: 2.203467138989908, prob_s_L: 0.06324555320336758
+Time for intialising with 10 perturbed values: 85.58046293258667
+Minim_exp_val_B: 2.203467138989908, prob_s_B: 0.06324555320336758
+p=5
+Minim_exp_val_L: 2.21385841951676, prob_s_L: 0.07348469228349534
+Time for intialising with 10 perturbed values: 125.06699419021606
+Minim_exp_val_B: 1.937661559284301, prob_s_B: 0.04
+p=6
+Minim_exp_val_L: 3.3511672689697383, prob_s_L: 0.0469041575982343
+Time for intialising with 10 perturbed values: 92.02013278007507
+Minim_exp_val_B: 3.3511672689697383, prob_s_B: 0.0469041575982343
+p=7
+Minim_exp_val_L: 3.3368569520945135, prob_s_L: 0.0412310562561766
+Time for intialising with 10 perturbed values: 71.59350776672363
+Minim_exp_val_B: 3.235022568842021, prob_s_B: 0.04795831523312719
+p=8
+Minim_exp_val_L: 3.300806960578076, prob_s_L: 0.05196152422706632
+Time for intialising with 10 perturbed values: 66.21879720687866
+Minim_exp_val_B: 3.089761897699954, prob_s_B: 0.04358898943540673
+p=9
+Minim_exp_val_L: 3.3135745062337483, prob_s_L: 0.042426406871192854
+Time for intialising with 10 perturbed values: 107.67159676551819
+Minim_exp_val_B: 2.885668648787037, prob_s_B: 0.05291502622129181
+p=10
+Minim_exp_val_L: 2.2484332861919087, prob_s_L: 0.07681145747868608
+Time for intialising with 10 perturbed values: 164.59309649467468
+Minim_exp_val_B: 2.2484332861919087, prob_s_B: 0.07681145747868608
+____________________________________________________________________________________________________ 
+QUBO NO: 48
+ ____________________________________________________________________________________________________
+optimal function value: 1.9208086465798
+optimal value: [0. 0. 1. 0. 0. 0. 0. 1. 0.]
+status: SUCCESS
+Error: At least one car did not have a valid route
+Starting with new qubo
+optimal function value: 0.6947956092290004
+optimal value: [1. 0. 0. 0. 1. 0. 0. 0. 1.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('010100001', 0.6947956092290004)
+('100010001', 0.6947956092290004)
+('010100010', 0.723407215053)
+('100010010', 0.723407215053)
+('100001001', 0.727012844209)
+('001100001', 0.7270128442090003)
+('010100100', 0.7276224534410003)
+('100010100', 0.7276224534410003)
+('100100001', 0.7286188243840004)
+('100001010', 0.755624450033)
+__________________________________________________
+Other ground state(s) found: '100010001'
+Number of couplings: 36
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 3.3618966503856202
+Prob_s: 0.0282842712474619 
+
+Restart No: 1
+Exp_val: 3.8480268106792175
+Prob_s: 0.02 
+
+Restart No: 2
+Exp_val: 4.973534546850313
+Prob_s: 0.0565685424949238 
+
+Restart No: 3
+Exp_val: 5.251930739800204
+Prob_s: 0 
+
+Restart No: 4
+Exp_val: 3.3974237460332892
+Prob_s: 0.02 
+
+Restart No: 5
+Exp_val: 3.0541745359972055
+Prob_s: 0.034641016151377546 
+
+Restart No: 6
+Exp_val: 4.054256496864781
+Prob_s: 0.02 
+
+Restart No: 7
+Exp_val: 6.088992274112313
+Prob_s: 0.044721359549995794 
+
+Restart No: 8
+Exp_val: 4.882895522401431
+Prob_s: 0.1 
+
+Restart No: 9
+Exp_val: 5.941177730188144
+Prob_s: 0.0916515138991168 
+
+Minimum Exp Val:  3.0541745359972055
+Prob_s for this:  0.034641016151377546
+p=2
+Minim_exp_val_L: 3.0906572596985007, prob_s_L: 0.05291502622129181
+Time for intialising with 10 perturbed values: 24.674429178237915
+Minim_exp_val_B: 3.0906572596985007, prob_s_B: 0.05291502622129181
+p=3
+Minim_exp_val_L: 3.0953877375025862, prob_s_L: 0.05291502622129181
+Time for intialising with 10 perturbed values: 58.04430317878723
+Minim_exp_val_B: 2.793663136827571, prob_s_B: 0.12489995996796796
+p=4
+Minim_exp_val_L: 3.0655963085472275, prob_s_L: 0.05291502622129181
+Time for intialising with 10 perturbed values: 98.76798820495605
+Minim_exp_val_B: 2.379126935204414, prob_s_B: 0.14422205101855956
+p=5
+Minim_exp_val_L: 3.093754217946394, prob_s_L: 0.0565685424949238
+Time for intialising with 10 perturbed values: 80.08336329460144
+Minim_exp_val_B: 2.3525524600007577, prob_s_B: 0.16
+p=6
+Minim_exp_val_L: 3.4343749879393926, prob_s_L: 0.10954451150103323
+Time for intialising with 10 perturbed values: 59.10911154747009
+Minim_exp_val_B: 3.2438650972179177, prob_s_B: 0.08944271909999159
+p=7
+Minim_exp_val_L: 3.4699034524019026, prob_s_L: 0.10954451150103323
+Time for intialising with 10 perturbed values: 103.13907122612
+Minim_exp_val_B: 3.3432311190735113, prob_s_B: 0.09797958971132711
+p=8
+Minim_exp_val_L: 3.3930333697908175, prob_s_L: 0.116619037896906
+Time for intialising with 10 perturbed values: 116.63484454154968
+Minim_exp_val_B: 3.2862023970982777, prob_s_B: 0.10392304845413264
+p=9
+Minim_exp_val_L: 3.398528486138398, prob_s_L: 0.13564659966250536
+Time for intialising with 10 perturbed values: 160.06297039985657
+Minim_exp_val_B: 3.344900980672721, prob_s_B: 0.08944271909999159
+p=10
+Minim_exp_val_L: 3.062949798978983, prob_s_L: 0.07211102550927978
+Time for intialising with 10 perturbed values: 142.38659501075745
+Minim_exp_val_B: 2.7593509713667173, prob_s_B: 0.08944271909999159
+____________________________________________________________________________________________________ 
+QUBO NO: 49
+ ____________________________________________________________________________________________________
+optimal function value: 0.6058135801019997
+optimal value: [0. 1. 0. 0. 1. 0. 0. 0. 1.]
+status: SUCCESS
+This is a valid solution
+__________________________________________________
+10 lowest states:
+('010010100', 0.6058135801019997)
+('100010010', 0.6058135801019997)
+('010001100', 0.6219472218049997)
+('100001010', 0.6219472218049997)
+('010100100', 0.62575096071)
+('100100010', 0.62575096071)
+('001010010', 0.6604452133859999)
+('010010001', 0.6604452133859999)
+('001010100', 0.6765480752189998)
+('100010001', 0.6765480752189998)
+__________________________________________________
+Other ground state(s) found: '100010010'
+Number of couplings: 36
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 2.768086640848835
+Prob_s: 0.02 
+
+Restart No: 1
+Exp_val: 3.3203931224045378
+Prob_s: 0.04 
+
+Restart No: 2
+Exp_val: 3.364970704095154
+Prob_s: 0.044721359549995794 
+
+Restart No: 3
+Exp_val: 3.3363905261250792
+Prob_s: 0.15231546211727817 
+
+Restart No: 4
+Exp_val: 3.0885952754118415
+Prob_s: 0.04 
+
+Restart No: 5
+Exp_val: 2.3615307571319843
+Prob_s: 0.21633307652783937 
+
+Restart No: 6
+Exp_val: 3.2216897162297378
+Prob_s: 0.10392304845413264 
+
+Restart No: 7
+Exp_val: 3.535096734558507
+Prob_s: 0 
+
+Restart No: 8
+Exp_val: 2.355808937276014
+Prob_s: 0.10583005244258362 
+
+Restart No: 9
+Exp_val: 3.34567898750478
+Prob_s: 0.1019803902718557 
+
+Minimum Exp Val:  2.355808937276014
+Prob_s for this:  0.10583005244258362
+p=2
+Minim_exp_val_L: 2.3571621766098567, prob_s_L: 0.1
+Time for intialising with 10 perturbed values: 45.32116889953613
+Minim_exp_val_B: 2.084690235030437, prob_s_B: 0.0938083151964686
+p=3
+Minim_exp_val_L: 2.3760432821311617, prob_s_L: 0.0916515138991168
+Time for intialising with 10 perturbed values: 59.61854100227356
+Minim_exp_val_B: 2.0877465746093673, prob_s_B: 0.10583005244258362
+p=4
+Minim_exp_val_L: 2.386070462341878, prob_s_L: 0.10583005244258362
+Time for intialising with 10 perturbed values: 49.88425636291504
+Minim_exp_val_B: 2.0776530395718984, prob_s_B: 0.1019803902718557
+p=5
+Minim_exp_val_L: 2.3613191227378714, prob_s_L: 0.08944271909999159
+Time for intialising with 10 perturbed values: 65.66838002204895
+Minim_exp_val_B: 2.0563301440753556, prob_s_B: 0.10392304845413264
+p=6
+Minim_exp_val_L: 2.9041448127018317, prob_s_L: 0.0824621125123532
+Time for intialising with 10 perturbed values: 124.3059515953064
+Minim_exp_val_B: 2.8252906635594983, prob_s_B: 0.07745966692414834
+p=7
+Minim_exp_val_L: 2.9203633282289316, prob_s_L: 0.0824621125123532
+Time for intialising with 10 perturbed values: 113.68359327316284
+Minim_exp_val_B: 2.779476308162923, prob_s_B: 0.08485281374238571
+p=8
+Minim_exp_val_L: 2.8864930189829465, prob_s_L: 0.1019803902718557
+Time for intialising with 10 perturbed values: 184.61666989326477
+Minim_exp_val_B: 2.5687260064813375, prob_s_B: 0.12328828005937953
+p=9
+Minim_exp_val_L: 2.915706926347862, prob_s_L: 0.0824621125123532
+Time for intialising with 10 perturbed values: 198.31336402893066
+Minim_exp_val_B: 2.4408617518466906, prob_s_B: 0.163707055437449
+p=10
+Minim_exp_val_L: 2.3917734571332048, prob_s_L: 0.09591663046625439
+Time for intialising with 10 perturbed values: 106.85527491569519
+Minim_exp_val_B: 2.3917734571332048, prob_s_B: 0.09591663046625439
+(50, 10)
+[[0.04898979485566356, 0.053851648071345036, 0.05099019513592785, 0.05477225575051661, 0.08660254037844387, 0.05477225575051661, 0.07810249675906655, 0.06244997998398398, 0.07141428428542851, 0.11489125293076058], [0.03863703305156273, 0.05095241053847768, 0.04685557720282968, 0.10540394169850748, 0.10763916785536654, 0.09589395245389785, 0.10755873763085165, 0.10099019513592786, 0.09997998999159141, 0.08825216382075125], [0.04795831523312719, 0.055677643628300216, 0.07483314773547883, 0.06557438524302, 0.06855654600401044, 0.0608276253029822, 0.05196152422706632, 0.05196152422706632, 0.058309518948453, 0.1004987562112089], [0.05477225575051661, 0.06557438524302, 0.07071067811865475, 0.07874007874011811, 0.05744562646538029, 0.0412310562561766, 0.05196152422706632, 0.042426406871192854, 0.04795831523312719, 0.08602325267042626], [0.06557438524302, 0.06, 0.055677643628300216, 0.05916079783099616, 0.0565685424949238, 0.0412310562561766, 0.05196152422706632, 0.05744562646538029, 0.0670820393249937, 0.06928203230275509], [0.05744562646538029, 0.066332495807108, 0.0754983443527075, 0.08, 0.07416198487095663, 0.03741657386773942, 0.0412310562561766, 0.05099019513592785, 0.0565685424949238, 0.0648074069840786], [0.09797958971132711, 0.0916515138991168, 0.09797958971132711, 0.1019803902718557, 0.1019803902718557, 0.08485281374238571, 0.1019803902718557, 0.10392304845413264, 0.11489125293076058, 0.12649110640673517], [0.05, 0.12721852527270977, 0.23916375287812985, 0.23316077434701946, 0.2622076938187742, 0.08259933138450473, 0.09486247283136148, 0.09886568182530062, 0.10665338225254059, 0.226246540187361], [0.01, 0.01, 0.017320508075688773, 0, 0.01414213562373095, 0.05291502622129181, 0.04795831523312719, 0.053851648071345036, 0.04358898943540673, 0.01], [0.0608276253029822, 0.07483314773547883, 0.07615773105863909, 0.07348469228349534, 0.07211102550927978, 0.05099019513592785, 0.04898979485566356, 0.04, 0.0412310562561766, 0.07416198487095663], [0.3807273164429645, 0.36244431361516316, 0.3562043653431778, 0.42081830845742707, 0.6536114499453539, 0.32089927618892233, 0.29176663042959583, 0.29438572393993473, 0.3398390129567333, 0.6611528867241592], [0.044721359549995794, 0.07681145747868608, 0.0888819441731559, 0.10099504938362078, 0.09899494936611665, 0.05, 0.05099019513592785, 0.053851648071345036, 0.0565685424949238, 0.09848857801796104], [0.07483314773547883, 0.0282842712474619, 0.10583005244258362, 0.10392304845413264, 0.10770329614269007, 0.09797958971132711, 0.10583005244258362, 0.10583005244258362, 0.13564659966250536, 0.06324555320336758], [0.10510514323456191, 0.08767311813944673, 0.08790332984698218, 0.11260500271343561, 0.11044731323400417, 0.16875941832726982, 0.13154730466853393, 0.13910929064825495, 0.12976666716029922, 0.1264375031022373], [0.022360679774997897, 0.10148891565092219, 0.09899494936611665, 0.0938083151964686, 0.11269427669584645, 0.04795831523312719, 0.05196152422706632, 0.06244997998398398, 0.07874007874011811, 0.066332495807108], [0.0614505191510159, 0.04732050807568877, 0.20179304513845692, 0.18643650760992952, 0.17544003745317532, 0.09099019513592785, 0.09267967478312299, 0.11995365897814277, 0.15033149208818633, 0.0423606797749979], [0.042426406871192854, 0.08, 0.09433981132056604, 0.08, 0.09539392014169457, 0.053851648071345036, 0.034641016151377546, 0.0469041575982343, 0.06, 0.10954451150103323], [0.02449489742783178, 0.08485281374238571, 0.09746794344808964, 0.11489125293076058, 0.10488088481701516, 0.05, 0.0458257569495584, 0.04795831523312719, 0.042426406871192854, 0.09848857801796104], [0.0608276253029822, 0.0806225774829855, 0.0938083151964686, 0.10583005244258362, 0.10862780491200216, 0.034641016151377546, 0.034641016151377546, 0.026457513110645904, 0.0412310562561766, 0.061644140029689765], [0.099498743710662, 0.09797958971132711, 0.0565685424949238, 0.09273618495495704, 0.1216552506059644, 0.05291502622129181, 0.04358898943540673, 0.042426406871192854, 0.0469041575982343, 0.06928203230275509], [0.11164414002968977, 0.1189231968316678, 0.1118033988749895, 0.1906840225908899, 0.18220536528049097, 0.09038472210432005, 0.09681595208548624, 0.09358898943540674, 0.09099019513592785, 0.15416198487095661], [0.0916515138991168, 0.07745966692414834, 0.09591663046625439, 0.07483314773547883, 0.20591260281974, 0.10392304845413264, 0.08485281374238571, 0.10770329614269007, 0.12328828005937953, 0.19183326093250877], [0.08426149773176358, 0.0938083151964686, 0.0888819441731559, 0.08, 0.08774964387392122, 0.0458257569495584, 0.04795831523312719, 0.053851648071345036, 0.05, 0.11045361017187261], [0.08717797887081347, 0.22803508501982758, 0.20591260281974, 0.22715633383201095, 0.21071307505705478, 0.10770329614269007, 0.12328828005937953, 0.10770329614269007, 0.10392304845413264, 0.21908902300206645], [0.026457513110645904, 0.026457513110645904, 0.10908712114635714, 0.1268857754044952, 0.11874342087037917, 0.05, 0.05099019513592785, 0.06, 0.06403124237432849, 0.0824621125123532], [0.10954451150103323, 0.09643650760992954, 0.09695359714832658, 0.1004987562112089, 0.10488088481701516, 0.05, 0.05099019513592785, 0.058309518948453, 0.08, 0.07071067811865475], [0.0458257569495584, 0.08124038404635961, 0.11401754250991379, 0.10246950765959599, 0.11789826122551596, 0.0412310562561766, 0.03162277660168379, 0.044721359549995794, 0.05744562646538029, 0.04358898943540673], [0.0469041575982343, 0.07874007874011811, 0.08426149773176358, 0.09055385138137417, 0.09327379053088815, 0.03872983346207417, 0.044721359549995794, 0.03872983346207417, 0.034641016151377546, 0.07681145747868608], [0, 0.01, 0.02449489742783178, 0.0458257569495584, 0.09273618495495704, 0.03872983346207417, 0.0412310562561766, 0.05099019513592785, 0.05291502622129181, 0], [0.09486247283136148, 0.1027305709836438, 0.2329280973110315, 0.23236465417546787, 0.2379042030930063, 0.07964450219004662, 0.09681595208548624, 0.10854829762792406, 0.10755873763085165, 0.17715639175981804], [0.1823528380363208, 0.19102060175358168, 0.17737348035560974, 0.16189136881463997, 0.33916375287812983, 0.1283521705570369, 0.15127627140721517, 0.1383203593250907, 0.12724645256277617, 0.177154512468009], [0.033166247903554, 0.03, 0.11180339887498948, 0.132664991614216, 0.11874342087037917, 0.05099019513592785, 0.0412310562561766, 0.044721359549995794, 0.04898979485566356, 0.11224972160321824], [0.033166247903554, 0.09591663046625439, 0.1, 0.09055385138137417, 0.09110433579144299, 0.03605551275463989, 0.0412310562561766, 0.042426406871192854, 0.07141428428542851, 0.01], [0.0565685424949238, 0.07937253933193772, 0.09746794344808964, 0.09591663046625439, 0.10723805294763608, 0.03605551275463989, 0.05, 0.04795831523312719, 0.0412310562561766, 0.08717797887081347], [0.03162277660168379, 0.033166247903554, 0.03162277660168379, 0.05916079783099616, 0.06855654600401044, 0.03605551275463989, 0.044721359549995794, 0.05099019513592785, 0.058309518948453, 0.03741657386773942], [0.05291502622129181, 0.05196152422706632, 0.03741657386773942, 0.03605551275463989, 0.03741657386773942, 0.04795831523312719, 0.05099019513592785, 0.03741657386773942, 0.05744562646538029, 0.09848857801796104], [0.04795831523312719, 0.05291502622129181, 0.0458257569495584, 0.1004987562112089, 0.10488088481701516, 0.05, 0.044721359549995794, 0.053851648071345036, 0.04795831523312719, 0.0458257569495584], [0.01414213562373095, 0.03162277660168379, 0.09591663046625439, 0.09797958971132711, 0.07810249675906655, 0.055677643628300216, 0.05, 0.053851648071345036, 0.05916079783099616, 0.01414213562373095], [0.01, 0.09746794344808964, 0.09, 0.08831760866327847, 0.09486832980505137, 0.05196152422706632, 0.0469041575982343, 0.044721359549995794, 0.0282842712474619, 0.0670820393249937], [0.0412310562561766, 0, 0.05099019513592785, 0.09746794344808964, 0.10344080432788601, 0.055677643628300216, 0.0458257569495584, 0.058309518948453, 0.06403124237432849, 0.05477225575051661], [0.22891046284519195, 0.232379000772445, 0.21354156504062624, 0.22803508501982758, 0.20784609690826528, 0.10583005244258362, 0.10392304845413264, 0.08, 0.09797958971132711, 0.22449944320643647], [0.09219544457292887, 0.09695359714832658, 0.1004987562112089, 0.09591663046625439, 0.09110433579144299, 0.042426406871192854, 0.058309518948453, 0.058309518948453, 0.044721359549995794, 0.10677078252031312], [0.03, 0.03605551275463989, 0.08717797887081347, 0.12529964086141668, 0.12569805089976535, 0.04358898943540673, 0.05291502622129181, 0.05291502622129181, 0.0648074069840786, 0.12884098726725127], [0.0969041575982343, 0.1906840225908899, 0.08100556330314615, 0.1129150262212918, 0.13488904181111844, 0.09371115440565936, 0.11129727453672533, 0.0999198394601935, 0.11224618612322401, 0.1694427190999916], [0.04, 0.05, 0.0282842712474619, 0.09219544457292887, 0.0916515138991168, 0.0469041575982343, 0.0469041575982343, 0.04358898943540673, 0.0565685424949238, 0.0412310562561766], [0.0282842712474619, 0.04, 0.1777638883463118, 0.1649242250247064, 0.19493588689617927, 0.1131370849898476, 0.09797958971132711, 0.08717797887081347, 0.10583005244258362, 0.18220867158288598], [0.13564659966250536, 0.10583005244258362, 0.12489995996796796, 0.13999999999999999, 0.13114877048604, 0.10770329614269007, 0.09797958971132711, 0.10583005244258362, 0.08717797887081347, 0.13564659966250536], [0.08124038404635961, 0.0754983443527075, 0.07416198487095663, 0.06324555320336758, 0.04, 0.0469041575982343, 0.04795831523312719, 0.04358898943540673, 0.05291502622129181, 0.07681145747868608], [0.034641016151377546, 0.05291502622129181, 0.12489995996796796, 0.14422205101855956, 0.16, 0.08944271909999159, 0.09797958971132711, 0.10392304845413264, 0.08944271909999159, 0.08944271909999159], [0.10583005244258362, 0.0938083151964686, 0.10583005244258362, 0.1019803902718557, 0.10392304845413264, 0.07745966692414834, 0.08485281374238571, 0.12328828005937953, 0.163707055437449, 0.09591663046625439]]
+Time Taken: 45427.53200817108

@@ -15,7 +15,7 @@ def main(raw_args=None):
         list: In position 0, returns the graph of problem, In position 1, a Numpy Array with shape "no_cars" by "no_routes" given by argument for the generated routes for each car with the route descibed as a sequence of nodes of the graph.
     """
     args = parse(raw_args)
-    G = import_map("unimelb_graph.pkl")
+    G = import_map("melbourne.pkl")
     cpus = mp.cpu_count()
     pool = mp.Pool(cpus)
     while True:
