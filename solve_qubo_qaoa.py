@@ -476,7 +476,7 @@ def generate_valid_qubo(args):
             args["penalty_multiplier"] += 0.05
     return qubo, max_coeff, operator, offset, routes
 
-main(["-N 3", "-R 3", "-P 1.5", "-M 10", "-T 10", "-S 100"])
+main()
 
 
 # operator, offset = quadratic_program.to_ising()
