@@ -27,7 +27,8 @@ from qiskit.algorithms.optimizers import (
                                         SLSQP,
                                         SPSA,
                                         TNC,
-                                        P_BFGS
+                                        P_BFGS,
+                                        BOBYQA
                                         )
 from qiskit_optimization.algorithms import MinimumEigenOptimizer
 from qiskit.utils.quantum_instance import QuantumInstance
@@ -101,7 +102,8 @@ def main(raw_args = None):
         "SLSQP":SLSQP(),
         "SPSA":SPSA(),
         "TNC":TNC(),
-        "P_BFGS": P_BFGS()}
+        "P_BFGS": P_BFGS(),
+        "BOBYQA": BOBYQA()}
         optimizer = optimizers[args["optimizer"]]
         print("_"*50,"\n"+optimizer.__class__.__name__)
         print("_"*50)
@@ -237,7 +239,7 @@ def parse(raw_args):
     """
     optimizer_choices = ["ADAM", "CG", "COBYLA", "L_BFGS_B",\
                         "NELDER_MEAD", "NFT", "POWELL",\
-                         "SLSQP", "SPSA", "TNC"]
+                         "SLSQP", "SPSA", "TNC", "P_BFGS", "BOBYQA"]
     parser = argparse.ArgumentParser()
     required_named = parser.add_argument_group('Required arguments')
     required_named.add_argument("--no_cars", "-N",
