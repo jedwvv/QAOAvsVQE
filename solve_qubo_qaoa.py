@@ -26,7 +26,8 @@ from qiskit.algorithms.optimizers import (
                                         POWELL,
                                         SLSQP,
                                         SPSA,
-                                        TNC
+                                        TNC,
+                                        P_BFGS
                                         )
 from qiskit_optimization.algorithms import MinimumEigenOptimizer
 from qiskit.utils.quantum_instance import QuantumInstance
@@ -99,7 +100,8 @@ def main(raw_args = None):
         "POWELL":POWELL(),
         "SLSQP":SLSQP(),
         "SPSA":SPSA(),
-        "TNC":TNC()}
+        "TNC":TNC(),
+        "P_BFGS": P_BFGS()}
         optimizer = optimizers[args["optimizer"]]
         print("_"*50,"\n"+optimizer.__class__.__name__)
         print("_"*50)
@@ -139,7 +141,10 @@ def main(raw_args = None):
 
         for p in range(2, args["p_max"]+1):
             print("p={}".format(p))
-            optimizer.set_options(maxiter = 100*p)
+            if args["optimizer"] == 'SLSQP':
+                optimizer.set_options(maxiter = 100*p)
+            elif args["optimizer"] == 'L_BFGS_B' or 'P_BFGS':
+                optimizer.set_options(maxfun = 1000*p)
             print("Optimizer options: {}".format(optimizer.setting))
             next_fourier_point = np.zeros(shape = (2*p,))
             next_fourier_point_B = np.zeros(shape = (2*p,))
