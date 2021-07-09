@@ -395,7 +395,7 @@ def get_costs(qubo, no_qubits):
     """
     # values = ['{}'.format()]
     cpus = mp.cpu_count()
-    pool = mp.Pool(cpus)
+    pool = mp.Pool(cpus-1)
     params = ( ('0'*(no_qubits-len('{0:b}'.format(k)))+'{0:b}'.format(k),
             qubo,
             no_qubits
