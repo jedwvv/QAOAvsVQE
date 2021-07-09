@@ -150,7 +150,9 @@ def main(raw_args = None):
             next_fourier_point_B[0:p-1] = optimal_fourier_point_B[0:p-1]
             next_fourier_point_B[p:2*p-1] = optimal_fourier_point_B[p-1:2*p-2]
 
-            perturbed_points = generate_points(next_fourier_point_B, 10)
+            perturbed_points = generate_points(next_fourier_point_B, 10) if p<= 5 \
+                                else generate_points(next_fourier_point_B, 20)
+
 
             qaoa_results, _ = Fourier_QAOA(operator, quantum_instance, optimizer, p, next_fourier_point)
             optimal_fourier_point = np.array(qaoa_results.optimal_point)
