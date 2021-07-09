@@ -138,9 +138,9 @@ def main(raw_args = None):
         optimal_fourier_point_B = optimal_fourier_point.copy()
 
         for p in range(2, args["p_max"]+1):
-            optimizer.set_options(max_iter = 100*p)
-            print("Optimizer options: {}".format(optimizer.settings))
             print("p={}".format(p))
+            optimizer.set_options(maxiter = 100*p)
+            print("Optimizer options: {}".format(optimizer.setting))
             next_fourier_point = np.zeros(shape = (2*p,))
             next_fourier_point_B = np.zeros(shape = (2*p,))
 
@@ -467,7 +467,7 @@ def generate_valid_qubo(args):
             args["penalty_multiplier"] += 0.05
     return qubo, max_coeff, operator, offset, routes
 
-main(["-N 3", "-R 3", "-P 1.5", "-OSLSQP","-M 10", "-T 10", "-S 100"])
+main()
 
 
 # operator, offset = quadratic_program.to_ising()
