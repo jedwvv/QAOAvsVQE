@@ -139,6 +139,7 @@ def main(raw_args = None):
 
         for p in range(2, args["p_max"]+1):
             optimizer.set_options(max_iter = 100*p)
+            print("Optimizer options: {}".format(optimizer.settings))
             print("p={}".format(p))
             next_fourier_point = np.zeros(shape = (2*p,))
             next_fourier_point_B = np.zeros(shape = (2*p,))
