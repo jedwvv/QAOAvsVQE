@@ -47,7 +47,7 @@ def main(raw_args = None):
     start = time()
     args = parse(raw_args)
     qubo_prob_s_s = []
-    for qubo_no in range(5):
+    for qubo_no in range(args["no_samples"]):
         print("__"*50, "\nQUBO NO: {}\n".format(qubo_no), "__"*50)
         # #Generate and save valid qubos
         # qubo, max_coeff, operator, offset, routes = generate_valid_qubo(args)
@@ -467,7 +467,7 @@ def generate_valid_qubo(args):
             args["penalty_multiplier"] += 0.05
     return qubo, max_coeff, operator, offset, routes
 
-main(["-N 3", "-R 3", "-P 1.5", "-OSLSQP","-M 10", "-T 10", "-S 50"])
+main(["-N 3", "-R 3", "-P 1.5", "-OSLSQP","-M 10", "-T 10", "-S 100"])
 
 
 # operator, offset = quadratic_program.to_ising()
