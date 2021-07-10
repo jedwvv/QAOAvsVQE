@@ -11058,3 +11058,178 @@ QUBO NO: 63
 optimal function value: 0.11966004412599984
 optimal value: [1. 0. 0. 1. 0. 0. 1. 0. 0.]
 status: SUCCESS
+__________________________________________________
+10 lowest states:
+('001001001', 0.11966004412599984)
+('001010001', 0.12654241900999996)
+('001100001', 0.12658266799599982)
+('001001100', 0.13239826410499989)
+('010001001', 0.13239826410499989)
+('001001010', 0.13364142877099994)
+('001010100', 0.139280638989)
+('010010001', 0.139280638989)
+('001100100', 0.13932088797499986)
+('010100001', 0.13932088797499986)
+__________________________________________________
+Number of couplings: 21
+Solving with QAOA...
+__________________________________________________ 
+SLSQP
+__________________________________________________
+p=1
+Restart No: 0
+Exp_val: 0.5896700900651826
+Prob_s: 0.04898979485566356 
+
+Restart No: 1
+Exp_val: 1.0061365963399347
+Prob_s: 0.03162277660168379 
+
+Restart No: 2
+Exp_val: 1.1055121098203675
+Prob_s: 0.04358898943540673 
+
+Restart No: 3
+Exp_val: 0.3885286791406576
+Prob_s: 0.1268857754044952 
+
+Restart No: 4
+Exp_val: 1.0635522837762093
+Prob_s: 0.03872983346207417 
+
+Restart No: 5
+Exp_val: 1.0626245338862763
+Prob_s: 0.01414213562373095 
+
+Restart No: 6
+Exp_val: 1.273407447229498
+Prob_s: 0.01 
+
+Restart No: 7
+Exp_val: 0.7513765556308105
+Prob_s: 0.01414213562373095 
+
+Restart No: 8
+Exp_val: 0.6186465713356122
+Prob_s: 0.06403124237432849 
+
+Restart No: 9
+Exp_val: 0.7464493916487508
+Prob_s: 0.04 
+
+Minimum Exp Val:  0.3885286791406576
+Prob_s for this:  0.1268857754044952
+p=2
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 200, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 0.39302014697917287, prob_s_L: 0.12369316876852982
+Time for intialising with 10 perturbed values: 21.61968183517456
+Minim_exp_val_B: 0.34937916318312545, prob_s_B: 0.11090536506409417
+p=3
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 300, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 0.39047009149425016, prob_s_L: 0.12
+Time for intialising with 10 perturbed values: 38.417237281799316
+Minim_exp_val_B: 0.347099537825478, prob_s_B: 0.11224972160321824
+p=4
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 400, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 0.38574398827522716, prob_s_L: 0.12041594578792296
+Time for intialising with 10 perturbed values: 56.36546611785889
+Minim_exp_val_B: 0.34906537565694795, prob_s_B: 0.12124355652982141
+p=5
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 500, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 0.3884796211139231, prob_s_L: 0.12369316876852982
+Time for intialising with 10 perturbed values: 36.59660267829895
+Minim_exp_val_B: 0.3490405699965121, prob_s_B: 0.11958260743101398
+p=6
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 600, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 0.9130014087071263, prob_s_L: 0.058309518948453
+Time for intialising with 10 perturbed values: 157.0234932899475
+Minim_exp_val_B: 0.7481623262889445, prob_s_B: 0.06324555320336758
+p=7
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 700, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 0.9561259468157004, prob_s_L: 0.04
+Time for intialising with 10 perturbed values: 149.93330717086792
+Minim_exp_val_B: 0.8024994034036603, prob_s_B: 0.0469041575982343
+p=8
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 800, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 0.9431489154242991, prob_s_L: 0.042426406871192854
+Time for intialising with 10 perturbed values: 155.32794404029846
+Minim_exp_val_B: 0.7967405365171398, prob_s_B: 0.0469041575982343
+p=9
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 900, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 0.946925464071481, prob_s_L: 0.04
+Time for intialising with 10 perturbed values: 235.5514850616455
+Minim_exp_val_B: 0.7413662318772185, prob_s_B: 0.06
+p=10
+Optimizer options: Optimizer: SLSQP
+-- gradient_support_level: 2
+-- bounds_support_level: 2
+-- initial_point_support_level: 3
+-- options: {'maxiter': 1000, 'disp': False, 'ftol': 1e-06, 'eps': 1.4901161193847656e-08}
+-- max_evals_grouped: 1
+-- tol: None
+
+Minim_exp_val_L: 0.36619462996245267, prob_s_L: 0.1224744871391589
+Time for intialising with 10 perturbed values: 258.5961048603058
+Minim_exp_val_B: 0.34168954692424214, prob_s_B: 0.11045361017187261
+____________________________________________________________________________________________________ 
+QUBO NO: 64
+ ____________________________________________________________________________________________________
+optimal function value: 0.288518487158
+optimal value: [1. 0. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
