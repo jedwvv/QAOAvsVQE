@@ -43,17 +43,7 @@ Example 1: Full usage example.
     print("optimizer_evals:", qaoa_results.optimizer_evals)
 
     solutions = qaoa_instance.get_optimal_solutions_from_statevector(qaoa_results_eigenstate, quadratic_program)
-    print_qaoa_solutions(solutions)
-
-Example 2: Convert parameter point using another parameterisation. 
-           E.g. the FOURIER method (https://arxiv.org/abs/1812.01041)
-           Replace the line 'qaoa_results = qaoa_instance.solve(operator, initial_point)' 
-           in Example 1 with the following.
-
-    # This sets a parameter conversion whenever _energy_evaluation is called and during optimisation
-    # 'convert_from_fourier_point' is a method defined in this file however a custom one can be used.
-    qaoa_instance.set_parameterise_point_for_energy_evaluation(convert_from_fourier_point)
-    
+    print_qaoa_QuantumCircuit
     # initial Fourier space point, will be converted to a typical point using 
     # 'convert_from_fourier_point' as per previous line
     initial_fourier_point = [0.5, 0.7]
