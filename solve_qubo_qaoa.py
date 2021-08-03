@@ -52,13 +52,13 @@ def main(raw_args = None):
     start = time()
     args = parse(raw_args)
     qubo_prob_s_s = []
-#     for qubo_no in range(args["no_samples"]):
     qubo_no = args["no_samples"]
     print("__"*50, "\nQUBO NO: {}\n".format(qubo_no), "__"*50)
     # #Generate and save valid qubos
-    # qubo, max_coeff, operator, offset, routes = generate_valid_qubo(args)
-    # with open('qubos_{}_car_{}_routes/qubo_{}.pkl'.format(args["no_cars"], args["no_routes"], qubo_no), 'wb') as f:
-    #     pkl.dump([qubo, max_coeff, operator, offset, routes],f)
+    # for qubo_no in range(args["no_samples"]):
+    #     qubo, max_coeff, operator, offset, routes = generate_valid_qubo(args)
+    #     with open('qubos_{}_car_{}_routes/qubo_{}.pkl'.format(args["no_cars"], args["no_routes"], qubo_no), 'wb') as f:
+    #         pkl.dump([qubo, max_coeff, operator, offset, routes],f)
 
     #Load generated qubo_no
     with open('qubos_{}_car_{}_routes/qubo_{}.pkl'.format(args["no_cars"], args["no_routes"], qubo_no), 'rb') as f:
@@ -143,18 +143,18 @@ def main(raw_args = None):
     prob_s_2 = []
     for point in points:
         r+=1
-        qaoa_results, _ = Fourier_QAOA(operator, quantum_instance, optimizer, p, point, initial_state = qc, mixer = mixer)
-        results.append(qaoa_results)
+        qaoa_results, _, qc = Fourier_QAOA(operator, quantum_instance, optimizer, p, point, initial_state = qc, mixer = mixer)
+        results.append((qaoa_results, qc))
         exp_val = qaoa_results.eigenvalue*max_coeff + offset
         exp_vals.append(exp_val)
         prob_s = 0
         for string in x_s:
-            prob_s += qaoa_results.eigenstate[string] if string in qaoa_results.eigenstate else 0
+            prob_s += qaoa_results.eigenstate[string]**2 if string in qaoa_results.eigenstate else 0
         print("Restart_no: {}, Exp_val: {}, Prob_s: {}".format(r, exp_val, prob_s))
         prob_s_2.append(prob_s)
     minim_index = np.argmin(exp_vals)
-    optimal_qaoa_result = results[minim_index]
-
+    optimal_qaoa_result, qc = results[minim_index]
+    print(qc.draw(fold = 200))
     minim_exp_val = exp_vals[minim_index]
     optimal_prob_s = prob_s_2[minim_index]
     print("Minimum: {}, prob_s: {}".format(minim_exp_val, optimal_prob_s))
@@ -183,13 +183,13 @@ def main(raw_args = None):
         # next_fourier_point_B[0:p-1] = optimal_fourier_point_B[0:p-1]
         # next_fourier_point_B[p:2*p-1] = optimal_fourier_point_B[p-1:2*p-2]
 
-        qaoa_results, _ = Fourier_QAOA(operator, quantum_instance, optimizer, p, next_fourier_point, qc, mixer = mixer)
+        qaoa_results, _, _ = Fourier_QAOA(operator, quantum_instance, optimizer, p, next_fourier_point, qc, mixer = mixer)
         optimal_fourier_point = np.array(qaoa_results.optimal_point)
         minim_exp_val = qaoa_results.eigenvalue*max_coeff + offset
         # print("Length_L:",len(optimal_fourier_point))
         optimal_prob_s = 0
         for string in x_s:
-            optimal_prob_s += qaoa_results.eigenstate[string] if string in qaoa_results.eigenstate else 0
+            optimal_prob_s += qaoa_results.eigenstate[string]**2 if string in qaoa_results.eigenstate else 0
         print("Minim_exp_val_L: {}, prob_s_L: {}".format(minim_exp_val, optimal_prob_s))
         optimal_prob_s_B = optimal_prob_s
         t1 = time()
@@ -201,7 +201,7 @@ def main(raw_args = None):
             penalty = 0.6
             perturbed_points = generate_points(next_fourier_point_B, 10, penalty)
             for point in perturbed_points:
-                qaoa_results_B, _ = Fourier_QAOA(operator, quantum_instance, optimizer, p, point, qc, mixer = mixer)
+                qaoa_results_B, _, _ = Fourier_QAOA(operator, quantum_instance, optimizer, p, point, qc, mixer = mixer)
                 exp_val = qaoa_results_B.eigenvalue*max_coeff + offset
                 results.append(qaoa_results_B)
                 exp_vals.append(exp_val)
@@ -211,7 +211,7 @@ def main(raw_args = None):
             optimal_fourier_point_B_2 = np.array(qaoa_results_B_2.optimal_point)
             optimal_prob_s_B_2 = 0
             for string in x_s:
-                optimal_prob_s_B_2 += qaoa_results_B_2.eigenstate[string] if string in qaoa_results_B_2.eigenstate else 0
+                optimal_prob_s_B_2 += qaoa_results_B_2.eigenstate[string]**2 if string in qaoa_results_B_2.eigenstate else 0
             print("Comparison (t={}): B_next: {}, B_before: {}".format(t, minim_exp_val_B_2, minim_exp_val_B))
             if minim_exp_val_B_2 < minim_exp_val_B or t>=2 and minim_exp_val_B_2 == minim_exp_val_B or t==4:
                 minim_exp_val_B = minim_exp_val_B_2
@@ -260,10 +260,10 @@ def Fourier_QAOA(operator, quantum_instance, optimizer, p, initial_fourier_point
     optimal_parameterised_point = qaoa_instance.latest_parameterised_point
     if not isinstance(qaoa_results.eigenstate, dict):
         qaoa_results.eigenstate = Statevector(qaoa_results.eigenstate).probabilities_dict()
-    # qc = qaoa_instance.get_optimal_circuit()
+    qc = qaoa_instance.get_optimal_circuit()
     # qc.draw(output = 'mpl', scale = 0.5, fold = 30*p)
     # plt.show()
-    return qaoa_results, optimal_parameterised_point
+    return qaoa_results, optimal_parameterised_point, qc
 
 def generate_points(point, no_perturb, penalty):
     alpha = penalty
@@ -499,7 +499,7 @@ def generate_valid_qubo(args):
                                     ]
                                 )
             else:
-                qubo, max_coeff, operator, offset, linear, quadratic, results = \
+                qubo, max_coeff, operator, offset, _, _, results = \
                     generate_qubo( [
                                     "-N "+str(args["no_cars"]),
                                     "-R "+str(args["no_routes"]),
