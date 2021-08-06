@@ -21,6 +21,11 @@ def main(raw_args=None):
     # print(op)
     # print(max_coeff)
     # print(offset)
+    #Generate and save valid qubos
+    for qubo_no in range(args["no_samples"]):
+        qubo, max_coeff, operator, offset, routes = generate_valid_qubo(args)
+        with open('qubos_{}_car_{}_routes/qubo_{}.pkl'.format(args["no_cars"], args["no_routes"], qubo_no), 'wb') as f:
+            pkl.dump([qubo, max_coeff, operator, offset, routes],f)
     return qubo, max_coeff, op, offset, linear, quadratic, results
 
 def parse(raw_args):
@@ -39,6 +44,10 @@ def parse(raw_args):
     requiredNamed.add_argument("--no_cars", "-N", required = True, help="Set the number of cars", type = int)
     requiredNamed.add_argument("--no_routes", "-R", required = True, help="Set the number of routes for each car", type = int)
     requiredNamed.add_argument("--penalty_multiplier", "-P", required = True, help="Set the penalty multiplier for QUBO constraint", type = float)
+    requiredNamed.add_argument("--no_samples", "-S", required = True,
+                                help = "Set number of samples/qubos with given no_cars no_routes",
+                                type=int
+                                )
     parser.add_argument("--visual", "-V", default = False, help="Activate routes visualisation with '-V' ", action="store_true")
     args = parser.parse_args(raw_args)
     args = vars(args)
@@ -74,16 +83,16 @@ def get_linear_quadratic_coeffs(G, all_edges_dict):
         #Linear terms
         for var in all_edges_dict[edge]:
             if var in linear:
-                linear[var] += G[edge[0]][edge[1]][0]['length']/1000
+                linear[var] += G[edge[0]][edge[1]][0]['length']**2/1000
             else:
-                linear[var] = G[edge[0]][edge[1]][0]['length']/1000
+                linear[var] = G[edge[0]][edge[1]][0]['length']**2/1000
 
         #Quadratic terms
         for vars_couple in combinations(all_edges_dict[edge],2):
             if vars_couple in quadratic:
-                quadratic[vars_couple] += 2*(G[edge[0]][edge[1]][0]['length']/1000)
+                quadratic[vars_couple] += 2*(G[edge[0]][edge[1]][0]['length']**2/1000)
             else:
-                quadratic[vars_couple] = 2*(G[edge[0]][edge[1]][0]['length']/1000)
+                quadratic[vars_couple] = 2*(G[edge[0]][edge[1]][0]['length']**2/1000)
     return linear, quadratic
 
 def get_edges_dict(routes_dict):
