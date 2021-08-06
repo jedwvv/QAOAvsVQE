@@ -16,7 +16,6 @@ import numpy as np
 import pickle as pkl
 import matplotlib.pyplot as plt
 from qiskit import Aer, QuantumCircuit
-from qiskit.algorithms.minimum_eigen_solvers import NumPyMinimumEigensolver
 from qiskit.algorithms.optimizers import (
                                         ADAM,
                                         CG,
@@ -31,15 +30,13 @@ from qiskit.algorithms.optimizers import (
                                         P_BFGS,
                                         BOBYQA
                                         )
-from qiskit_optimization.algorithms import MinimumEigenOptimizer
 from qiskit.utils.quantum_instance import QuantumInstance
 from qiskit.opflow import I, X, Swap
 from qiskit.quantum_info import Statevector
 # from qiskit.opflow.primitive_ops import PauliSumOp
 # from generate_problem import import_map
-from generate_qubo import main as generate_qubo
 import QAOAEx
-
+from parser import parse
 
 warnings.filterwarnings('ignore')
 
@@ -54,11 +51,7 @@ def main(raw_args = None):
     qubo_prob_s_s = []
     qubo_no = args["no_samples"]
     print("__"*50, "\nQUBO NO: {}\n".format(qubo_no), "__"*50)
-    # #Generate and save valid qubos
-    # for qubo_no in range(args["no_samples"]):
-    #     qubo, max_coeff, operator, offset, routes = generate_valid_qubo(args)
-    #     with open('qubos_{}_car_{}_routes/qubo_{}.pkl'.format(args["no_cars"], args["no_routes"], qubo_no), 'wb') as f:
-    #         pkl.dump([qubo, max_coeff, operator, offset, routes],f)
+
 
     #Load generated qubo_no
     with open('qubos_{}_car_{}_routes/qubo_{}.pkl'.format(args["no_cars"], args["no_routes"], qubo_no), 'rb') as f:
@@ -278,121 +271,6 @@ def generate_points(point, no_perturb, penalty):
                 points[r][i] += alpha*noise
     return points
 
-def parse(raw_args):
-    """Parse inputs for no_cars (number of cars),
-                        no_routes (number of routes)
-
-    Args:
-        raw_args (list): list of strings describing the inputs e.g. ["-N 3", "-R 3"]
-
-    Returns:
-        dict: A dictionary of the inputs as values, and the name of variables as the keys
-    """
-    optimizer_choices = ["ADAM", "CG", "COBYLA", "L_BFGS_B",\
-                        "NELDER_MEAD", "NFT", "POWELL",\
-                         "SLSQP", "SPSA", "TNC", "P_BFGS", "BOBYQA"]
-    parser = argparse.ArgumentParser()
-    required_named = parser.add_argument_group('Required arguments')
-    required_named.add_argument("--no_cars", "-N",
-                                required = True,
-                                help="Set the number of cars",
-                                type = int
-                                )
-    required_named.add_argument("--no_routes", "-R",
-                                required = True,
-                                help="Set the number of routes for each car",
-                                type = int
-                                )
-    required_named.add_argument("--penalty_multiplier", "-P",
-                                required = True,
-                                help="Set the penalty multiplier for QUBO constraint",
-                                type = float
-                                )
-    required_named.add_argument("--optimizer", "-O",
-                                required = True,
-                                help = "Choose from Qiskit's optimizers",
-                                type = str,
-                                choices=optimizer_choices
-                                )
-    required_named.add_argument("--p_max", "-M",
-                                required = True,
-                                help = "Set maximum number of layers for QAOA",
-                                type = int
-                                )
-    required_named.add_argument("--no_restarts", "-T", required = True,
-                                help = "Set number of restarts for QAOA",
-                                type = int
-                                )
-    required_named.add_argument("--no_samples", "-S", required = True,
-                                help = "Set number of samples/qubos with given no_cars no_routes",
-                                type=int
-                                )
-    parser.add_argument("--visual",
-                        "-V", default = False,
-                        help="Activate routes visualisation with '-V' ",
-                        action="store_true"
-                        )
-    args = parser.parse_args(raw_args)
-    args = vars(args)
-    return args
-
-def solve_classically(qubo):
-    """[summary]
-
-    Args:
-        qubo ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-    exact_mes = NumPyMinimumEigensolver()
-    exact = MinimumEigenOptimizer(exact_mes)
-    exact_result = exact.solve(qubo)
-    print(exact_result)
-    return exact_result
-
-def arr_to_str(x_arr):
-    """[summary]
-
-    Args:
-        x_arr ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-    x_arr = x_arr[::-1]
-    string = ''.join(str(int(x_i)) for x_i in x_arr)
-    return string
-
-def filter_solutions(results, qaoa_dict, no_cars):
-    """[summary]
-
-    Args:
-        results ([type]): [description]
-        qaoa_dict ([type]): [description]
-        no_cars ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-    routes = []
-    variables = []
-    for var_route, var_value in zip( results.items(), qaoa_dict.items() ):
-        if var_route[0] == var_value[0] and int(var_value[1]) == 1 \
-            and var_route[0] not in variables:
-            routes.append(var_route[1])
-            variables.append(var_route[0])
-        elif var_route[0] != var_value[0]:
-            print("Error, function returned non-matching variables")
-            return None
-        elif var_route[0] in variables:
-            print("Error: Solution found two routes for one car")
-            return None
-    if len(variables) != no_cars:
-        print("Error: At least one car did not have a valid route")
-        return None
-    return routes
-
 def eval_cost(x_str_arr, qubo_problem, no_qubits):
     """[summary]
 
@@ -457,20 +335,6 @@ def get_costs(qubo, no_qubits):
     sort_values = sorted(values.items(), key=lambda x: x[1])
     return sort_values
 
-def check_solutions(routes):
-    """[summary]
-
-    Args:
-        routes ([type]): [description]
-
-    Raises:
-        TypeError: [description]
-    """
-    try:
-        len(routes)
-        print("This is a valid solution")
-    except TypeError as typ:
-        raise TypeError("This is not a valid solution") from typ
 
 def count_coupling_terms(operator):
     """[summary]
@@ -484,47 +348,6 @@ def count_coupling_terms(operator):
         if op_str.count('Z') == 2:
             count += 1
     return count
-
-def generate_valid_qubo(args):
-    while True: #Generate valid QUBO
-        try:
-            #Generate a QUBO
-            if args["visual"] is True:
-                qubo, max_coeff, operator, offset, _, _, results = \
-                    generate_qubo( [
-                                    "-N "+str(args["no_cars"]),
-                                    "-R "+str(args["no_routes"]),
-                                    "-P "+str(args["penalty_multiplier"]),
-                                    "-V"
-                                    ]
-                                )
-            else:
-                qubo, max_coeff, operator, offset, _, _, results = \
-                    generate_qubo( [
-                                    "-N "+str(args["no_cars"]),
-                                    "-R "+str(args["no_routes"]),
-                                    "-P "+str(args["penalty_multiplier"])
-                                    ]
-                                )
-            #Classically solve generated QUBO
-            classical_result = solve_classically(qubo)
-
-            #Check solution
-            variables_dict = classical_result.variables_dict
-            routes = filter_solutions(results, variables_dict, args["no_cars"])
-            check_solutions(routes)
-
-            #If valid solution, save the solution.
-            x_arr = classical_result.x
-            x_str = arr_to_str(x_arr)
-
-            break #break loop if valid solution, else increase penalty.
-
-        except TypeError:
-            #QUBO has invalid solution, start again with increased penalty.
-            print("Starting with new qubo")
-            args["penalty_multiplier"] += 0.05
-    return qubo, max_coeff, operator, offset, routes
 
 def interp_point(optimal_point):
     """Method to interpolate to next point from the optimal point found from the previous layer   
