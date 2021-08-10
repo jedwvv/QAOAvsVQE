@@ -110,6 +110,19 @@ def arr_to_str(x_arr):
     string = ''.join(str(int(x_i)) for x_i in x_arr)
     return string
 
+def str_to_arr(x_str):
+    """[summary]
+
+    Args:
+        x_arr ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+    x_arr = list(x_str[::-1])
+    x_arr = list(map(int,x_arr))
+    return x_arr
+
 def filter_solutions(results, qaoa_dict, no_cars):
     """[summary]
 

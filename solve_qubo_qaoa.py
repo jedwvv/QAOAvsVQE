@@ -47,7 +47,7 @@ def main(args = None):
     x_str = arr_to_str(x_arr)
     no_qubits = len(x_arr)
 
-    sort_values = get_costs(qubo, no_qubits)
+    sort_values = get_costs(qubo)
 
     print("_"*50)
     up_to = 27
@@ -149,7 +149,7 @@ def main(args = None):
     print("Time Taken: {}".format(finish - start))
 
 
-def Fourier_QAOA(operator, quantum_instance, optimizer, reps, initial_fourier_point, initial_state=None, mixer = None, construct_circ = False):
+def Fourier_QAOA(operator, quantum_instance, optimizer, reps, initial_fourier_point, initial_state=None, mixer = None, construct_circ = False, fourier_parametrise = True):
     qaoa_instance = QAOAEx.QAOACustom(quantum_instance = quantum_instance,
                                         reps = reps,
                                         force_shots = False,
@@ -160,7 +160,8 @@ def Fourier_QAOA(operator, quantum_instance, optimizer, reps, initial_fourier_po
                                         include_custom = False,
                                         max_evals_grouped = 2
                                         )
-    # qaoa_instance.set_parameterise_point_for_energy_evaluation(QAOAEx.convert_from_fourier_point)
+    if fourier_parametrise:
+        qaoa_instance.set_parameterise_point_for_energy_evaluation(QAOAEx.convert_from_fourier_point)
     # bounds = [None, (-np.pi/2)]*len(initial_fourier_point)
     bounds = [(-np.pi/2, np.pi/2), (-np.pi/2, np.pi/2)]*reps
     qaoa_results = qaoa_instance.solve(operator, initial_fourier_point)
@@ -205,7 +206,7 @@ def eval_cost(x_str_arr, qubo_problem, no_qubits):
                                             )
     return x_str_arr, cost
 
-def get_costs(qubo, no_qubits):
+def get_costs(qubo):
     """[summary]
 
     Args:
@@ -216,6 +217,7 @@ def get_costs(qubo, no_qubits):
         [type]: [description]
     """
     # values = ['{}'.format()]
+    no_qubits = qubo.get_num_binary_vars()
     cpus = mp.cpu_count()
     pool = mp.Pool(cpus-1)
     params = ( ('0'*(no_qubits-len('{0:b}'.format(k)))+'{0:b}'.format(k),
@@ -313,4 +315,5 @@ def n_qbit_mixer(initial_state: QuantumCircuit):
     # print(test.draw())
     return mixer
 
-main()
+if __name__ == "__main__":
+    main()

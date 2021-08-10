@@ -416,7 +416,7 @@ Function value obtained: 0
                              ftol_rel=1e-32,
                              xtol_abs = 1e-32,
                              xtol_rel = 1e-32,
-                             maxtime = 120)
+                             maxtime = 60)
         print(res.message)
         
         return res.x, res.fun, -1
