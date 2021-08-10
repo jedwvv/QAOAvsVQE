@@ -1,11 +1,11 @@
 import numpy as np 
 import osmnx as ox
-import argparse
 import pickle as pkl
 import multiprocessing as mp
 import matplotlib.pyplot as plt
+from parser_all import parse
 
-def main(raw_args=None):
+def main(args=None):
     """Brings all methods together to return a traffic routing instance.
 
     Args:
@@ -14,8 +14,9 @@ def main(raw_args=None):
     Returns:
         list: In position 0, returns the graph of problem, In position 1, a Numpy Array with shape "no_cars" by "no_routes" given by argument for the generated routes for each car with the route descibed as a sequence of nodes of the graph.
     """
-    args = parse(raw_args)
-    G = import_map("melbourne.pkl")
+    if args == None:
+        args = parse()
+    G = import_map("melbourne_2.pkl")
     cpus = mp.cpu_count()
     pool = mp.Pool(cpus)
     while True:
@@ -32,27 +33,6 @@ def main(raw_args=None):
         visualise(G, results)
 
     return G, results
-
-
-def parse(raw_args):
-    """Parse inputs for no_cars (number of cars),
-                        no_routes (number of routes)               
-
-    Args:
-        raw_args (list): list of strings describing the inputs e.g. ["-N 3", "-R 3"]
-
-    Returns:
-        dict: A dictionary of the inputs as values, and the name of variables as the keys
-    """
-
-    parser = argparse.ArgumentParser()
-    requiredNamed = parser.add_argument_group('Required arguments')
-    requiredNamed.add_argument("--no_cars", "-N", required = True, help="Set the number of cars", type = int)
-    requiredNamed.add_argument("--no_routes", "-R", required = True, help="Set the number of routes for each car", type = int)
-    parser.add_argument("--visual", "-V", default = False, help="Activate routes visualisation with '-V' ", action="store_true")
-    args = parser.parse_args(raw_args)
-    args = vars(args)
-    return args
 
 def import_map(filepath):
     """Import pre-made graph from pickle file
@@ -124,8 +104,10 @@ def visualise(G, results):
     # Visualise result #
     for i in range(len(results)):     
         routes = results[i]
-        colors = np.array(["r", "y", "b", "g", "w", "gr", "o"]*2)[0:len(routes)]
-        fig, ax = ox.plot_graph_routes(G, routes, route_colors=colors, route_linewidth=4, node_size=10)
+        colors = np.array(["r", "y", "b", "g", "w", "gr", "o"]*5)[0:len(routes)]
+        fig, ax = ox.plot_graph_routes(G, routes, route_colors=colors, route_linewidth=4, node_size=10, show = False, close = False)
+        fig.suptitle('Car_{} routes'.format(i))
+        plt.show()
     return fig, ax
 
 if __name__ == "__main__":

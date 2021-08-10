@@ -1,6 +1,6 @@
 import argparse
 
-def parse(raw_args):
+def parse():
     """Parse inputs for no_cars (number of cars),
                         no_routes (number of routes)
 
@@ -30,12 +30,6 @@ def parse(raw_args):
                                 help="Set the penalty multiplier for QUBO constraint",
                                 type = float
                                 )
-    required_named.add_argument("--optimizer", "-O",
-                                required = True,
-                                help = "Choose from Qiskit's optimizers",
-                                type = str,
-                                choices=optimizer_choices
-                                )
     required_named.add_argument("--p_max", "-M",
                                 required = True,
                                 help = "Set maximum number of layers for QAOA",
@@ -54,6 +48,6 @@ def parse(raw_args):
                         help="Activate routes visualisation with '-V' ",
                         action="store_true"
                         )
-    args = parser.parse_args(raw_args)
+    args = parser.parse_args()
     args = vars(args)
     return args

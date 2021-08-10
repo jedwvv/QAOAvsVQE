@@ -8,7 +8,7 @@ def main():
     fig, ax = ox.plot_graph(G, node_size=1) #Visualize
     
     #Save graph file
-    with open('melbourne.pkl', 'wb') as f:
+    with open('melbourne_2.pkl', 'wb') as f:
         pkl.dump(G, f)
     return fig, ax
     

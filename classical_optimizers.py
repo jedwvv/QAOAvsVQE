@@ -1,6 +1,7 @@
 import nlopt
-
 from scipy.optimize import OptimizeResult
+from qiskit.algorithms.optimizers.optimizer import Optimizer, OptimizerSupportLevel
+from typing import Optional
 from six.moves import filter
 from functools import partial
 from warnings import warn
@@ -38,7 +39,7 @@ NLOPT_MESSAGES = {
 
 # TODO: argument to specify whether to be stateful
 def nlopt_minimize(fun, x0, args=(), method=None, jac=None, bounds=None,
-             constraints=[], **options):
+             constraints=None, **options):
     """
     Parameters
     ----------
@@ -102,6 +103,8 @@ def nlopt_minimize(fun, x0, args=(), method=None, jac=None, bounds=None,
         ...
     ValueError: Constraint type not recognized
     """
+    if constraints == None:
+        constraints = []
     # Create NLopt object
     dim = len(x0)
 
@@ -327,7 +330,7 @@ def normalize_bound(bound):
     return min_, max_
 
 
-def normalize_bounds(bounds=[]):
+def normalize_bounds(bounds=None):
     """
     Examples
     --------
@@ -335,6 +338,8 @@ def normalize_bounds(bounds=[]):
     >>> list(normalize_bounds(bounds))
     [(2.6, 7.2), (-inf, 2), (3.14, inf), (-inf, inf)]
     """
+    if bounds == None:
+        bounds = []
     return map(normalize_bound, bounds)
 
 
@@ -352,8 +357,6 @@ def get_nlopt_message(ret_code):
     'Invalid arguments (e.g. lower bounds are bigger than upper bounds, an unknown algorithm was specified, etcetera).'
     """
     return NLOPT_MESSAGES.get(ret_code)
-
-from qiskit.algorithms.optimizers.optimizer import Optimizer, OptimizerSupportLevel
  
 class NLOPT_Optimizer(Optimizer):
 
@@ -361,6 +364,7 @@ class NLOPT_Optimizer(Optimizer):
 
     # pylint: disable=unused-argument
     def __init__(self,
+                method,
                  maxiter: int = 100,
                  disp: bool = False,
                  ftol: float = 1e-06,
@@ -380,6 +384,7 @@ Function value obtained: 0
         """
         super().__init__()
         self.n_calls = n_calls
+        self.method = method
         for k, v in list(locals().items()):
             if k in self._OPTIONS:
                 self._options[k] = v
@@ -397,13 +402,21 @@ Function value obtained: 0
                  variable_bounds=None, initial_point=None):
         super().optimize(num_vars, objective_function,
                          gradient_function, variable_bounds, initial_point)
-
         if gradient_function is None and self._max_evals_grouped > 1:
             epsilon = self._options['eps']
             gradient_function = Optimizer.wrap_function(Optimizer.gradient_num_diff,
                                                         (objective_function, epsilon,
                                                          self._max_evals_grouped))
-        res = nlopt_minimize(objective_function, initial_point, method=nlopt.LN_BOBYQA, jac=gradient_function, ftol_abs=1e-32, ftol_rel=1e-32, xtol_abs = 1e-32, xtol_rel = 1e-32, maxtime = 120)
+        res = nlopt_minimize(objective_function,
+                             initial_point,
+                             bounds=variable_bounds,
+                             method=self.method,
+                             jac=gradient_function,
+                             ftol_abs=1e-32,
+                             ftol_rel=1e-32,
+                             xtol_abs = 1e-32,
+                             xtol_rel = 1e-32,
+                             maxtime = 120)
         print(res.message)
         
         return res.x, res.fun, -1
