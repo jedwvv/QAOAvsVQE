@@ -1,0 +1,174 @@
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) fftw/3.3.8                     3) openmpi/4.0.5
+  2) jupyter/1.0.0-python-3.8.6     4) scalapack/2.1.0
+
+____________________________________________________________________________________________________ 
+QUBO NO: 0
+ ____________________________________________________________________________________________________
+optimal function value: 0.43192294731299996
+optimal value: [0. 0. 1. 0. 0. 1. 0. 1. 0.]
+status: SUCCESS
+Solving with QAOA...
+p=1
+Restart_no: 1, Exp_val: 0.5092480058957425, Prob_s: 0.16535945694153692
+Restart_no: 2, Exp_val: 2.9850579606282173, Prob_s: 0
+Restart_no: 3, Exp_val: 3.3429783794265227, Prob_s: 0
+Restart_no: 4, Exp_val: 3.530740317040089, Prob_s: 0
+Restart_no: 5, Exp_val: 3.81444724325321, Prob_s: 0
+Restart_no: 6, Exp_val: 0.8825725865051475, Prob_s: 0.13621559198564606
+Minimum: 0.5092480058957425, prob_s: 0.16535945694153692
+p=2
+Minim_exp_val_L: 0.5083613979928112, prob_s_L: 0.18221724671391565
+Comparison (t=1): B_next: 0.5045416032395971, B_before: 0.5092480058957425
+Time for intialising with perturbed values 1 no. of times: 22.116822004318237
+Minim_exp_val_B: 0.5045416032395971, prob_s_B: 0.1767766952966369
+p=3
+Minim_exp_val_L: 0.5091163448372682, prob_s_L: 0.2049199538844375
+Comparison (t=1): B_next: 0.5059688560939812, B_before: 0.5045416032395971
+Comparison (t=2): B_next: 0.5059688560939812, B_before: 0.5045416032395971
+Comparison (t=3): B_next: 0.5059688560939812, B_before: 0.5045416032395971
+Comparison (t=4): B_next: 0.5059688560939812, B_before: 0.5045416032395971
+Time for intialising with perturbed values 4 no. of times: 106.86294436454773
+Minim_exp_val_B: 0.5059688560939812, prob_s_B: 0.16535945694153692
+p=4
+Minim_exp_val_L: 0.5139106143107592, prob_s_L: 0.20009763241977652
+Comparison (t=1): B_next: 0.5060050588130041, B_before: 0.5059688560939812
+Comparison (t=2): B_next: 0.5045160994704041, B_before: 0.5059688560939812
+Time for intialising with perturbed values 2 no. of times: 61.34141778945923
+Minim_exp_val_B: 0.5045160994704041, prob_s_B: 0.19515618744994995
+p=5
+Minim_exp_val_L: 0.5145510217359563, prob_s_L: 0.2072890493972125
+Comparison (t=1): B_next: 0.5063377616125821, B_before: 0.5045160994704041
+Comparison (t=2): B_next: 0.5040015179746871, B_before: 0.5045160994704041
+Time for intialising with perturbed values 2 no. of times: 87.24412870407104
+Minim_exp_val_B: 0.5040015179746871, prob_s_B: 0.18221724671391565
+p=6
+Minim_exp_val_L: 0.5090046134033941, prob_s_L: 0.18221724671391565
+Comparison (t=1): B_next: 0.5091227058641039, B_before: 0.5040015179746871
+Comparison (t=2): B_next: 0.5057546885130659, B_before: 0.5040015179746871
+Comparison (t=3): B_next: 0.504802221951774, B_before: 0.5040015179746871
+Comparison (t=4): B_next: 0.504802221951774, B_before: 0.5040015179746871
+Time for intialising with perturbed values 4 no. of times: 237.3597011566162
+Minim_exp_val_B: 0.504802221951774, prob_s_B: 0.1767766952966369
+p=7
+Minim_exp_val_L: 0.5156709880234773, prob_s_L: 0.1926379375927805
+Comparison (t=1): B_next: 0.5072471286348137, B_before: 0.504802221951774
+Comparison (t=2): B_next: 0.5072471286348137, B_before: 0.504802221951774
+Comparison (t=3): B_next: 0.5067127774385529, B_before: 0.504802221951774
+Comparison (t=4): B_next: 0.5063615221383759, B_before: 0.504802221951774
+Time for intialising with perturbed values 4 no. of times: 266.7747001647949
+Minim_exp_val_B: 0.5063615221383759, prob_s_B: 0.2096313728906053
+____________________________________________________________________________________________________ 
+QUBO NO: 1
+ ____________________________________________________________________________________________________
+optimal function value: 0.14054452064799994
+optimal value: [0. 1. 0. 1. 0. 0. 1. 0. 0.]
+status: SUCCESS
+Other ground state(s) found: '010001001'
+Solving with QAOA...
+p=1
+Restart_no: 1, Exp_val: 0.173419585855625, Prob_s: 0.3792998421218825
+Restart_no: 2, Exp_val: 0.3769176939917792, Prob_s: 0.17352164899547468
+Restart_no: 3, Exp_val: 0.9804209338104235, Prob_s: 0
+Restart_no: 4, Exp_val: 1.1709734621949286, Prob_s: 0.03125
+Restart_no: 5, Exp_val: 1.0471883980721344, Prob_s: 0
+Restart_no: 6, Exp_val: 1.19205766334928, Prob_s: 0
+Minimum: 0.173419585855625, prob_s: 0.3792998421218825
+p=2
+Minim_exp_val_L: 0.1732307563525488, prob_s_L: 0.4113879375927805
+Comparison (t=1): B_next: 0.17190118024219914, B_before: 0.173419585855625
+Time for intialising with perturbed values 1 no. of times: 20.871313333511353
+Minim_exp_val_B: 0.17190118024219914, prob_s_B: 0.35629427800095026
+p=3
+Minim_exp_val_L: 0.17464735824444344, prob_s_L: 0.40959016573318835
+Comparison (t=1): B_next: 0.17298855110869593, B_before: 0.17190118024219914
+Comparison (t=2): B_next: 0.17160672360137774, B_before: 0.17190118024219914
+Time for intialising with perturbed values 2 no. of times: 64.44532465934753
+Minim_exp_val_B: 0.17160672360137774, prob_s_B: 0.42142630483054716
+p=4
+Minim_exp_val_L: 0.17543077762851866, prob_s_L: 0.43525635094610965
+Comparison (t=1): B_next: 0.1724421516009953, B_before: 0.17160672360137774
+Comparison (t=2): B_next: 0.1724421516009953, B_before: 0.17160672360137774
+Comparison (t=3): B_next: 0.1724421516009953, B_before: 0.17160672360137774
+Comparison (t=4): B_next: 0.17230156206749592, B_before: 0.17160672360137774
+Time for intialising with perturbed values 4 no. of times: 162.8730571269989
+Minim_exp_val_B: 0.17230156206749592, prob_s_B: 0.32986980422058554
+p=5
+Minim_exp_val_L: 0.1758615779792354, prob_s_L: 0.34780398292726666
+Comparison (t=1): B_next: 0.17347348572431442, B_before: 0.17230156206749592
+Comparison (t=2): B_next: 0.17248406890657697, B_before: 0.17230156206749592
+Comparison (t=3): B_next: 0.17248406890657697, B_before: 0.17230156206749592
+Comparison (t=4): B_next: 0.1716707111661595, B_before: 0.17230156206749592
+Time for intialising with perturbed values 4 no. of times: 211.54240489006042
+Minim_exp_val_B: 0.1716707111661595, prob_s_B: 0.3616541885184999
+p=6
+Minim_exp_val_L: 0.1762732067775865, prob_s_L: 0.3902802913533042
+Comparison (t=1): B_next: 0.1722645108244365, B_before: 0.1716707111661595
+Comparison (t=2): B_next: 0.1722645108244365, B_before: 0.1716707111661595
+Comparison (t=3): B_next: 0.1722645108244365, B_before: 0.1716707111661595
+Comparison (t=4): B_next: 0.1722645108244365, B_before: 0.1716707111661595
+Time for intialising with perturbed values 4 no. of times: 212.83711957931519
+Minim_exp_val_B: 0.1722645108244365, prob_s_B: 0.39146539467697805
+p=7
+Minim_exp_val_L: 0.1765796625307926, prob_s_L: 0.36788260376678256
+Comparison (t=1): B_next: 0.17366063136959664, B_before: 0.1722645108244365
+Comparison (t=2): B_next: 0.17317050788260246, B_before: 0.1722645108244365
+Comparison (t=3): B_next: 0.17317050788260246, B_before: 0.1722645108244365
+Comparison (t=4): B_next: 0.1726751620717596, B_before: 0.1722645108244365
+Time for intialising with perturbed values 4 no. of times: 298.9862711429596
+Minim_exp_val_B: 0.1726751620717596, prob_s_B: 0.3801726581436387
+____________________________________________________________________________________________________ 
+QUBO NO: 2
+ ____________________________________________________________________________________________________
+optimal function value: 0.17645056293200012
+optimal value: [0. 1. 0. 1. 0. 0. 0. 0. 1.]
+status: SUCCESS
+Solving with QAOA...
+p=1
+Restart_no: 1, Exp_val: 0.20390834231592525, Prob_s: 0.18221724671391565
+Restart_no: 2, Exp_val: 1.7919206408818837, Prob_s: 0.03125
+Restart_no: 3, Exp_val: 1.6592938708053824, Prob_s: 0
+Restart_no: 4, Exp_val: 1.8301611028282698, Prob_s: 0.05412658773652741
+Restart_no: 5, Exp_val: 0.5009057503929348, Prob_s: 0.09375
+Restart_no: 6, Exp_val: 1.102816827808112, Prob_s: 0
+Minimum: 0.20390834231592525, prob_s: 0.18221724671391565
+p=2
+Minim_exp_val_L: 0.20505944171743218, prob_s_L: 0.1875
+Comparison (t=1): B_next: 0.20380042920084607, B_before: 0.20390834231592525
+Time for intialising with perturbed values 1 no. of times: 13.14266037940979
+Minim_exp_val_B: 0.20380042920084607, prob_s_B: 0.184877493221863
+p=3
+Minim_exp_val_L: 0.20336381077069565, prob_s_L: 0.18221724671391565
+Comparison (t=1): B_next: 0.20576691928217727, B_before: 0.20380042920084607
+Comparison (t=2): B_next: 0.2042756320553517, B_before: 0.20380042920084607
+Comparison (t=3): B_next: 0.20372238559521294, B_before: 0.20380042920084607
+Time for intialising with perturbed values 3 no. of times: 68.49634075164795
+Minim_exp_val_B: 0.20372238559521294, prob_s_B: 0.19008632907181935
+p=4
+Minim_exp_val_L: 0.20447633255889086, prob_s_L: 0.2096313728906053
+Comparison (t=1): B_next: 0.20377299535969562, B_before: 0.20372238559521294
+Comparison (t=2): B_next: 0.20377299535969562, B_before: 0.20372238559521294
+Comparison (t=3): B_next: 0.20311147407862318, B_before: 0.20372238559521294
+Time for intialising with perturbed values 3 no. of times: 84.43432641029358
+Minim_exp_val_B: 0.20311147407862318, prob_s_B: 0.20009763241977652
+p=5
+Minim_exp_val_L: 0.2051606325455123, prob_s_L: 0.1767766952966369
+Comparison (t=1): B_next: 0.2032771589118031, B_before: 0.20311147407862318
+Comparison (t=2): B_next: 0.2032771589118031, B_before: 0.20311147407862318
+Comparison (t=3): B_next: 0.2032771589118031, B_before: 0.20311147407862318
+Comparison (t=4): B_next: 0.2032771589118031, B_before: 0.20311147407862318
+Time for intialising with perturbed values 4 no. of times: 120.63620591163635
+Minim_exp_val_B: 0.2032771589118031, prob_s_B: 0.2072890493972125
+p=6
+Minim_exp_val_L: 0.21023828308009773, prob_s_L: 0.20009763241977652
+Comparison (t=1): B_next: 0.20327377246297174, B_before: 0.2032771589118031
+Time for intialising with perturbed values 1 no. of times: 29.91842770576477
+Minim_exp_val_B: 0.20327377246297174, prob_s_B: 0.2049199538844375
+p=7
+Minim_exp_val_L: 0.20704958089078673, prob_s_L: 0.19515618744994995
+Comparison (t=1): B_next: 0.20324913391197963, B_before: 0.20327377246297174
+Time for intialising with perturbed values 1 no. of times: 51.358736515045166
+Minim_exp_val_B: 0.20324913391197963, prob_s_B: 0.1767766952966369
+[[0.16535945694153692, 0.1767766952966369, 0.16535945694153692, 0.19515618744994995, 0.18221724671391565, 0.1767766952966369, 0.2096313728906053], [0.3792998421218825, 0.35629427800095026, 0.42142630483054716, 0.32986980422058554, 0.3616541885184999, 0.39146539467697805, 0.3801726581436387], [0.18221724671391565, 0.184877493221863, 0.18221724671391565, 0.20009763241977652, 0.2072890493972125, 0.2049199538844375, 0.1767766952966369]]
+Time Taken: 2214.3038890361786
