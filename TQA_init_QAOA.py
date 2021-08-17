@@ -87,7 +87,7 @@ def main(args = None):
         optimal_point = qaoa_results.optimal_point
         if fourier_parametrise:
            optimal_point = convert_from_fourier_point(optimal_point, len(optimal_point))
-        approx_ratio = np.abs( (opt_value - exp_val) / opt_value )
+        approx_ratio = 1 - np.abs( (opt_value - exp_val) / opt_value )
         print("    "+"Optimal_point: {}".format(optimal_point))
         print("    "+"Exp_val: {}, Prob_s: {}, approx_ratio: {}".format(exp_val, prob_s, approx_ratio))
         approx_ratios.append(approx_ratio)
