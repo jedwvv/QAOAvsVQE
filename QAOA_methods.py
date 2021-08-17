@@ -26,7 +26,7 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
         qaoa_instance.set_parameterise_point_for_energy_evaluation(QAOAEx.convert_from_fourier_point)
     bounds = [(-np.pi/2, np.pi/2), (-np.pi/2, np.pi/2)]*reps
     
-    if kwargs["list_points"]:
+    if "list_points" in kwargs:
         list_points = kwargs["list_points"]
         list_results = []
         for point in list_points:
