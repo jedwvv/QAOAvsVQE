@@ -414,11 +414,11 @@ Function value obtained: 0
                              bounds=variable_bounds,
                              method=self.method,
                              jac=gradient_function,
-                             ftol_abs=1e-32,
-                             ftol_rel=1e-32,
-                             xtol_abs = 1e-32,
-                             xtol_rel = 1e-32,
-                             maxtime = 120)
+                             ftol_abs=1e-16,
+                             ftol_rel=1e-16,
+                             xtol_abs = 1e-16,
+                             xtol_rel = 1e-16,
+                             maxtime = 90)
         if self.result_message:
             print(res.message)
         
