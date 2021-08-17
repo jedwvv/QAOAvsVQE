@@ -72,6 +72,7 @@ def main(args = None):
         #empty lists to save following results to choose best result
         results = []
         exp_vals = []
+        print("-"*50)
         print("p={}".format(p))
         for r, point in enumerate(points):
             qaoa_results, optimal_circ = CustomQAOA(operator,
@@ -111,9 +112,11 @@ def main(args = None):
         minim_exp_val = exp_vals[minim_index]
         approx_ratio = 1.0 - np.abs( opt_value - minim_exp_val ) / opt_value
         print("Minimum: {}, prob_s: {}, approx_ratio {}".format(minim_exp_val, optimal_prob_s, approx_ratio))
-        print("_"*50)
         approx_ratios.append(approx_ratio)
         prob_s_s.append(optimal_prob_s)
+    print("-"*50)
+    print("QAOA terminated")
+    print("-"*50)
     print("Approximation ratios per layer", approx_ratios)
     print("Prob_success per layer", prob_s_s)
     save_results = np.append(approx_ratios, prob_s_s)
@@ -125,7 +128,6 @@ def main(args = None):
         with open('results_{}cars{}routes/RI_NF_{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
             np.savetxt(f, save_results, delimiter=',')
         print("Results saved in results_{}cars{}routes/RI_NF_{}.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
-
     finish = time()
     print("Time Taken: {}".format(finish - start))
 
