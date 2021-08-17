@@ -293,7 +293,7 @@ def get_nlopt_enum(method_name=None, default=nlopt.LN_BOBYQA):
         return NLOPT_ALGORITHMS[method_name.upper()]
     except KeyError:
         warn('Method {name} could not be found. Defaulting to '
-             '{default}'.format(name=method_name, default=default),
+             '{default}'.format(name=method_name, default="NLOPT_LN_BOBYQA"),
              RuntimeWarning)
         return default
 
@@ -365,6 +365,7 @@ class NLOPT_Optimizer(Optimizer):
     # pylint: disable=unused-argument
     def __init__(self,
                 method,
+                result_message: bool = False,
                  maxiter: int = 100,
                  disp: bool = False,
                  ftol: float = 1e-06,
@@ -385,6 +386,7 @@ Function value obtained: 0
         super().__init__()
         self.n_calls = n_calls
         self.method = method
+        self.result_message = result_message
         for k, v in list(locals().items()):
             if k in self._OPTIONS:
                 self._options[k] = v
@@ -416,7 +418,8 @@ Function value obtained: 0
                              ftol_rel=1e-32,
                              xtol_abs = 1e-32,
                              xtol_rel = 1e-32,
-                             maxtime = 60)
-        print(res.message)
+                             maxtime = 120)
+        if self.result_message:
+            print(res.message)
         
         return res.x, res.fun, -1
