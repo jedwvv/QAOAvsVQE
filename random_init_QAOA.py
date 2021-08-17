@@ -99,7 +99,7 @@ def main(args = None):
             for string in x_s:
                 prob_s += qaoa_results.eigenstate[string] if string in qaoa_results.eigenstate else 0
             results.append((qaoa_results, optimal_circ, prob_s))
-            print("Point_{}, Exp_val: {}, Prob_s: {}".format(p, r, exp_val, prob_s))
+            print("Point_{}, Exp_val: {}, Prob_s: {}".format(r, exp_val, prob_s))
         minim_index = np.argmin(exp_vals)
         optimal_qaoa_result, optimal_circ, optimal_prob_s = results[minim_index]
         if fourier_parametrise:
