@@ -58,7 +58,8 @@ def main(args = None):
         initial_state, mixer = (None, None)
 
     fourier_parametrise = args["fourier"]
-    print("Fourier Parametrisation: {}".format(fourier_parametrise))
+    print("-"*50)
+    print("Now solving with QAOA... Fourier Parametrisation: {}".format(fourier_parametrise))
     for p in range(1, p_max+1):
 
         if p == 1:
