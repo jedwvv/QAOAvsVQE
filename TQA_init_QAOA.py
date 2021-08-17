@@ -67,7 +67,7 @@ def main(args = None):
         point = np.append( [ (i+1)/p for i in range(p) ] , [ 1-(i+1)/p for i in range(p) ] )
         points = [delta*point for delta in deltas]
         print("-"*50)
-        print("p={}".format(p))
+        print("    "+"p={}".format(p))
         if fourier_parametrise:
             points = [ convert_to_fourier_point(point, len(point)) for point in points ]
         qaoa_results, optimal_circ = CustomQAOA(operator,
@@ -87,8 +87,8 @@ def main(args = None):
         optimal_point = qaoa_results.optimal_point
         if fourier_parametrise:
            optimal_point = convert_from_fourier_point(optimal_point, len(optimal_point))
-        print("Optimal_point: {}".format(optimal_point))
-        print("Exp_val: {}, Prob_s: {}".format(exp_val, prob_s))
+        print("    "+"Optimal_point: {}".format(optimal_point))
+        print("    "+"Exp_val: {}, Prob_s: {}".format(exp_val, prob_s))
         approx_ratio = np.abs( (opt_value - exp_val) / opt_value )
         approx_ratios.append(approx_ratio)
         prob_s_s.append(prob_s)

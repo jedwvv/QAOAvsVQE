@@ -61,7 +61,6 @@ def main(args = None):
     print("-"*50)
     print("Now solving with QAOA... Fourier Parametrisation: {}".format(fourier_parametrise))
     for p in range(1, p_max+1):
-
         if p == 1:
             points = [[0,0]] + [ np.random.uniform(low = -np.pi/2+0.01, high = np.pi/2-0.01, size = 2*p) for _ in range(2**p)]
             next_point = []
@@ -69,12 +68,11 @@ def main(args = None):
             penalty = 0.6
             points = [next_point_l] + generate_points(next_point, no_perturb=min(2**p-1,10), penalty=penalty)
         construct_circ = False
-
         #empty lists to save following results to choose best result
         results = []
         exp_vals = []
         print("-"*50)
-        print("p={}".format(p))
+        print("    "+"p={}".format(p))
         for r, point in enumerate(points):
             qaoa_results, optimal_circ = CustomQAOA(operator,
                                                         quantum_instance,
@@ -99,7 +97,7 @@ def main(args = None):
             for string in x_s:
                 prob_s += qaoa_results.eigenstate[string] if string in qaoa_results.eigenstate else 0
             results.append((qaoa_results, optimal_circ, prob_s))
-            print("Point_{}, Exp_val: {}, Prob_s: {}".format(r, exp_val, prob_s))
+            print("    "+"Point_{}, Exp_val: {}, Prob_s: {}".format(r, exp_val, prob_s))
         minim_index = np.argmin(exp_vals)
         optimal_qaoa_result, optimal_circ, optimal_prob_s = results[minim_index]
         if fourier_parametrise:
@@ -112,7 +110,7 @@ def main(args = None):
             print(optimal_circ.draw(fold=150))
         minim_exp_val = exp_vals[minim_index]
         approx_ratio = 1.0 - np.abs( opt_value - minim_exp_val ) / opt_value
-        print("Minimum: {}, prob_s: {}, approx_ratio {}".format(minim_exp_val, optimal_prob_s, approx_ratio))
+        print("    "+"Minimum: {}, prob_s: {}, approx_ratio {}".format(minim_exp_val, optimal_prob_s, approx_ratio))
         approx_ratios.append(approx_ratio)
         prob_s_s.append(optimal_prob_s)
     print("-"*50)
