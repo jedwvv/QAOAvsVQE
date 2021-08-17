@@ -84,7 +84,7 @@ def main(args = None):
                                                         construct_circ= construct_circ,
                                                         fourier_parametrise = fourier_parametrise
                                                         )
-            if r==0:
+            if r == 0:
                 if fourier_parametrise:
                     next_point_l = np.zeros(shape = 2*p + 2)
                     next_point_l[0:p] = qaoa_results.optimal_point[0:p]
