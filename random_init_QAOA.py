@@ -29,8 +29,10 @@ def main(args = None):
     start = time()
     if args == None:
         args = parse()
-    qubo_no = args["no_samples"]
 
+    qubo_no = args["no_samples"]
+    print("-"*50)
+    print("QUBO_{}".format(qubo_no))
     #Load generated qubo_no
     with open('qubos_{}_car_{}_routes/qubo_{}.pkl'.format(args["no_cars"], args["no_routes"], qubo_no), 'rb') as f:
         qubo, max_coeff, operator, offset, routes = pkl.load(f)
@@ -70,7 +72,7 @@ def main(args = None):
         #empty lists to save following results to choose best result
         results = []
         exp_vals = []
-
+        print("p={}".format(p))
         for r, point in enumerate(points):
             qaoa_results, optimal_circ = CustomQAOA(operator,
                                                         quantum_instance,
@@ -95,7 +97,7 @@ def main(args = None):
             for string in x_s:
                 prob_s += qaoa_results.eigenstate[string] if string in qaoa_results.eigenstate else 0
             results.append((qaoa_results, optimal_circ, prob_s))
-            print("QAOA_{}, Point_no: {}, Exp_val: {}, Prob_s: {}".format(p, r, exp_val, prob_s))
+            print("Point_{}, Exp_val: {}, Prob_s: {}".format(p, r, exp_val, prob_s))
         minim_index = np.argmin(exp_vals)
         optimal_qaoa_result, optimal_circ, optimal_prob_s = results[minim_index]
         if fourier_parametrise:
