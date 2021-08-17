@@ -67,7 +67,7 @@ def main(args = None):
             next_point = []
         else:
             penalty = 0.6
-            points = [next_point_l] + generate_points(next_point, no_perturb=2**p-1, penalty=penalty)
+            points = [next_point_l] + generate_points(next_point, no_perturb=min(2**p-1,10), penalty=penalty)
         construct_circ = False
 
         #empty lists to save following results to choose best result

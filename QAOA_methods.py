@@ -5,7 +5,7 @@ from qiskit.quantum_info import Statevector
 from generate_qubos import solve_classically, arr_to_str
 import QAOAEx
 
-def CustomQAOA(operator, quantum_instance, optimizer, reps, initial_fourier_point, **kwargs):
+def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
     
     initial_state = None if "initial_state" not in kwargs else kwargs["initial_state"]
     mixer = None if "mixer" not in kwargs else kwargs["mixer"]
@@ -24,11 +24,26 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, initial_fourier_poin
                                         )
     if fourier_parametrise:
         qaoa_instance.set_parameterise_point_for_energy_evaluation(QAOAEx.convert_from_fourier_point)
-    # bounds = [None, (-np.pi/2)]*len(initial_fourier_point)
     bounds = [(-np.pi/2, np.pi/2), (-np.pi/2, np.pi/2)]*reps
-    qaoa_results = qaoa_instance.solve(operator, initial_fourier_point, bounds=bounds)
+    
+    if kwargs["list_points"]:
+        list_points = kwargs["list_points"]
+        list_results = []
+        for point in list_points:
+            result = qaoa_instance.solve(operator, point, bounds=bounds)
+            list_results.append( result )
+            print(result.eigenvalue)
+        qaoa_results = min(list_results, key=lambda x: x.eigenvalue)
+        print(qaoa_results.eigenvalue)
+    # bounds = [None, (-np.pi/2)]*len(initial_point)
+    else:
+        initial_point = kwargs["initial_point"] if "initial_point" in kwargs \
+                                                else [ np.pi * (np.random.rand() - 0.5) for _ in range(2*reps) ]
+        qaoa_results = qaoa_instance.solve(operator, initial_point, bounds=bounds)
+    
     if not isinstance(qaoa_results.eigenstate, dict):
         qaoa_results.eigenstate = Statevector(qaoa_results.eigenstate).probabilities_dict()
+    
     if construct_circ:
         qc = qaoa_instance.get_optimal_circuit()
     else:
