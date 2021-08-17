@@ -6,6 +6,7 @@ from parser_all import parse
 from qiskit import Aer
 from qiskit.utils.quantum_instance import QuantumInstance
 from generate_qubos import solve_classically, arr_to_str
+# from qiskit.algorithms.optimizers import COBYLA, SLSQP
 from classical_optimizers import NLOPT_Optimizer
 from QAOAEx import QAOACustom
 from QAOA_methods import (CustomQAOA,
@@ -43,6 +44,7 @@ def main(args = None):
     #Set optimizer method
     method = args["method"]
     optimizer = NLOPT_Optimizer(method = method, result_message=False)
+    # optimizer = COBYLA()
     backend = Aer.get_backend("statevector_simulator")
     quantum_instance = QuantumInstance(backend = backend)
 
