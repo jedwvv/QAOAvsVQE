@@ -44,7 +44,7 @@ def main(args = None):
     quantum_instance = QuantumInstance(backend = backend)
 
     approx_ratios = []
-    prob_s = []
+    prob_s_s = []
     p_max = args["p_max"]
     no_routes, no_cars = (args["no_routes"], args["no_cars"])
 
@@ -111,10 +111,10 @@ def main(args = None):
         print("Minimum: {}, prob_s: {}, approx_ratio {}".format(minim_exp_val, optimal_prob_s, approx_ratio))
         print("_"*50)
         approx_ratios.append(approx_ratio)
-        prob_s.append(optimal_prob_s)
+        prob_s_s.append(optimal_prob_s)
     print("Approximation ratios per layer", approx_ratios)
-    print("Prob_success per layer", prob_s)
-    save_results = np.append(approx_ratios, prob_s)
+    print("Prob_success per layer", prob_s_s)
+    save_results = np.append(approx_ratios, prob_s_s)
     if fourier_parametrise:
         with open('results_{}cars{}routes/RI_F_{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
             np.savetxt(f, save_results, delimiter=',')
