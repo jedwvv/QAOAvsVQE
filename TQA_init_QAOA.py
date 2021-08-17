@@ -86,11 +86,11 @@ def main(args = None):
         prob_s = 0
         for string in x_s:
             prob_s += qaoa_results.eigenstate[string] if string in qaoa_results.eigenstate else 0
-        optimal_point = qaoa_results.optimal_point
-        if fourier_parametrise:
-           optimal_point = convert_from_fourier_point(optimal_point, len(optimal_point))
+        # optimal_point = qaoa_results.optimal_point
+        # if fourier_parametrise:
+        #    optimal_point = convert_from_fourier_point(optimal_point, len(optimal_point))
         approx_ratio = 1 - np.abs( (opt_value - exp_val) / opt_value )
-        print("    "+"Optimal_point: {}".format(optimal_point))
+        # print("    "+"Optimal_point: {}".format(optimal_point))
         print("    "+"Exp_val: {}, Prob_s: {}, approx_ratio: {}".format(exp_val, prob_s, approx_ratio))
         approx_ratios.append(approx_ratio)
         prob_s_s.append(prob_s)
