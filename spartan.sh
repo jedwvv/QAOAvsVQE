@@ -9,7 +9,7 @@
 #SBATCH --nodes=1
 
 # The name of the job:
-#SBATCH --job-name="TQA_init_0-99_12cpus"
+#SBATCH --job-name="random_init_0-99_12cpus"
 
 # The project ID which this job should run under:
 #SBATCH --account="punim0147"
@@ -52,4 +52,4 @@ module load python/3.8.6
 source ~/venv1/python3.8.6/bin/activate
 
 # The job command(s):
-for i in {0..99}; do python TQA_init_QAOA.py -N 3 -R 3 -M 4 -S ${i} -O LN_BOBYQA -F; done
+for i in {0..99}; do python random_init_QAOA.py -N 3 -R 3 -M 4 -S ${i} -O LN_BOBYQA -F; done | tee random_results.txt
