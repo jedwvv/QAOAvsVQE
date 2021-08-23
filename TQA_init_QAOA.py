@@ -106,8 +106,8 @@ def main(args = None):
     print_to_file("-"*50)
     print_to_file("QAOA terminated")
     print_to_file("-"*50)
-    print_to_file("Approximation ratios per layer", approx_ratios)
-    print_to_file("Prob_success per layer", prob_s_s)
+    print_to_file("Approximation ratios per layer: {}".format(approx_ratios))
+    print_to_file("Prob_success per layer: {}".format(prob_s_s))
     save_results = np.append(approx_ratios, prob_s_s)
     if fourier_parametrise:
         with open('results_{}cars{}routes/TQA_F_{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
