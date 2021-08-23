@@ -1,0 +1,5 @@
+--------------------------------------------------
+QUBO_101
+optimal function value: -321.0
+optimal value: [1. 0. 0. 0. 1. 0. 0. 1. 0.]
+status: SUCCESS

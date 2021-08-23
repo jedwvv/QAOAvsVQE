@@ -77,6 +77,7 @@ def main(args = None):
         exp_vals = []
         print_to_file("-"*50)
         print_to_file("    "+"p={}".format(p))
+        optimizer.set_options(maxeval = 1000*p)
         for r, point in enumerate(points):
             qaoa_results, optimal_circ = CustomQAOA(operator,
                                                         quantum_instance,

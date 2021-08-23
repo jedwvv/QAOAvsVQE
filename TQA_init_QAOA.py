@@ -77,6 +77,7 @@ def main(args = None):
         print_to_file("    "+"p={}".format(p))
         if fourier_parametrise:
             points = [ convert_to_fourier_point(point, len(point)) for point in points ]
+        optimizer.set_options(maxeval = 1000*p)
         qaoa_results, optimal_circ = CustomQAOA(operator,
                                                     quantum_instance,
                                                     optimizer,
@@ -100,7 +101,8 @@ def main(args = None):
         if fourier_parametrise:
             optimal_point = convert_from_fourier_point(optimal_point, len(optimal_point))
         approx_ratio = 1 - np.abs( (opt_value - exp_val) / opt_value )
-        print_to_file("    "+"Optimal_point: {}".format(optimal_point))
+        nfev = qaoa_results.
+        print_to_file("    "+"Optimal_point: {}, Nfev: {}".format(optimal_point))
         print_to_file("    "+"Exp_val: {}, Prob_s: {}, approx_ratio: {}".format(exp_val, prob_s, approx_ratio))
         approx_ratios.append(approx_ratio)
         prob_s_s.append(prob_s)

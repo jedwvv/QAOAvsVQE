@@ -164,12 +164,14 @@ def nlopt_minimize(fun, x0, args=(), method=None, jac=None, bounds=None,
     except nlopt.RoundoffLimited:
         # If we encounter a RoundoffLimited exception, simply return last point
         x = path[-1]
+        nfev = opt.get_numevals()
 
     return OptimizeResult(
         x=x,
         fun=opt.last_optimum_value(),
         message=get_nlopt_message(opt.last_optimize_result()),
         success=(opt.last_optimize_result() > 0),
+        nfev = nfev
     )
 
 
@@ -371,7 +373,7 @@ class NLOPT_Optimizer(Optimizer):
                  ftol: float = 1e-06,
                  tol: Optional[float] = None,
                  eps: float = 1.4901161193847656e-08,
-                n_calls: int=100) -> None:
+                n_calls: int=1000) -> None:
         """Iteration No: 1 started. Evaluating function at random point.
 Iteration No: 1 ended. Evaluation done at random point.
 Time taken: 0.2034
@@ -414,12 +416,12 @@ Function value obtained: 0
                              bounds=variable_bounds,
                              method=self.method,
                              jac=gradient_function,
-                             ftol_abs=1e-16,
-                             ftol_rel=1e-16,
-                             xtol_abs = 1e-16,
-                             xtol_rel = 1e-16,
-                             maxtime = 90)
-        if self.result_message:
+                             ftol_abs=1e-12,
+                             ftol_rel=1e-20,
+                             xtol_abs = 1e-6,
+                             xtol_rel = 1e-10,
+                             maxeval = self._options['maxeval'])
+        if True:
             print(res.message)
         
-        return res.x, res.fun, -1
+        return res.x, res.fun, res.nfev
