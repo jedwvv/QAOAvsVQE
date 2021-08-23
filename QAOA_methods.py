@@ -11,6 +11,7 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
     mixer = None if "mixer" not in kwargs else kwargs["mixer"]
     construct_circ = False if "construct_circ" not in kwargs else kwargs["construct_circ"]
     fourier_parametrise = False if "fourier_parametrise" not in kwargs else kwargs["fourier_parametrise"]
+    qubo = None if "fourier_parametrise" not in kwargs else kwargs["qubo"]
 
     qaoa_instance = QAOAEx.QAOACustom(quantum_instance = quantum_instance,
                                         reps = reps,
@@ -43,8 +44,11 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
         qaoa_results = qaoa_instance.solve(operator, initial_point, bounds=bounds)
         qc = qaoa_instance.get_optimal_circuit() if construct_circ else None
     
-    if not isinstance(qaoa_results.eigenstate, dict):
-        qaoa_results.eigenstate = Statevector(qaoa_results.eigenstate).probabilities_dict()
+    if fourier_parametrise and qubo:
+        optimal_point = qaoa_results.optimal_point
+        state = qaoa_instance.calculate_statevector_at_point(operator = operator, point = QAOAEx.convert_from_fourier_point(optimal_point, len(optimal_point)))
+        qaoa_results.eigenstate = qaoa_instance._eigenvector_to_solutions(state, quadratic_program=qubo)
+
 
     return qaoa_results, qc
 

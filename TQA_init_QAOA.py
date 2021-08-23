@@ -18,7 +18,7 @@ from QAOA_methods import (CustomQAOA,
                          construct_initial_state,
                          n_qbit_mixer)
 from QAOAEx import convert_from_fourier_point, convert_to_fourier_point
-            
+from qiskit_optimization import QuadraticProgram
 
 # warnings.filterwarnings('ignore')
 
@@ -38,6 +38,9 @@ def main(args = None):
     #Load generated qubo_no
     with open('qubos_{}_car_{}_routes/qubo_{}.pkl'.format(args["no_cars"], args["no_routes"], qubo_no), 'rb') as f:
         qubo, max_coeff, operator, offset, routes = pkl.load(f)
+    
+    qubo = QuadraticProgram()
+    qubo.from_ising(operator)
 
     x_s, opt_value = find_all_ground_states(qubo)
 
@@ -80,7 +83,8 @@ def main(args = None):
                                                     mixer = mixer,
                                                     construct_circ= construct_circ,
                                                     fourier_parametrise = fourier_parametrise,
-                                                    list_points = points
+                                                    list_points = points,
+                                                    qubo = qubo
                                                     )
         exp_val = qaoa_results.eigenvalue * max_coeff + offset
         prob_s = 0
