@@ -9,14 +9,14 @@
 #SBATCH --nodes=1
 
 # The name of the job:
-#SBATCH --job-name="test_solve_qubo_qaoa"
+#SBATCH --job-name="TQA_init_0-99_12cpus"
 
 # The project ID which this job should run under:
 #SBATCH --account="punim0147"
 
 # Maximum number of tasks/CPU cores used by the job:
-#SBATCH --ntasks=8
-#SBATCH --cpus-per-task=2
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=12
 
 
 
@@ -35,7 +35,7 @@
 #SBATCH --mail-type=END
 
 # The maximum running time of the job in days-hours:mins:sec
-#SBATCH --time=2:00:00
+#SBATCH --time=1-0:00:00
 
 # check that the script is launched with sbatch
 if [ "x$SLURM_JOB_ID" == "x" ]; then
@@ -52,4 +52,4 @@ module load python/3.8.6
 source ~/venv1/python3.8.6/bin/activate
 
 # The job command(s):
-for i in {0..100}; do python random_init_QAOA.py -N 3 -R 3 -M 6 -S ${i} -O LN_BOBYQA -F; done
+for i in {0..99}; do python TQA_init_QAOA.py -N 3 -R 3 -M 4 -S ${i} -O LN_BOBYQA -F; done

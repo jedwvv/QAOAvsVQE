@@ -16,6 +16,7 @@ from QAOA_methods import (CustomQAOA,
                          construct_initial_state,
                          n_qbit_mixer)
 from QAOAEx import convert_from_fourier_point, convert_to_fourier_point
+from qiskit_optimization import QuadraticProgram
             
 
 # warnings.filterwarnings('ignore')
@@ -36,7 +37,9 @@ def main(args = None):
     #Load generated qubo_no
     with open('qubos_{}_car_{}_routes/qubo_{}.pkl'.format(args["no_cars"], args["no_routes"], qubo_no), 'rb') as f:
         qubo, max_coeff, operator, offset, routes = pkl.load(f)
-
+    qubo = QuadraticProgram()
+    qubo.from_ising(operator)
+    
     x_s, opt_value = find_all_ground_states(qubo)
 
     #Set optimizer method
@@ -82,7 +85,8 @@ def main(args = None):
                                                         initial_state = initial_state,
                                                         mixer = mixer,
                                                         construct_circ= construct_circ,
-                                                        fourier_parametrise = fourier_parametrise
+                                                        fourier_parametrise = fourier_parametrise,
+                                                        qubo = qubo
                                                         )
             if r == 0:
                 if fourier_parametrise:
@@ -91,25 +95,34 @@ def main(args = None):
                     next_point_l[p+1:2*p+1] = qaoa_results.optimal_point[p:2*p]
                 else:
                     next_point_l = interp_point(qaoa_results.optimal_point)
-            exp_val = qaoa_results.eigenvalue * max_coeff + offset
+            exp_val = qaoa_results.eigenvalue * max_coeff
             exp_vals.append(exp_val)
+            
+            state_solutions = { item[0][::-1]: item[1:] for item in qaoa_results.eigenstate }
+            
+            for item in sorted(state_solutions.items(), key = lambda x: x[1][1], reverse = True)[0:5]:
+                print( item )
+                
             prob_s = 0
             for string in x_s:
-                prob_s += qaoa_results.eigenstate[string] if string in qaoa_results.eigenstate else 0
+                prob_s += state_solutions[string][1] if string in state_solutions else 0
+            prob_s /= len(x_s) #normalise
             results.append((qaoa_results, optimal_circ, prob_s))
             print("    "+"Point_{}, Exp_val: {}, Prob_s: {}".format(r, exp_val, prob_s))
         minim_index = np.argmin(exp_vals)
         optimal_qaoa_result, optimal_circ, optimal_prob_s = results[minim_index]
         if fourier_parametrise:
-            next_point = np.zeros(shape = 2*p + 2)
-            next_point[0:p] = optimal_qaoa_result.optimal_point[0:p]
-            next_point[p+1:2*p+1] = optimal_qaoa_result.optimal_point[p:2*p]
+            next_point = convert_from_fourier_point( optimal_qaoa_result.optimal_point, 2*p )
+            next_point = convert_to_fourier_point( interp_point(next_point), 2*p + 2 )
+#             next_point = np.zeros(shape = 2*p + 2)
+#             next_point[0:p] = optimal_qaoa_result.optimal_point[0:p]
+#             next_point[p+1:2*p+1] = optimal_qaoa_result.optimal_point[p:2*p]
         else:
             next_point = interp_point(optimal_qaoa_result.optimal_point)
         if construct_circ:
             print(optimal_circ.draw(fold=150))
         minim_exp_val = exp_vals[minim_index]
-        approx_ratio = 1.0 - np.abs( opt_value - minim_exp_val ) / opt_value
+        approx_ratio = 1.0 - np.abs( (opt_value - minim_exp_val ) / opt_value )
         print("    "+"Minimum: {}, prob_s: {}, approx_ratio {}".format(minim_exp_val, optimal_prob_s, approx_ratio))
         approx_ratios.append(approx_ratio)
         prob_s_s.append(optimal_prob_s)

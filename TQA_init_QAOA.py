@@ -88,14 +88,15 @@ def main(args = None):
                                                     )
         exp_val = qaoa_results.eigenvalue * max_coeff
         state_solutions = { item[0][::-1]: item[1:] for item in qaoa_results.eigenstate }
-        for item in sorted(state_solutions.items(), key = lambda x: x[1])[0:5]:
+        for item in sorted(state_solutions.items(), key = lambda x: x[1][1], reverse = True)[0:5]:
             print( item )
         prob_s = 0
         for string in x_s:
             prob_s += state_solutions[string][1] if string in state_solutions else 0
+        prob_s /= len(x_s) #normalise
         optimal_point = qaoa_results.optimal_point
         if fourier_parametrise:
-           optimal_point = convert_from_fourier_point(optimal_point, len(optimal_point))
+            optimal_point = convert_from_fourier_point(optimal_point, len(optimal_point))
         approx_ratio = 1 - np.abs( (opt_value - exp_val) / opt_value )
         print("    "+"Optimal_point: {}".format(optimal_point))
         print("    "+"Exp_val: {}, Prob_s: {}, approx_ratio: {}".format(exp_val, prob_s, approx_ratio))
