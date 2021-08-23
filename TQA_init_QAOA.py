@@ -86,7 +86,7 @@ def main(args = None):
                                                     list_points = points,
                                                     qubo = qubo
                                                     )
-        exp_val = qaoa_results.eigenvalue * max_coeff + offset
+        exp_val = qaoa_results.eigenvalue * max_coeff
         prob_s = 0
         for string in x_s:
             prob_s += qaoa_results.eigenstate[string] if string in qaoa_results.eigenstate else 0
