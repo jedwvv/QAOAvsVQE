@@ -40,8 +40,9 @@ def main(args = None):
     qubo = QuadraticProgram()
     qubo.from_ising(operator)
     
-    x_s, opt_value = find_all_ground_states(qubo)
-
+    x_s, opt_value, classical_result = find_all_ground_states(qubo)
+    print_to_file(classical_result)
+    
     #Set optimizer method
     method = args["method"]
     optimizer = NLOPT_Optimizer(method = method, result_message=False)

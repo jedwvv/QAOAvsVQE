@@ -104,7 +104,6 @@ def get_costs(qubo):
 
 def find_all_ground_states(qubo):
     classical_result = solve_classically(qubo)
-    print(classical_result)
     x_arr = classical_result.x
     opt_value = classical_result.fval
     x_str = arr_to_str(x_arr)
@@ -116,7 +115,7 @@ def find_all_ground_states(qubo):
             print("Other ground state(s) found: '{}'".format(sort_values[i][0]))
             x_s.append(sort_values[i][0])
     
-    return x_s, opt_value
+    return x_s, opt_value, classical_result
 
 
 def count_coupling_terms(operator):
