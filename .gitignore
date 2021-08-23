@@ -5,3 +5,5 @@ cache/
 untitled.txt
 *.sh
 *.ipynb
+*.txt
+*.out

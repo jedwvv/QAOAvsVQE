@@ -13,7 +13,7 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
     fourier_parametrise = False if "fourier_parametrise" not in kwargs else kwargs["fourier_parametrise"]
     qubo = None if "fourier_parametrise" not in kwargs else kwargs["qubo"]
 
-    qaoa_instance = QAOAEx.QAOACustom(quantum_instance = quantum_instance,
+    qaoa_instance = QAOAEx.QAOAC ustom(quantum_instance = quantum_instance,
                                         reps = reps,
                                         force_shots = False,
                                         optimizer = optimizer,
