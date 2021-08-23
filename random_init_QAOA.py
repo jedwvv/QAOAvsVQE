@@ -61,8 +61,8 @@ def main(args = None):
         initial_state, mixer = (None, None)
 
     fourier_parametrise = args["fourier"]
-    print("-"*50)
-    print("Now solving with QAOA... Fourier Parametrisation: {}".format(fourier_parametrise))
+    print_to_file("-"*50)
+    print_to_file("Now solving with QAOA... Fourier Parametrisation: {}".format(fourier_parametrise))
     for p in range(1, p_max+1):
         if p == 1:
             points = [[0,0]] + [ np.random.uniform(low = -np.pi/2+0.01, high = np.pi/2-0.01, size = 2*p) for _ in range(2**p)]
@@ -74,8 +74,8 @@ def main(args = None):
         #empty lists to save following results to choose best result
         results = []
         exp_vals = []
-        print("-"*50)
-        print("    "+"p={}".format(p))
+        print_to_file("-"*50)
+        print_to_file("    "+"p={}".format(p))
         for r, point in enumerate(points):
             qaoa_results, optimal_circ = CustomQAOA(operator,
                                                         quantum_instance,
@@ -101,14 +101,14 @@ def main(args = None):
             state_solutions = { item[0][::-1]: item[1:] for item in qaoa_results.eigenstate }
             
             for item in sorted(state_solutions.items(), key = lambda x: x[1][1], reverse = True)[0:5]:
-                print( item )
+                print_to_file( item )
                 
             prob_s = 0
             for string in x_s:
                 prob_s += state_solutions[string][1] if string in state_solutions else 0
             prob_s /= len(x_s) #normalise
             results.append((qaoa_results, optimal_circ, prob_s))
-            print("    "+"Point_{}, Exp_val: {}, Prob_s: {}".format(r, exp_val, prob_s))
+            print_to_file("    "+"Point_{}, Exp_val: {}, Prob_s: {}".format(r, exp_val, prob_s))
         minim_index = np.argmin(exp_vals)
         optimal_qaoa_result, optimal_circ, optimal_prob_s = results[minim_index]
         if fourier_parametrise:
@@ -120,29 +120,34 @@ def main(args = None):
         else:
             next_point = interp_point(optimal_qaoa_result.optimal_point)
         if construct_circ:
-            print(optimal_circ.draw(fold=150))
+            print_to_file(optimal_circ.draw(fold=150))
         minim_exp_val = exp_vals[minim_index]
         approx_ratio = 1.0 - np.abs( (opt_value - minim_exp_val ) / opt_value )
-        print("    "+"Minimum: {}, prob_s: {}, approx_ratio {}".format(minim_exp_val, optimal_prob_s, approx_ratio))
+        print_to_file("    "+"Minimum: {}, prob_s: {}, approx_ratio {}".format(minim_exp_val, optimal_prob_s, approx_ratio))
         approx_ratios.append(approx_ratio)
         prob_s_s.append(optimal_prob_s)
-    print("-"*50)
-    print("QAOA terminated")
-    print("-"*50)
-    print("Approximation ratios per layer", approx_ratios)
-    print("Prob_success per layer", prob_s_s)
+    print_to_file("-"*50)
+    print_to_file("QAOA terminated")
+    print_to_file("-"*50)
+    print_to_file("Approximation ratios per layer", approx_ratios)
+    print_to_file("Prob_success per layer", prob_s_s)
     save_results = np.append(approx_ratios, prob_s_s)
     if fourier_parametrise:
         with open('results_{}cars{}routes/RI_F_{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
             np.savetxt(f, save_results, delimiter=',')
-        print("Results saved in results_{}cars{}routes/RI_F_{}.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
+        print_to_file("Results saved in results_{}cars{}routes/RI_F_{}.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
     else:
         with open('results_{}cars{}routes/RI_NF_{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
             np.savetxt(f, save_results, delimiter=',')
-        print("Results saved in results_{}cars{}routes/RI_NF_{}.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
+        print_to_file("Results saved in results_{}cars{}routes/RI_NF_{}.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
     finish = time()
-    print("Time Taken: {}".format(finish - start))
+    print_to_file("Time Taken: {}".format(finish - start))
 
+filepath = "RI_output.txt"
+def print_to_file(string, filepath = filepath):
+    print(string)
+    with open(filepath, 'a') as f:
+        print(string, file=f)
 
 if __name__ == "__main__":
     main()
