@@ -34,8 +34,8 @@ def main(args = None):
         args = parse()
 
     qubo_no = args["no_samples"]
-    print("-"*50)
-    print("QUBO_{}".format(qubo_no))
+    print_to_file("-"*50)
+    print_to_file("QUBO_{}".format(qubo_no))
     #Load generated qubo_no
     with open('qubos_{}_car_{}_routes/qubo_{}.pkl'.format(args["no_cars"], args["no_routes"], qubo_no), 'rb') as f:
         qubo, max_coeff, operator, offset, routes = pkl.load(f)
