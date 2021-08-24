@@ -11,6 +11,9 @@ import numpy as np
 import pickle as pkl
 from tqdm import tqdm
 from parser_all import parse
+from qiskit.utils import algorithm_globals
+
+algorithm_globals.massive = True
 
 def main(args = None):
     #Generate and save valid qubos
