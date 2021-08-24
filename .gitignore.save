@@ -1,0 +1,11 @@
+__pycache__/
+.vscode/
+.ipynb_checkpoints/
+cache/
+untitled.txt
+*.sh
+*.ipynb
+*.txt
+*.out
+makefile
+spartan*
