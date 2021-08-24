@@ -1,7 +1,6 @@
 import multiprocessing as mp
 import numpy as np
 from qiskit import QuantumCircuit
-from qiskit.quantum_info import Statevector
 from generate_qubos import solve_classically, arr_to_str
 import QAOAEx
 
@@ -13,7 +12,7 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
     fourier_parametrise = False if "fourier_parametrise" not in kwargs else kwargs["fourier_parametrise"]
     qubo = None if "fourier_parametrise" not in kwargs else kwargs["qubo"]
 
-    qaoa_instance = QAOAEx.QAOAC ustom(quantum_instance = quantum_instance,
+    qaoa_instance = QAOAEx.QAOACustom(quantum_instance = quantum_instance,
                                         reps = reps,
                                         force_shots = False,
                                         optimizer = optimizer,
@@ -47,7 +46,7 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
     if fourier_parametrise and qubo:
         optimal_point = qaoa_results.optimal_point
         state = qaoa_instance.calculate_statevector_at_point(operator = operator, point = QAOAEx.convert_from_fourier_point(optimal_point, len(optimal_point)))
-        qaoa_results.eigenstate = qaoa_instance._eigenvector_to_solutions(state, quadratic_program=qubo)
+        qaoa_results.eigenstate = qaoa_instance.eigenvector_to_solutions(state, quadratic_program=qubo)
 
 
     return qaoa_results, qc

@@ -1,6 +1,4 @@
 from time import time
-import sys
-import warnings
 import numpy as np
 import pickle as pkl
 from parser_all import parse
@@ -123,8 +121,7 @@ def main(args = None):
     finish = time()
     print_to_file("Time Taken: {}".format(finish - start))
 
-filepath = "TQA_output.txt"
-def print_to_file(string, filepath = filepath):
+def print_to_file(string, filepath = "TQA_output.txt"):
     print(string)
     with open(filepath, 'a') as f:
         print(string, file=f)

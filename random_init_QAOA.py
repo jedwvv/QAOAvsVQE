@@ -145,8 +145,7 @@ def main(args = None):
     finish = time()
     print_to_file("Time Taken: {}".format(finish - start))
 
-filepath = "RI_output.txt"
-def print_to_file(string, filepath = filepath):
+def print_to_file(string, filepath = "RI_output.txt"):
     print(string)
     with open(filepath, 'a') as f:
         print(string, file=f)

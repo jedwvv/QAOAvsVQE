@@ -636,7 +636,7 @@ class QAOACustom(QAOA):
 
         return result
     
-    def _eigenvector_to_solutions(self, 
+    def eigenvector_to_solutions(self, 
                                   eigenvector: Union[dict, np.ndarray, StateFn],
                                   quadratic_program: QuadraticProgram,
                                   min_probability: float = 1e-6
@@ -913,7 +913,7 @@ class QAOACustom(QAOA):
             TypeError: If the type of eigenvector is not supported.
         """
 
-        samples = self._eigenvector_to_solutions(eigenvector,
+        samples = self.eigenvector_to_solutions(eigenvector,
                                                  quadratic_program,
                                                  min_probability)
         samples.sort(key=lambda x: quadratic_program.objective.sense.value * x[1])
