@@ -19,7 +19,7 @@ def main(args = None):
 
     print("Arguments: {}".format(args))
     print("Now generating QUBOs with {} cars {} routes".format(args["no_cars"], args["no_routes"]))
-    for qubo_no in tqdm(range(100, args["no_samples"])):
+    for qubo_no in tqdm(range(args["no_samples"])):
         generate_valid_qubo(args, qubo_no)
     
 
