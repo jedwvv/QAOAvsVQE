@@ -1,3 +1,0 @@
-No_restarts: 10
-No_samples: 50
-Max number of layers: 10
