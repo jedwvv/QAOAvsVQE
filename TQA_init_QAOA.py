@@ -66,6 +66,7 @@ def main(args = None):
     fourier_parametrise = args["fourier"]
     print_to_file("-"*50)
     print_to_file("Now solving with TQA_QAOA... Fourier Parametrisation: {}".format(fourier_parametrise))
+#     maxeval = 125
     for p in range(1, p_max+1):
         construct_circ = False
         deltas = np.arange(0.45, 0.91, 0.05)
@@ -75,6 +76,8 @@ def main(args = None):
         print_to_file("    "+"p={}".format(p))
         if fourier_parametrise:
             points = [ convert_to_fourier_point(point, len(point)) for point in points ]
+#         maxeval *= 2 #Double max_allowed evals for optimizer
+#         optimizer.set_options(maxeval = maxeval)
         optimizer.set_options(maxeval = 1000*p)
         qaoa_results, optimal_circ = CustomQAOA(operator,
                                                     quantum_instance,

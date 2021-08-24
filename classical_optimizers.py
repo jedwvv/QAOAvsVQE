@@ -416,9 +416,9 @@ Function value obtained: 0
                              bounds=variable_bounds,
                              method=self.method,
                              jac=gradient_function,
-                             ftol_abs=1e-12,
+                             ftol_abs=1e-24,
                              ftol_rel=1e-20,
-                             xtol_abs = 1e-6,
+                             xtol_abs = 1e-12,
                              xtol_rel = 1e-10,
                              maxeval = self._options['maxeval'])
         if self._options['disp']:
