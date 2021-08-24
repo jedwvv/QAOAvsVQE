@@ -164,7 +164,7 @@ def nlopt_minimize(fun, x0, args=(), method=None, jac=None, bounds=None,
     except nlopt.RoundoffLimited:
         # If we encounter a RoundoffLimited exception, simply return last point
         x = path[-1]
-        nfev = opt.get_numevals()
+    nfev = opt.get_numevals()
 
     return OptimizeResult(
         x=x,
