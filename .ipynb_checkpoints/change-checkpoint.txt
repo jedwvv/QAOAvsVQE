@@ -1,2 +1,0 @@
-/home/jedwin/anaconda3/envs/ox/lib/python3.9/site-packages/qiskit_optimization/algorithms/optimization_algorithm.py
-line 508 :  eigenvector = eigenvector.to_matrix() > eigenvector = eigenvector.to_matrix(massive=True)
