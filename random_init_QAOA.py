@@ -95,6 +95,9 @@ def main(args = None):
                     next_point_l = np.zeros(shape = 2*p + 2)
                     next_point_l[0:p] = qaoa_results.optimal_point[0:p]
                     next_point_l[p+1:2*p+1] = qaoa_results.optimal_point[p:2*p]
+                    
+                    next_point_l = convert_from_fourier_point(qaoa_results.optimal_point, 2*p+2)
+                    next_point_l = convert_to_fourier_point(next_point_l, 2*p+2)
                 else:
                     next_point_l = interp_point(qaoa_results.optimal_point)
             exp_val = qaoa_results.eigenvalue * max_coeff
