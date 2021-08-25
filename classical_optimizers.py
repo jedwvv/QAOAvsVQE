@@ -421,6 +421,7 @@ Function value obtained: 0
                              xtol_abs = 1e-12,
                              xtol_rel = 1e-10,
                              maxeval = self._options['maxeval'])
+        
         if self._options['disp']:
             print(res.message)
         
