@@ -22,8 +22,9 @@ def main(args = None):
 
     print("Arguments: {}".format(args))
     print("Now generating QUBOs with {} cars {} routes".format(args["no_cars"], args["no_routes"]))
-    for qubo_no in tqdm(range(101, args["no_samples"])):
+    for qubo_no in tqdm(range(320, args["no_samples"])):
         generate_valid_qubo(args, qubo_no)
+    generate_valid_qubo(args, 10000)
     
 
 def generate_valid_qubo(args, qubo_no):

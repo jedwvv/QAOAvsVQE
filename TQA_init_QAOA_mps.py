@@ -49,7 +49,7 @@ def main(args = None):
     optimizer = NLOPT_Optimizer(method = method, result_message=True)
     # optimizer = COBYLA()
     backend = Aer.get_backend("aer_simulator_matrix_product_state")
-    quantum_instance = QuantumInstance(backend = backend, shots = 1024)
+    quantum_instance = QuantumInstance(backend = backend, shots = 8192)
     approx_ratios = []
     prob_s_s = []
     p_max = args["p_max"]
@@ -113,11 +113,11 @@ def main(args = None):
     print_to_file("Prob_success per layer: {}".format(prob_s_s))
     save_results = np.append(approx_ratios, prob_s_s)
     if fourier_parametrise:
-        with open('results_{}cars{}routes/TQA_F_{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
+        with open('results_{}cars{}routes_mps/TQA_F_{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
             np.savetxt(f, save_results, delimiter=',')
         print_to_file("Results saved in results_{}cars{}routes_mps/TQA_F_{}.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
     else:
-        with open('results_{}cars{}routes/TQA_NF_{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
+        with open('results_{}cars{}routes_mps/TQA_NF_{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
             np.savetxt(f, save_results, delimiter=',')
         print_to_file("Results saved in results_{}cars{}routes_mps/TQA_NF_{}.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
     finish = time()
