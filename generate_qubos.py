@@ -22,10 +22,8 @@ def main(args = None):
 
     print("Arguments: {}".format(args))
     print("Now generating QUBOs with {} cars {} routes".format(args["no_cars"], args["no_routes"]))
-    for qubo_no in tqdm(range(320, args["no_samples"])):
+    for qubo_no in tqdm(range(args["no_samples"])):
         generate_valid_qubo(args, qubo_no)
-    generate_valid_qubo(args, 10000)
-    
 
 def generate_valid_qubo(args, qubo_no):
     infeasible = True
@@ -52,7 +50,7 @@ def generate_valid_qubo(args, qubo_no):
 
     #Save generated valid qubo
     with open('qubos_{}_car_{}_routes/qubo_{}.pkl'.format(args["no_cars"], args["no_routes"], qubo_no), 'wb') as f:
-        pkl.dump([qubo, max_coeff, operator, offset, routes],f)
+        pkl.dump([qubo, max_coeff, operator, offset, routes, classical_result], f)
 
 def generate_qubo(args):
     G, all_routes = generate_problem(args)
