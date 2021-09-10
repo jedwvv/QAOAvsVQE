@@ -32,7 +32,7 @@ def generate_valid_qubo(args, qubo_no):
             qubo, max_coeff, operator, offset, _, _, results = generate_qubo(args)
 
             #Classically solve generated QUBO
-            classical_result = solve_classically(qubo)
+            classical_result, worst_result = solve_classically(qubo)
             #Check solution
             variables_dict = classical_result.variables_dict
             routes = filter_solutions(results, variables_dict, args["no_cars"])
@@ -94,10 +94,15 @@ def solve_classically(qubo):
     Returns:
         [type]: [description]
     """
+    from copy import deepcopy
+    from qiskit_optimization.problems.quadratic_objective import ObjSense
     exact_mes = NumPyMinimumEigensolver()
     exact = MinimumEigenOptimizer(exact_mes)
     exact_result = exact.solve(qubo)
-    return exact_result
+    qubo_2 = deepcopy(qubo)
+    qubo_2.objective.sense = ObjSense.MAXIMIZE
+    worst_result = exact.solve(qubo_2)
+    return exact_result, worst_result
 
 def arr_to_str(x_arr):
     """[summary]

@@ -22,6 +22,8 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
                                         include_custom = False,
                                         max_evals_grouped = 1
                                         )
+    random_energy = qaoa_instance.evaluate_energy_at_point(operator, [0,0]*reps)
+    
     if fourier_parametrise:
         qaoa_instance.set_parameterise_point_for_energy_evaluation(QAOAEx.convert_from_fourier_point)
     bounds = [(-np.pi/2, np.pi/2), (-np.pi/2, np.pi/2)]*reps
@@ -48,8 +50,7 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
         state = qaoa_instance.calculate_statevector_at_point(operator = operator, point = QAOAEx.convert_from_fourier_point(optimal_point, len(optimal_point)))
         qaoa_results.eigenstate = qaoa_instance.eigenvector_to_solutions(state, quadratic_program=qubo)
 
-
-    return qaoa_results, qc
+    return qaoa_results, qc, random_energy
 
 def generate_points(point, no_perturb, penalty):
     points = [point.copy() for _ in range(no_perturb+1)]
@@ -102,7 +103,7 @@ def get_costs(qubo):
     return sort_values
 
 def find_all_ground_states(qubo):
-    classical_result = solve_classically(qubo)
+    classical_result, worst_result = solve_classically(qubo)
     x_arr = classical_result.x
     opt_value = classical_result.fval
     x_str = arr_to_str(x_arr)
@@ -114,7 +115,7 @@ def find_all_ground_states(qubo):
             print("Other ground state(s) found: '{}'".format(sort_values[i][0]))
             x_s.append(sort_values[i][0])
     
-    return x_s, opt_value, classical_result
+    return x_s, opt_value, classical_result, worst_result
 
 
 def count_coupling_terms(operator):
