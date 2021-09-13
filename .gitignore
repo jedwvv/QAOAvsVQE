@@ -2,6 +2,7 @@ __pycache__/
 .vscode/
 .ipynb_checkpoints/
 cache/
+/qubos_7_car_3_routes/
 untitled.txt
 *.sh
 *.ipynb
