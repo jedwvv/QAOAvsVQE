@@ -11,6 +11,7 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
     construct_circ = False if "construct_circ" not in kwargs else kwargs["construct_circ"]
     fourier_parametrise = False if "fourier_parametrise" not in kwargs else kwargs["fourier_parametrise"]
     qubo = None if "fourier_parametrise" not in kwargs else kwargs["qubo"]
+    solve = True if "solve" not in kwargs else kwargs["solve"]
 
     qaoa_instance = QAOAEx.QAOACustom(quantum_instance = quantum_instance,
                                         reps = reps,
@@ -22,35 +23,39 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
                                         include_custom = False,
                                         max_evals_grouped = 1
                                         )
+
     random_energy = qaoa_instance.evaluate_energy_at_point(operator, [0,0]*reps)
-    
-    if fourier_parametrise:
-        qaoa_instance.set_parameterise_point_for_energy_evaluation(QAOAEx.convert_from_fourier_point)
-    bounds = [(-np.pi/2, np.pi/2), (-np.pi/2, np.pi/2)]*reps
-    
-    if "list_points" in kwargs:
-        list_points = kwargs["list_points"]
-        list_results = []
 
-        for point in list_points:
-            result = qaoa_instance.solve(operator, point, bounds=bounds)
+    if solve:    
+        if fourier_parametrise:
+            qaoa_instance.set_parameterise_point_for_energy_evaluation(QAOAEx.convert_from_fourier_point)
+        bounds = [(-np.pi/2, np.pi/2), (-np.pi/2, np.pi/2)]*reps
+        
+        if "list_points" in kwargs:
+            list_points = kwargs["list_points"]
+            list_results = []
+
+            for point in list_points:
+                result = qaoa_instance.solve(operator, point, bounds=bounds)
+                qc = qaoa_instance.get_optimal_circuit() if construct_circ else None
+                list_results.append( (result, qc) )
+
+            qaoa_results, qc = min(list_results, key=lambda x: x[0].eigenvalue)
+        else:
+            initial_point = kwargs["initial_point"] if "initial_points" in kwargs\
+                                                    else [ np.pi * (np.random.rand() - 0.5) for _ in range(2*reps) ]
+
+            qaoa_results = qaoa_instance.solve(operator, initial_point, bounds=bounds)
             qc = qaoa_instance.get_optimal_circuit() if construct_circ else None
-            list_results.append( (result, qc) )
+        
+        if fourier_parametrise and qubo:
+            optimal_point = qaoa_results.optimal_point
+            state = qaoa_instance.calculate_statevector_at_point(operator = operator, point = QAOAEx.convert_from_fourier_point(optimal_point, len(optimal_point)))
+            qaoa_results.eigenstate = qaoa_instance.eigenvector_to_solutions(state, quadratic_program=qubo)
+        return qaoa_results, qc, random_energy
 
-        qaoa_results, qc = min(list_results, key=lambda x: x[0].eigenvalue)
     else:
-        initial_point = kwargs["initial_point"] if "initial_points" in kwargs\
-                                                else [ np.pi * (np.random.rand() - 0.5) for _ in range(2*reps) ]
-
-        qaoa_results = qaoa_instance.solve(operator, initial_point, bounds=bounds)
-        qc = qaoa_instance.get_optimal_circuit() if construct_circ else None
-    
-    if fourier_parametrise and qubo:
-        optimal_point = qaoa_results.optimal_point
-        state = qaoa_instance.calculate_statevector_at_point(operator = operator, point = QAOAEx.convert_from_fourier_point(optimal_point, len(optimal_point)))
-        qaoa_results.eigenstate = qaoa_instance.eigenvector_to_solutions(state, quadratic_program=qubo)
-
-    return qaoa_results, qc, random_energy
+        return random_energy
 
 def generate_points(point, no_perturb, penalty):
     points = [point.copy() for _ in range(no_perturb+1)]
