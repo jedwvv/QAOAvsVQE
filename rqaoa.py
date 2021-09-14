@@ -246,7 +246,7 @@ def main(args=None):
 
     rqaoa.construct_initial_state()
     rqaoa.construct_mixer()
-    qaoa_results = rqaoa.solve_tqa_qaoa(1)
+    qaoa_results = rqaoa.solve_tqa_qaoa(2)
     print(qaoa_results)
     max_state = sorted(qaoa_results.eigenstate, key = lambda x: x[2], reverse=True)[0]
     var_values = {}
@@ -265,6 +265,7 @@ def main(args=None):
     print(rqaoa.replacements)
     print(rqaoa.result)
     print(var_values)
+    print(list(var_values.values()))
 
 if __name__ == '__main__':
     main()
