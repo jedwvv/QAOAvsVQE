@@ -201,15 +201,8 @@ def n_qbit_mixer(initial_state: QuantumCircuit):
     from qiskit.circuit.parameter import Parameter
     no_qubits = initial_state.num_qubits
     t = Parameter('t')
-    # print(initial_state.draw())
     mixer = QuantumCircuit(no_qubits)
-    # print(initial_state.inverse().draw())
     mixer.append(initial_state.inverse(), range(no_qubits))
-    # mixer.barrier()
     mixer.rz(2*t, range(no_qubits))
-    # mixer.barrier()
     mixer.append(initial_state, range(no_qubits))
-    # from qiskit.compiler import transpile
-    # test = transpile(mixer, basis_gates=["id", "rx", "ry", "rz", "cx"])
-    # print(test.draw())
     return mixer
