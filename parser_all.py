@@ -45,6 +45,7 @@ def parse():
                                 )
     required_named.add_argument("--method", "-O", required=False, help = "Set optimizer method from NLOPT library", type = str)
     parser.add_argument("--fourier", "-F", default = False, help = "Set whether to use FOURIER parametrisation or not", action = "store_true")
+    parser.add_argument("--biased", "-B", default = False, help = "Set whether to use biased correlations or not", action = "store_true")
     parser.add_argument("--visual",
                         "-V", default = False,
                         help="Activate routes visualisation with '-V' ",
