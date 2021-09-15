@@ -1,5 +1,4 @@
 from time import time
-
 start = time()
 
 import numpy as np
@@ -16,8 +15,74 @@ from classical_optimizers import NLOPT_Optimizer
 from qiskit_optimization import QuadraticProgram
 from qiskit.quantum_info import Pauli
 from qiskit.opflow.primitive_ops import PauliOp
-from QAOA_methods import CustomQAOA
+from QAOA_methods import CustomQAOA, find_all_ground_states
 from pprint import pprint
+
+def main(args=None):
+    start = time()
+    if args == None:
+        args = parse()
+    with open('qubos_{}_car_{}_routes/qubo_{}.pkl'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'rb') as f:
+        load_data = pkl.load(f)
+        if len(load_data) == 5:
+            qubo, max_coeff, operator, offset, routes = load_data
+        else:
+            qubo, max_coeff, operator, offset, routes, classical_result = load_data
+    rqaoa = RQAOA(qubo, args["no_cars"], args["no_routes"])
+    rqaoa.solve_classically()
+    print(rqaoa.result)
+    print("First round of TQA-QAOA. Results below:")
+    qaoa_results = rqaoa.solve_qaoa(2, tqa=True)
+    rqaoa.perform_substitution_from_qaoa_results(qaoa_results, biased = args["bias"])
+    print("Performed variable substition(s) and constructed new initial state and mixer.")
+    num_vars = rqaoa.qubo.get_num_vars()
+    print("Remaining variables: {}".format(num_vars))
+    t = 1
+    while num_vars > 1:
+        print("-"*50)
+        t+=1
+        qaoa_results = rqaoa.solve_qaoa(2, tqa=True)
+        print( "Round {} of TQA-QAOA. Results below:".format(t) )
+        rqaoa.perform_substitution_from_qaoa_results(qaoa_results, biased = args["bias"])
+        print("Performed variable substition(s) and constructed new initial state and mixer.")
+        num_vars = rqaoa.qubo.get_num_vars()
+        print("Remaining variables: {}".format(num_vars))
+    print("-"*50)
+    p=2
+    qaoa_results = rqaoa.solve_qaoa( p, point = [0]* (2*p) ) #qaoa with tqa = False by default here
+    print( "Final round of QAOA Done. Eigenstate below:" )
+    pprint(qaoa_results.eigenstate)
+    print( rqaoa.prob_s )
+    print( rqaoa.approx_s )
+    max_state = sorted(qaoa_results.eigenstate, key = lambda x: x[2], reverse=True)[0]
+    var_last = rqaoa.qubo.variables[0].name
+    rqaoa.var_values[var_last] = int(max_state[0])
+    var_values = rqaoa.var_values
+    replacements = rqaoa.replacements
+    while True:
+        for var, replacement in replacements.items():
+            if replacement == None:
+                continue
+            elif replacement[0] in var_values and var not in var_values and replacement[1] != None:
+                var_values[var] = var_values[ replacement[0] ] if replacement[1] == 1 else 1 - var_values[ replacement[0] ]
+        if len(var_values.keys()) == args["no_cars"]*args["no_routes"]:
+            break
+    print(rqaoa.result)
+    print(var_values)
+    list_values = list(var_values.values())
+    cost = rqaoa.original_qubo.objective.evaluate(var_values)
+    
+    print("{}, Cost: {}".format(list_values, cost))
+    save_results = np.array( [rqaoa.prob_s, rqaoa.approx_s] )
+    
+    if args["bias"]:
+        with open('results_{}cars{}routes_mps/Biased_RQAOA_{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
+            np.savetxt(f, save_results, delimiter=',')
+            print("Results saved in results_{}cars{}routes_mps/Biased_RQAOA_{}.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
+    else:
+        with open('results_{}cars{}routes_mps/Regular_RQAOA_{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
+            np.savetxt(f, save_results, delimiter=',')
+            print("Results saved in results_{}cars{}routes_mps/Regular_RQAOA_{}.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
 
 class RQAOA:
     def __init__(self, qubo, no_cars, no_routes):
@@ -44,6 +109,9 @@ class RQAOA:
         self.construct_mixer()
         self.get_random_energy()
         self.get_benchmark_energy()
+        self.prob_s = []
+        self.approx_s = []
+        self.optimal_point = None
 
     
     def construct_initial_state(self):
@@ -89,8 +157,11 @@ class RQAOA:
         self.mixer = mixer
     
     def solve_classically(self):
-        classical_result, _ = solve_classically(self.qubo)
+        x_s, opt_value, classical_result, _ = find_all_ground_states(self.qubo)
         self.result = classical_result
+        x_arr = classical_result.x
+        self.x_s =  [ x_str[::-1] for x_str in x_s ]
+        self.opt_value = opt_value
     
     def get_random_energy(self):
         #Get random benchmark energy for 0 layer QAOA (achieved by using layer 1 QAOA with [0,0] angles)
@@ -123,35 +194,39 @@ class RQAOA:
         self.benchmark_energy = min(self.benchmark_energy, temp) if self.benchmark_energy else temp
         return self.benchmark_energy
     
-    def solve_tqa_qaoa(self, p):
-        deltas = np.arange(0.45, 0.91, 0.05)
-        point = np.append( [ (i+1)/p for i in range(p) ] , [ 1-(i+1)/p for i in range(p) ] )
-        points = [delta*point for delta in deltas]
-        fourier_parametrise = True
-        if fourier_parametrise:
-            points = [ QAOAEx.convert_to_fourier_point(point, len(point)) for point in points ]
-        self.optimizer.set_options(maxeval = 1000)
-        qaoa_results, _, _ = CustomQAOA( self.operator,
-                                                    self.quantum_instance,
-                                                    self.optimizer,
-                                                    reps = p,
-                                                    initial_state = self.initial_state,
-                                                    mixer = self.mixer,
-                                                    fourier_parametrise = fourier_parametrise,
-                                                    list_points = points,
-                                                    qubo = self.qubo
-                                                    )
-        point = qaoa_results.optimal_point
-        qaoa_results.eigenvalue = sum( [ x[1] * x[2] for x in qaoa_results.eigenstate ] )
-        self.optimal_point = QAOAEx.convert_to_fourier_point(point, len(point)) if fourier_parametrise else point
-        self.qaoa_result = qaoa_results
-        return qaoa_results
-    
     def solve_qaoa(self, p, **kwargs):
-        point = self.optimal_point if 'point' not in kwargs else kwargs['point']
+        
+        if self.optimal_point and 'point' not in kwargs:
+            point = self.optimal_point
+        elif 'point' in kwargs:
+            point = kwargs['point']
+
         fourier_parametrise = True
         self.optimizer.set_options(maxeval = 1000)
-        qaoa_results, _, _ = CustomQAOA( self.operator,
+        
+        tqa = False if 'tqa' not in kwargs else kwargs['tqa']
+        if tqa:
+            deltas = np.arange(0.45, 0.91, 0.05)
+            point = np.append( [ (i+1)/p for i in range(p) ] , [ 1-(i+1)/p for i in range(p) ] )
+            points = [delta*point for delta in deltas]
+            fourier_parametrise = True
+            if fourier_parametrise:
+                points = [ QAOAEx.convert_to_fourier_point(point, len(point)) for point in points ]
+            self.optimizer.set_options(maxeval = 1000)
+            qaoa_results, _, _ = CustomQAOA( self.operator,
+                                                        self.quantum_instance,
+                                                        self.optimizer,
+                                                        reps = p,
+                                                        initial_state = self.initial_state,
+                                                        mixer = self.mixer,
+                                                        fourier_parametrise = fourier_parametrise,
+                                                        list_points = points,
+                                                        qubo = self.qubo
+                                                        )
+            
+        else:
+            point = point if point else [0]*(2*p)
+            qaoa_results, _, _ = CustomQAOA( self.operator,
                                         self.quantum_instance,
                                         self.optimizer,
                                         reps = p,
@@ -165,18 +240,34 @@ class RQAOA:
         qaoa_results.eigenvalue = sum( [ x[1] * x[2] for x in qaoa_results.eigenstate ] )
         self.optimal_point = QAOAEx.convert_to_fourier_point(point, len(point)) if fourier_parametrise else point
         self.qaoa_result = qaoa_results
-        return qaoa_results
-    
-    def perform_substitution_from_qaoa_results(self, qaoa_results, update_benchmark_energy=True):
+              
+        print("-"*50)
+        pprint(qaoa_results.eigenstate)
+        print("Eigenvalue: {}".format(qaoa_results.eigenvalue))
+        print("Optimal point: {}".format(qaoa_results.optimal_point))
+        print("Optimizer Evals: {}".format(qaoa_results.optimizer_evals))
+              
         sorted_eigenstate_by_energy = sorted(qaoa_results.eigenstate, key = lambda x: x[1])
         sorted_eigenstate_by_prob = sorted(qaoa_results.eigenstate, key = lambda x: x[2], reverse = True)
         scale = self.random_energy - self.result.fval
+        approx_quality = (self.random_energy - sorted_eigenstate_by_energy[0][1])/ scale 
+        energy_prob = {}
+        for x in qaoa_results.eigenstate:
+            energy_prob[ int(x[1]) ] = energy_prob.get(int(x[1]), 0) + x[2]
+        print("energy_prob: {}".format(energy_prob))
+        prob_s = energy_prob.get(int(x[1]), 0) / len(self.x_s) 
+        self.prob_s.append( prob_s )
+        self.approx_s.append( approx_quality )
         print( "QAOA lowest energy solution: {}".format(sorted_eigenstate_by_energy[0]) )
-        print( "Approx_quality: {}".format((self.random_energy - sorted_eigenstate_by_energy[0][1])/ scale ) )
+        print( "Approx_quality: {}".format(approx_quality) )
         print( "QAOA most probable solution: {}".format(sorted_eigenstate_by_prob[0]) )
         print( "Approx_quality: {}".format((self.random_energy - sorted_eigenstate_by_prob[0][1])/ scale) )
+
+        return qaoa_results
+    
+    def perform_substitution_from_qaoa_results(self, qaoa_results, update_benchmark_energy=True, biased = True):
         
-        correlations = self.get_correlations(qaoa_results.eigenstate)
+        correlations = self.get_biased_correlations(qaoa_results.eigenstate) if biased else self.get_correlations(qaoa_results.eigenstate)
         i, j = self.find_strongest_correlation(correlations)
         new_qubo = deepcopy(self.qubo)
         x_i, x_j = new_qubo.variables[i].name, new_qubo.variables[j].name
@@ -265,6 +356,28 @@ class RQAOA:
         n = len(x)
         correlations = np.zeros((n, n))
         for x, cost, prob in states:
+            for i in range(n):
+                for j in range(i):
+                    if x[i] == x[j]:
+                        correlations[i, j] += prob
+                    else:
+                        correlations[i, j] -= prob
+        return correlations
+    
+              
+    def get_biased_correlations(self, state) -> np.ndarray:
+        """
+        Get <Zi x Zj> correlation matrix from the eigenstate(state: Dict).
+
+        Returns:
+            A correlation matrix.
+        """
+        states = state
+        # print(states)
+        x, _, prob = states[0]
+        n = len(x)
+        correlations = np.zeros((n, n))
+        for x, cost, prob in states:
             if cost < self.benchmark_energy:
                 scaled_approx_quality = (self.benchmark_energy - cost)
                 for i in range(n):
@@ -291,67 +404,6 @@ class RQAOA:
         j = int(m_max - i*len(correlations))
 
         return (i, j)
-    
-
-def main(args=None):
-    start = time()
-    if args == None:
-        args = parse()
-    with open('qubos_{}_car_{}_routes/qubo_{}.pkl'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'rb') as f:
-        load_data = pkl.load(f)
-        if len(load_data) == 5:
-            qubo, max_coeff, operator, offset, routes = load_data
-        else:
-            qubo, max_coeff, operator, offset, routes, classical_result = load_data
-    rqaoa = RQAOA(qubo, args["no_cars"], args["no_routes"])
-    rqaoa.solve_classically()
-    print(rqaoa.result)
-    qaoa_results = rqaoa.solve_tqa_qaoa(2)
-    print("-"*50)
-    print("First round of TQA-QAOA Done. Results below:")
-    pprint(qaoa_results.eigenstate)
-    print("Eigenvalue: {}".format(qaoa_results.eigenvalue))
-    print("Optimal point: {}".format(qaoa_results.optimal_point))
-    print("Optimizer Evals: {}".format(qaoa_results.optimizer_evals))
-    rqaoa.perform_substitution_from_qaoa_results(qaoa_results)
-    print("Performed variable substition(s) and constructed new initial state and mixer.")
-    num_vars = rqaoa.qubo.get_num_vars()
-    print("Remaining variables: {}".format(num_vars))
-    while num_vars > 1:
-        print("-"*50)
-        qaoa_results = rqaoa.solve_qaoa(2)
-        print( "One round of QAOA Done. Results below:" )
-        pprint(qaoa_results.eigenstate)
-        print("Eigenvalue: {}".format(qaoa_results.eigenvalue))
-        print("Optimal point: {}".format(qaoa_results.optimal_point))
-        print("Optimizer Evals: {}".format(qaoa_results.optimizer_evals))
-        rqaoa.perform_substitution_from_qaoa_results(qaoa_results)
-        print("Performed variable substition(s) and constructed new initial state and mixer.")
-        num_vars = rqaoa.qubo.get_num_vars()
-        print("Remaining variables: {}".format(num_vars))
-    print("-"*50)
-    p=2
-    qaoa_results = rqaoa.solve_qaoa( p, point = [0]* (2*p) )
-    print( "Final round of QAOA Done. Eigenstate below:" )
-    pprint(qaoa_results.eigenstate)
-    max_state = sorted(qaoa_results.eigenstate, key = lambda x: x[2], reverse=True)[0]
-    var_last = rqaoa.qubo.variables[0].name
-    rqaoa.var_values[var_last] = int(max_state[0])
-    var_values = rqaoa.var_values
-    replacements = rqaoa.replacements
-    while True:
-        for var, replacement in replacements.items():
-            if replacement == None:
-                continue
-            elif replacement[0] in var_values and var not in var_values and replacement[1] != None:
-                var_values[var] = var_values[ replacement[0] ] if replacement[1] == 1 else 1 - var_values[ replacement[0] ]
-        if len(var_values.keys()) == args["no_cars"]*args["no_routes"]:
-            break
-    print(rqaoa.result)
-    print(var_values)
-    list_values = list(var_values.values())
-    cost = rqaoa.original_qubo.objective.evaluate(var_values)
-    print("{}, Cost: {}".format(list_values, cost))
 
 if __name__ == '__main__':
     main()
