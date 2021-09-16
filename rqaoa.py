@@ -76,13 +76,13 @@ def main(args=None):
     save_results = np.array( [rqaoa.prob_s, rqaoa.approx_s] )
     
     if args["bias"]:
-        with open('results_{}cars{}routes_mps/Biased_RQAOA_{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
+        with open('results_{}cars{}routes_mps/Biased_RQAOA_{}_tan.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
             np.savetxt(f, save_results, delimiter=',')
-            print("Results saved in results_{}cars{}routes_mps/Biased_RQAOA_{}.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
+            print("Results saved in results_{}cars{}routes_mps/Biased_RQAOA_{}_tan.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
     else:
-        with open('results_{}cars{}routes_mps/Regular_RQAOA_{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
+        with open('results_{}cars{}routes_mps/Regular_RQAOA_{}_new.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
             np.savetxt(f, save_results, delimiter=',')
-            print("Results saved in results_{}cars{}routes_mps/Regular_RQAOA_{}.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
+            print("Results saved in results_{}cars{}routes_mps/Regular_RQAOA_{}_new.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
 
 class RQAOA:
     def __init__(self, qubo, no_cars, no_routes):
@@ -255,7 +255,7 @@ class RQAOA:
         for x in qaoa_results.eigenstate:
             energy_prob[ int(x[1]) ] = energy_prob.get(int(x[1]), 0) + x[2]
         print("energy_prob: {}".format(energy_prob))
-        prob_s = energy_prob.get(int(x[1]), 0) / len(self.x_s) 
+        prob_s = energy_prob.get(int(self.result.fval), 0)
         self.prob_s.append( prob_s )
         self.approx_s.append( approx_quality )
         print( "QAOA lowest energy solution: {}".format(sorted_eigenstate_by_energy[0]) )
@@ -378,8 +378,7 @@ class RQAOA:
         n = len(x)
         correlations = np.zeros((n, n))
         for x, cost, prob in states:
-            if cost < self.benchmark_energy:
-                scaled_approx_quality = (self.benchmark_energy - cost)
+                scaled_approx_quality = np.arctan(self.benchmark_energy - cost)/np.pi + 0.5
                 for i in range(n):
                     for j in range(i):
                         if x[i] == x[j]:
