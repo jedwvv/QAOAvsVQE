@@ -49,8 +49,10 @@ def main(args=None):
         print("Remaining variables: {}".format(num_vars))
 
     p=2
-    qaoa_results = rqaoa.solve_qaoa( p, point = [0]* (2*p) ) #qaoa with tqa = False by default here
     print( "Final round of QAOA Done. Eigenstate below:" )
+    qaoa_results = rqaoa.solve_qaoa( p, point = [0]* (2*p) ) #qaoa with tqa = False by default here
+    
+    print( get_costs(rqaoa.qubo) )
     
     print( "Probabilities: {}".format(rqaoa.prob_s) )
     print( "Approx Qualities: {}".format(rqaoa.approx_s) )
@@ -123,7 +125,7 @@ class RQAOA:
         self.offset = offset
         if self.symmetrise:
             self.symmetrise_qubo()
-        self.quantum_instance = QuantumInstance(backend = Aer.get_backend("aer_simulator_matrix_product_state"), shots = 1024)
+        self.quantum_instance = QuantumInstance(backend = Aer.get_backend("aer_simulator_matrix_product_state"), shots = 4096)
         self.replacements = {var.name:None for var in var_list}
         self.no_cars = no_cars
         self.no_routes = no_routes
@@ -496,7 +498,7 @@ class RQAOA:
         n = len(x)
         correlations = np.zeros((n, n))
         for x, cost, prob in states:
-                scaled_approx_quality = 1 / ( 1 + 2 ^ (-self.benchmark_energy + cost) )
+                scaled_approx_quality = 1 / ( 1 + 2 ** (-self.benchmark_energy + cost) )
                 for i in range(n):
                     for j in range(i):
                         if x[i] == x[j]:

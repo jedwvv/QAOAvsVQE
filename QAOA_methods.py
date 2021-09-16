@@ -13,7 +13,7 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
     solve = kwargs.get("solve", True)
     qaoa_instance = QAOAEx.QAOACustom(quantum_instance = quantum_instance,
                                         reps = reps,
-                                        force_shots = False,
+                                        force_shots = True,
                                         optimizer = optimizer,
                                         qaoa_name = "example_qaoa",
                                         initial_state = initial_state,
