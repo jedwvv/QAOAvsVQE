@@ -104,11 +104,11 @@ def main(args=None):
 
 class RQAOA:
     def __init__(self, qubo, no_cars, no_routes, **kwargs):
-        opt_str = kwargs.get('opt_str', "LN_BOBYQA")
+        opt_str = kwargs.get('opt_str', "LN_SBPLX")
         self.symmetrise = kwargs.get('symmetrise', False)
         var_list = qubo.variables
         self.optimizer = NLOPT_Optimizer(opt_str)
-        self.optimizer.set_options(max_eval = 100)
+        self.optimizer.set_options(max_eval = 1000)
         self.original_qubo = qubo
         self.qubo = qubo
         self.solve_classically()
@@ -326,14 +326,18 @@ class RQAOA:
         qaoa_results.eigenvalue = sum( [ x[1] * x[2] for x in qaoa_results.eigenstate ] )
         self.optimal_point = QAOAEx.convert_to_fourier_point(point, len(point)) if fourier_parametrise else point
         self.qaoa_result = qaoa_results
+
+        #Sort states by increasing energy and decreasing probability
+        sorted_eigenstate_by_energy = sorted(qaoa_results.eigenstate, key = lambda x: x[1])
+        sorted_eigenstate_by_prob = sorted(qaoa_results.eigenstate, key = lambda x: x[2], reverse = True)
         
-        self.print_state(qaoa_results)
+        #print energy-sorted state in a table
+        self.print_state(sorted_eigenstate_by_energy)
+
+        #Other print
         print("Eigenvalue: {}".format(qaoa_results.eigenvalue))
         print("Optimal point: {}".format(qaoa_results.optimal_point))
         print("Optimizer Evals: {}".format(qaoa_results.optimizer_evals))
-              
-        sorted_eigenstate_by_energy = sorted(qaoa_results.eigenstate, key = lambda x: x[1])
-        sorted_eigenstate_by_prob = sorted(qaoa_results.eigenstate, key = lambda x: x[2], reverse = True)
         scale = self.random_energy - self.result.fval
         approx_quality = (self.random_energy - sorted_eigenstate_by_energy[0][1])/ scale 
         energy_prob = {}
@@ -349,8 +353,7 @@ class RQAOA:
 
         return qaoa_results
     
-    def print_state(self, qaoa_results):
-            
+    def print_state(self, eigenstate):
             header = '|'
             for var in self.qubo.variables:
                 var_name = var.name
@@ -360,7 +363,7 @@ class RQAOA:
             print("-"*len(header))
             print(header)
             print("-"*len(header))
-            for item in qaoa_results.eigenstate:
+            for item in eigenstate:
                 string = '|'
                 for binary_var in item[0]:
                     string += '{:<5} '.format(binary_var) #Binary string
