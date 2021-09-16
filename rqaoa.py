@@ -12,7 +12,7 @@ from classical_optimizers import NLOPT_Optimizer
 from qiskit_optimization import QuadraticProgram, QiskitOptimizationError
 from qiskit.quantum_info import Pauli
 from qiskit.opflow.primitive_ops import PauliOp
-from QAOA_methods import CustomQAOA, find_all_ground_states
+from QAOA_methods import CustomQAOA, find_all_ground_states, get_costs #Debugging
 from pprint import pprint
 import numpy as np
 
@@ -26,7 +26,10 @@ def main(args=None):
             qubo, max_coeff, operator, offset, routes = load_data
         else:
             qubo, max_coeff, operator, offset, routes, classical_result = load_data
+    
+    #Initialize RQAOA object
     rqaoa = RQAOA(qubo, args["no_cars"], args["no_routes"], symmetrise = args["symmetrise"])
+
     print("First round of TQA-QAOA. Results below:")
     qaoa_results = rqaoa.solve_qaoa(2, tqa=True)
     rqaoa.perform_substitution_from_qaoa_results(qaoa_results, biased = args["bias"])
@@ -48,9 +51,9 @@ def main(args=None):
     p=2
     qaoa_results = rqaoa.solve_qaoa( p, point = [0]* (2*p) ) #qaoa with tqa = False by default here
     print( "Final round of QAOA Done. Eigenstate below:" )
-    rqaoa.print_state(qaoa_results)
-    print( rqaoa.prob_s )
-    print( rqaoa.approx_s )
+    
+    print( "Probabilities: {}".format(rqaoa.prob_s) )
+    print( "Approx Qualities: {}".format(rqaoa.approx_s) )
 
     if args["symmetrise"]:
         var_last = "X_anc" #Last variable should be ancilla if Hamiltonian was initially symmetrised
@@ -73,16 +76,20 @@ def main(args=None):
             break
         elif len(var_values.keys()) == args["no_cars"]*args["no_routes"]:
             break
-
-    var_values.pop("X_anc") #Remove Ancilla qubit in final result if it is in the variable values dict
-    print(rqaoa.result)
-    print(var_values)
+    
+    #Remove Ancilla qubit in final result if it is in the variable values dict
+    if "X_anc" in var_values:
+        var_values.pop("X_anc") 
+    
     list_values = list(var_values.values())
     cost = rqaoa.original_qubo.objective.evaluate(var_values)
-
-    print("{}, Cost: {}".format(list_values, cost))
-    save_results = np.array( [rqaoa.prob_s, rqaoa.approx_s] )
     
+    print(rqaoa.result)
+    print(var_values)
+    print("{}, Cost: {}".format(list_values, cost))
+    
+    #Save results
+    save_results = np.array( [rqaoa.prob_s, rqaoa.approx_s] )
     if args["bias"]:
         with open('results_{}cars{}routes_mps/Biased_RQAOA_{}_tan.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
             np.savetxt(f, save_results, delimiter=',')
@@ -91,16 +98,17 @@ def main(args=None):
         with open('results_{}cars{}routes_mps/Regular_RQAOA_{}_new.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
             np.savetxt(f, save_results, delimiter=',')
             print("Results saved in results_{}cars{}routes_mps/Regular_RQAOA_{}_new.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
+    
     finish = time()
-
     print("Time taken: {} s".format(finish - start))
 
 class RQAOA:
     def __init__(self, qubo, no_cars, no_routes, **kwargs):
-        opt_str = kwargs.get('opt_str', "LN_SBPLX")
+        opt_str = kwargs.get('opt_str', "LN_BOBYQA")
         self.symmetrise = kwargs.get('symmetrise', False)
         var_list = qubo.variables
         self.optimizer = NLOPT_Optimizer(opt_str)
+        self.optimizer.set_options(max_eval = 100)
         self.original_qubo = qubo
         self.qubo = qubo
         self.solve_classically()
@@ -178,7 +186,7 @@ class RQAOA:
             new_operator.append(pauli)
         symmetrised_qubo = QuadraticProgram()
         symmetrised_operator = sum(new_operator)
-        symmetrised_qubo.from_ising(symmetrised_operator, self.offset, linear=False)
+        symmetrised_qubo.from_ising(symmetrised_operator, self.offset, linear=True)
         self.qubo = symmetrised_qubo
         self.rename_qubo_variables()
         operator, _ = self.qubo.to_ising()
@@ -251,7 +259,6 @@ class RQAOA:
             point = self.optimal_point
         elif 'point' in kwargs:
             point = kwargs['point']
-        print("QAOA Checkmark 1")
         fourier_parametrise = True
         self.optimizer.set_options(maxeval = 1000)
         
@@ -270,7 +277,6 @@ class RQAOA:
                 if coeff != 0.0: #if at least one non-zero then return valid ( valid = True )
                     valid = True
             return valid
-        print("QAOA Checkmark 2")
         num_vars = self.qubo.get_num_vars()
 
         if num_vars > 1 and not valid_operator(self.qubo):
@@ -291,7 +297,6 @@ class RQAOA:
             if fourier_parametrise:
                 points = [ QAOAEx.convert_to_fourier_point(point, len(point)) for point in points ]
             self.optimizer.set_options(maxeval = 1000)
-            print("QAOA Checkmark 2.01") 
             qaoa_results, _ = CustomQAOA( self.operator,
                                                         self.quantum_instance,
                                                         self.optimizer,
@@ -302,11 +307,10 @@ class RQAOA:
                                                         list_points = points,
                                                         qubo = self.qubo
                                                         )
-            print("QAOA Checkmark 2.02") 
-
+ 
         else:
             point = point if point else [0]*(2*p)
-            print("QAOA Checkmark 2.11")   
+   
             qaoa_results, _, _ = CustomQAOA( self.operator,
                                         self.quantum_instance,
                                         self.optimizer,
@@ -317,11 +321,7 @@ class RQAOA:
                                         fourier_parametrise = fourier_parametrise,
                                         qubo = self.qubo
                                         )
-            print("QAOA Checkmark 2.12")   
-
-
-        print("QAOA Checkmark 3")   
-
+   
         point = qaoa_results.optimal_point
         qaoa_results.eigenvalue = sum( [ x[1] * x[2] for x in qaoa_results.eigenstate ] )
         self.optimal_point = QAOAEx.convert_to_fourier_point(point, len(point)) if fourier_parametrise else point
@@ -342,9 +342,9 @@ class RQAOA:
         prob_s = energy_prob.get(int(self.result.fval), 0)
         self.prob_s.append( prob_s )
         self.approx_s.append( approx_quality )
-        print( "QAOA lowest energy solution: {}".format(sorted_eigenstate_by_energy[0]) )
+        print( "\nQAOA lowest energy solution: {}".format(sorted_eigenstate_by_energy[0]) )
         print( "Approx_quality: {}".format(approx_quality) )
-        print( "QAOA most probable solution: {}".format(sorted_eigenstate_by_prob[0]) )
+        print( "\nQAOA most probable solution: {}".format(sorted_eigenstate_by_prob[0]) )
         print( "Approx_quality: {}".format((self.random_energy - sorted_eigenstate_by_prob[0][1])/ scale) )
 
         return qaoa_results
@@ -374,9 +374,12 @@ class RQAOA:
         correlations = self.get_biased_correlations(qaoa_results.eigenstate) if biased else self.get_correlations(qaoa_results.eigenstate)
         i, j = self.find_strongest_correlation(correlations)
         new_qubo = deepcopy(self.qubo)
-        x_i, x_j = new_qubo.variables[i].name, new_qubo.variables[j].name
+        x_i, x_j = str(new_qubo.variables[i].name), str(new_qubo.variables[j].name)
+        x_i, x_j = deepcopy(x_i), deepcopy(x_j)
         if x_i == "X_anc":
+            print("X_i was ancilla. Swapped")
             x_i, x_j = x_j, x_i #So ancilla qubit is never substituted out
+            i, j = j, i #Also swap i and j
         print( "\nCorrelation: < {} {} > = {}".format(x_i.replace("_", ""), x_j.replace("_", ""), correlations[i, j])) 
         
         car_block = int(x_i[2])
@@ -403,7 +406,6 @@ class RQAOA:
                     print("{} = 1 can also be determined from all other variables being 0 for car_{}".format(x_r, car_block))
         elif x_i[2] != x_j[2] and correlations[i, j] > 0: 
             # set x_i = x_j
-            print("Option 2 Variables: {} {}".format(x_i, x_j))
             new_qubo = new_qubo.substitute_variables(variables={x_i: (x_j, 1)})
             if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
                 raise QiskitOptimizationError('Infeasible due to variable substitution {} = {}'.format(x_i, x_j))            

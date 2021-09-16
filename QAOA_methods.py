@@ -5,14 +5,12 @@ from generate_qubos import solve_classically, arr_to_str
 import QAOAEx
 
 def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
-    
     initial_state = kwargs.get("initial_state", None)
     mixer = kwargs.get("mixer", None)
     construct_circ = kwargs.get("construct_circ", False)
     fourier_parametrise = kwargs.get("fourier_parametrise", False)
     qubo = kwargs.get("qubo", None) 
     solve = kwargs.get("solve", True)
-
     qaoa_instance = QAOAEx.QAOACustom(quantum_instance = quantum_instance,
                                         reps = reps,
                                         force_shots = False,
@@ -23,7 +21,7 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
                                         include_custom = False,
                                         max_evals_grouped = 1
                                         )
-
+    
     if solve:    
         if fourier_parametrise:
             qaoa_instance.set_parameterise_point_for_energy_evaluation(QAOAEx.convert_from_fourier_point)
@@ -32,12 +30,10 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
         if "list_points" in kwargs:
             list_points = kwargs["list_points"]
             list_results = []
-
             for point in list_points:
                 result = qaoa_instance.solve(operator, point, bounds=bounds)
                 qc = qaoa_instance.get_optimal_circuit() if construct_circ else None
                 list_results.append( (result, qc) )
-
             qaoa_results, qc = min(list_results, key=lambda x: x[0].eigenvalue)
         else:
             initial_point = kwargs["initial_point"] if "initial_points" in kwargs\
@@ -45,7 +41,6 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
 
             qaoa_results = qaoa_instance.solve(operator, initial_point, bounds=bounds)
             qc = qaoa_instance.get_optimal_circuit() if construct_circ else None
-        
         if fourier_parametrise and qubo:
             optimal_point = qaoa_results.optimal_point
             state = qaoa_instance.calculate_statevector_at_point(operator = operator, point = QAOAEx.convert_from_fourier_point(optimal_point, len(optimal_point)))
