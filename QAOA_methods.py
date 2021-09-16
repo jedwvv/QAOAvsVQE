@@ -6,12 +6,12 @@ import QAOAEx
 
 def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
     
-    initial_state = None if "initial_state" not in kwargs else kwargs["initial_state"]
-    mixer = None if "mixer" not in kwargs else kwargs["mixer"]
-    construct_circ = False if "construct_circ" not in kwargs else kwargs["construct_circ"]
-    fourier_parametrise = False if "fourier_parametrise" not in kwargs else kwargs["fourier_parametrise"]
-    qubo = None if "fourier_parametrise" not in kwargs else kwargs["qubo"]
-    solve = True if "solve" not in kwargs else kwargs["solve"]
+    initial_state = kwargs.get("initial_state", None)
+    mixer = kwargs.get("mixer", None)
+    construct_circ = kwargs.get("construct_circ", False)
+    fourier_parametrise = kwargs.get("fourier_parametrise", False)
+    qubo = kwargs.get("qubo", None) 
+    solve = kwargs.get("solve", True)
 
     qaoa_instance = QAOAEx.QAOACustom(quantum_instance = quantum_instance,
                                         reps = reps,
@@ -23,8 +23,6 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
                                         include_custom = False,
                                         max_evals_grouped = 1
                                         )
-
-    random_energy = qaoa_instance.evaluate_energy_at_point(operator, [0,0]*reps)
 
     if solve:    
         if fourier_parametrise:
@@ -52,9 +50,10 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
             optimal_point = qaoa_results.optimal_point
             state = qaoa_instance.calculate_statevector_at_point(operator = operator, point = QAOAEx.convert_from_fourier_point(optimal_point, len(optimal_point)))
             qaoa_results.eigenstate = qaoa_instance.eigenvector_to_solutions(state, quadratic_program=qubo)
-        return qaoa_results, qc, random_energy
+        return qaoa_results, qc
 
     else:
+        random_energy = qaoa_instance.evaluate_energy_at_point(operator, [0,0]*reps)
         return random_energy
 
 def generate_points(point, no_perturb, penalty):
