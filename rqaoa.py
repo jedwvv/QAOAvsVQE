@@ -94,6 +94,12 @@ def main(args=None):
         with open('results_{}cars{}routes_mps/Biased_RQAOA_{}_tan.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
             np.savetxt(f, save_results, delimiter=',')
             print("Results saved in results_{}cars{}routes_mps/Biased_RQAOA_{}_tan.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
+    
+    elif args["symmetrise"]:
+        with open('results_{}cars{}routes_mps/Biased_RQAOA_{}_tan.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
+            np.savetxt(f, save_results, delimiter=',')
+            print("Results saved in results_{}cars{}routes_mps/Symmetrised_RQAOA_{}_new.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
+    
     else:
         with open('results_{}cars{}routes_mps/Regular_RQAOA_{}_new.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
             np.savetxt(f, save_results, delimiter=',')
