@@ -13,7 +13,7 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
     solve = kwargs.get("solve", True)
     qaoa_instance = QAOAEx.QAOACustom(quantum_instance = quantum_instance,
                                         reps = reps,
-                                        force_shots = True,
+                                        force_shots = False,
                                         optimizer = optimizer,
                                         qaoa_name = "example_qaoa",
                                         initial_state = initial_state,
@@ -25,7 +25,7 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
     if solve:    
         if fourier_parametrise:
             qaoa_instance.set_parameterise_point_for_energy_evaluation(QAOAEx.convert_from_fourier_point)
-        bounds = [(-np.pi/2, np.pi/2), (-np.pi/2, np.pi/2)]*reps
+        bounds = [(-np.pi, np.pi), (-np.pi, np.pi)]*reps
         
         if "list_points" in kwargs:
             list_points = kwargs["list_points"]
@@ -49,7 +49,7 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
 
     else:
         random_energy = qaoa_instance.evaluate_energy_at_point(operator, [0,0]*reps)
-        return random_energy
+        return random_energy, None
 
 def generate_points(point, no_perturb, penalty):
     points = [point.copy() for _ in range(no_perturb+1)]

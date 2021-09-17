@@ -12,7 +12,7 @@ from classical_optimizers import NLOPT_Optimizer
 from qiskit_optimization import QuadraticProgram, QiskitOptimizationError
 from qiskit.quantum_info import Pauli
 from qiskit.opflow.primitive_ops import PauliOp
-from QAOA_methods import CustomQAOA, find_all_ground_states, get_costs #Debugging
+from QAOA_methods import CustomQAOA, find_all_ground_states, get_costs
 from pprint import pprint
 import numpy as np
 
@@ -27,10 +27,13 @@ def main(args=None):
         else:
             qubo, max_coeff, operator, offset, routes, classical_result = load_data
     
+    #Normalize qubo (Can recover original qubo via normalize_factor * qubo_objective )
+    qubo, normalize_factor = reduce_qubo(qubo)
+    
     #Initialize RQAOA object
     rqaoa = RQAOA(qubo, args["no_cars"], args["no_routes"], symmetrise = args["symmetrise"])
 
-    print("First round of TQA-QAOA. Results below:")
+    print("First round of TQA-QAOA...")
     qaoa_results = rqaoa.solve_qaoa(2, tqa=True)
     rqaoa.perform_substitution_from_qaoa_results(qaoa_results, biased = args["bias"])
     print("Performed variable substition(s) and constructed new initial state and mixer.")
@@ -48,11 +51,13 @@ def main(args=None):
         num_vars = rqaoa.qubo.get_num_vars()
         print("Remaining variables: {}".format(num_vars))
 
-    p=2
     print( "Final round of QAOA Done. Eigenstate below:" )
-    qaoa_results = rqaoa.solve_qaoa( p, point = [0]* (2*p) ) #qaoa with tqa = False by default here
+    p=2
+    points = [ [ np.pi * (np.random.rand() - 0.5) for _ in range(2*p) ] for _ in range(10) ]  + [ [ 0 for _ in range(2*p) ] ]
+    qaoa_results = rqaoa.solve_qaoa( p, points = points )
     
-    print( get_costs(rqaoa.qubo) )
+    print( "Final states" )
+    pprint( get_costs(rqaoa.qubo) )
     
     print( "Probabilities: {}".format(rqaoa.prob_s) )
     print( "Approx Qualities: {}".format(rqaoa.approx_s) )
@@ -98,7 +103,7 @@ def main(args=None):
             print("Results saved in results_{}cars{}routes_mps/Biased_RQAOA_{}_tan.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
     
     elif args["symmetrise"]:
-        with open('results_{}cars{}routes_mps/Biased_RQAOA_{}_tan.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
+        with open('results_{}cars{}routes_mps/Symmetrised_RQAOA_{}_tan.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'w') as f:
             np.savetxt(f, save_results, delimiter=',')
             print("Results saved in results_{}cars{}routes_mps/Symmetrised_RQAOA_{}_new.csv".format(args["no_cars"], args["no_routes"], args["no_samples"]))
     
@@ -110,6 +115,19 @@ def main(args=None):
     finish = time()
     print("Time taken: {} s".format(finish - start))
 
+def reduce_qubo(qubo):
+    #Perform reduction as many times possible up to some threshold
+    max_coeff = np.max( np.append( qubo.objective.linear.to_array(), qubo.objective.quadratic.to_array() ) )
+    total_normalize_factor = 1.0 #To recover original qubo by multiplying this number to its objective
+    while np.round(max_coeff) > 15.0:
+        factor = np.round(np.log(max_coeff))
+        qubo.objective.linear._coefficients = qubo.objective.linear._coefficients / factor
+        qubo.objective.quadratic._coefficients = qubo.objective.quadratic._coefficients / factor
+        qubo.objective.constant = qubo.objective.constant / factor
+        total_normalize_factor *= factor
+        max_coeff = np.max( np.append( qubo.objective.linear.to_array(), qubo.objective.quadratic.to_array() ) )
+    return qubo, total_normalize_factor 
+    
 class RQAOA:
     def __init__(self, qubo, no_cars, no_routes, **kwargs):
         opt_str = kwargs.get('opt_str', "LN_SBPLX")
@@ -177,7 +195,7 @@ class RQAOA:
         if self.symmetrise:
             ancilla_reg = QuantumRegister(1, 'ancilla')
             self.initial_state.add_register(ancilla_reg)
-            self.initial_state.h(ancilla_reg[0])
+            self.initial_state.h(ancilla_reg[0])    
     
     def symmetrise_qubo(self):
         new_operator = []
@@ -199,13 +217,13 @@ class RQAOA:
         self.rename_qubo_variables()
         operator, _ = self.qubo.to_ising()
         self.operator = operator
-    
+        
     def rename_qubo_variables(self):
         original_qubo = self.original_qubo
         qubo = self.qubo
         variable_names = [ variable.name for variable in qubo.variables ]
         original_variable_names = [ (variable.name, 1) for variable in original_qubo.variables ]
-        new_variable_names = original_variable_names + [("X_anc", 1)]
+        new_variable_names = original_variable_names + [("X_anc", 1)] if self.symmetrise else original_variable_names
         variables_dict = dict(zip(variable_names, new_variable_names))
         for (variable_name, new_variable_name) in variables_dict.items():
             qubo.binary_var(name = new_variable_name[0])
@@ -234,7 +252,7 @@ class RQAOA:
     
     def get_random_energy(self):
         #Get random benchmark energy for 0 layer QAOA (achieved by using layer 1 QAOA with [0,0] angles)
-        random_energy = CustomQAOA(operator = self.operator,
+        random_energy, _ = CustomQAOA(operator = self.operator,
                     quantum_instance = self.quantum_instance,
                     optimizer = self.optimizer,
                     reps = 1,
@@ -244,11 +262,14 @@ class RQAOA:
                     )
         temp = random_energy
         self.random_energy = temp + self.offset
+        if np.round( self.random_energy - self.opt_value, 6 ) < 1e-7:
+            print("0 layer QAOA converged to exact solution. Shifting value up by |exact_ground_energy| instead to avoid dividing by 0 in approx quality.")
+            self.random_energy += np.abs(self.random_energy)
         print("random energy: {}".format(self.random_energy))
             
     def get_benchmark_energy(self):
         #Get benchmark energy with 0-layer QAOA (just as random_energy)
-        benchmark_energy = CustomQAOA(operator = self.operator,
+        benchmark_energy, _ = CustomQAOA(operator = self.operator,
                     quantum_instance = self.quantum_instance,
                     optimizer = self.optimizer,
                     reps = 1,
@@ -262,41 +283,42 @@ class RQAOA:
         return self.benchmark_energy
     
     def solve_qaoa(self, p, **kwargs):
-        print("Now solving QAOA")
         if self.optimal_point and 'point' not in kwargs:
             point = self.optimal_point
-        elif 'point' in kwargs:
-            point = kwargs['point']
+        else:
+            point = kwargs.get("point", None)
         fourier_parametrise = True
         self.optimizer.set_options(maxeval = 1000)
-        
         tqa = kwargs.get('tqa', False)
-
-        #Can sometimes end up with zero operator when substituting variables,
+        points = kwargs.get("points", None)
+        symmetrised = self.symmetrise
+        
+        #Can sometimes end up with zero operator when substituting variables when we only have ZZ terms (symmetrised qubo),
         #e.g. if H = ZIZ (=Z1Z3 for 3 qubit system) and we know <Z1 Z3> = 1, so after substition H = II for the 2 qubit system.
         #H = II is then treated as an offset and not a Pauli operator, so the QUBO results to a zero (pauli) operator.
         #In such cases it means the QUBO is fully solved and any solution will do, so chose "0" string as the solution. 
         #This also makes sure that ancilla bit is in 0 state. (we could equivalently choose something like "100" instead the "000" for 3 remaining variables)
         def valid_operator(qubo):
+            num_vars = qubo.get_num_vars()
             operator, _ = qubo.to_ising()
             valid = False
+            operator = [operator] if isinstance(operator, PauliOp) else operator #Make a list if only one single PauliOp
             for op_1 in operator:
                 coeff, op_1 = op_1.to_pauli_op().coeff, op_1.to_pauli_op().primitive
-                if coeff != 0.0: #if at least one non-zero then return valid ( valid = True )
+                if coeff >= 1e-6 and op_1 != "I"*num_vars: #if at least one non-zero then return valid ( valid = True )
                     valid = True
             return valid
+        
+        valid_op = valid_operator(self.qubo)
         num_vars = self.qubo.get_num_vars()
 
-        if num_vars > 1 and not valid_operator(self.qubo):
+        if num_vars >= 1 and symmetrised and not valid_op:
             qaoa_results = self.qaoa_result
             qaoa_results.eigenstate = [ ('0'*num_vars, self.qubo.objective.evaluate([0]*num_vars), 1) ]
             qaoa_results.optimizer_evals = 0
             qaoa_results.eigenvalue = self.qubo.objective.evaluate([0]*num_vars)
-
-        elif num_vars == 1:
-            qaoa_results = self.qaoa_result
-            qaoa_results.eigenstate = [ ('0', self.qubo.objective.evaluate([0]), 1) ]
-
+            qc = QuantumCircuit(num_vars)
+            
         elif tqa:
             deltas = np.arange(0.45, 0.91, 0.05)
             point = np.append( [ (i+1)/p for i in range(p) ] , [ 1-(i+1)/p for i in range(p) ] )
@@ -304,7 +326,21 @@ class RQAOA:
             fourier_parametrise = True
             if fourier_parametrise:
                 points = [ QAOAEx.convert_to_fourier_point(point, len(point)) for point in points ]
-            self.optimizer.set_options(maxeval = 1000)
+            qaoa_results, _ = CustomQAOA( self.operator,
+                                                        self.quantum_instance,
+                                                        self.optimizer,
+                                                        reps = p,
+                                                        initial_state = self.initial_state,
+                                                        mixer = self.mixer,
+                                                        fourier_parametrise = fourier_parametrise,
+                                                        list_points = points,
+                                                        qubo = self.qubo
+                                                        )
+        
+        elif points is not None:
+            fourier_parametrise = True
+            if fourier_parametrise:
+                points = [ QAOAEx.convert_to_fourier_point(point, len(point)) for point in points ]
             qaoa_results, _ = CustomQAOA( self.operator,
                                                         self.quantum_instance,
                                                         self.optimizer,
@@ -316,10 +352,26 @@ class RQAOA:
                                                         qubo = self.qubo
                                                         )
  
+        elif point is None:
+            list_points = [0]*(2*p) + [ [ 2 * np.pi* ( np.random.rand() - 0.5 ) for _ in range(2*p)] for _ in range(5) ]
+            fourier_parametrise = True
+            if fourier_parametrise:
+                points = [ QAOAEx.convert_to_fourier_point(point, len(point)) for point in points ]
+            qaoa_results, _ = CustomQAOA( self.operator,
+                                        self.quantum_instance,
+                                        self.optimizer,
+                                        reps = p,
+                                        initial_state = self.initial_state,
+                                        list_points = points,
+                                        mixer = self.mixer,
+                                        fourier_parametrise = fourier_parametrise,
+                                        qubo = self.qubo
+                                        )
         else:
-            point = point if point else [0]*(2*p)
-   
-            qaoa_results, _, _ = CustomQAOA( self.operator,
+            fourier_parametrise = True
+            if fourier_parametrise:
+                point =  QAOAEx.convert_to_fourier_point(point, len(point))
+            qaoa_results, _ = CustomQAOA( self.operator,
                                         self.quantum_instance,
                                         self.optimizer,
                                         reps = p,
@@ -329,7 +381,7 @@ class RQAOA:
                                         fourier_parametrise = fourier_parametrise,
                                         qubo = self.qubo
                                         )
-   
+            
         point = qaoa_results.optimal_point
         qaoa_results.eigenvalue = sum( [ x[1] * x[2] for x in qaoa_results.eigenstate ] )
         self.optimal_point = QAOAEx.convert_to_fourier_point(point, len(point)) if fourier_parametrise else point
@@ -342,22 +394,22 @@ class RQAOA:
         #print energy-sorted state in a table
         self.print_state(sorted_eigenstate_by_energy)
 
-        #Other print
+        #Other print stuff
         print("Eigenvalue: {}".format(qaoa_results.eigenvalue))
         print("Optimal point: {}".format(qaoa_results.optimal_point))
         print("Optimizer Evals: {}".format(qaoa_results.optimizer_evals))
         scale = self.random_energy - self.result.fval
-        approx_quality = (self.random_energy - sorted_eigenstate_by_energy[0][1])/ scale 
+        approx_quality = np.round( (self.random_energy - sorted_eigenstate_by_energy[0][1])/ scale, 3 )
         energy_prob = {}
         for x in qaoa_results.eigenstate:
-            energy_prob[ int(x[1]) ] = energy_prob.get(int(x[1]), 0) + x[2]
-        prob_s = energy_prob.get(int(self.result.fval), 0)
+            energy_prob[ np.round(x[1], 6) ] = energy_prob.get(np.round(x[1], 6), 0) + x[2]
+        prob_s = np.round( energy_prob.get(np.round(self.result.fval, 6), 0), 6 )
         self.prob_s.append( prob_s )
         self.approx_s.append( approx_quality )
         print( "\nQAOA lowest energy solution: {}".format(sorted_eigenstate_by_energy[0]) )
         print( "Approx_quality: {}".format(approx_quality) )
         print( "\nQAOA most probable solution: {}".format(sorted_eigenstate_by_prob[0]) )
-        print( "Approx_quality: {}".format((self.random_energy - sorted_eigenstate_by_prob[0][1])/ scale) )
+        print( "Approx_quality: {}".format( ( np.round(self.random_energy - sorted_eigenstate_by_prob[0][1])/ scale, 3 ) ) ) 
 
         return qaoa_results
     
@@ -375,7 +427,7 @@ class RQAOA:
                 string = '|'
                 for binary_var in item[0]:
                     string += '{:<5} '.format(binary_var) #Binary string
-                string += '{:<6} '.format(np.round(item[1], 0)) #Cost
+                string += '{:<6} '.format(np.round(item[1], 2)) #Cost
                 string += '{:<5}|'.format(np.round(item[2], 3)) #Prob
                 print(string)
             print("-"*len(header))
@@ -384,18 +436,18 @@ class RQAOA:
         
         correlations = self.get_biased_correlations(qaoa_results.eigenstate) if biased else self.get_correlations(qaoa_results.eigenstate)
         i, j = self.find_strongest_correlation(correlations)
+        correlation = correlations[i, j]
         new_qubo = deepcopy(self.qubo)
-        x_i, x_j = str(new_qubo.variables[i].name), str(new_qubo.variables[j].name)
-        x_i, x_j = deepcopy(x_i), deepcopy(x_j)
+        x_i, x_j = new_qubo.variables[i].name, new_qubo.variables[j].name
         if x_i == "X_anc":
             print("X_i was ancilla. Swapped")
             x_i, x_j = x_j, x_i #So ancilla qubit is never substituted out
             i, j = j, i #Also swap i and j
-        print( "\nCorrelation: < {} {} > = {}".format(x_i.replace("_", ""), x_j.replace("_", ""), correlations[i, j])) 
+        print( "\nCorrelation: < {} {} > = {}".format(x_i.replace("_", ""), x_j.replace("_", ""), correlation)) 
         
         car_block = int(x_i[2])
         #If same car_block and x_i = x_j, then both must be 0 since only one 1 in a car block
-        if x_i[2] == x_j[2] and correlations[i, j] > 0 and len(self.car_blocks[car_block]) > 2: 
+        if x_i[2] == x_j[2] and correlation > 0 and len(self.car_blocks[car_block]) > 2: 
             # set x_i = x_j = 0
             new_qubo = new_qubo.substitute_variables({x_i: 0, x_j:0})
             if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
@@ -415,7 +467,7 @@ class RQAOA:
                         raise QiskitOptimizationError('Infeasible due to variable substitution {} = 1'.format(x_r))
                     self.car_blocks[car_block].remove(x_r)
                     print("{} = 1 can also be determined from all other variables being 0 for car_{}".format(x_r, car_block))
-        elif x_i[2] != x_j[2] and correlations[i, j] > 0: 
+        elif x_i[2] != x_j[2] and correlation > 0: 
             # set x_i = x_j
             new_qubo = new_qubo.substitute_variables(variables={x_i: (x_j, 1)})
             if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
@@ -450,11 +502,11 @@ class RQAOA:
             #2 set xi = -xj
             new_qubo = new_qubo.substitute_variables(variables={x_i: (x_j, -1)})
             if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
-                raise QiskitOptimizationError('Infeasible due to variable substitution {} = -{}'.format(x_i, x_j))      
+                raise QiskitOptimizationError('Infeasible due to variable substitution {} = -{}'.format(x_i, x_j))
             self.replacements[x_i] = (x_j, -1)
             self.car_blocks[car_block].remove(x_i)
         self.qubo = new_qubo
-        op, offset = new_qubo.to_ising()
+        op, offset = new_qubo.to_ising() 
         self.operator = op
         self.offset = offset
         self.construct_initial_state()
@@ -463,15 +515,13 @@ class RQAOA:
         #     temp = self.get_benchmark_energy()
         
         
-    def get_correlations(self, state) -> np.ndarray:
+    def get_correlations(self, states) -> np.ndarray:
         """
         Get <Zi x Zj> correlation matrix from the eigenstate(state: Dict).
 
         Returns:
             A correlation matrix.
         """
-        states = state
-        # print(states)
         x, _, prob = states[0]
         n = len(x)
         correlations = np.zeros((n, n))
@@ -485,26 +535,24 @@ class RQAOA:
         return correlations
     
               
-    def get_biased_correlations(self, state) -> np.ndarray:
+    def get_biased_correlations(self, states) -> np.ndarray:
         """
-        Get <Zi x Zj> correlation matrix from the eigenstate(state: Dict).
+        Get <Zi x Zj> correlation matrix from the eigenstate(states: Dict).
 
         Returns:
             A correlation matrix.
         """
-        states = state
-        # print(states)
         x, _, prob = states[0]
         n = len(x)
         correlations = np.zeros((n, n))
         for x, cost, prob in states:
-                scaled_approx_quality = 1 / ( 1 + 2 ** (-self.benchmark_energy + cost) )
-                for i in range(n):
-                    for j in range(i):
-                        if x[i] == x[j]:
-                            correlations[i, j] += scaled_approx_quality * prob
-                        else:
-                            correlations[i, j] -= scaled_approx_quality * prob
+            scaled_approx_quality = 1 / ( 1 + 2 ** (-self.benchmark_energy + cost) )
+            for i in range(n):
+                for j in range(i):
+                    if x[i] == x[j]:
+                        correlations[i, j] += scaled_approx_quality * prob
+                    else:
+                        correlations[i, j] -= scaled_approx_quality * prob
         return correlations
 
     def find_strongest_correlation(self, correlations):
@@ -514,7 +562,6 @@ class RQAOA:
         diagonal = np.diag( np.ones(len(correlations)) )
         abs_correlations = abs_correlations - diagonal
 
-
         # get index of maximum (by construction on off-diagonal)
         m_max = np.argmax(abs_correlations.flatten())
 
@@ -523,6 +570,7 @@ class RQAOA:
         j = int(m_max - i*len(correlations))
 
         return (i, j)
+
 
 if __name__ == '__main__':
     main()

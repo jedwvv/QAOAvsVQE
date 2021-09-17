@@ -58,9 +58,7 @@ def generate_qubo(args):
     qubo, linear, quadratic = build_qubo_unconstrained(G, routes_dictionary)
     qubo = add_qubo_constraints(qubo, args["no_cars"], args["no_routes"])
     penalty_multiplier = args["penalty_multiplier"]
-    # print("Before: ", qubo)
     qubo, max_coeff = convert_qubo(qubo, linear, quadratic, penalty_multiplier = penalty_multiplier)
-    # qubo.objective *= 2
     # print("After: ", qubo)
     op, offset = qubo.to_ising()
     # print("Operator:", op)
