@@ -1,3 +1,7 @@
+##Changes: Uses existing classical result if available, else solve
+##Changes: Allows using baseline QAOA and custom QAOA by parsing -C to use custom initial state
+##Changes: 
+
 from time import time
 import pickle as pkl
 from copy import deepcopy
@@ -12,7 +16,7 @@ from classical_optimizers import NLOPT_Optimizer
 from qiskit_optimization import QuadraticProgram, QiskitOptimizationError
 from qiskit.quantum_info import Pauli
 from qiskit.opflow.primitive_ops import PauliOp
-from QAOA_methods import CustomQAOA, find_all_ground_states, get_costs
+from QAOA_methods import CustomQAOA, find_all_ground_states
 from pprint import pprint
 import numpy as np
 
@@ -68,9 +72,6 @@ def main(args=None):
     points = [ [ np.pi * (np.random.rand() - 0.5) for _ in range(2*p) ] for _ in range(10) ]  + [ [ 0 for _ in range(2*p) ] ]
     qaoa_results = rqaoa.solve_qaoa( p, points = points )
     
-    print( "Final states" )
-    pprint( get_costs(rqaoa.qubo) )
-    
     print( "Probabilities: {}".format(rqaoa.prob_s) )
     print( "Approx Qualities of (lowest_energy_state, most_probable_state): {}".format(rqaoa.approx_s) )
 
@@ -118,14 +119,14 @@ def main(args=None):
         elif args["symmetrise"]:
             filedir = 'results_{}cars{}routes_mps/Symmetrised_RQAOA_{}_Cust_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
         else:
-            filedir = 'results_{}cars{}routes_mps/Symmetrised_RQAOA_{}_Cust_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+            filedir = 'results_{}cars{}routes_mps/Regular_RQAOA_{}_Cust_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
     else:
-        if args["bias"]: #Using regular QAOA
-            filedir = 'results_{}cars{}routes_mps/Biased_RQAOA_{}_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+        if args["bias"]: #Using baseline QAOA
+            filedir = 'results_{}cars{}routes_mps/Biased_RQAOA_{}_Base_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
         elif args["symmetrise"]:
-            filedir = 'results_{}cars{}routes_mps/Symmetrised_RQAOA_{}_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+            filedir = 'results_{}cars{}routes_mps/Symmetrised_RQAOA_{}_Base_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
         else:
-            filedir = 'results_{}cars{}routes_mps/Symmetrised_RQAOA_{}_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+            filedir = 'results_{}cars{}routes_mps/Regular_RQAOA_{}_Base_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
     
     #Save results to file
     save_results = np.append( rqaoa.prob_s, rqaoa.approx_s )
@@ -133,7 +134,7 @@ def main(args=None):
         np.savetxt(f, save_results, delimiter=',')
     print("Results saved in {}".format(filedir))
     
-    #END(main)
+    ##END(main)
     
 def reduce_qubo(qubo):
     #Perform reduction as many times possible up to some threshold

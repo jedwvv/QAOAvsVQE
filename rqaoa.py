@@ -12,8 +12,7 @@ from classical_optimizers import NLOPT_Optimizer
 from qiskit_optimization import QuadraticProgram, QiskitOptimizationError
 from qiskit.quantum_info import Pauli
 from qiskit.opflow.primitive_ops import PauliOp
-from QAOA_methods import CustomQAOA, find_all_ground_states, get_costs
-from pprint import pprint
+from QAOA_methods import CustomQAOA, find_all_ground_states
 import numpy as np
 
 def main(args=None):
@@ -57,9 +56,6 @@ def main(args=None):
     p=2
     points = [ [ np.pi * (np.random.rand() - 0.5) for _ in range(2*p) ] for _ in range(10) ]  + [ [ 0 for _ in range(2*p) ] ]
     qaoa_results = rqaoa.solve_qaoa( p, points = points )
-    
-#     print( "Final states" )
-#     pprint( get_costs(rqaoa.qubo) )
     
     print( "Probabilities: {}".format(rqaoa.prob_s) )
     print( "Approx Qualities of (lowest_energy_state, most_probable_state): {}".format(rqaoa.approx_s) )
@@ -463,17 +459,7 @@ class RQAOA:
             self.car_blocks[car_block].remove(x_i)
             self.car_blocks[car_block].remove(x_j)
             print("Two variable substitutions were performed due to extra information from constraints.")
-            if len(self.car_blocks[car_block]) == 1: #If only one remaining variable
-                x_r = self.car_blocks[car_block][0] #remaining variable
-                #Check if all other variables are 0 (then their sum should be 0) -> so x_r must be 1
-                check = sum( [self.var_values.get("X_{}_{}".format(car_block, route_no), 0) for route_no in range(self.no_routes)] )
-                if check == 0:
-                    new_qubo = new_qubo.substitute_variables({x_r: 1})
-                    if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
-                        raise QiskitOptimizationError('Infeasible due to variable substitution {} = 1'.format(x_r))
-                    self.car_blocks[car_block].remove(x_r)
-                    print("{} = 1 can also be determined from all other variables being 0 for car_{}".format(x_r, car_block))
-        
+      
         elif x_i[2] != x_j[2] and correlation > 0: 
             # set x_i = x_j
             new_qubo = new_qubo.substitute_variables(variables={x_i: (x_j, 1)})
@@ -513,6 +499,16 @@ class RQAOA:
                 raise QiskitOptimizationError('Infeasible due to variable substitution {} = -{}'.format(x_i, x_j))
             self.replacements[x_i] = (x_j, -1)
             self.car_blocks[car_block].remove(x_i)
+        
+        #If only one remaining variable and all other variables are 0, then remaining must be 1.
+        check = sum( [self.var_values.get("X_{}_{}".format(car_block, route_no), 0) for route_no in range(self.no_routes)] )
+        if len(self.car_blocks[car_block]) == 1 and check == 0: 
+            x_r = self.car_blocks[car_block][0] #remaining variable
+            new_qubo = new_qubo.substitute_variables({x_r: 1})
+            if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
+                raise QiskitOptimizationError('Infeasible due to variable substitution {} = 1'.format(x_r))
+            self.car_blocks[car_block].remove(x_r)
+            print("{} = 1 can also be determined from all other variables being 0 for car_{}".format(x_r, car_block))
         
         #Update variable eliminated QUBO
         self.qubo = new_qubo
