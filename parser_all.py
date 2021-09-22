@@ -47,6 +47,7 @@ def parse():
     parser.add_argument("--fourier", "-F", default = False, help = "Set whether to use FOURIER parametrisation or not", action = "store_true")
     parser.add_argument("--bias", "-B", default = False, help = "Set whether to use biased correlations or not", action = "store_true")
     parser.add_argument("--symmetrise", "-Y", default = False, help = "Set whether to symmetrise Hamiltonian initially or not", action = "store_true")
+    parser.add_argument("--customise", "-C", default = False, help = "Set whether to use Custom QAOA circuit or Regular", action = "store_true")
     parser.add_argument("--visual",
                         "-V", default = False,
                         help="Activate routes visualisation with '-V' ",
