@@ -487,19 +487,18 @@ class RQAOA:
         print( "\nCorrelation: < {} {} > = {}".format(x_i.replace("_", ""), x_j.replace("_", ""), correlation)) 
         
         car_block = int(x_i[2])
-        #If same car_block and x_i = x_j, then both must be 0 since only one 1 in a car block
-        
-        if x_i[2] == x_j[2] and correlation > 0 and len(self.car_blocks[car_block]) > 2: 
-            # set x_i = x_j = 0
-            new_qubo = new_qubo.substitute_variables({x_i: 0, x_j:0})
-            if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
-                raise QiskitOptimizationError('Infeasible due to variable substitution {} = {} = 0'.format(x_i, x_j))
-            self.var_values[x_i] = 0
-            self.var_values[x_j] = 0
-            self.car_blocks[car_block].remove(x_i)
-            self.car_blocks[car_block].remove(x_j)
-            print("Two variable substitutions were performed due to extra information from constraints.")                    
-        elif x_i[2] != x_j[2] and correlation > 0: 
+#         #If same car_block and x_i = x_j, then both must be 0 since only one 1 in a car block
+#         if x_i[2] == x_j[2] and correlation > 0 and len(self.car_blocks[car_block]) > 2: 
+#             # set x_i = x_j = 0
+#             new_qubo = new_qubo.substitute_variables({x_i: 0, x_j:0})
+#             if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
+#                 raise QiskitOptimizationError('Infeasible due to variable substitution {} = {} = 0'.format(x_i, x_j))
+#             self.var_values[x_i] = 0
+#             self.var_values[x_j] = 0
+#             self.car_blocks[car_block].remove(x_i)
+#             self.car_blocks[car_block].remove(x_j)
+#             print("Two variable substitutions were performed due to extra information from constraints.")                    
+        if correlation > 0: 
             # set x_i = x_j
             new_qubo = new_qubo.substitute_variables(variables={x_i: (x_j, 1)})
             if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
