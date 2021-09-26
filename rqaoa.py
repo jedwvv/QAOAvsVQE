@@ -247,7 +247,7 @@ class RQAOA:
         x_arr = classical_result.x
         self.x_s =  [ x_str[::-1] for x_str in x_s ]
         self.opt_value = opt_value
-    
+    solve
     def get_random_energy(self):
         #Get random benchmark energy for 0 layer QAOA (achieved by using layer 1 QAOA with [0,0] angles)
         random_energy, _ = CustomQAOA(operator = self.operator,
@@ -295,7 +295,7 @@ class RQAOA:
         #e.g. if H = ZIZ (=Z1Z3 for 3 qubit system) and we know <Z1 Z3> = 1, so after substition H = II for the 2 qubit system.
         #H = II is then treated as an offset and not a Pauli operator, so the QUBO results to a zero (pauli) operator.
         #In such cases it means the QUBO is fully solved and any solution will do, so chose "0" string as the solution. 
-        #This also makes sure that ancilla bit is in 0 state. (we could equivalently choose something like "100" instead the "000" for 3 remaining variables)
+        #This also makes sure that ancilla bit is in 0 state. (we could equivalently choose something like "100" instead the "000" for 3 remaining variables)solve
         def valid_operator(qubo):
             num_vars = qubo.get_num_vars()
             operator, _ = qubo.to_ising()
