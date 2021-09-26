@@ -291,7 +291,8 @@ class RQAOA:
             self.opt_value = opt_value
     
     def get_random_energy(self):
-        #Get random benchmark energy for 0 layer QAOA (achieved by using layer 1 QAOA with [0,0] angles)
+        #Get random benchmark energy for 0 layer QAOA (achieved by using layer 1 QAOA with [0,0] angles) and with only feasible states (custom initial state)
+        self.construct_initial_state()
         random_energy, _ = CustomQAOA(operator = self.operator,
                     quantum_instance = self.quantum_instance,
                     optimizer = self.optimizer,
@@ -300,6 +301,9 @@ class RQAOA:
                     mixer = self.mixer,
                     solve = False,
                     )
+        #To remove custom initial state if using BASE QAOA
+        if not self.customise: 
+            self.initial_state = None
         temp = random_energy
         self.random_energy = temp + self.offset
         if np.round( self.random_energy - self.opt_value, 6 ) < 1e-7:
@@ -541,8 +545,9 @@ class RQAOA:
         op, offset = new_qubo.to_ising() 
         self.operator = op
         self.offset = offset
-        self.construct_initial_state()
-        self.construct_mixer()
+        if self.customise:
+            self.construct_initial_state()
+            self.construct_mixer()
         
         
     def get_correlations(self, states) -> np.ndarray:
