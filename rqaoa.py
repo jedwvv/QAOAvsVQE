@@ -1,3 +1,7 @@
+##Changes: Uses existing classical result if available, else solve
+##Changes: Allows using baseline QAOA and custom QAOA by parsing -C to use custom initial state
+##Changes: 
+
 from time import time
 import pickle as pkl
 from copy import deepcopy
@@ -13,6 +17,7 @@ from qiskit_optimization import QuadraticProgram, QiskitOptimizationError
 from qiskit.quantum_info import Pauli
 from qiskit.opflow.primitive_ops import PauliOp
 from QAOA_methods import CustomQAOA, find_all_ground_states
+from pprint import pprint
 import numpy as np
 
 def main(args=None):
@@ -23,21 +28,31 @@ def main(args=None):
         load_data = pkl.load(f)
         if len(load_data) == 5:
             qubo, max_coeff, operator, offset, routes = load_data
+            classical_result = None
+            print("No classical result already available.")
         else:
             qubo, max_coeff, operator, offset, routes, classical_result = load_data
     
     #Normalize qubo (Can recover original qubo via normalize_factor * qubo_objective )
     qubo, normalize_factor = reduce_qubo(qubo)
+    if classical_result:
+        classical_result._fval /= normalize_factor #Also normalize classical result
     
-    #Initialize RQAOA object
-    rqaoa = RQAOA(qubo, args["no_cars"], args["no_routes"], symmetrise = args["symmetrise"])
+    #Initialize RQAOA object and make sure there is a classical solution
+    rqaoa = RQAOA(qubo,
+                  args["no_cars"],
+                  args["no_routes"],
+                  symmetrise = args["symmetrise"],
+                  customise = args["customise"],
+                  classical_result = classical_result
+                 )
     
     print("Args: {}".format(args))
     print("First round of TQA-QAOA...")
     p = args["p_max"]
     qaoa_results = rqaoa.solve_qaoa(p, tqa=True)
     rqaoa.perform_substitution_from_qaoa_results(qaoa_results, biased = args["bias"])
-    print("Performed variable substition(s) and constructed new initial state and mixer.")
+    print("Performed variable substition(s).")
     num_vars = rqaoa.qubo.get_num_vars()
     print("Remaining variables: {}".format(num_vars))
     t = 1
@@ -48,11 +63,11 @@ def main(args=None):
         qaoa_results = rqaoa.solve_qaoa(p, tqa=True)
         print( "Round {} of TQA-QAOA. Results below:".format(t) )
         rqaoa.perform_substitution_from_qaoa_results(qaoa_results, biased = args["bias"])
-        print("Performed variable substition(s) and constructed new initial state and mixer.")
+        print("Performed variable substition(s).")
         num_vars = rqaoa.qubo.get_num_vars()
         print("Remaining variables: {}".format(num_vars))
 
-    print( "Final round of QAOA Done. Eigenstate below:" )
+    print( "Final round of QAOA. Eigenstate below:" )
     p=2
     points = [ [ np.pi * (np.random.rand() - 0.5) for _ in range(2*p) ] for _ in range(10) ]  + [ [ 0 for _ in range(2*p) ] ]
     qaoa_results = rqaoa.solve_qaoa( p, points = points )
@@ -89,30 +104,38 @@ def main(args=None):
     list_values = list(var_values.values())
     cost = rqaoa.original_qubo.objective.evaluate(var_values)
     
-    print(rqaoa.result)
+    print(rqaoa.classical_result)
     print(var_values)
     print("{}, Cost: {}".format(list_values, cost))
     
-    #Save results
-    save_results = np.append( rqaoa.prob_s, rqaoa.approx_s )
-    if args["bias"]:
-        with open('results_{}cars{}routes_mps/Biased_RQAOA_{}_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"]), 'w') as f:
-            np.savetxt(f, save_results, delimiter=',')
-            print("Results saved in results_{}cars{}routes_mps/Biased_RQAOA_{}_p={}.csv".format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"]))
-    
-    elif args["symmetrise"]:
-        with open('results_{}cars{}routes_mps/Symmetrised_RQAOA_{}_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"]), 'w') as f:
-            np.savetxt(f, save_results, delimiter=',')
-            print("Results saved in results_{}cars{}routes_mps/Symmetrised_RQAOA_{}_p={}.csv".format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"]))
-    
-    else:
-        with open('results_{}cars{}routes_mps/Regular_RQAOA_{}_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"]), 'w') as f:
-            np.savetxt(f, save_results, delimiter=',')
-            print("Results saved in results_{}cars{}routes_mps/Regular_RQAOA_{}_p={}.csv".format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"]))
-    
+    #End of algorithm
     finish = time()
     print("Time taken: {} s".format(finish - start))
-
+    
+    #Naming of file to save results to
+    if args["customise"]: #Using custom QAOA
+        if args["bias"]:
+            filedir = 'results_{}cars{}routes_mps/Biased_RQAOA_{}_Cust_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+        elif args["symmetrise"]:
+            filedir = 'results_{}cars{}routes_mps/Symmetrised_RQAOA_{}_Cust_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+        else:
+            filedir = 'results_{}cars{}routes_mps/Regular_RQAOA_{}_Cust_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+    else:
+        if args["bias"]: #Using baseline QAOA
+            filedir = 'results_{}cars{}routes_mps/Biased_RQAOA_{}_Base_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+        elif args["symmetrise"]:
+            filedir = 'results_{}cars{}routes_mps/Symmetrised_RQAOA_{}_Base_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+        else:
+            filedir = 'results_{}cars{}routes_mps/Regular_RQAOA_{}_Base_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+    
+    #Save results to file
+    save_results = np.append( rqaoa.prob_s, rqaoa.approx_s )
+    with open(filedir, 'w') as f:
+        np.savetxt(f, save_results, delimiter=',')
+    print("Results saved in {}".format(filedir))
+    
+    ##END(main)
+    
 def reduce_qubo(qubo):
     #Perform reduction as many times possible up to some threshold
     max_coeff = np.max( np.append( qubo.objective.linear.to_array(), qubo.objective.quadratic.to_array() ) )
@@ -130,34 +153,50 @@ class RQAOA:
     def __init__(self, qubo, no_cars, no_routes, **kwargs):
         opt_str = kwargs.get('opt_str', "LN_SBPLX")
         self.symmetrise = kwargs.get('symmetrise', False)
+        self.customise = kwargs.get('customise', True)
+        self.classical_result = kwargs.get("classical_result", None)
+        
+        #Initializing other algorithm required objects
         var_list = qubo.variables
+        self.quantum_instance = QuantumInstance(backend = Aer.get_backend("aer_simulator_matrix_product_state"), shots = 4096)
         self.optimizer = NLOPT_Optimizer(opt_str)
         self.optimizer.set_options(max_eval = 1000)
         self.original_qubo = qubo
         self.qubo = qubo
-        self.solve_classically()
-        op, offset = qubo.to_ising()
-        self.operator = op
-        self.offset = offset
-        if self.symmetrise:
+        self.operator, self.offset = qubo.to_ising()
+        if self.symmetrise: #Symmetrise QUBO if required 
             self.symmetrise_qubo()
-        self.quantum_instance = QuantumInstance(backend = Aer.get_backend("aer_simulator_matrix_product_state"), shots = 4096)
+        
+        #If no classical result, this will compute the appropriate self.classical_result, else this will simply re-organise already available result    
+        self.solve_classically() 
+         
+        #Setup for variable replacements
         self.replacements = {var.name:None for var in var_list}
         self.no_cars = no_cars
         self.no_routes = no_routes
         self.car_blocks = np.empty(shape = (no_cars,), dtype=object)
         for car_no in range(no_cars):
             self.car_blocks[car_no] = ["X_{}_{}".format(car_no, route_no) for route_no in range(no_routes)]
+        
+        #Initialize variable placeholders in
         self.qaoa_result = None
+        self.initial_state = None
+        self.mixer = None
         self.benchmark_energy = None
         self.var_values = {}
-        self.construct_initial_state()
-        self.construct_mixer()
-        self.get_random_energy()
-        self.get_benchmark_energy()
         self.prob_s = []
         self.approx_s = []
         self.optimal_point = None
+        
+        #Custom initial state and mixer if required
+        if self.customise:
+            self.construct_initial_state()
+            self.construct_mixer()
+        
+        #Benchmarking
+        self.get_random_energy()
+        self.get_benchmark_energy()
+
     
     def construct_initial_state(self):
         qc = QuantumCircuit()
@@ -242,14 +281,18 @@ class RQAOA:
         self.mixer = mixer
     
     def solve_classically(self):
-        x_s, opt_value, classical_result, _ = find_all_ground_states(self.original_qubo)
-        self.result = classical_result
-        x_arr = classical_result.x
-        self.x_s =  [ x_str[::-1] for x_str in x_s ]
-        self.opt_value = opt_value
+        if self.classical_result:
+            print("There is an existing classical result. Using this as code proceeds.")
+            self.opt_value = self.classical_result.fval
+        else:
+            print("Now solving classically")
+            _, opt_value, classical_result, _ = find_all_ground_states(self.original_qubo)
+            self.classical_result = classical_result
+            self.opt_value = opt_value
     
     def get_random_energy(self):
-        #Get random benchmark energy for 0 layer QAOA (achieved by using layer 1 QAOA with [0,0] angles)
+        #Get random benchmark energy for 0 layer QAOA (achieved by using layer 1 QAOA with [0,0] angles) and with only feasible states (custom initial state)
+        self.construct_initial_state()
         random_energy, _ = CustomQAOA(operator = self.operator,
                     quantum_instance = self.quantum_instance,
                     optimizer = self.optimizer,
@@ -258,6 +301,9 @@ class RQAOA:
                     mixer = self.mixer,
                     solve = False,
                     )
+        #To remove custom initial state if using BASE QAOA
+        if not self.customise: 
+            self.initial_state = None
         temp = random_energy
         self.random_energy = temp + self.offset
         if np.round( self.random_energy - self.opt_value, 6 ) < 1e-7:
@@ -396,13 +442,13 @@ class RQAOA:
         print("Eigenvalue: {}".format(qaoa_results.eigenvalue))
         print("Optimal point: {}".format(qaoa_results.optimal_point))
         print("Optimizer Evals: {}".format(qaoa_results.optimizer_evals))
-        scale = self.random_energy - self.result.fval
+        scale = self.random_energy - self.opt_value
         approx_quality = np.round( (self.random_energy - sorted_eigenstate_by_energy[0][1])/ scale, 3 )
         approx_quality_2 = np.round( ( self.random_energy - sorted_eigenstate_by_prob[0][1] ) / scale, 3 )
         energy_prob = {}
         for x in qaoa_results.eigenstate:
             energy_prob[ np.round(x[1], 6) ] = energy_prob.get(np.round(x[1], 6), 0) + x[2]
-        prob_s = np.round( energy_prob.get(np.round(self.result.fval, 6), 0), 6 )
+        prob_s = np.round( energy_prob.get(np.round(self.opt_value, 6), 0), 6 )
         self.prob_s.append( prob_s )
         self.approx_s.append( [approx_quality, approx_quality_2] )
         print( "\nQAOA lowest energy solution: {}".format(sorted_eigenstate_by_energy[0]) )
@@ -422,6 +468,8 @@ class RQAOA:
             print("-"*len(header))
             print(header)
             print("-"*len(header))
+            
+            count = 0
             for item in eigenstate:
                 string = '|'
                 for binary_var in item[0]:
@@ -429,6 +477,12 @@ class RQAOA:
                 string += '{:<6} '.format(np.round(item[1], 2)) #Cost
                 string += '{:<5}|'.format(np.round(item[2], 3)) #Prob
                 print(string)
+                
+                #Print only first 20 states of lowest energy
+                count += 1
+                if count == 20: 
+                    break
+            
             print("-"*len(header))
 
     def perform_substitution_from_qaoa_results(self, qaoa_results, update_benchmark_energy=True, biased = True):
@@ -438,36 +492,31 @@ class RQAOA:
         correlation = correlations[i, j]
         new_qubo = deepcopy(self.qubo)
         x_i, x_j = new_qubo.variables[i].name, new_qubo.variables[j].name
-        
         if x_i == "X_anc":
             print("X_i was ancilla. Swapped")
             x_i, x_j = x_j, x_i #So ancilla qubit is never substituted out
             i, j = j, i #Also swap i and j
-        
         print( "\nCorrelation: < {} {} > = {}".format(x_i.replace("_", ""), x_j.replace("_", ""), correlation)) 
-       
-        car_block = int(x_i[2])
         
-        #If same car_block and x_i = x_j, then both must be 0 since only one 1 in a car block
-        if x_i[2] == x_j[2] and correlation > 0 and len(self.car_blocks[car_block]) > 2: 
-            # set x_i = x_j = 0
-            new_qubo = new_qubo.substitute_variables({x_i: 0, x_j:0})
-            if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
-                raise QiskitOptimizationError('Infeasible due to variable substitution {} = {} = 0'.format(x_i, x_j))
-            self.var_values[x_i] = 0
-            self.var_values[x_j] = 0
-            self.car_blocks[car_block].remove(x_i)
-            self.car_blocks[car_block].remove(x_j)
-            print("Two variable substitutions were performed due to extra information from constraints.")
-      
-        elif x_i[2] != x_j[2] and correlation > 0: 
+        car_block = int(x_i[2])
+#         #If same car_block and x_i = x_j, then both must be 0 since only one 1 in a car block
+#         if x_i[2] == x_j[2] and correlation > 0 and len(self.car_blocks[car_block]) > 2: 
+#             # set x_i = x_j = 0
+#             new_qubo = new_qubo.substitute_variables({x_i: 0, x_j:0})
+#             if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
+#                 raise QiskitOptimizationError('Infeasible due to variable substitution {} = {} = 0'.format(x_i, x_j))
+#             self.var_values[x_i] = 0
+#             self.var_values[x_j] = 0
+#             self.car_blocks[car_block].remove(x_i)
+#             self.car_blocks[car_block].remove(x_j)
+#             print("Two variable substitutions were performed due to extra information from constraints.")                    
+        if correlation > 0: 
             # set x_i = x_j
             new_qubo = new_qubo.substitute_variables(variables={x_i: (x_j, 1)})
             if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
                 raise QiskitOptimizationError('Infeasible due to variable substitution {} = {}'.format(x_i, x_j))            
             self.replacements[x_i] = (x_j, 1)
             self.car_blocks[car_block].remove(x_i)
-            
         else:
             # set x_i = 1 - x_j, this is done in two steps:
             # 1. set x_i = 1 + x_i
@@ -498,27 +547,15 @@ class RQAOA:
             if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
                 raise QiskitOptimizationError('Infeasible due to variable substitution {} = -{}'.format(x_i, x_j))
             self.replacements[x_i] = (x_j, -1)
-            self.car_blocks[car_block].remove(x_i)
+            self.car_blocks[car_block].remove(x_i)                
         
-        #If only one remaining variable and all other variables are 0, then remaining must be 1.
-        check = sum( [self.var_values.get("X_{}_{}".format(car_block, route_no), 0) for route_no in range(self.no_routes)] )
-        if len(self.car_blocks[car_block]) == 1 and check == 0: 
-            x_r = self.car_blocks[car_block][0] #remaining variable
-            new_qubo = new_qubo.substitute_variables({x_r: 1})
-            if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
-                raise QiskitOptimizationError('Infeasible due to variable substitution {} = 1'.format(x_r))
-            self.car_blocks[car_block].remove(x_r)
-            print("{} = 1 can also be determined from all other variables being 0 for car_{}".format(x_r, car_block))
-        
-        #Update variable eliminated QUBO
         self.qubo = new_qubo
         op, offset = new_qubo.to_ising() 
         self.operator = op
         self.offset = offset
-        self.construct_initial_state()
-        self.construct_mixer()
-#         if update_benchmark_energy:
-#             temp = self.get_benchmark_energy()
+        if self.customise:
+            self.construct_initial_state()
+            self.construct_mixer()
         
         
     def get_correlations(self, states) -> np.ndarray:
