@@ -468,6 +468,8 @@ class RQAOA:
             print("-"*len(header))
             print(header)
             print("-"*len(header))
+            
+            count = 0
             for item in eigenstate:
                 string = '|'
                 for binary_var in item[0]:
@@ -475,6 +477,12 @@ class RQAOA:
                 string += '{:<6} '.format(np.round(item[1], 2)) #Cost
                 string += '{:<5}|'.format(np.round(item[2], 3)) #Prob
                 print(string)
+                
+                #Print only first 20 states of lowest energy
+                count += 1
+                if count == 20: 
+                    break
+            
             print("-"*len(header))
 
     def perform_substitution_from_qaoa_results(self, qaoa_results, update_benchmark_energy=True, biased = True):
