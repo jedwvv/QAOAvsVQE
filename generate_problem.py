@@ -104,7 +104,7 @@ def visualise(G, results):
     # Visualise result #
     for i in range(len(results)):     
         routes = results[i]
-        colors = np.array(["r", "y", "b", "g", "w", "gr", "o"]*5)[0:len(routes)]
+        colors = np.array(["r", "y", "b", "g", "w"]*5)[0:len(routes)]
         fig, ax = ox.plot_graph_routes(G, routes, route_colors=colors, route_linewidth=4, node_size=10, show = False, close = False)
         fig.suptitle('Car_{} routes'.format(i))
         plt.show()

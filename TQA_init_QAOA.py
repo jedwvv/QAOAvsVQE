@@ -131,3 +131,14 @@ def print_to_file(string, filepath = "TQA_output.txt"):
 
 if __name__ == "__main__":
     main()
+
+def main(params):
+    """[summary]
+
+    Args:
+        params ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+    return value
