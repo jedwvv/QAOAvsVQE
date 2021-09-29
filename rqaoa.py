@@ -147,7 +147,7 @@ def reduce_qubo(qubo):
         qubo.objective.constant = qubo.objective.constant / factor
         total_normalize_factor *= factor
         max_coeff = np.max( np.append( qubo.objective.linear.to_array(), qubo.objective.quadratic.to_array() ) )
-    return qubo, total_normalize_factor 
+    return qubo, total_normalize_factor
     
 class RQAOA:
     def __init__(self, qubo, no_cars, no_routes, **kwargs):
@@ -158,7 +158,7 @@ class RQAOA:
         
         #Initializing other algorithm required objects
         var_list = qubo.variables
-        self.quantum_instance = QuantumInstance(backend = Aer.get_backend("aer_simulator_matrix_product_state"), shots = 4096)
+        self.quantum_instance = QuantumInstance(backend = Aer.get_backend("statevector_simulator"), shots = 4096)
         self.optimizer = NLOPT_Optimizer(opt_str)
         self.optimizer.set_options(max_eval = 1000)
         self.original_qubo = qubo
