@@ -59,6 +59,7 @@ def main(args=None):
     
     #Recursively substitute variables to reduce qubit by one until 1 remaining
     while num_vars > 1:
+        iterate_time = time()
         t+=1
         qaoa_results = rqaoa.solve_qaoa(p, tqa=True)
         print( "Round {} of TQA-QAOA. Results below:".format(t) )
@@ -66,6 +67,8 @@ def main(args=None):
         print("Performed variable substition(s).")
         num_vars = rqaoa.qubo.get_num_vars()
         print("Remaining variables: {}".format(num_vars))
+        iterate_time_2 = time()
+        print("Time taken (for this iteration): {}s".format(iterate_time_2 - iterate_time))
 
     print( "Final round of QAOA. Eigenstate below:" )
     p=2
@@ -158,7 +161,7 @@ class RQAOA:
         
         #Initializing other algorithm required objects
         var_list = qubo.variables
-        self.quantum_instance = QuantumInstance(backend = Aer.get_backend("statevector_simulator"), shots = 4096)
+        self.quantum_instance = QuantumInstance(backend = Aer.get_backend("aer_simulator_matrix_product_state"), shots = 4096)
         self.optimizer = NLOPT_Optimizer(opt_str)
         self.optimizer.set_options(max_eval = 1000)
         self.original_qubo = qubo
