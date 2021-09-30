@@ -53,6 +53,7 @@ def parse():
                         help="Activate routes visualisation with '-V' ",
                         action="store_true"
                         )
+    parser.add_argument("--simulator", "-I", required=False, default=None, help = "Set simulation method from Qiskit Aer library", type = str)
     args = parser.parse_args()
     args = vars(args)
     return args
