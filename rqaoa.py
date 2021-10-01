@@ -37,6 +37,7 @@ def main(args=None):
     if classical_result:
         classical_result._fval /= normalize_factor #Also normalize classical result
     
+    
     #Initialize RQAOA object and make sure there is a classical solution
     rqaoa = RQAOA(qubo,
                   args["no_cars"],
@@ -46,7 +47,9 @@ def main(args=None):
                   classical_result = classical_result,
                   simulator = args["simulator"]
                  )
-    print("Args: {}".format(args))
+    print("Args: {}\n".format(args))
+    
+    iterate_time = time()
     print("First round of TQA-QAOA...")
     p = args["p_max"]
     qaoa_results = rqaoa.solve_qaoa(p, tqa=True) if p>1 else rqaoa.solve_qaoa(p)
@@ -54,14 +57,16 @@ def main(args=None):
     print("Performed variable substition(s).")
     num_vars = rqaoa.qubo.get_num_vars()
     print("Remaining variables: {}".format(num_vars))
-    t = 1
+    iterate_time_2 = time()
+    print("Time taken (for this iteration): {}s".format(iterate_time_2 - iterate_time))
     
+    t = 1
     #Recursively substitute variables to reduce qubit by one until 1 remaining
     while num_vars > 1:
         iterate_time = time()
         t+=1
+        print( "\nRound {} of TQA-QAOA. Results below:".format(t) )
         qaoa_results = rqaoa.solve_qaoa(p, tqa=True) if p>1 else rqaoa.solve_qaoa(p)
-        print( "Round {} of TQA-QAOA. Results below:".format(t) )
         rqaoa.perform_substitution_from_qaoa_results(qaoa_results, biased = args["bias"])
         print("Performed variable substition(s).")
         num_vars = rqaoa.qubo.get_num_vars()
@@ -69,13 +74,13 @@ def main(args=None):
         iterate_time_2 = time()
         print("Time taken (for this iteration): {}s".format(iterate_time_2 - iterate_time))
 
-    print( "Final round of QAOA. Eigenstate below:" )
+    print( "\nFinal round of QAOA. Eigenstate below:" )
     p=2
     points = [ [ np.pi * (np.random.rand() - 0.5) for _ in range(2*p) ] for _ in range(10) ]  + [ [ 0 for _ in range(2*p) ] ]
     qaoa_results = rqaoa.solve_qaoa( p, points = points )
     
-    print( "Probabilities: {}".format(rqaoa.prob_s) )
-    print( "Approx Qualities of (lowest_energy_state, most_probable_state): {}".format(rqaoa.approx_s) )
+    print( "\nProbabilities: {}".format(rqaoa.prob_s) )
+    print( "Approx Qualities of (lowest_energy_state, most_probable_state): {}\n".format(rqaoa.approx_s) )
 
     if args["symmetrise"]:
         var_last = "X_anc" #Last variable should be ancilla if Hamiltonian was initially symmetrised
@@ -107,12 +112,11 @@ def main(args=None):
     cost = rqaoa.original_qubo.objective.evaluate(var_values)
     
     print(rqaoa.classical_result)
-    print(var_values)
-    print("{}, Cost: {}".format(list_values, cost))
+    print("\nRQAOA Solution: {}, Cost: {}".format(list_values, cost))
     
     #End of algorithm
     finish = time()
-    print("Time taken: {} s".format(finish - start))
+    print("\nTime taken: {} s".format(finish - start))
     
     #Naming of file to save results to
     if args["customise"]: #Using custom QAOA
@@ -134,7 +138,11 @@ def main(args=None):
     save_results = np.append( rqaoa.prob_s, rqaoa.approx_s )
     with open(filedir, 'w') as f:
         np.savetxt(f, save_results, delimiter=',')
-    print("Results saved in {}".format(filedir))
+    
+    result_saved_string = "Results saved in {}".format(filedir)
+    print(result_saved_string)
+    print("_"*len(result_saved_string))
+    print("")
     
     ##END(main)
     
@@ -162,9 +170,9 @@ class RQAOA:
         #Initializing other algorithm required objects
         var_list = qubo.variables
         self.quantum_instance = QuantumInstance(backend = Aer.get_backend(simulator), shots = 4096)
-        
+        self.random_instance = QuantumInstance(backend = Aer.get_backend("aer_simulator_matrix_product_state"), shots = 10)
         #print backend name
-        print("Quantum Instance: {}".format(self.quantum_instance.backend_name))
+        print("Quantum Instance: {}\n".format(self.quantum_instance.backend_name))
         #print backend name
         
         self.optimizer = NLOPT_Optimizer(opt_str)
@@ -295,6 +303,7 @@ class RQAOA:
     def solve_classically(self):
         if self.classical_result:
             print("There is an existing classical result. Using this as code proceeds.")
+            print(self.classical_result)
             self.opt_value = self.classical_result.fval
         else:
             print("No classical result already available.")
@@ -308,7 +317,7 @@ class RQAOA:
         self.construct_initial_state()
         self.construct_mixer()
         random_energy, _ = CustomQAOA(operator = self.operator,
-                    quantum_instance = self.quantum_instance,
+                    quantum_instance = self.random_instance,
                     optimizer = self.optimizer,
                     reps = 1,
                     initial_state = self.initial_state,
@@ -324,7 +333,7 @@ class RQAOA:
             print("0 layer QAOA converged to exact solution. Shifting value up by |exact_ground_energy| instead to avoid dividing by 0 in approx quality.")
             self.random_energy += np.abs(self.random_energy)
         self.benchmark_energy = self.random_energy
-        print("random energy: {}".format(self.random_energy))
+        print("random energy: {}\n".format(self.random_energy))
     
     def solve_qaoa(self, p, **kwargs):
         if self.optimal_point and 'point' not in kwargs:
