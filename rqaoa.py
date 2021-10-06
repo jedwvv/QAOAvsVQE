@@ -170,7 +170,7 @@ class RQAOA:
         #Initializing other algorithm required objects
         var_list = qubo.variables
         self.quantum_instance = QuantumInstance(backend = Aer.get_backend(simulator), shots = 4096)
-        self.random_instance = QuantumInstance(backend = Aer.get_backend("aer_simulator_matrix_product_state"), shots = 10)
+        self.random_instance = QuantumInstance(backend = Aer.get_backend("aer_simulator_matrix_product_state"), shots = 1000)
         #print backend name
         print("Quantum Instance: {}\n".format(self.quantum_instance.backend_name))
         #print backend name
