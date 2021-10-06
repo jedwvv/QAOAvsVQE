@@ -37,6 +37,15 @@ def main(args=None):
     if classical_result:
         classical_result._fval /= normalize_factor #Also normalize classical result
     
+
+    #Noise
+    if args["noisy"]:
+        print("Simulating with noise...")
+        with open('noise_model.pkl', 'rb') as f:
+            noise_model = pkl.load(f)
+    else:
+        print("Simulating without noise...")
+        noise_model = None
     
     #Initialize RQAOA object and make sure there is a classical solution
     rqaoa = RQAOA(qubo,
@@ -45,10 +54,10 @@ def main(args=None):
                   symmetrise = args["symmetrise"],
                   customise = args["customise"],
                   classical_result = classical_result,
-                  simulator = args["simulator"]
+                  simulator = args["simulator"],
+                  noise_model = noise_model
                  )
     print("Args: {}\n".format(args))
-    
     iterate_time = time()
     print("First round of TQA-QAOA...")
     p = args["p_max"]
@@ -163,13 +172,14 @@ class RQAOA:
         self.customise = kwargs.get('customise', True)
         self.classical_result = kwargs.get("classical_result", None)
         simulator = kwargs.get("simulator", "aer_simulator_matrix_product_state")
+        noise_model = kwargs.get("noise_model", None)
         
         if simulator == None:
             simulator = "aer_simulator_matrix_product_state"
         
         #Initializing other algorithm required objects
         var_list = qubo.variables
-        self.quantum_instance = QuantumInstance(backend = Aer.get_backend(simulator), shots = 4096)
+        self.quantum_instance = QuantumInstance(backend = Aer.get_backend(simulator), shots = 4096, noise_model = noise_model)
         self.random_instance = QuantumInstance(backend = Aer.get_backend("aer_simulator_matrix_product_state"), shots = 1000)
         #print backend name
         print("Quantum Instance: {}\n".format(self.quantum_instance.backend_name))
@@ -282,7 +292,7 @@ class RQAOA:
         original_variable_names = [ (variable.name, 1) for variable in original_qubo.variables ]
         new_variable_names = original_variable_names + [("X_anc", 1)] if self.symmetrise else original_variable_names
         variables_dict = dict(zip(variable_names, new_variable_names))
-        for (variable_name, new_variable_name) in variables_dict.items():
+        for new_variable_name in variables_dict.values():
             qubo.binary_var(name = new_variable_name[0])
         qubo = qubo.substitute_variables(variables = variables_dict)
         if qubo.status == QuadraticProgram.Status.INFEASIBLE:
