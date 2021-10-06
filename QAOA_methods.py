@@ -11,14 +11,18 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
     fourier_parametrise = kwargs.get("fourier_parametrise", False)
     qubo = kwargs.get("qubo", None) 
     solve = kwargs.get("solve", True)
+    if quantum_instance.is_statevector:
+        include_custom = True
+    else:
+        include_custom = False
     qaoa_instance = QAOAEx.QAOACustom(quantum_instance = quantum_instance,
                                         reps = reps,
-                                        force_shots = False,
+                                        force_shots = True,
                                         optimizer = optimizer,
                                         qaoa_name = "example_qaoa",
                                         initial_state = initial_state,
                                         mixer = mixer,
-                                        include_custom = False,
+                                        include_custom = include_custom,
                                         max_evals_grouped = 1
                                         )
     

@@ -53,6 +53,8 @@ def parse():
                         help="Activate routes visualisation with '-V' ",
                         action="store_true"
                         )
+    parser.add_argument("--simulator", "-I", required=False, default=None, help = "Set simulation method from Qiskit Aer library", type = str)
+#     parser.add_argument("--noisy", "-NOISY", required=False, default=False, help = "Set whether simulation is noisy", action="store_true")
     args = parser.parse_args()
     args = vars(args)
     return args
