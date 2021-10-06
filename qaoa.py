@@ -173,7 +173,6 @@ class QAOA_Base:
         #Get random benchmark energy for 0 layer Custom-QAOA (achieved by using layer 1 Cust-QAOA with [0,0] angles i.e. sampling from feasible states with equal prob)
         self.construct_initial_state(symmetrise=False)
         self.construct_mixer()
-        print(self.initial_state.draw())
         random_energy, _ = CustomQAOA(operator = self.operator,
                     quantum_instance = self.random_instance,
                     optimizer = self.optimizer,
@@ -221,7 +220,7 @@ class QAOA_Base:
         fourier_parametrise = True
         tqa = kwargs.get('tqa', False)
         points = kwargs.get("points", None)
-        construct_circ = True
+        construct_circ = False
                 
         if tqa:
             deltas = np.arange(0.25, 0.91, 0.05)
@@ -230,7 +229,7 @@ class QAOA_Base:
             fourier_parametrise = True
             if fourier_parametrise:
                 points = [ convert_to_fourier_point(point, len(point)) for point in points ]
-            qaoa_results, qc = CustomQAOA( self.operator,
+            qaoa_results, _ = CustomQAOA( self.operator,
                                             self.quantum_instance,
                                             self.optimizer,
                                             reps = p,
@@ -247,7 +246,7 @@ class QAOA_Base:
                 points = [ convert_to_fourier_point(point, len(point)) for point in points ]
             if point is not None:
                 points.append( convert_to_fourier_point(point, len(point)) )
-            qaoa_results, qc = CustomQAOA( self.operator,
+            qaoa_results, _ = CustomQAOA( self.operator,
                                                         self.quantum_instance,
                                                         self.optimizer,
                                                         reps = p,
@@ -262,7 +261,7 @@ class QAOA_Base:
             fourier_parametrise = True
             if fourier_parametrise:
                 point =  convert_to_fourier_point(point, len(point))
-            qaoa_results, qc = CustomQAOA( self.operator,
+            qaoa_results, _ = CustomQAOA( self.operator,
                                         self.quantum_instance,
                                         self.optimizer,
                                         reps = p,
@@ -276,7 +275,7 @@ class QAOA_Base:
         else:
             points = [ [0]*(2*p) ] + [ [ 1.98 * np.pi* ( np.random.rand() - 0.5 ) for _ in range(2*p)] for _ in range(10) ]
             fourier_parametrise = True
-            qaoa_results, qc = CustomQAOA( self.operator,
+            qaoa_results, _ = CustomQAOA( self.operator,
                                         self.quantum_instance,
                                         self.optimizer,
                                         reps = p,
@@ -287,7 +286,6 @@ class QAOA_Base:
                                         qubo = self.qubo,
                                         construct_circ = construct_circ
                                         )
-        print(qc.draw(fold=250))
         point = qaoa_results.optimal_point
         qaoa_results.eigenvalue = sum( [ x[1] * x[2] for x in qaoa_results.eigenstate ] )
         self.optimal_point = convert_to_fourier_point(point, len(point)) if fourier_parametrise else point
