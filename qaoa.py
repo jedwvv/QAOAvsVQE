@@ -117,7 +117,11 @@ class QAOA_Base:
             simulator = "aer_simulator_density_matrix"
         print("Using "+simulator)
         
-        self.quantum_instance = QuantumInstance(backend = Aer.get_backend(simulator), shots = 4096, noise_model = noise_model)
+        self.quantum_instance = QuantumInstance( backend = Aer.get_backend(simulator), 
+                                                 shots = 4096, 
+                                                 noise_model = noise_model,
+                                                 basis_gates = ["cx", "x", "sx", "rz", "id"]
+                                               )
         
         #Symmetrise
         if self.symmetrise:

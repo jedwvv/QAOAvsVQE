@@ -40,6 +40,11 @@ def main(args=None):
 
     #Noise
     if args["noisy"]:
+        #Use symmetrised Hamiltonian and base QAOA
+        args["symmetrise"] = True
+        args["customise"] = False
+        args["bias"] = False
+        args["simulator"] = "aer_simulator_density_matrix"
         print("Simulating with noise...")
         with open('noise_model.pkl', 'rb') as f:
             noise_model = pkl.load(f)
@@ -128,20 +133,23 @@ def main(args=None):
     print("\nTime taken: {} s".format(finish - start))
     
     #Naming of file to save results to
-    if args["customise"]: #Using custom QAOA
+    if args["customise"] and not args["noisy"]: #Using custom QAOA
         if args["bias"]:
             filedir = 'results_{}cars{}routes_mps/Biased_RQAOA_{}_Cust_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
         elif args["symmetrise"]:
             filedir = 'results_{}cars{}routes_mps/Symmetrised_RQAOA_{}_Cust_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
         else:
             filedir = 'results_{}cars{}routes_mps/Regular_RQAOA_{}_Cust_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
-    else:
+    elif not args["customise"] and not args["noisy"]:
         if args["bias"]: #Using baseline QAOA
             filedir = 'results_{}cars{}routes_mps/Biased_RQAOA_{}_Base_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
         elif args["symmetrise"]:
             filedir = 'results_{}cars{}routes_mps/Symmetrised_RQAOA_{}_Base_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
         else:
             filedir = 'results_{}cars{}routes_mps/Regular_RQAOA_{}_Base_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+    elif args["noisy"]:
+        filedir = 'results_{}cars{}routes/Noisy_S_RQAOA_{}_Base_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+        
     
     #Save results to file
     save_results = np.append( rqaoa.prob_s, rqaoa.approx_s )
@@ -179,7 +187,15 @@ class RQAOA:
         
         #Initializing other algorithm required objects
         var_list = qubo.variables
-        self.quantum_instance = QuantumInstance(backend = Aer.get_backend(simulator), shots = 4096, noise_model = noise_model)
+        if noise_model == None:
+            self.quantum_instance = QuantumInstance( backend = Aer.get_backend(simulator), shots = 4096)
+        elif noise_model:
+            self.quantum_instance = QuantumInstance( backend = Aer.get_backend(simulator),
+                                                     shots = 4096, 
+                                                     noise_model = noise_model,
+                                                     basis_gates = ["cx", "x", "sx", "rz", "id"]
+                                                   )
+                                                    
         self.random_instance = QuantumInstance(backend = Aer.get_backend("aer_simulator_matrix_product_state"), shots = 1000)
         #print backend name
         print("Quantum Instance: {}\n".format(self.quantum_instance.backend_name))
