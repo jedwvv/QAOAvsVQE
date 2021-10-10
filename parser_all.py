@@ -55,6 +55,7 @@ def parse():
                         )
     parser.add_argument("--simulator", "-I", required=False, default=None, help = "Set simulation method from Qiskit Aer library", type = str)
     parser.add_argument("--noisy", "-X", required=False, default=False, help = "Set whether simulation is noisy", action="store_true")
+    parser.add_argument("--multiplier", "-U", required=False, default=1.0, help = "Set error rate multiplier", type=float)
     args = parser.parse_args()
     args = vars(args)
     return args

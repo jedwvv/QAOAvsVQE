@@ -6,12 +6,14 @@ from classical_optimizers import NLOPT_Optimizer
 from qiskit_optimization import QuadraticProgram, QiskitOptimizationError
 from qiskit.quantum_info import Pauli
 from qiskit.opflow.primitive_ops import PauliOp
-from rqaoa import reduce_qubo
 from parser_all import parse
 import numpy as np
 import pickle as pkl
 from copy import deepcopy
 from time import time
+from qiskit.providers.aer.noise import NoiseModel
+from qiskit.providers.aer.noise import depolarizing_error
+import json
 
 def main(args=None):
     start = time()
@@ -32,9 +34,11 @@ def main(args=None):
     
     #Noise
     if args["noisy"]:
-        print("Simulating with noise...")
-        with open('noise_model.pkl', 'rb') as f:
-            noise_model = pkl.load(f)
+        multiplier = args["multiplier"]
+        print("Simulating with noise...Error mulitplier: {}".format(multiplier))
+        with open('average_gate_errors.json', 'r') as f:
+            noise_rates = json.load(f)
+        noise_model = build_noise_model(noise_rates, multiplier)
     else:
         print("Simulating without noise...")
         noise_model = None
@@ -48,13 +52,14 @@ def main(args=None):
                   classical_result = classical_result,
                   simulator = args["simulator"],
                   noise_model = noise_model,
-                  opt_str = "LN_COBYLA"
+                  opt_str = "LN_BOBYQA"
                  )
     p_max = args["p_max"]
 
     for p in range(1, p_max+1):
         p_start = time()
         print( "\nQAOA p={}. Results below:".format(p) )
+        qaoa.optimizer.set_options(maxeval=100*(2**p))
         if p==1:
             qaoa.solve_qaoa(p)
         else:
@@ -64,31 +69,62 @@ def main(args=None):
         
     
     print( "\nProbabilities: {}".format(qaoa.prob_s) )
-    print( "Approx Qualities of (lowest_energy_state, most_probable_state): {}\n".format(qaoa.approx_s) )
+    print( "Eigenvalue at each p: {}".format(qaoa.eval_s) )
+    print( "Approx Qualities of most_probable_state: {}\n".format(qaoa.approx_s) )
     if args["noisy"]:
         if args["symmetrise"]:
-            filedir = 'results_{}cars{}routes/NoisyQAOA_Symm_{}_Cust_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+            filedir = 'results_{}cars{}routes/Noisy_QAOA_Symm_{}_Cust_p={}_error{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"], args["multiplier"])
         else:
-            filedir = 'results_{}cars{}routes/NoisyQAOA_Reg_{}_Cust_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+            filedir = 'results_{}cars{}routes/Noisy_QAOA_Reg_{}_Cust_p={}_error{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"], args["multiplier"])
     else:
         if args["symmetrise"]:
-            filedir = 'results_{}cars{}routes/Ideal_QAOA_Symm_{}_Cust_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+            filedir = 'results_{}cars{}routes/Ideal_QAOA_Symm_{}_Cust_p={}_error{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"], args["multiplier"])
         else:
-            filedir = 'results_{}cars{}routes/Ideal_QAOA_Reg_{}_Cust_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+            filedir = 'results_{}cars{}routes/Ideal_QAOA_Reg_{}_Cust_p={}_error{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"], args["multiplier"])
     
     if not args["customise"]:
         filedir = filedir.replace("Cust", "Base")
     
     #Save results to file
-    save_results = np.append( qaoa.prob_s, qaoa.approx_s )
+    save_results = np.append( qaoa.prob_s, qaoa.eval_s )
+    save_results = np.append( save_results, qaoa.approx_s )
     with open(filedir, 'w') as f:
         np.savetxt(f, save_results, delimiter=',')
 
     result_saved_string = "Results saved in {}".format(filedir)
     print(result_saved_string)
-    print("_"*len(result_saved_string))  
     finish = time()
     print("\nTime taken: {} s".format(finish - start))
+    print("_"*len(result_saved_string))  
+
+def reduce_qubo(qubo):
+    #Perform reduction as many times possible up to some threshold
+    max_coeff = np.max( np.append( qubo.objective.linear.to_array(), qubo.objective.quadratic.to_array() ) )
+    total_normalize_factor = 1.0 #To recover original qubo by multiplying this number to its objective
+    qubo.objective.linear._coefficients = qubo.objective.linear._coefficients / max_coeff
+    qubo.objective.quadratic._coefficients = qubo.objective.quadratic._coefficients / max_coeff
+    qubo.objective.constant = qubo.objective.constant / max_coeff
+    total_normalize_factor *= max_coeff
+    return qubo, total_normalize_factor
+
+def build_noise_model(noise_rates, multiplier):
+    noise_model = NoiseModel(basis_gates = ['cx', 'id', 'reset', 'rz', 'sx', 'x'])
+    gate_errors = {x[0]: x[1]*multiplier for x in noise_rates.items()}
+    for gate in noise_rates:
+        #Depolarizing error on CX
+        if gate == 'cx':
+            depol_err_cx = depolarizing_error(noise_rates[gate] * multiplier, 2)
+            noise_model.add_all_qubit_quantum_error(depol_err_cx, ['cx'])
+        #Depolarizing error on single qubit gates
+        else:
+            depol_err = depolarizing_error(noise_rates[gate] * multiplier, 1, standard_gates = False) 
+            noise_model.add_all_qubit_quantum_error(depol_err, [gate])
+    
+    #Save error rates
+    with open("gate_errors_{}.json".format(multiplier), "w") as f:
+        json.dump(gate_errors, f)
+    
+    return noise_model
 
 class QAOA_Base:
     def __init__(self, **kwargs):
@@ -100,8 +136,9 @@ class QAOA_Base:
         self.symmetrise = kwargs.get("symmetrise", False)
         self.customise = kwargs.get("customise", False)
         opt_str = kwargs.get('opt_str', "LN_COBYLA")
+        print("Optimizer: {}".format(opt_str))
         self.optimizer = NLOPT_Optimizer(opt_str)
-        self.optimizer.set_options(maxeval = 200)
+        self.optimizer.set_options(maxeval = 100)
         self.original_qubo = deepcopy(self.qubo)
 
         #Benchmarking, using classical result for ground state energy, and then random energy measurement.
@@ -118,7 +155,7 @@ class QAOA_Base:
         print("Using "+simulator)
         
         self.quantum_instance = QuantumInstance( backend = Aer.get_backend(simulator), 
-                                                 shots = 4096, 
+                                                 shots = 8192, 
                                                  noise_model = noise_model,
                                                  basis_gates = ["cx", "x", "sx", "rz", "id"]
                                                )
@@ -137,6 +174,7 @@ class QAOA_Base:
         
         #Results placeholder
         self.prob_s = []
+        self.eval_s = []
         self.approx_s = []
 
     def symmetrise_qubo(self):
@@ -291,32 +329,31 @@ class QAOA_Base:
                                         construct_circ = construct_circ
                                         )
         point = qaoa_results.optimal_point
-        qaoa_results.eigenvalue = sum( [ x[1] * x[2] for x in qaoa_results.eigenstate ] )
+        eigenvalue = sum( [ x[1] * x[2] for x in qaoa_results.eigenstate ] )
+        qaoa_results.eigenvalue = eigenvalue
         self.optimal_point = convert_to_fourier_point(point, len(point)) if fourier_parametrise else point
         self.qaoa_result = qaoa_results
 
-        #Sort states by increasing energy and decreasing probability
-        sorted_eigenstate_by_energy = sorted(qaoa_results.eigenstate, key = lambda x: x[1])
+        #Sort states by decreasing probability
         sorted_eigenstate_by_prob = sorted(qaoa_results.eigenstate, key = lambda x: x[2], reverse = True)
         
-        #print energy-sorted state in a table
-        self.print_state(sorted_eigenstate_by_energy)
+        #print sorted state in a table
+        self.print_state(sorted_eigenstate_by_prob)
 
         #Other print stuff
-        print("Eigenvalue: {}".format(qaoa_results.eigenvalue))
+        print("Eigenvalue: {}".format(eigenvalue))
         print("Optimal point: {}".format(qaoa_results.optimal_point))
         print("Optimizer Evals: {}".format(qaoa_results.optimizer_evals))
         scale = self.random_energy - self.opt_value
-        approx_quality = np.round( (self.random_energy - sorted_eigenstate_by_energy[0][1])/ scale, 3 )
+
         approx_quality_2 = np.round( ( self.random_energy - sorted_eigenstate_by_prob[0][1] ) / scale, 3 )
         energy_prob = {}
         for x in qaoa_results.eigenstate:
             energy_prob[ np.round(x[1], 6) ] = energy_prob.get(np.round(x[1], 6), 0) + x[2]
         prob_s = np.round( energy_prob.get(np.round(self.opt_value, 6), 0), 6 )
         self.prob_s.append( prob_s )
-        self.approx_s.append( [approx_quality, approx_quality_2] )
-        print( "\nQAOA lowest energy solution: {}".format(sorted_eigenstate_by_energy[0]) )
-        print( "Approx_quality: {}".format(approx_quality) )
+        self.eval_s.append( eigenvalue )
+        self.approx_s.append( approx_quality_2 )
         print( "\nQAOA most probable solution: {}".format(sorted_eigenstate_by_prob[0]) )
         print( "Approx_quality: {}".format(approx_quality_2) ) 
 

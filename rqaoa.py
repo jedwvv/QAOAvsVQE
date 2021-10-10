@@ -19,6 +19,8 @@ from qiskit.opflow.primitive_ops import PauliOp
 from QAOA_methods import CustomQAOA, find_all_ground_states
 from pprint import pprint
 import numpy as np
+from qaoa import build_noise_model
+import json
 
 def main(args=None):
     start = time()
@@ -45,9 +47,11 @@ def main(args=None):
         args["customise"] = False
         args["bias"] = False
         args["simulator"] = "aer_simulator_density_matrix"
-        print("Simulating with noise...")
-        with open('noise_model.pkl', 'rb') as f:
-            noise_model = pkl.load(f)
+        multiplier = args["multiplier"]
+        print("Simulating with noise...Error mulitplier: {}".format(multiplier))
+        with open('average_gate_errors.json', 'r') as f:
+            noise_rates = json.load(f)
+        noise_model = build_noise_model(noise_rates, multiplier)
     else:
         print("Simulating without noise...")
         noise_model = None
@@ -148,7 +152,7 @@ def main(args=None):
         else:
             filedir = 'results_{}cars{}routes_mps/Regular_RQAOA_{}_Base_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
     elif args["noisy"]:
-        filedir = 'results_{}cars{}routes/Noisy_S_RQAOA_{}_Base_p={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
+        filedir = 'results_{}cars{}routes/Noisy_S_RQAOA_{}_Base_p={}_Error={}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"], args["multiplier"])
         
     
     #Save results to file
