@@ -45,6 +45,7 @@ def parse():
                                 )
     required_named.add_argument("--method", "-O", required=False, help = "Set optimizer method from NLOPT library", type = str)
     parser.add_argument("--fourier", "-F", default = False, help = "Set whether to use FOURIER parametrisation or not", action = "store_true")
+    parser.add_argument("--interp", "-INT", default = False, help = "Set whether to use INTERP layer-based point initialization or not", action = "store_true")
     parser.add_argument("--bias", "-B", default = False, help = "Set whether to use biased correlations or not", action = "store_true")
     parser.add_argument("--symmetrise", "-Y", default = False, help = "Set whether to symmetrise Hamiltonian initially or not", action = "store_true")
     parser.add_argument("--customise", "-C", default = False, help = "Set whether to use Custom QAOA circuit or Regular", action = "store_true")

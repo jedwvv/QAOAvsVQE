@@ -1,4 +1,4 @@
-from QAOA_methods import CustomQAOA, construct_initial_state, n_qbit_mixer, find_all_ground_states
+from QAOA_methods import CustomQAOA, QiskitQAOA, construct_initial_state, n_qbit_mixer, find_all_ground_states, interp_point
 from QAOAEx import convert_to_fourier_point, convert_from_fourier_point
 from qiskit.utils.quantum_instance import QuantumInstance
 from qiskit import Aer, QuantumCircuit, QuantumRegister
@@ -13,6 +13,7 @@ from copy import deepcopy
 from time import time
 from qiskit.providers.aer.noise import NoiseModel
 from qiskit.providers.aer.noise import depolarizing_error
+from qiskit.algorithms.optimizers import COBYLA, SLSQP, SPSA, NELDER_MEAD
 import json
 
 def main(args=None):
@@ -31,7 +32,7 @@ def main(args=None):
     qubo, normalize_factor = reduce_qubo(qubo)
     if classical_result:
         classical_result._fval /= normalize_factor #Also normalize classical result
-    
+        
     #Noise
     if args["noisy"]:
         multiplier = args["multiplier"]
@@ -55,22 +56,35 @@ def main(args=None):
                   opt_str = "LN_BOBYQA"
                  )
     p_max = args["p_max"]
-
+    fourier_parametrise = args["fourier"]
+    print("FOURIER: {}\nINTERP: {}".format(args["fourier"], args["interp"]))
+    
     for p in range(1, p_max+1):
         p_start = time()
         print( "\nQAOA p={}. Results below:".format(p) )
         qaoa.optimizer.set_options(maxeval=100*(2**p))
         if p==1:
-            qaoa.solve_qaoa(p)
+            qaoa.solve_qiskit_qaoa(p, fourier_parametrise = fourier_parametrise)
         else:
-            qaoa.solve_qaoa(p, tqa=True)
+            if args["interp"]:
+                next_point = interp_point(qaoa.optimal_point)
+            elif not args["interp"] and args["fourier"]:
+                next_point = convert_to_fourier_point(qaoa.optimal_point, 2*p)
+                next_point = convert_from_fourier_point(next_point, 2*p)
+            else:
+                next_point = np.zeros(2*p)
+                next_point[0:p-1]=point[0:p-1]
+                next_point[p:2*p-1]=point[p-1:2*p-2]  
+            qaoa.solve_qiskit_qaoa(p, point = next_point, fourier_parametrise = fourier_parametrise)
         p_end = time()
         print("Time taken (for this iteration): {}s".format(p_end - p_start))
         
-    
-    print( "\nProbabilities: {}".format(qaoa.prob_s) )
-    print( "Eigenvalue at each p: {}".format(qaoa.eval_s) )
-    print( "Approx Qualities of most_probable_state: {}\n".format(qaoa.approx_s) )
+    prob_s = [np.round(prob, 3) for prob in qaoa.prob_s]
+    eval_s = [np.round(e_val, 3) for e_val in qaoa.eval_s]
+    approx_s = [np.round(approx, 3) for approx in qaoa.approx_s]
+    print( "\nProbabilities: {}".format(prob_s) )
+    print( "Eigenvalue at each p: {}".format(eval_s) )
+    print( "Approx Qualities of most_probable_state: {}\n".format(approx_s) )
     if args["noisy"]:
         if args["symmetrise"]:
             filedir = 'results_{}cars{}routes/Noisy_QAOA_Symm_{}_Cust_p={}_error{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"], args["multiplier"])
@@ -78,9 +92,9 @@ def main(args=None):
             filedir = 'results_{}cars{}routes/Noisy_QAOA_Reg_{}_Cust_p={}_error{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"], args["multiplier"])
     else:
         if args["symmetrise"]:
-            filedir = 'results_{}cars{}routes/Ideal_QAOA_Symm_{}_Cust_p={}_error{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"], args["multiplier"])
+            filedir = 'results_{}cars{}routes/Ideal_QAOA_Symm_{}_Cust_p={}_error0.0.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
         else:
-            filedir = 'results_{}cars{}routes/Ideal_QAOA_Reg_{}_Cust_p={}_error{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"], args["multiplier"])
+            filedir = 'results_{}cars{}routes/Ideal_QAOA_Reg_{}_Cust_p={}_error0.0.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
     
     if not args["customise"]:
         filedir = filedir.replace("Cust", "Base")
@@ -135,10 +149,10 @@ class QAOA_Base:
         self.no_routes = kwargs.get("no_routes", 0)
         self.symmetrise = kwargs.get("symmetrise", False)
         self.customise = kwargs.get("customise", False)
-        opt_str = kwargs.get('opt_str', "LN_COBYLA")
+        opt_str = kwargs.get('opt_str', "LN_BOBYQA")
         print("Optimizer: {}".format(opt_str))
         self.optimizer = NLOPT_Optimizer(opt_str)
-        self.optimizer.set_options(maxeval = 100)
+        self.optimizer.set_options(maxeval = 200)
         self.original_qubo = deepcopy(self.qubo)
 
         #Benchmarking, using classical result for ground state energy, and then random energy measurement.
@@ -257,21 +271,22 @@ class QAOA_Base:
             self.classical_result = classical_result
             self.opt_value = opt_value
 
+    #Using Gary's Qiskit code
     def solve_qaoa(self, p, **kwargs):
-        point = kwargs.get("point", None)
-        fourier_parametrise = True
+        print("USING CUSTOM CODE")
+        point = kwargs.get("point", None) #Make sure point here is already in FOURIER space of length 2(p-1)
+        fourier_parametrise = kwargs.get("fourier_parametrise", False)
         tqa = kwargs.get('tqa', False)
         points = kwargs.get("points", None)
-        construct_circ = False
+        construct_circ = kwargs.get("construct_circ", False)
                 
         if tqa:
             deltas = np.arange(0.25, 0.91, 0.05)
             point = np.append( [ (i+1)/p for i in range(p) ] , [ 1-(i+1)/p for i in range(p) ] )
             points = [delta*point for delta in deltas]
-            fourier_parametrise = True
             if fourier_parametrise:
                 points = [ convert_to_fourier_point(point, len(point)) for point in points ]
-            qaoa_results, _ = CustomQAOA( self.operator,
+            qaoa_results, circ = CustomQAOA( self.operator,
                                             self.quantum_instance,
                                             self.optimizer,
                                             reps = p,
@@ -283,12 +298,14 @@ class QAOA_Base:
                                             construct_circ = construct_circ
                                                         )
         elif points is not None:
-            fourier_parametrise = True
             if fourier_parametrise:
                 points = [ convert_to_fourier_point(point, len(point)) for point in points ]
-            if point is not None:
-                points.append( convert_to_fourier_point(point, len(point)) )
-            qaoa_results, _ = CustomQAOA( self.operator,
+                if point is not None:
+                    points.append( convert_to_fourier_point(point, len(point)) )
+            else:
+                points.append(point)
+
+            qaoa_results, circ = CustomQAOA( self.operator,
                                                         self.quantum_instance,
                                                         self.optimizer,
                                                         reps = p,
@@ -300,10 +317,9 @@ class QAOA_Base:
                                                         construct_circ = construct_circ
                                                         )
         elif point is not None:
-            fourier_parametrise = True
             if fourier_parametrise:
-                point =  convert_to_fourier_point(point, len(point))
-            qaoa_results, _ = CustomQAOA( self.operator,
+                initial_point = convert_to_fourier_point(point, len(point))
+            qaoa_results, circ = CustomQAOA( self.operator,
                                         self.quantum_instance,
                                         self.optimizer,
                                         reps = p,
@@ -316,8 +332,7 @@ class QAOA_Base:
                                         )
         else:
             points = [ [0]*(2*p) ] + [ [ 1.98 * np.pi* ( np.random.rand() - 0.5 ) for _ in range(2*p)] for _ in range(10) ]
-            fourier_parametrise = True
-            qaoa_results, _ = CustomQAOA( self.operator,
+            qaoa_results, circ = CustomQAOA( self.operator,
                                         self.quantum_instance,
                                         self.optimizer,
                                         reps = p,
@@ -328,10 +343,13 @@ class QAOA_Base:
                                         qubo = self.qubo,
                                         construct_circ = construct_circ
                                         )
-        point = qaoa_results.optimal_point
+        if circ:
+            print(circ.draw(fold=200))
+        optimal_point = qaoa_results.optimal_point
         eigenvalue = sum( [ x[1] * x[2] for x in qaoa_results.eigenstate ] )
         qaoa_results.eigenvalue = eigenvalue
-        self.optimal_point = convert_to_fourier_point(point, len(point)) if fourier_parametrise else point
+        self.optimal_point = optimal_point
+
         self.qaoa_result = qaoa_results
 
         #Sort states by decreasing probability
@@ -342,7 +360,117 @@ class QAOA_Base:
 
         #Other print stuff
         print("Eigenvalue: {}".format(eigenvalue))
-        print("Optimal point: {}".format(qaoa_results.optimal_point))
+        print("Optimal point: {}".format(optimal_point))
+        print("Optimizer Evals: {}".format(qaoa_results.optimizer_evals))
+        scale = self.random_energy - self.opt_value
+
+        approx_quality_2 = np.round( ( self.random_energy - sorted_eigenstate_by_prob[0][1] ) / scale, 3 )
+        energy_prob = {}
+        for x in qaoa_results.eigenstate:
+            energy_prob[ np.round(x[1], 6) ] = energy_prob.get(np.round(x[1], 6), 0) + x[2]
+        prob_s = np.round( energy_prob.get(np.round(self.opt_value, 6), 0), 6 )
+        self.prob_s.append( prob_s )
+        self.eval_s.append( eigenvalue )
+        self.approx_s.append( approx_quality_2 )
+        print( "\nQAOA most probable solution: {}".format(sorted_eigenstate_by_prob[0]) )
+        print( "Approx_quality: {}".format(approx_quality_2) ) 
+    
+    def solve_qiskit_qaoa(self, p, **kwargs):
+        print("USING QISKIT CODE")
+        point = kwargs.get("point", None)
+        tqa = kwargs.get('tqa', False)
+        points = kwargs.get("points", None)
+        construct_circ = kwargs.get("construct_circ", False)
+        fourier_parametrise = kwargs.get("fourier_parametrise", False)
+
+        if tqa:
+            deltas = np.arange(0.25, 0.91, 0.05)
+            point = np.append( [ (i+1)/p for i in range(p) ] , [ 1-(i+1)/p for i in range(p) ] )
+            points = [delta*point for delta in deltas]
+            if fourier_parametrise:
+                points = [convert_to_fourier_point(point, len(point)) for point in points]
+            qaoa_results, circ = QiskitQAOA( self.operator,
+                                            self.quantum_instance,
+                                            self.optimizer,
+                                            reps = p,
+                                            initial_state = self.initial_state,
+                                            mixer = self.mixer,
+                                            list_points = points,
+                                            construct_circ = construct_circ,
+                                            fourier_parametrise = fourier_parametrise
+                                            )
+        elif points is not None:
+            if point is not None:
+                points.append(point)
+            if fourier_parametrise:
+                points = [convert_to_fourier_point(point, len(point)) for point in points]
+            qaoa_results, circ = QiskitQAOA( self.operator,
+                                            self.quantum_instance,
+                                            self.optimizer,
+                                            reps = p,
+                                            initial_state = self.initial_state,
+                                            mixer = self.mixer,
+                                            list_points = points,
+                                            construct_circ = construct_circ,
+                                            fourier_parametrise = fourier_parametrise
+                                            )
+        elif point is not None:
+            if fourier_parametrise:
+                point = convert_to_fourier_point(point, len(point))
+            qaoa_results, circ = QiskitQAOA( self.operator,
+                                        self.quantum_instance,
+                                        self.optimizer,
+                                        reps = p,
+                                        initial_state = self.initial_state,
+                                        initial_point = point,
+                                        mixer = self.mixer,
+                                        construct_circ = construct_circ,
+                                        fourier_parametrise = fourier_parametrise
+                                        )
+        else:
+            points = [ [0]*(2*p) ] + [ [ 1.98 * np.pi* ( np.random.rand() - 0.5 ) for _ in range(2*p)] for _ in range(10) ]
+            qaoa_results, circ = QiskitQAOA( self.operator,
+                                        self.quantum_instance,
+                                        self.optimizer,
+                                        reps = p,
+                                        initial_state = self.initial_state,
+                                        list_points = points,
+                                        mixer = self.mixer,
+                                        construct_circ = construct_circ,
+                                        fourier_parametrise = fourier_parametrise
+                                        )
+        if circ:
+            print(circ.draw(fold=200))
+        optimal_point = qaoa_results.optimal_point
+        self.optimal_point = optimal_point
+        self.qaoa_result = qaoa_results
+        
+        eigenstate = qaoa_results.eigenstate
+        if self.quantum_instance.is_statevector:
+            from qiskit.quantum_info import Statevector
+            eigenstate = Statevector(eigenstate)
+            eigenstate = eigenstate.probabilities_dict()
+        else:
+            eigenstate = dict([(u, v**2) for u, v in eigenstate.items()]) #Change to probabilities
+        num_qubits = len(list(eigenstate.items())[0][0])
+        solutions = []
+        eigenvalue = 0
+        for bitstr, sampling_probability in eigenstate.items():
+            bitstr = bitstr[::-1]
+            value = self.qubo.objective.evaluate([int(bit) for bit in bitstr])
+            eigenvalue += value * sampling_probability
+            solutions += [(bitstr, value, sampling_probability)]
+        qaoa_results.eigenstate = solutions
+        qaoa_results.eigenvalue = eigenvalue
+        #Sort states by decreasing probability
+        sorted_eigenstate_by_prob = sorted(qaoa_results.eigenstate, key = lambda x: x[2], reverse = True)
+        
+        #print sorted state in a table
+        self.print_state(sorted_eigenstate_by_prob)
+
+        #Other print stuff
+        print("Eigenvalue: {}".format(eigenvalue))
+        print("Optimal point: {}".format(optimal_point))
         print("Optimizer Evals: {}".format(qaoa_results.optimizer_evals))
         scale = self.random_energy - self.opt_value
 

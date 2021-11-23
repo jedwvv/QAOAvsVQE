@@ -120,7 +120,7 @@ def nlopt_minimize(fun, x0, args=(), method=None, jac=None, bounds=None,
     # Create NLOpt objective function
     obj_fun = make_nlopt_fun(fun, jac, args, path)
     opt.set_min_objective(obj_fun)
-
+    
     # Normalize and set parameter bounds
     if bounds:
         lower, upper = zip(*normalize_bounds(bounds))

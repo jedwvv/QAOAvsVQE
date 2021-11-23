@@ -3,6 +3,172 @@ import numpy as np
 from qiskit import QuantumCircuit
 from generate_qubos import solve_classically, arr_to_str
 import QAOAEx
+from qiskit.algorithms import QAOA as QAOA_Base
+from qiskit.algorithms.variational_algorithm import VariationalResult
+from typing import Any, Callable, Dict, List, Mapping, Optional, Tuple, Union
+from qiskit.algorithms.optimizers import Optimizer
+from time import time
+import logging
+
+logger = logging.getLogger(__name__)
+class QAOA(QAOA_Base):
+    _parameterise_point_for_energy_evaluation: Callable[[Union[List[float], np.ndarray], int], List[float]] = None
+    latest_parameterised_point = None
+
+    def set_parameterise_point_for_energy_evaluation(self,
+                                                parameterise_point_for_optimisation: Callable[[Union[List[float], np.ndarray], int], List[float]]
+                                                ) -> None:
+        self._parameterise_point_for_energy_evaluation = parameterise_point_for_optimisation
+
+    def find_minimum(self,
+                     initial_point: Optional[np.ndarray] = None,
+                     ansatz: Optional[QuantumCircuit] = None,
+                     cost_fn: Optional[Callable] = None,
+                     optimizer: Optional[Optimizer] = None,
+                     gradient_fn: Optional[Callable] = None) -> 'VariationalResult':
+        """Optimize to find the minimum cost value.
+
+        Args:
+            initial_point: If not `None` will be used instead of any initial point supplied via
+                constructor. If `None` and `None` was supplied to constructor then a random
+                point will be used if the optimizer requires an initial point.
+            ansatz: If not `None` will be used instead of any ansatz supplied via constructor.
+            cost_fn: If not `None` will be used instead of any cost_fn supplied via
+                constructor.
+            optimizer: If not `None` will be used instead of any optimizer supplied via
+                constructor.
+            gradient_fn: Optional gradient function for optimizer
+
+        Returns:
+            dict: Optimized variational parameters, and corresponding minimum cost value.
+
+        Raises:
+            ValueError: invalid input
+        """
+        initial_point = initial_point if initial_point is not None else self.initial_point
+        ansatz = ansatz if ansatz is not None else self.ansatz
+        cost_fn = cost_fn if cost_fn is not None else self._cost_fn
+        optimizer = optimizer if optimizer is not None else self.optimizer
+
+        if ansatz is None:
+            raise ValueError('Ansatz neither supplied to constructor nor find minimum.')
+        if cost_fn is None:
+            raise ValueError('Cost function neither supplied to constructor nor find minimum.')
+        if optimizer is None:
+            raise ValueError('Optimizer neither supplied to constructor nor find minimum.')
+
+        nparms = ansatz.num_parameters
+
+        if hasattr(ansatz, 'parameter_bounds') and ansatz.parameter_bounds is not None:
+            bounds = ansatz.parameter_bounds
+        else:
+            bounds = [(None, None)] * nparms
+
+        if initial_point is not None and len(initial_point) != nparms:
+            raise ValueError(
+                'Initial point size {} and parameter size {} mismatch'.format(
+                    len(initial_point), nparms))
+        if len(bounds) != nparms:
+            raise ValueError('Ansatz bounds size does not match parameter size')
+        # If *any* value is *equal* in bounds array to None then the problem does *not* have bounds
+        problem_has_bounds = not np.any(np.equal(bounds, None))
+        # Check capabilities of the optimizer
+        if problem_has_bounds:
+            if not optimizer.is_bounds_supported:
+                raise ValueError('Problem has bounds but optimizer does not support bounds')
+        else:
+            if optimizer.is_bounds_required:
+                raise ValueError('Problem does not have bounds but optimizer requires bounds')
+        if initial_point is not None:
+            if not optimizer.is_initial_point_supported:
+                raise ValueError('Optimizer does not support initial point')
+        else:
+            if optimizer.is_initial_point_required:
+                if hasattr(ansatz, 'preferred_init_points'):
+                    # Note: default implementation returns None, hence check again after below
+                    initial_point = ansatz.preferred_init_points
+
+                if initial_point is None:  # If still None use a random generated point
+                    low = [(l if l is not None else -2 * np.pi) for (l, u) in bounds]
+                    high = [(u if u is not None else 2 * np.pi) for (l, u) in bounds]
+                    initial_point = algorithm_globals.random.uniform(low, high)
+
+        start = time()
+        if not optimizer.is_gradient_supported:  # ignore the passed gradient function
+            gradient_fn = None
+        else:
+            if not gradient_fn:
+                gradient_fn = self._gradient
+
+        logger.info('Starting optimizer.\nbounds=%s\ninitial point=%s', bounds, initial_point)
+        opt_params, opt_val, num_optimizer_evals = optimizer.optimize(nparms,
+                                                                      cost_fn,
+                                                                      variable_bounds=bounds,
+                                                                      initial_point=initial_point,
+                                                                      gradient_function=gradient_fn)
+        eval_time = time() - start
+
+        if self._parameterise_point_for_energy_evaluation != None:
+            self.latest_parameterised_point = self._parameterise_point_for_energy_evaluation(opt_params, nparms)
+
+        result = VariationalResult()
+        result.optimizer_evals = num_optimizer_evals
+        result.optimizer_time = eval_time
+        result.optimal_value = opt_val
+        result.optimal_point = self.latest_parameterised_point
+        result.optimal_parameters = dict(zip(self._ansatz_params, self.latest_parameterised_point))
+
+        return result
+
+    def _energy_evaluation(self,
+                           parameters: Union[List[float], np.ndarray]
+                           ) -> Union[float, List[float]]:
+        """Evaluate energy at given parameters for the ansatz.
+
+        This is the objective function to be passed to the optimizer that is used for evaluation.
+
+        Args:
+            parameters: The parameters for the ansatz.
+
+        Returns:
+            Energy of the hamiltonian of each parameter.
+
+
+        Raises:
+            RuntimeError: If the ansatz has no parameters.
+        """
+        num_parameters = self.ansatz.num_parameters
+
+        if self._parameterise_point_for_energy_evaluation != None:
+            parameters = self._parameterise_point_for_energy_evaluation(parameters, num_parameters)
+            
+        if self._ansatz.num_parameters == 0:
+            raise RuntimeError('The ansatz cannot have 0 parameters.')
+
+        parameter_sets = np.reshape(parameters, (-1, num_parameters))
+        # Create dict associating each parameter with the lists of parameterization values for it
+        param_bindings = dict(zip(self._ansatz_params,
+                                  parameter_sets.transpose().tolist()))  # type: Dict
+
+        start_time = time()
+        sampled_expect_op = self._circuit_sampler.convert(self._expect_op, params=param_bindings)
+        means = np.real(sampled_expect_op.eval())
+
+        if self._callback is not None:
+            variance = np.real(self._expectation.compute_variance(sampled_expect_op))
+            estimator_error = np.sqrt(variance / self.quantum_instance.run_config.shots)
+            for i, param_set in enumerate(parameter_sets):
+                self._eval_count += 1
+                self._callback(self._eval_count, param_set, means[i], estimator_error[i])
+        else:
+            self._eval_count += len(means)
+
+        end_time = time()
+        logger.info('Energy evaluation returned %s - %.5f (ms), eval count: %s',
+                    means, (end_time - start_time) * 1000, self._eval_count)
+
+        return means if len(means) > 1 else means[0]
+
 
 def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
     initial_state = kwargs.get("initial_state", None)
@@ -17,7 +183,7 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
         include_custom = False
     qaoa_instance = QAOAEx.QAOACustom(quantum_instance = quantum_instance,
                                         reps = reps,
-                                        force_shots = True,
+                                        force_shots = False,
                                         optimizer = optimizer,
                                         qaoa_name = "example_qaoa",
                                         initial_state = initial_state,
@@ -45,15 +211,67 @@ def CustomQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
 
             qaoa_results = qaoa_instance.solve(operator, initial_point, bounds=bounds)
             qc = qaoa_instance.get_optimal_circuit() if construct_circ else None
-        if fourier_parametrise and qubo:
-            optimal_point = qaoa_results.optimal_point
-            state = qaoa_instance.calculate_statevector_at_point(operator = operator, point = QAOAEx.convert_from_fourier_point(optimal_point, len(optimal_point)))
-            qaoa_results.eigenstate = qaoa_instance.eigenvector_to_solutions(state, quadratic_program=qubo)
+        if qubo:
+            if fourier_parametrise:
+                optimal_point = qaoa_results.optimal_point
+                state = qaoa_instance.calculate_statevector_at_point(operator = operator, point = QAOAEx.convert_from_fourier_point(optimal_point, len(optimal_point)))
+                qaoa_results.eigenstate = qaoa_instance.eigenvector_to_solutions(state, quadratic_program=qubo)
+            else:
+                optimal_point = qaoa_results.optimal_point
+                state = qaoa_instance.calculate_statevector_at_point(operator = operator, point = optimal_point)
+                qaoa_results.eigenstate = qaoa_instance.eigenvector_to_solutions(state, quadratic_program=qubo) 
         return qaoa_results, qc
 
     else:
         random_energy = qaoa_instance.evaluate_energy_at_point(operator, [0,0]*reps)
         return random_energy, None
+
+#Using QISKIT QAOA
+def QiskitQAOA(operator, quantum_instance, optimizer, reps, **kwargs):
+    initial_state = kwargs.get("initial_state", None)
+    mixer = kwargs.get("mixer", None)
+    construct_circ = kwargs.get("construct_circ", False)
+    fourier_parametrise = kwargs.get("fourier_parametrise", False)
+    if quantum_instance.is_statevector:
+        include_custom = True
+    else:
+        include_custom = False
+    qaoa_instance = QAOA(quantum_instance = quantum_instance,
+                        reps = reps,
+                        optimizer = optimizer,
+                        initial_state = initial_state,
+                        mixer = mixer,
+                        include_custom = include_custom,
+                        max_evals_grouped = 1
+                        )
+
+    if fourier_parametrise:
+        qaoa_instance.set_parameterise_point_for_energy_evaluation(QAOAEx.convert_from_fourier_point)
+
+    #Set up QAOA Ansatz for computation of expectation values
+    qaoa_instance.construct_expectation(parameter=[0]*(2*reps), operator=operator)
+    
+    #Bounds
+    bounds = [(-2*np.pi, 2*np.pi)]*(2*reps) 
+    qaoa_instance.ansatz._bounds = bounds
+
+    if "list_points" in kwargs:
+        list_points = kwargs["list_points"]
+        list_results = []
+        for point in list_points:
+            qaoa_instance.initial_point = point
+            result = qaoa_instance.compute_minimum_eigenvalue(operator)
+            qc = qaoa_instance.get_optimal_circuit() if construct_circ else None
+            list_results.append( (result, qc) )
+        qaoa_results, qc = min(list_results, key=lambda x: x[0].eigenvalue)
+        
+    else:
+        initial_point = kwargs.get("initial_point", None)
+        qaoa_instance.initial_point = initial_point
+        qaoa_results = qaoa_instance.compute_minimum_eigenvalue(operator)
+        qc = qaoa_instance.get_optimal_circuit() if construct_circ else None
+    return qaoa_results, qc
+
 
 def generate_points(point, no_perturb, penalty):
     points = [point.copy() for _ in range(no_perturb+1)]
