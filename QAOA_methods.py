@@ -110,6 +110,8 @@ class QAOA(QAOA_Base):
 
         if self._parameterise_point_for_energy_evaluation != None:
             self.latest_parameterised_point = self._parameterise_point_for_energy_evaluation(opt_params, nparms)
+        else:
+            self.latest_parameterised_point = opt_params
 
         result = VariationalResult()
         result.optimizer_evals = num_optimizer_evals

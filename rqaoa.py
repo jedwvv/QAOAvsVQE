@@ -16,7 +16,7 @@ from classical_optimizers import NLOPT_Optimizer
 from qiskit_optimization import QuadraticProgram, QiskitOptimizationError
 from qiskit.quantum_info import Pauli
 from qiskit.opflow.primitive_ops import PauliOp
-from QAOA_methods import CustomQAOA, find_all_ground_states
+from QAOA_methods import CustomQAOA, find_all_ground_states, QiskitQAOA
 from pprint import pprint
 import numpy as np
 from qaoa import build_noise_model
@@ -397,7 +397,7 @@ class RQAOA:
 
         if num_vars >= 1 and symmetrised and not valid_op:
             qaoa_results = self.qaoa_result
-            qaoa_results.eigenstate = [ ('0'*num_vars, self.qubo.objective.evaluate([0]*num_vars), 1) ]
+            qaoa_results.eigenstate = np.array( [ 1 ] + [ 0 ]*(2**num_vars - 1) )
             qaoa_results.optimizer_evals = 0
             qaoa_results.eigenvalue = self.qubo.objective.evaluate([0]*num_vars)
             qc = QuantumCircuit(num_vars)
@@ -409,7 +409,7 @@ class RQAOA:
             fourier_parametrise = True
             if fourier_parametrise:
                 points = [ QAOAEx.convert_to_fourier_point(point, len(point)) for point in points ]
-            qaoa_results, _ = CustomQAOA( self.operator,
+            qaoa_results, _ = QiskitQAOA( self.operator,
                                                         self.quantum_instance,
                                                         self.optimizer,
                                                         reps = p,
@@ -424,7 +424,7 @@ class RQAOA:
             fourier_parametrise = True
             if fourier_parametrise:
                 points = [ QAOAEx.convert_to_fourier_point(point, len(point)) for point in points ]
-            qaoa_results, _ = CustomQAOA( self.operator,
+            qaoa_results, _ = QiskitQAOA( self.operator,
                                                         self.quantum_instance,
                                                         self.optimizer,
                                                         reps = p,
@@ -438,7 +438,7 @@ class RQAOA:
         elif point is None:
             points = [ [0]*(2*p) ] + [ [ 2 * np.pi* ( np.random.rand() - 0.5 ) for _ in range(2*p)] for _ in range(10) ]
             fourier_parametrise = True
-            qaoa_results, _ = CustomQAOA( self.operator,
+            qaoa_results, _ = QiskitQAOA( self.operator,
                                         self.quantum_instance,
                                         self.optimizer,
                                         reps = p,
@@ -452,7 +452,7 @@ class RQAOA:
             fourier_parametrise = True
             if fourier_parametrise:
                 point =  QAOAEx.convert_to_fourier_point(point, len(point))
-            qaoa_results, _ = CustomQAOA( self.operator,
+            qaoa_results, _ = QiskitQAOA( self.operator,
                                         self.quantum_instance,
                                         self.optimizer,
                                         reps = p,
@@ -464,9 +464,27 @@ class RQAOA:
                                         )
             
         point = qaoa_results.optimal_point
-        qaoa_results.eigenvalue = sum( [ x[1] * x[2] for x in qaoa_results.eigenstate ] )
-        self.optimal_point = QAOAEx.convert_to_fourier_point(point, len(point)) if fourier_parametrise else point
+        eigenstate = qaoa_results.eigenstate
+        if self.quantum_instance.is_statevector:
+            from qiskit.quantum_info import Statevector
+            eigenstate = Statevector(eigenstate)
+            eigenstate = eigenstate.probabilities_dict()
+        else:
+            eigenstate = dict([(u, v**2) for u, v in eigenstate.items()]) #Change to probabilities
+        num_qubits = len(list(eigenstate.items())[0][0])
+        solutions = []
+        eigenvalue = 0
+        for bitstr, sampling_probability in eigenstate.items():
+            bitstr = bitstr[::-1]
+            value = self.qubo.objective.evaluate([int(bit) for bit in bitstr])
+            eigenvalue += value * sampling_probability
+            solutions += [(bitstr, value, sampling_probability)]
+        qaoa_results.eigenstate = solutions
+        qaoa_results.eigenvalue = eigenvalue
+
+        self.optimal_point = point
         self.qaoa_result = qaoa_results
+
 
         #Sort states by increasing energy and decreasing probability
         sorted_eigenstate_by_energy = sorted(qaoa_results.eigenstate, key = lambda x: x[1])

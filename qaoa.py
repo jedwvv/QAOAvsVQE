@@ -32,7 +32,7 @@ def main(args=None):
     qubo, normalize_factor = reduce_qubo(qubo)
     if classical_result:
         classical_result._fval /= normalize_factor #Also normalize classical result
-        
+    print("NO CARS: {}, NO ROUTES: {}, SAMPLE: {}\n".format(args["no_cars"], args["no_routes"], args["no_samples"]))
     #Noise
     if args["noisy"]:
         multiplier = args["multiplier"]
@@ -53,11 +53,13 @@ def main(args=None):
                   classical_result = classical_result,
                   simulator = args["simulator"],
                   noise_model = noise_model,
-                  opt_str = "LN_BOBYQA"
+                  opt_str = args["optimizer"]
                  )
     p_max = args["p_max"]
     fourier_parametrise = args["fourier"]
+    print("QAOA METHODS") 
     print("FOURIER: {}\nINTERP: {}".format(args["fourier"], args["interp"]))
+    print("CUSTOM: {}\nSYMMETR: {}".format(args["customise"], args["symmetrise"]))
     
     for p in range(1, p_max+1):
         p_start = time()
@@ -68,13 +70,13 @@ def main(args=None):
         else:
             if args["interp"]:
                 next_point = interp_point(qaoa.optimal_point)
-            elif not args["interp"] and args["fourier"]:
-                next_point = convert_to_fourier_point(qaoa.optimal_point, 2*p)
-                next_point = convert_from_fourier_point(next_point, 2*p)
             else:
+                point = qaoa.optimal_point if not args["fourier"] else convert_to_fourier_point(qaoa.optimal_point, len(qaoa.optimal_point))
                 next_point = np.zeros(2*p)
                 next_point[0:p-1]=point[0:p-1]
-                next_point[p:2*p-1]=point[p-1:2*p-2]  
+                next_point[p:2*p-1]=point[p-1:2*p-2]
+                if args["fourier"]:
+                    next_point = convert_from_fourier_point(next_point, 2*p)
             qaoa.solve_qiskit_qaoa(p, point = next_point, fourier_parametrise = fourier_parametrise)
         p_end = time()
         print("Time taken (for this iteration): {}s".format(p_end - p_start))
@@ -85,20 +87,32 @@ def main(args=None):
     print( "\nProbabilities: {}".format(prob_s) )
     print( "Eigenvalue at each p: {}".format(eval_s) )
     print( "Approx Qualities of most_probable_state: {}\n".format(approx_s) )
+    filedir = 'results_{}cars{}routes/'.format(args["no_cars"], args["no_routes"])
+    p_max = str( args["p_max"] ).zfill(2)
+    err_multipler = '{:.2f}'.format(args["multiplier"]) if args["noisy"] else '{:.2f}'.format(0.0)
+    sample = str( args["no_samples"] ).zfill(3)
     if args["noisy"]:
-        if args["symmetrise"]:
-            filedir = 'results_{}cars{}routes/Noisy_QAOA_Symm_{}_Cust_p={}_error{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"], args["multiplier"])
-        else:
-            filedir = 'results_{}cars{}routes/Noisy_QAOA_Reg_{}_Cust_p={}_error{}.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"], args["multiplier"])
+        filedir += "Noisy_QAOA_p={}_s={}_err={}".format(p_max, sample, err_multipler)
     else:
-        if args["symmetrise"]:
-            filedir = 'results_{}cars{}routes/Ideal_QAOA_Symm_{}_Cust_p={}_error0.0.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
-        else:
-            filedir = 'results_{}cars{}routes/Ideal_QAOA_Reg_{}_Cust_p={}_error0.0.csv'.format(args["no_cars"], args["no_routes"], args["no_samples"], args["p_max"])
-    
-    if not args["customise"]:
-        filedir = filedir.replace("Cust", "Base")
-    
+        filedir += "Ideal_QAOA_p={}_s={}_err={}".format(p_max, sample, err_multipler)
+    if args["symmetrise"]:
+        filedir += "_Symm"
+    else:
+        filedir += "_Base"
+    if args["customise"]:
+        filedir += "_Cust"
+    else:
+        filedir += "_Base"
+    if args["fourier"]:
+        filedir += "_FOUR"
+    else:
+        filedir += "_NONE"
+    if args["interp"]:
+        filedir += "_INTP"
+    else:
+        filedir += "_NONE"
+    filedir += "_{}".format(str(args["optimizer"]))
+    print(filedir)
     #Save results to file
     save_results = np.append( qaoa.prob_s, qaoa.eval_s )
     save_results = np.append( save_results, qaoa.approx_s )
@@ -416,7 +430,7 @@ class QAOA_Base:
                                             )
         elif point is not None:
             if fourier_parametrise:
-                point = convert_to_fourier_point(point, len(point))
+                point = convert_to_fourier_point(point, 2*p)
             qaoa_results, circ = QiskitQAOA( self.operator,
                                         self.quantum_instance,
                                         self.optimizer,

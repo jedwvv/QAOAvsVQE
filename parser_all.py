@@ -25,25 +25,16 @@ def parse():
                                 help="Set the number of routes for each car",
                                 type = int
                                 )
-    required_named.add_argument("--penalty_multiplier", "-P",
-                                required = False,
-                                help="Set the penalty multiplier for QUBO constraint",
-                                type = float
-                                )
     required_named.add_argument("--p_max", "-M",
                                 required = False,
                                 help = "Set maximum number of layers for QAOA",
-                                type = int
-                                )
-    required_named.add_argument("--no_restarts", "-T", required = False,
-                                help = "Set number of restarts for QAOA",
                                 type = int
                                 )
     required_named.add_argument("--no_samples", "-S", required = False,
                                 help = "Set number of samples/qubos with given no_cars no_routes",
                                 type=int
                                 )
-    required_named.add_argument("--method", "-O", required=False, help = "Set optimizer method from NLOPT library", type = str)
+    parser.add_argument("--optimizer", "-O", required=False, help = "Set optimizer method from NLOPT library", type = str)
     parser.add_argument("--fourier", "-F", default = False, help = "Set whether to use FOURIER parametrisation or not", action = "store_true")
     parser.add_argument("--interp", "-INT", default = False, help = "Set whether to use INTERP layer-based point initialization or not", action = "store_true")
     parser.add_argument("--bias", "-B", default = False, help = "Set whether to use biased correlations or not", action = "store_true")
@@ -56,7 +47,16 @@ def parse():
                         )
     parser.add_argument("--simulator", "-I", required=False, default=None, help = "Set simulation method from Qiskit Aer library", type = str)
     parser.add_argument("--noisy", "-X", required=False, default=False, help = "Set whether simulation is noisy", action="store_true")
-    parser.add_argument("--multiplier", "-U", required=False, default=1.0, help = "Set error rate multiplier", type=float)
+    parser.add_argument("--error-multiplier", "-U", required=False, default=1.0, help = "Set error rate multiplier", type=float)
+    parser.add_argument("--penalty_multiplier", "-P",
+                        required = False,
+                        help="Set the penalty multiplier for QUBO constraint",
+                        type = float
+                        )
+    parser.add_argument("--no_restarts", "-T", required = False,
+                        help = "Set number of restarts for QAOA",
+                        type = int
+                        )
     args = parser.parse_args()
     args = vars(args)
     return args
