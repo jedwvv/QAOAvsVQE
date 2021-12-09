@@ -33,7 +33,7 @@ def main(args=None):
             classical_result = None
         else:
             qubo, max_coeff, operator, offset, routes, classical_result = load_data
-    
+    fourier_parametrise = args["fourier"]
     #Normalize qubo (Can recover original qubo via normalize_factor * qubo_objective )
     qubo, normalize_factor = reduce_qubo(qubo)
     if classical_result:
@@ -64,13 +64,14 @@ def main(args=None):
                   customise = args["customise"],
                   classical_result = classical_result,
                   simulator = args["simulator"],
-                  noise_model = noise_model
+                  noise_model = noise_model,
+                  opt_str = args["optimizer"]
                  )
     print("Args: {}\n".format(args))
     iterate_time = time()
     print("First round of TQA-QAOA...")
     p = args["p_max"]
-    qaoa_results = rqaoa.solve_qaoa(p, tqa=True) if p>1 else rqaoa.solve_qaoa(p)
+    qaoa_results = rqaoa.solve_qaoa(p, tqa=True, fourier_parametrise = fourier_parametrise) if p>1 else rqaoa.solve_qaoa(p, fourier_parametrise=fourier_parametrise)
     rqaoa.perform_substitution_from_qaoa_results(qaoa_results, biased = args["bias"])
     print("Performed variable substition(s).")
     num_vars = rqaoa.qubo.get_num_vars()
@@ -84,7 +85,7 @@ def main(args=None):
         iterate_time = time()
         t+=1
         print( "\nRound {} of TQA-QAOA. Results below:".format(t) )
-        qaoa_results = rqaoa.solve_qaoa(p, tqa=True) if p>1 else rqaoa.solve_qaoa(p)
+        qaoa_results = rqaoa.solve_qaoa(p, tqa=True, fourier_parametrise=fourier_parametrise) if p>1 else rqaoa.solve_qaoa(p, fourier_parametrise=fourier_parametrise)
         rqaoa.perform_substitution_from_qaoa_results(qaoa_results, biased = args["bias"])
         print("Performed variable substition(s).")
         num_vars = rqaoa.qubo.get_num_vars()
@@ -179,7 +180,7 @@ def reduce_qubo(qubo):
     
 class RQAOA:
     def __init__(self, qubo, no_cars, no_routes, **kwargs):
-        opt_str = kwargs.get('opt_str', "LN_SBPLX")
+        opt_str = kwargs.get('opt_str', "LN_COBYLA")
         self.symmetrise = kwargs.get('symmetrise', False)
         self.customise = kwargs.get('customise', True)
         self.classical_result = kwargs.get("classical_result", None)
@@ -370,7 +371,7 @@ class RQAOA:
             point = self.optimal_point
         else:
             point = kwargs.get("point", None)
-        fourier_parametrise = True
+        fourier_parametrise = kwargs.get("fourier_parametrise", False)
         self.optimizer.set_options(maxeval = 1000)
         tqa = kwargs.get('tqa', False)
         points = kwargs.get("points", None)
@@ -406,7 +407,6 @@ class RQAOA:
             deltas = np.arange(0.45, 0.91, 0.05)
             point = np.append( [ (i+1)/p for i in range(p) ] , [ 1-(i+1)/p for i in range(p) ] )
             points = [delta*point for delta in deltas]
-            fourier_parametrise = True
             if fourier_parametrise:
                 points = [ QAOAEx.convert_to_fourier_point(point, len(point)) for point in points ]
             qaoa_results, _ = QiskitQAOA( self.operator,
@@ -421,7 +421,6 @@ class RQAOA:
                                                         )
         
         elif points is not None:
-            fourier_parametrise = True
             if fourier_parametrise:
                 points = [ QAOAEx.convert_to_fourier_point(point, len(point)) for point in points ]
             qaoa_results, _ = QiskitQAOA( self.operator,
@@ -437,7 +436,6 @@ class RQAOA:
  
         elif point is None:
             points = [ [0]*(2*p) ] + [ [ 2 * np.pi* ( np.random.rand() - 0.5 ) for _ in range(2*p)] for _ in range(10) ]
-            fourier_parametrise = True
             qaoa_results, _ = QiskitQAOA( self.operator,
                                         self.quantum_instance,
                                         self.optimizer,
@@ -449,7 +447,6 @@ class RQAOA:
                                         qubo = self.qubo
                                         )
         else:
-            fourier_parametrise = True
             if fourier_parametrise:
                 point =  QAOAEx.convert_to_fourier_point(point, len(point))
             qaoa_results, _ = QiskitQAOA( self.operator,

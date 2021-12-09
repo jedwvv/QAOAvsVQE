@@ -20,7 +20,7 @@ def main(args=None):
     start = time()
     if args == None:
         args = parse()
-    
+    print(args)
     #Load QUBO and reduce, then check existing classical solution
     with open('qubos_{}_car_{}_routes/qubo_{}.pkl'.format(args["no_cars"], args["no_routes"], args["no_samples"]), 'rb') as f:
         load_data = pkl.load(f)
@@ -55,13 +55,13 @@ def main(args=None):
                   noise_model = noise_model,
                   opt_str = args["optimizer"]
                  )
-    p_max = args["p_max"]
+    p_min, p_max = ( args["p_min"], args["p_max"] )
     fourier_parametrise = args["fourier"]
     print("QAOA METHODS") 
     print("FOURIER: {}\nINTERP: {}".format(args["fourier"], args["interp"], True))
     print("CUSTOM: {}\nSYMMETR: {}".format(args["customise"], args["symmetrise"]))
     
-    for p in range(1, p_max+1):
+    for p in range(p_min, p_max+1):
         p_start = time()
         print( "\nQAOA p={}. Results below:".format(p) )
         qaoa.optimizer.set_options(maxeval=100*(2**p))
@@ -80,9 +80,9 @@ def main(args=None):
     err_multipler = '{:.2f}'.format(args["multiplier"]) if args["noisy"] else '{:.2f}'.format(0.0)
     sample = str( args["no_samples"] ).zfill(3)
     if args["noisy"]:
-        filedir += "Noisy_TQA-QAOA_p={}_s={}_err={}".format(p_max, sample, err_multipler)
+        filedir += "Noisy_TQA-QAOA_p={}_s={}_err={}_Pmin={}".format(p_max, sample, err_multipler, p_min)
     else:
-        filedir += "Ideal_TQA-QAOA_p={}_s={}_err={}".format(p_max, sample, err_multipler)
+        filedir += "Ideal_TQA-QAOA_p={}_s={}_err={}_Pmin={}".format(p_max, sample, err_multipler, p_min)
     if args["symmetrise"]:
         filedir += "_Symm"
     else:

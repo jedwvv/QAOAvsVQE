@@ -57,6 +57,11 @@ def parse():
                         help = "Set number of restarts for QAOA",
                         type = int
                         )
+    parser.add_argument("--p_min", "-J", required = False,
+                        help = "set p_min for tqa_qaoa",
+                        default = 1,
+                        type = int
+                        )
     args = parser.parse_args()
     args = vars(args)
     return args

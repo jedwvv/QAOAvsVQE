@@ -97,7 +97,7 @@ def generate_routes(G, origin_destination, no_routes):
         routes = list(ox.k_shortest_paths(G, orig, dest, k = no_routes, weight="length"))
         return routes
     except Exception:
-        # for unsolvable routes (due to directed graph pecar_labelrimeter effects)
+        # for unsolvable routes (due to directed graph perimeter effects)
         return None
 
 def visualise(G, results):
