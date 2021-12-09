@@ -151,7 +151,11 @@ class QAOA_Traffic:
             plt.show()
         return self._map
 
-
+    def set_variables_routing_dict(self):
+        if not hasattr(self, '_variables'):
+            self.set_variables()
+        routing_dict = {var:None for var in self._variables}
+        return routing_dict
 import pickle as pkl
 # import matplotlib.pyplot as plt
 import numpy as np
@@ -163,9 +167,9 @@ with open(filepath, 'rb') as f:
 
 
 traffic = QAOA_Traffic(3, 2)
-traffic.set_map(G)
-traffic.obtain_map(plot=True)
-print(traffic.set_variables())
+# traffic.set_map(G)
+# traffic.obtain_map(plot=True)
+print(traffic.set_variables_routing_dict())
 # rng = np.random.default_rng(123)
 # start, dest = rng.integers(low=0, high=len(G.nodes()), size=2)
 
