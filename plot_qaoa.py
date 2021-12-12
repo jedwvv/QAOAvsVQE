@@ -33,9 +33,9 @@ def plot(no_cars, no_routes, p_max_qaoa, p_max_tqa, no_counter, plot_settings, o
                 else:
                     continue
                 key = [sample, p_max]
-                if 'Cust' in file:
+                if custom and 'Cust' in file:
                     key.append('Cust')
-                elif 'Cust' not in file:
+                elif not custom and 'Cust' not in file:
                     key.append('Base')
                 else:
                     continue
