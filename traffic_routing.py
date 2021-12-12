@@ -1,5 +1,12 @@
+import pickle as pkl
 import osmnx as ox
+import numpy as np
+import matplotlib.pyplot as plt
+from itertools import product, combinations
 
+filepath='unimelb_2.pkl'
+with open(filepath, 'rb') as f:
+    G = pkl.load(f)
 class Ox_Route:
     def __init__(self, routing: list):
         self._routing = routing
@@ -96,6 +103,114 @@ class Ox_Route:
     #Getter for self._routing
     def routing(self):
         return self._routing
+        
+class QAOA_Traffic:
+    def __init__(self, no_cars, no_routes, G_map = None, coupling_map = None, qubit_mapping = None):
+        self._map = G_map
+        self._no_cars = no_cars
+        self._no_routes = no_routes
+        self._coupling_map = coupling_map
+        self._qubit_mapping = qubit_mapping
+        if self._qubit_mapping:
+            self.compute_qubit_neighbours()
+        self.set_variables()
+
+    def set_variables(self):
+        variables = ["Car_{}_Route_{}".format(str(u).zfill(2),v) for u,v in product(range(self._no_cars), range(self._no_routes))]
+        self._variables = variables
+        routing_dict = dict(zip(variables, [None for _ in range(len(variables))]))
+        self._routing_dict = routing_dict
+    
+    def set_map(self, G_map):
+        self._map = G_map
+    
+    def set_coupling_map(self, coupling_map):
+        self._coupling_map = coupling_map
+    
+    def set_qubit_mapping(self, qubit_mapping):
+        self._qubit_mapping = qubit_mapping
+        self.compute_qubit_neighbours()
+    
+    def compute_qubit_neigbours(self, max_no_):
+        self._qubit_neibours = {}
+        qubits = list(range(np.amax(self._coupling_map)))
+
+    def generate_k_routes_from_origin_to_dest(self, k):
+        G = self._map
+        fig, ax = ox.plot_graph(G, figsize = (10,4), bgcolor='white', edge_color='black', edge_linewidth=0.5, show=False)
+        self._temp_nodes = []
+        def append_two_nodes_onclick(event):
+            nodes = self._temp_nodes
+            x, y = (event.ydata, event.xdata)
+            node = ox.nearest_nodes(G, y, x)
+            nodes.append(node)
+            if len(nodes) == 2:
+                plt.close()
+        cid = fig.canvas.mpl_connect('button_press_event', append_two_nodes_onclick)
+        plt.show()
+        try:
+            routes = list(ox.k_shortest_paths(G, *self._temp_nodes, k))
+        except:
+            routes = None
+            raise Exception("No valid routes between two nodes")
+        if routes:
+            return routes
+
+    def generate_k_routes_from_random_nodes(self, k, seed=123):
+        rng = np.random.default_rng(seed=seed)
+        G = self._map
+        high = len(G.nodes()) #max index for node
+        start_idx , dest_idx = rng.integers(low=0, high=high, size=2)
+        start, dest = (list(G.nodes())[start_idx], list(G.nodes())[dest_idx])
+        try:
+            routes = list(ox.k_shortest_paths(G, start, dest, k))
+        except:
+            routes = None
+            raise Exception("No valid routes between two nodes")
+        if routes:
+            return routes
+        
+    def add_car(self, n):
+        new_variables = ["Car_{}_Route_{}".format(u,v) for u,v in product(range(self._no_cars, self._no_cars+n), range(self._no_routes))]
+        self._variables += new_variables
+        self._no_cars += n
+
+    def obtain_map(self, plot=False, **args):
+        if plot:
+            import matplotlib.pyplot as plt
+            ox.plot_graph(self._map, bgcolor='white', edge_color='black', edge_linewidth=1.0)
+            plt.show()
+        return self._map
+
+    def routing_dict(self):
+        return self._routing_dict
+
+    def no_cars(self):
+        return self._no_cars
+
+    def no_routes(self):
+        return self._no_routes
+    
+    def coupling_map(self):
+        return self._coupling_map
+
+    def qubit_mapping(self):
+        return self._qubit_mapping
+
+    def assign_route(self, var, route):
+        if var not in self._routing_dict:
+            self._routing_dict[var] = route
+        else:
+            raise Exception("This variable already has an existing Route")
+
+    def remove_route(self, var):
+        self._routing_dict.pop(var, None)
+
+    def get_qubit_from_var(self, var):
+        if self._qubit_mapping:
+            return self._qubit_mapping[var]
+        else:
+            raise Exception("There are no qubit assignments provided.")
 
 def sublist(list_a, list_b):
     if 0 == len(list_a):
@@ -112,85 +227,9 @@ def sublist(list_a, list_b):
 
     return -1
 
-from itertools import product, combinations
-
-class QAOA_Traffic:
-    def __init__(self, no_cars, no_routes, G_map = None, coupling_map = None):
-        self._map = G_map
-        self._no_cars = no_cars
-        self._no_routes = no_routes
-        self._coupling_map = coupling_map
-        self.set_variables()
-
-    def no_cars(self):
-        return self._no_cars
-
-    def no_routes(self):
-        return self._no_routes
-    
-    def coupling_map(self):
-        return self._coupling_map
-
-    def set_variables(self):
-        variables = ["Car_{}_Route_{}".format(u,v) for u,v in product(range(self._no_cars), range(self._no_routes))]
-        self._variables = variables
-        return variables
-    
-    def set_map(self, G_map):
-        self._map = G_map
-
-    def add_car(self, n):
-        new_variables = ["Car_{}_Route_{}".format(u,v) for u,v in product(range(self._no_cars, self._no_cars+n), range(self._no_routes))]
-        self._variables += new_variables
-        self._no_cars += n
-
-    def obtain_map(self, plot=False, **args):
-        if plot:
-            import matplotlib.pyplot as plt
-            ox.plot_graph(self._map, bgcolor='white', edge_color='black', edge_linewidth=1.0)
-            plt.show()
-        return self._map
-
-    def set_variables_routing_dict(self):
-        if not hasattr(self, '_variables'):
-            self.set_variables()
-        routing_dict = {var:None for var in self._variables}
-        return routing_dict
-import pickle as pkl
-# import matplotlib.pyplot as plt
-import numpy as np
-
-filepath='unimelb_2.pkl'
-with open(filepath, 'rb') as f:
-    G = pkl.load(f)
-# fig = ox.plot_graph(G, figsize = (10,4), bgcolor='white', edge_color='black', edge_linewidth=1.0)
-
-
-traffic = QAOA_Traffic(3, 2)
-# traffic.set_map(G)
-# traffic.obtain_map(plot=True)
-print(traffic.set_variables_routing_dict())
-# rng = np.random.default_rng(123)
-# start, dest = rng.integers(low=0, high=len(G.nodes()), size=2)
-
-# routing = ox.shortest_path(G, list(G.nodes())[start], list(G.nodes())[dest])
-# route = Ox_Route(routing)
-# print("ROUTE:")
-# print(route)
-
-# k=5
-# removed_routing = route.obtain_last_k_nodes(k)
-# print("Last {} nodes".format(k))
-# print(removed_routing)
-# print("")
-# print("TEST before removing")
-# print(route.check_common_edges(removed_routing))
-# route.remove(removed_routing.routing())
-# print("Removed last {} nodes".format(k))
-# print(route)
-# print("TEST AFTER REMOVING")
-# print(route.check_common_edges(removed_routing))
-# print( removed_route )
-# print("\nRecombined:")
-# print( route+removed_route )
-# print(route.routing()[len(route.routing())-5:len(route.routing())])
+with open("coupling_map.pkl", "rb") as f:
+    coupling_map = pkl.load(f)
+import json
+with open("qubit_mapping.json", "r") as f:
+    qubit_mapping = json.load(f)
+traffic = QAOA_Traffic(21,3,G, coupling_map, qubit_mapping)
