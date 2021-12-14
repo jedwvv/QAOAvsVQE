@@ -12,4 +12,5 @@ def main(filepath, radius):
     return fig, ax
     
 if __name__ == "__main__":
-    main() 
+    filepath = 'unimelb_2.pkl'
+    main(filepath, 4000) 
