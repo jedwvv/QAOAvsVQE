@@ -55,7 +55,7 @@ def generate_valid_qubo(args, qubo_no):
 def generate_qubo(args):
     G, all_routes = generate_problem(args)
     routes_dictionary = dict_routes(all_routes, args)
-    qubo, linear, quadratic = build_qubo_unconstrained(G, routes_dictionary)
+    qubo, linear, quadratic = build_qubo_unconstrained_from_nodes(G, routes_dictionary)
     qubo = add_qubo_constraints(qubo, args["no_cars"], args["no_routes"])
     penalty_multiplier = args["penalty_multiplier"]
     qubo, max_coeff = convert_qubo(qubo, linear, quadratic, penalty_multiplier = penalty_multiplier)
@@ -170,7 +170,7 @@ def dict_routes(results, args):
     results_dict = { "X_{}_{}".format(int((i-i%args["no_routes"])/args["no_routes"]),i%args["no_routes"]): result for i, result in enumerate(results) }
     return results_dict
 
-def build_qubo_unconstrained(G, routes_dict):
+def build_qubo_unconstrained_from_nodes(G, routes_dict):
     all_edges_dict = get_edges_dict(routes_dict)
     qubo = QuadraticProgram()
     linear, quadratic = get_linear_quadratic_coeffs(G, all_edges_dict)
@@ -178,6 +178,15 @@ def build_qubo_unconstrained(G, routes_dict):
         qubo.binary_var(var)
     qubo.minimize(linear = linear, quadratic=quadratic)
     return qubo, linear, quadratic
+
+def build_qubo_unconstrained_from_edges_dict(G, all_edges_dict, variables):
+    qubo = QuadraticProgram()
+    linear, quadratic = get_linear_quadratic_coeffs(G, all_edges_dict)
+    for var in variables:
+        qubo.binary_var(var)
+    qubo.minimize(linear = linear, quadratic=quadratic)
+    return qubo, linear, quadratic
+
 
 def get_linear_quadratic_coeffs(G, all_edges_dict):
     linear = {}
@@ -208,7 +217,7 @@ def get_edges_dict(routes_dict):
         for edge in edge_list:
             if edge not in all_edges_dict:
                 all_edges_dict[edge] = [var]
-            else:
+            elif edge in all_edges_dict and var not in all_edges_dict[edge]:
                 all_edges_dict[edge].append(var)
     return all_edges_dict
 

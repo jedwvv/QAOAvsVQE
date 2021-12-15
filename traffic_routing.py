@@ -166,15 +166,19 @@ class QAOA_Traffic:
     def generate_k_routes_from_clicks(self, k):
         G = self._map
         fig, ax = ox.plot_graph(G, figsize = (8,8), bgcolor='white', edge_color='black', edge_linewidth=0.5, show=False)
+        fig.suptitle("Press X while hovering desired nodes in order of (orig, dest).")
         self._temp_nodes = []
         def append_two_nodes_onclick(event):
             nodes = self._temp_nodes
-            x, y = (event.ydata, event.xdata)
-            node = ox.nearest_nodes(G, y, x)
-            nodes.append(node)
+            if event.key == "x" or event.key == "X":
+                x, y = (event.ydata, event.xdata)
+                node = ox.nearest_nodes(G, y, x)
+                nodes.append(node)
+            elif event.key != "q" and event.key != "Q":
+                raise Exception("Press X when selecting nodes. Try again")
             if len(nodes) == 2:
                 plt.close()
-        cid = fig.canvas.mpl_connect('button_press_event', append_two_nodes_onclick)
+        cid = fig.canvas.mpl_connect('key_press_event', append_two_nodes_onclick)
         plt.show()
         try:
             routes = list(ox.k_shortest_paths(G, *self._temp_nodes, k))
@@ -316,7 +320,7 @@ class QAOA_Traffic:
                             weight = 0
                             print("{} and {} have overlapping routes, now checking if their corresponding qubits can interact (up to 2nd neighbours)...".format(var, var_2))
                             for edge in overlapping_edges:
-                                edge_data = self._map.get_edge_data(*edge, default=None)[0]
+                                edge_data = self._map.get_edge_data(*edge, default=[None])[0]
                                 if edge_data:
                                     weight += edge_data["length"]
                             print("Length of overlapping segments(m): {}".format(weight))
@@ -353,106 +357,123 @@ global temp_node
 temp_nodes = []
 def get_node_from_click(event):
     global temp_nodes
-    x, y = (event.ydata, event.xdata)
-    temp_node = ox.nearest_nodes(G, y, x)
-    temp_nodes.append(temp_node)
+    print(event.key)
+    if event.key == "x" or event.key == "X":
+        x, y = (event.ydata, event.xdata)
+        temp_node = ox.nearest_nodes(G, y, x)
+        temp_nodes.append(temp_node)
+    elif event.key == "d" or event.key == "D":
+        global outer_while
+        outer_while = 4
+        raise Exception("Force stopped")
+    elif event.key != "q" and event.key != "Q":
+        raise Exception("Press X to select nodes while hovering mouse. Try again")
     if event.ydata == None:
         plt.close()
 
 no_cars = 21
 no_routes = 3
-traffic = QAOA_Traffic(no_cars, no_routes, G, coupling_map, qubit_mapping)
 
-for i in range(21):
-    #Make sure to select 2 nodes (origin and destination)
-    while True:
-        print("_"*50+"\nEXISTING ROUTES\n"+"_"*50)
-        for var in traffic.routing_dict():
-            if traffic.routing_dict()[var]:
-                print("{}".format(var))
-        car_routes = []
-        try:
-            temp_nodes = []
-            var_s = ["Car_{}_Route_{}".format(str(i).zfill(2), r) for r in range(3)]
-            title = ""
-            for var in var_s:
-                qubit = traffic.get_qubit_from_var(var)
-                var_2_s = [ traffic.get_var_from_qubit(qubit_2) for qubit_2 in traffic.qubit_neighbours()[qubit] if traffic.get_var_from_qubit(qubit_2)]
-                var_2_s_2 = []
-                for var_2 in var_2_s:
-                    if var_2[4:6] != var[4:6]:
-                        var_2_s_2.append(var_2)
-                title += "{}: interacts with {}\n".format(var, var_2_s_2)                
-            fig, ax = ox.plot_graph(G, figsize = (8,8), bgcolor='white', edge_color='black', edge_linewidth=0.5, show=False)
-            fig.suptitle("Click on origin and dest nodes to for car {} in that order then press Q".format(i)+"\n\n"+title)
-            cid = fig.canvas.mpl_connect('button_press_event', get_node_from_click)
-            plt.show()
-            orig, dest = temp_nodes
+with open("traffic.pkl", 'rb') as f:
+    traffic = pkl.load(f)
+
+# i_min = 21
+
+# for i in range(i_min, 21):
+#     #Make sure to select 2 nodes (origin and destination)
+#     while True:
+#         print("_"*50+"\nEXISTING ROUTES\n"+"_"*50)
+#         for var in traffic.routing_dict():
+#             if traffic.routing_dict()[var]:
+#                 print("{}".format(var))
+#         car_routes = []
+#         try:
+#             temp_nodes = []
+#             var_s = ["Car_{}_Route_{}".format(str(i).zfill(2), r) for r in range(3)]
+#             title = ""
+#             for var in var_s:
+#                 qubit = traffic.get_qubit_from_var(var)
+#                 var_2_s = [ traffic.get_var_from_qubit(qubit_2) for qubit_2 in traffic.qubit_neighbours()[qubit] if traffic.get_var_from_qubit(qubit_2)]
+#                 var_2_s_2 = []
+#                 for var_2 in var_2_s:
+#                     if var_2[4:6] != var[4:6]:
+#                         var_2_s_2.append(var_2)
+#                 title += "{}: interacts with {}\n".format(var, var_2_s_2)                
+#             fig, ax = ox.plot_graph(G, figsize = (8,8), bgcolor='white', edge_color='black', edge_linewidth=0.5, show=False)
+#             fig.suptitle("Click on origin and dest nodes to for car {} in that order then press Q".format(i)+"\n\n"+title)
+#             cid = fig.canvas.mpl_connect('key_press_event', get_node_from_click)
+#             plt.show()
+#             orig, dest = temp_nodes
             
-            #Now select 3 routes from those nodes
-            for r in range(3):
-                outer_while = 0
+#             #Now select 3 routes from those nodes
+#             for r in range(3):
+#                 outer_while = 0
                 
-                #Make sure it is possible to generate a route and that it is a valid route
-                while True:
-                    # try:
-                    temp_nodes = []
-                    var = "Car_{}_Route_{}".format(str(i).zfill(2), r)
-                    fig, ax = ox.plot_graph(G, figsize = (8,8), bgcolor='white', edge_color='black', edge_linewidth=0.5, show=False)
-                    fig.suptitle("Click on nodes to include for car {} route {}, then press Q when done".format(i, r))
-                    qubit = traffic.get_qubit_from_var(var)
-                    var_2_s = [traffic.get_var_from_qubit(qubit_2) for qubit_2 in traffic.qubit_neighbours()[qubit]]
-                    var_2_s_2 = []
-                    for var_2 in var_2_s:
-                        if var_2[4:6] != var[4:6]:
-                            var_2_s_2.append(var_2)
-                    ax.set_title("Can interact with qubits corresponding to: {}".format(var_2_s_2))
-                    cid = fig.canvas.mpl_connect('button_press_event', get_node_from_click)
-                    plt.show()
-                    route = traffic.generate_route_from_orig_to_dest_include_nodes(origin=orig, dest=dest, nodes=temp_nodes)
-                    ox.plot_graph_route(G, route.routing())
-                    print("Now assigning {}".format(var))
-                    traffic.assign_route(var, route)
-                    break
-                    # except Exception as e:
-                    outer_while += 1
-                    print(e)
-                    print("Try again... {} tries remaining after which, must select orig and dest nodes again for car {}".format(5-outer_while, i))
-                    if outer_while == 5:
-                        raise Exception(e)    
-                car_routes += [route]
-            print("Now showing routes for car {}".format(i))
-            ox.plot_graph_routes(G, [car_routes[r].routing() for r in range(3)], route_colors=['r', 'g', 'b'], figsize = (8,8), show=True, save=True, filepath='car_{}.png'.format(i))
-            string = "\nAre these routes good? type Y to continue, N to re-start with new orig and dest nodes:"
-            print("_"*len(string)+string)
-            while True:
-                try:
-                    assign_vars = input("(Choose Y/N) : ")
-                    if assign_vars != "Y" and assign_vars != "N":
-                        raise Exception("Try again.")
-                    else:
-                        break
-                except Exception as e:
-                    print(e)
-            if assign_vars == "Y":
-                print("Great, moving onto the next car.")
-                break
-            elif assign_vars == "N":
-                for r in range(3):
-                    var = "Car_{}_Route_{}".format(str(i).zfill(2), r)
-                    traffic.remove_route(var)
-                raise Exception("Routes have been removed. Please re-select orig and dest nodes.")
-            else:
-                raise Exception("Something went wrong. Please re-select orig and dest nodes.")    
+#                 #Make sure it is possible to generate a route and that it is a valid route
+#                 while True:
+#                     try:
+#                         temp_nodes = []
+#                         var = "Car_{}_Route_{}".format(str(i).zfill(2), r)
+#                         fig, ax = ox.plot_graph(G, figsize = (8,8), bgcolor='white', edge_color='black', edge_linewidth=0.5, show=False)
+#                         fig.suptitle("Click on nodes to include for car {} route {}, then press Q when done".format(i, r))
+#                         qubit = traffic.get_qubit_from_var(var)
+#                         var_2_s = [traffic.get_var_from_qubit(qubit_2) for qubit_2 in traffic.qubit_neighbours()[qubit]]
+#                         var_2_s_2 = []
+#                         for var_2 in var_2_s:
+#                             if var_2 and var_2[4:6] != var[4:6]:
+#                                 var_2_s_2.append(var_2)
+#                         ax.set_title("Can interact with qubits corresponding to: {}".format(var_2_s_2))
+#                         cid = fig.canvas.mpl_connect('key_press_event', get_node_from_click)
+#                         plt.show()
+#                         route = traffic.generate_route_from_orig_to_dest_include_nodes(origin=orig, dest=dest, nodes=temp_nodes)
+#                         print("Now assigning {}".format(var))
+#                         traffic.assign_route(var, route)
+#                         ox.plot_graph_route(G, route.routing(), save=True, filepath="temp.png")
+#                         break
+#                     except Exception as e:
+#                         outer_while += 1
+#                         print(e)
+#                         print("Try again... {} tries remaining after which, must select orig and dest nodes again for car {}".format(5-outer_while, i))
+#                         if outer_while == 5:
+#                             raise Exception(e)    
+#                 car_routes += [route]
+#             print("Now showing routes for car {}".format(i))
+#             ox.plot_graph_routes(G, [car_routes[r].routing() for r in range(3)], route_colors=['r', 'g', 'b'], figsize = (8,8), show=True, save=True, filepath='car_{}.png'.format(i))
+#             string = "\nAre these routes good? type Y to continue, N to re-start with new orig and dest nodes:"
+#             print("_"*len(string)+string)
+#             while True:
+#                 try:
+#                     assign_vars = input("(Choose Y/N) (or type 'save' to save traffic model): ")
+#                     if assign_vars != "Y" and assign_vars != "N" and assign_vars != 'save':
+#                         raise Exception("Try again.")
+#                     else:
+#                         break
+#                 except Exception as e:
+#                     print(e)
+#             if assign_vars == "Y":
+#                 print("Great, moving onto the next car.")
+#                 break
+#             elif assign_vars == "N":
+#                 for r in range(3):
+#                     var = "Car_{}_Route_{}".format(str(i).zfill(2), r)
+#                     traffic.remove_route(var)
+#                 raise Exception("Routes have been removed. Please re-select orig and dest nodes.")
+#             elif assign_vars == "save":
+#                 print("Now saving traffic model")
+#                 with open("traffic.pkl", "wb") as f:
+#                     pkl.dump(traffic, f)
+#                 break
+#             else:
+#                 raise Exception("Something went wrong. Please re-select orig and dest nodes.")    
                         
-        except Exception as e:
-            print(e)
-            print("Select orig, dest nodes again")
+#         except Exception as e:
+#             print(e)
+#             print("Select orig, dest nodes again")
             
-#Save traffic model
-print("Now saving traffic model")
-with open("traffic.pkl", "wb") as f:
-    pkl.dump(traffic, f)
+# #Save traffic model
+# print("Now saving traffic model")
+# with open("traffic.pkl", "wb") as f:
+#     pkl.dump(traffic, f)
 
 
 # current_routing = [traffic.get_route_from_var("Car_{}_Route_{}".format(str(car).zfill(2), route)).routing() for car, route in product( [0], range(3))]
@@ -517,3 +538,73 @@ with open("traffic.pkl", "wb") as f:
 #     pkl.dump(traffic, f)
     
 # traffic.check_valid_coupling()
+
+
+from generate_qubos import get_edges_dict
+routing_dict =  {var: traffic.routing_dict()[var].routing() for var in traffic.routing_dict()} 
+edges_dict = get_edges_dict(routing_dict)
+new_dict = deepcopy(edges_dict)
+
+#Remove edges with <50m overlaps.
+for edge, value in edges_dict.items():
+    weight = 0
+    edge_data = traffic.obtain_map().get_edge_data(*edge, default=[None])[0]
+    if edge_data:
+        weight += edge_data["length"]
+    if weight < 50:
+        # print(edge, value, weight)
+        new_dict.pop(edge, None)
+
+
+variable_renaming = {"Car_{}_Route_{}".format(str(i).zfill(2), j): "X_{}_{}".format(str(i).zfill(2), j) for i, j in product(range(21), range(3))}
+new_edges_dict = {}
+for edge, variables in new_dict.items():
+    new_edges_dict[edge] = [variable_renaming[var] for var in variables]
+
+del edges_dict
+del new_dict
+
+from generate_qubos import build_qubo_unconstrained_from_edges_dict, convert_qubo
+
+def add_qubo_constraints(qubo, no_cars, no_routes):
+    for i in range(no_cars):
+        qubo.linear_constraint(linear = {"X_{}_{}".format(str(i).zfill(2), j):1 for j in range(no_routes)}, sense= "==", rhs = 1, name = "Car_{}".format(i) )
+    return qubo
+
+unconstrained_qubo, linear, quadratic = build_qubo_unconstrained_from_edges_dict(traffic.obtain_map(), new_edges_dict, variables=variable_renaming.values())
+qubo = add_qubo_constraints(unconstrained_qubo, no_cars=21, no_routes=3)
+qubo, max_coeff = convert_qubo(qubo, linear, quadratic, penalty_multiplier=1.5)
+
+results = {}
+total_obj = 0
+for car in range(21):
+    zeros = [0] * 3
+    assignments = [ [0]*i + [1] + [0]*(2-i) for i in range(3) ]
+    assignments_obj = {}
+    for assignment in assignments:
+        x = zeros*(car) + assignment + zeros*(20-car)
+        var_dict = {"X_{}_{}".format(str(int((k-k%3)/3)).zfill(2), k%3): x[k] for k in range(len(x)) }
+        obj = unconstrained_qubo.objective.evaluate(var_dict)
+        assignments_obj[tuple(assignment)] = obj
+    min_assignment = min(assignments_obj.items(), key = lambda x: x[1])
+    total_obj += min_assignment[1]
+    car_dict_assignment = {"X_{}_{}".format(str(car).zfill(2), k): min_assignment[0][k] for k in range(3) }
+    for var, value in car_dict_assignment.items():
+        results[var] = value
+print(results)
+print("Total distance traversed:", total_obj)
+print(qubo)
+print("GREEDY:", qubo.objective.evaluate(results))
+
+min_obj = 1000000000000000000000000000000
+min_var = None
+from tqdm import tqdm
+x_s = list(product( [ [0,0,1],[0,1,0],[1,0,0] ], repeat = 21))
+for i in tqdm(range(len(x_s))):
+    x = x_s[i]
+    print(x, min_var)
+    
+# for var in max_edge[1]:
+#     print(var, traffic.get_qubit_from_var(var))
+
+# print(traffic.coupling_map())
