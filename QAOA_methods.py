@@ -5,6 +5,7 @@ from generate_qubos import solve_classically, arr_to_str
 import QAOAEx
 from qiskit.algorithms import QAOA as QAOA_Base
 from qiskit.algorithms.variational_algorithm import VariationalResult
+from qiskit.utils import algorithm_globals
 from typing import Any, Callable, Dict, List, Mapping, Optional, Tuple, Union
 from qiskit.algorithms.optimizers import Optimizer
 from time import time

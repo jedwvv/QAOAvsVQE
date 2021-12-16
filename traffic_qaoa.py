@@ -9,7 +9,9 @@ from copy import deepcopy
 from generate_qubos import get_edges_dict, build_qubo_unconstrained_from_edges_dict, convert_qubo
 from time import time
 from QAOA_methods import QiskitQAOA
-import qiskit_optimization
+from qiskit.algorithms.optimizers import NELDER_MEAD
+from qiskit.utils.quantum_instance import QuantumInstance
+from qiskit import Aer, QuantumCircuit, QuantumRegister
 
 with open('unimelb_2.pkl', 'rb') as f:
     G = pkl.load(f)
@@ -407,9 +409,19 @@ def main():
     print("MAX GREEDY:", max_greedy)
     print("Total distance traversed(max):", max_total_obj)
     print(max_results)
-    print(qiskit_optimization.__dir__())
-
-
+    optimizer = NELDER_MEAD()
+    optimizer.set_options(maxiter=100)
+    backend = Aer.get_backend("aer_simulator_matrix_product_state")
+    quantum_instance = QuantumInstance(backend, shots=1024)
+    op, offset = qubo.to_ising()
+    start = time()
+    result, qc = QiskitQAOA(operator=op, quantum_instance=quantum_instance, optimizer=optimizer, reps=1, construct_circ=False)
+    end = time()
+    print(result.eigenstate)
+    print(result.eigenvalue+offset)
+    # print(qc.draw(fold=200))
+    print("Time taken: {}s".format(end-start))
+    print(result.cost_function_evals)
 
 if __name__ == "__main__":
     main()
