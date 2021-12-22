@@ -195,18 +195,18 @@ def get_linear_quadratic_coeffs(G, all_edges_dict):
         #Linear terms
         for var in all_edges_dict[edge]:
             if var in linear:
-                linear[var] += np.ceil(G[edge[0]][edge[1]][0]['length']/1000)
+                linear[var] += G[edge[0]][edge[1]][0]['length']
                 # print(linear[var])
             else:
-                linear[var] = np.ceil(G[edge[0]][edge[1]][0]['length']/1000)
+                linear[var] = G[edge[0]][edge[1]][0]['length']
                 # print(linear[var])
         #Quadratic terms
         for vars_couple in combinations(all_edges_dict[edge],2):
             if vars_couple in quadratic:
-                quadratic[vars_couple] += 2*np.ceil(G[edge[0]][edge[1]][0]['length']/1000)
+                quadratic[vars_couple] += G[edge[0]][edge[1]][0]['length']
                 # print(quadratic[vars_couple])
             else:
-                quadratic[vars_couple] = 2*np.ceil(G[edge[0]][edge[1]][0]['length']/1000)
+                quadratic[vars_couple] = G[edge[0]][edge[1]][0]['length']
                 # print(quadratic[vars_couple])
     return linear, quadratic
 

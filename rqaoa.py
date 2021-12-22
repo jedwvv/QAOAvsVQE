@@ -367,7 +367,7 @@ class RQAOA:
         print("random energy: {}\n".format(self.random_energy))
     
     def solve_qaoa(self, p, **kwargs):
-        if self.optimal_point and 'point' not in kwargs:
+        if self.optimal_point is not None and 'point' not in kwargs:
             point = self.optimal_point
         else:
             point = kwargs.get("point", None)
@@ -569,7 +569,7 @@ class RQAOA:
                 raise QiskitOptimizationError('Infeasible due to variable substitution {} = {}'.format(x_i, x_j))            
             self.replacements[x_i] = (x_j, 1)
             self.car_blocks[car_block].remove(x_i)
-        else:
+        else :
             # set x_i = 1 - x_j, this is done in two steps:
             # 1. set x_i = 1 + x_i
             # 2. set x_i = -x_j
@@ -632,6 +632,136 @@ class RQAOA:
                         correlations[i, j] -= prob
         return correlations
     
+    def get_z_zz(self, states) -> np.ndarray:
+        """
+        Get <Zi x Zj> correlation matrix from the eigenstate(state: Dict) along with < Zi > on the diagonal 
+
+        Returns:
+            A correlation matrix.
+        """
+        x, _, prob = states[0]
+        n = len(x)
+        z_zz_matrix = np.zeros((n, n))
+        for x, cost, prob in states:
+            for i in range(n):
+                #Diagonal entries
+                if x[i] == '0':
+                    z_zz_matrix[i, i] += prob
+                elif x[i] == '1':
+                    z_zz_matrix[i, i] -= prob
+                
+                #Lower triangular entries
+                for j in range(i):
+                        if x[i] == x[j]:
+                            z_zz_matrix[i, j] += prob
+                        else:
+                            z_zz_matrix[i, j] -= prob
+                            
+        return z_zz_matrix
+
+    def find_strongest_z_or_zz(self, z_zz_matrix):
+
+        # get absolute values and set diagonal to -1 to make sure maximum is always on off-diagonal
+        abs_z_zz = np.abs(z_zz_matrix)
+
+        # get index of maximum (by construction on off-diagonal)
+        m_max = np.argmax(abs_z_zz.flatten())
+
+        # translate back to indices
+        i = int(m_max // len(z_zz_matrix))
+        j = int(m_max - i*len(z_zz_matrix))
+
+        return (i, j)
+
+    def perform_substitution_from_qaoa_results_z(self, qaoa_results):
+        
+        z_zz_matrix = self.get_z_zz(qaoa_results.eigenstate)
+        i, j = self.find_strongest_z_or_zz(z_zz_matrix)
+        sign = z_zz_matrix[i, j]
+        new_qubo = deepcopy(self.qubo)
+        x_i, x_j = new_qubo.variables[i].name, new_qubo.variables[j].name
+        if x_i == "X_anc":
+            print("X_i was ancilla. Swapped")
+            x_i, x_j = x_j, x_i #So ancilla qubit is never substituted out
+            i, j = j, i #Also swap i and j
+        print(z_zz_matrix)
+        print( "\nMaximum: < {} {} > = {}".format(x_i.replace("_", ""), x_j.replace("_", ""), sign)) 
+        print(new_qubo)
+        
+        car_block = int(x_i[2])            
+        if i != j:
+            if sign > 0: 
+                # set x_i = x_j
+                new_qubo = new_qubo.substitute_variables(variables={x_i: (x_j, 1)})
+                if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
+                    raise QiskitOptimizationError('Infeasible due to variable substitution {} = {}'.format(x_i, x_j))            
+                self.replacements[x_i] = (x_j, 1)
+                self.car_blocks[car_block].remove(x_i)
+            else:
+                # set x_i = 1 - x_j, this is done in two steps:
+                # 1. set x_i = 1 + x_i
+                # 2. set x_i = -x_j
+
+                # 1a. get additional offset from the 1 on the RHS of (xi -> 1+xi)
+                constant = new_qubo.objective.constant
+                constant += new_qubo.objective.linear[i]
+                constant += new_qubo.objective.quadratic[i, i]
+                new_qubo.objective.constant = constant
+
+                #1b get additional linear part from quadratic terms becoming linear due to the same 1 in the 1+xi as above
+                for k in range(new_qubo.get_num_vars()):
+                    coeff = new_qubo.objective.linear[k]
+                    if k == i:
+                        coeff += 2*new_qubo.objective.quadratic[i, k]
+                    else:
+                        coeff += new_qubo.objective.quadratic[i, k]
+
+                    # set new coefficient if not too small
+                    if np.abs(coeff) > 1e-10:
+                        new_qubo.objective.linear[k] = coeff
+                    else:
+                        new_qubo.objective.linear[k] = 0
+
+                #2 set xi = -xj
+                new_qubo = new_qubo.substitute_variables(variables={x_i: (x_j, -1)})
+                if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
+                    raise QiskitOptimizationError('Infeasible due to variable substitution {} = -{}'.format(x_i, x_j))
+                self.replacements[x_i] = (x_j, -1)
+                self.car_blocks[car_block].remove(x_i)    
+        else:
+            if sign > 0: 
+                # set x_i = 0
+                try:
+                    new_qubo = new_qubo.substitute_variables(constants={x_i: 0.0})
+                except Exception as e:
+                    print(e)
+#                 if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
+#                     raise QiskitOptimizationError('Infeasible due to variable substitution {} = {}'.format(x_i, 0))            
+                self.replacements[x_i] = None
+                self.var_values[x_i] = 0
+                self.car_blocks[car_block].remove(x_i)
+            else:
+                #set x_i = 1
+                try:
+                    new_qubo = new_qubo.substitute_variables(constants={x_i: 1.0})
+                except Exception as e:
+                    print(e)
+#                 if new_qubo.status == QuadraticProgram.Status.INFEASIBLE:
+#                     raise QiskitOptimizationError('Infeasible due to variable substitution {} = {}'.format(x_i, 1))
+                self.replacements[x_i] = None
+                self.var_values[x_i] = 1
+                self.car_blocks[car_block].remove(x_i)    
+        
+        self.qubo = new_qubo
+        op, offset = new_qubo.to_ising() 
+        self.operator = op
+        self.offset = offset
+        if self.customise:
+            if self.symmetrise:
+                self.construct_initial_state(ancilla = True)
+            else:
+                self.construct_initial_state()
+            self.construct_mixer()    
               
     def get_biased_correlations(self, states) -> np.ndarray:
         """

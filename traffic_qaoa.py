@@ -8,7 +8,8 @@ from itertools import product, combinations
 from copy import deepcopy
 from generate_qubos import get_edges_dict, build_qubo_unconstrained_from_edges_dict, convert_qubo
 from time import time
-from QAOA_methods import QiskitQAOA
+from QAOA_methods import QiskitQAOA, construct_initial_state, n_qbit_mixer, interp_point
+from QAOAEx import convert_to_fourier_point, convert_from_fourier_point
 from qiskit.algorithms.optimizers import NELDER_MEAD
 from qiskit.utils.quantum_instance import QuantumInstance
 from qiskit import Aer, QuantumCircuit, QuantumRegister
@@ -412,16 +413,32 @@ def main():
     optimizer = NELDER_MEAD()
     optimizer.set_options(maxiter=100)
     backend = Aer.get_backend("aer_simulator_matrix_product_state")
-    quantum_instance = QuantumInstance(backend, shots=1024)
+    quantum_instance = QuantumInstance(backend, shots=102400)
     op, offset = qubo.to_ising()
-    start = time()
-    result, qc = QiskitQAOA(operator=op, quantum_instance=quantum_instance, optimizer=optimizer, reps=1, construct_circ=False)
-    end = time()
-    print(result.eigenstate)
-    print(result.eigenvalue+offset)
-    # print(qc.draw(fold=200))
-    print("Time taken: {}s".format(end-start))
-    print(result.cost_function_evals)
+    op *= 1/max_coeff
+    print(op)
+    initial_state = construct_initial_state(no_routes = 3, no_cars = 21)
+    mixer = n_qbit_mixer(initial_state)
+    
+#     #p=1
+#     start = time()
+#     result, qc = QiskitQAOA(operator=op, quantum_instance=quantum_instance, optimizer=optimizer, reps=1, construct_circ=False, initial_state = initial_state, mixer=mixer, initial_point = [0,0])
+#     end = time()
+#     print(result.eigenstate)
+#     print(max_coeff*(result.eigenvalue)+offset)
+#     print("p=1, Time taken: {}s".format(end-start))
+#     print(result.cost_function_evals)
+    
+#     #p=2
+#     start = time()
+#     opt_point = result.optimal_point
+#     next_point = interp_point(opt_point)
+#     result, qc = QiskitQAOA(operator=op, quantum_instance=quantum_instance, optimizer=optimizer, reps=2, construct_circ=False, initial_state = initial_state, mixer=mixer, initial_point = next_point)
+#     end = time()
+#     print(result.eigenstate)
+#     print(max_coeff*(result.eigenvalue)+offset)
+#     print("p=2, Time taken: {}s".format(end-start))
+#     print(result.cost_function_evals)
 
 if __name__ == "__main__":
     main()

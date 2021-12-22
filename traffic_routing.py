@@ -550,7 +550,7 @@ def main_2():
     max_var = None
     global mapping
     mapping = {'0': np.array([0,0,1]), '1':np.array([0,1,0]), '2':np.array([1,0,0])}
-    x_s = product( [ [0,0,1],[0,1,0],[1,0,0] ], repeat = 21)
+
 
     
     def int_to_arr(integer):
@@ -577,7 +577,7 @@ def main_2():
             max_obj = result[1]
             max_var = tuple(result[0])
             print("MAX: ", max_obj, max_var)
-            all_min_results[i] = max_obj
+            all_max_results[i] = max_obj
     end = time()
     search_time = end - start
     print("Time taken: {}s".format(search_time))
@@ -592,7 +592,7 @@ def main_2():
 
     if search_time > 0:
         with open("classical_results/search_time_j={}.dat".format(j), "w") as f:
-            f.write("{}".format(j))
+            f.write("{}".format(end-start))
 
 if __name__ == "__main__":
     main_2()
