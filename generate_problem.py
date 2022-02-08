@@ -94,7 +94,8 @@ def generate_routes(G, origin_destination, no_routes):
     """
     orig, dest = origin_destination
     try:
-        routes = list(ox.k_shortest_paths(G, orig, dest, k = no_routes, weight="length"))
+        routes = list(ox.k_shortest_paths(G, orig, dest, k = no_routes*3, weight="length"))
+        routes = [routes[3*k] for k in range(no_routes)]
         return routes
     except Exception:
         # for unsolvable routes (due to directed graph perimeter effects)

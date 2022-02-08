@@ -411,23 +411,25 @@ def main():
     print("Total distance traversed(max):", max_total_obj)
     print(max_results)
     optimizer = NELDER_MEAD()
-    optimizer.set_options(maxiter=100)
+    optimizer.set_options(maxiter=1)
     backend = Aer.get_backend("aer_simulator_matrix_product_state")
-    quantum_instance = QuantumInstance(backend, shots=102400)
+    quantum_instance = QuantumInstance(backend, shots=1)
     op, offset = qubo.to_ising()
     op *= 1/max_coeff
     print(op)
-    initial_state = construct_initial_state(no_routes = 3, no_cars = 21)
-    mixer = n_qbit_mixer(initial_state)
+#     initial_state = construct_initial_state(no_routes = 3, no_cars = 21)
+#     mixer = n_qbit_mixer(initial_state)
     
-#     #p=1
-#     start = time()
-#     result, qc = QiskitQAOA(operator=op, quantum_instance=quantum_instance, optimizer=optimizer, reps=1, construct_circ=False, initial_state = initial_state, mixer=mixer, initial_point = [0,0])
-#     end = time()
-#     print(result.eigenstate)
-#     print(max_coeff*(result.eigenvalue)+offset)
-#     print("p=1, Time taken: {}s".format(end-start))
-#     print(result.cost_function_evals)
+    #p=1
+    start = time()
+    result, qc = QiskitQAOA(operator=op, quantum_instance=quantum_instance, optimizer=optimizer, reps=1, construct_circ=True, initial_state = None, mixer=None, initial_point = [0,0])
+    print(qc.draw())
+    print(qc.depth())
+    end = time()
+    print(result.eigenstate)
+    print(max_coeff*(result.eigenvalue)+offset)
+    print("p=1, Time taken: {}s".format(end-start))
+    print(result.cost_function_evals)
     
 #     #p=2
 #     start = time()

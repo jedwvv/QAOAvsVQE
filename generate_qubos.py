@@ -195,18 +195,18 @@ def get_linear_quadratic_coeffs(G, all_edges_dict):
         #Linear terms
         for var in all_edges_dict[edge]:
             if var in linear:
-                linear[var] += G[edge[0]][edge[1]][0]['length']
+                linear[var] += G[edge[0]][edge[1]][0]['length']**2
                 # print(linear[var])
             else:
-                linear[var] = G[edge[0]][edge[1]][0]['length']
+                linear[var] = G[edge[0]][edge[1]][0]['length']**2
                 # print(linear[var])
         #Quadratic terms
         for vars_couple in combinations(all_edges_dict[edge],2):
             if vars_couple in quadratic:
-                quadratic[vars_couple] += G[edge[0]][edge[1]][0]['length']
+                quadratic[vars_couple] += (2*G[edge[0]][edge[1]][0]['length'])**2
                 # print(quadratic[vars_couple])
             else:
-                quadratic[vars_couple] = G[edge[0]][edge[1]][0]['length']
+                quadratic[vars_couple] = (2*G[edge[0]][edge[1]][0]['length'])**2
                 # print(quadratic[vars_couple])
     return linear, quadratic
 
@@ -240,12 +240,21 @@ def add_qubo_constraints(qubo, no_cars, no_routes):
     return qubo
 
 def convert_qubo(qubo, linear, quadratic, penalty_multiplier = 1):
-    coefficients = np.append(list(linear.values()), list(quadratic.values()))
-    max_coeff = np.max(np.abs(coefficients))
+    max_coeff = max(max(linear.values()), max(quadratic.values()))
     penalty = np.floor( max_coeff * penalty_multiplier )
     converter = QuadraticProgramToQubo(penalty = penalty)
     qubo = converter.convert(qubo)
-    return qubo, max(penalty, max_coeff)
+    obj = qubo.objective
+    linear = obj.linear.to_array()
+    max_linear = np.amax(linear)
+    quadratic = obj.quadratic.to_array()
+    max_quadratic = np.amax(quadratic)
+    max_coeff = max(max_linear, max_quadratic)
+    qubo.objective.quadratic._coefficients /= max_coeff
+    qubo.objective.linear._coefficients /= max_coeff
+    qubo_constant = qubo.objective._constant
+    qubo.objective._constant = 0
+    return qubo, max_coeff, qubo_constant
 
 def visualise_solution(graph, routes):
     """[summary]
